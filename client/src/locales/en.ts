@@ -5,6 +5,7 @@ import footer from '@/modules/footer/locales/en';
 import home from '@/modules/home/locales/en';
 import portfolio from '@/modules/portfolio/locales/en';
 
+/** @description English language version. */
 export default {
     aboutMyself,
     alert,

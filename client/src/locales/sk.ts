@@ -5,6 +5,7 @@ import footer from '@/modules/footer/locales/sk';
 import home from '@/modules/home/locales/sk';
 import portfolio from '@/modules/portfolio/locales/sk';
 
+/** @description Slovak language version. */
 export default {
     aboutMyself,
     alert,
