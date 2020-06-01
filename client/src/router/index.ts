@@ -66,9 +66,12 @@ router.beforeEach((to, from, next) =>
         document.documentElement.setAttribute(`lang`, to.name);
     }
 
+    /** @description Type of the value of a HTML Meta Tag with name="title". */
     type metaTitle = string;
+    /** @description  */
     type metaMetaTag = { content: string, name: string };
 
+    /** @description The nearest object representing all metadata which has a title attribute. */
     const nearestWithTitle: Merge<RouteRecord, {
         meta: {
             title: metaTitle,
@@ -79,6 +82,7 @@ router.beforeEach((to, from, next) =>
         return r.meta && r.meta.title;
     });
 
+    /** @description The nearest meta object which has a list of HTML Meta tags. */
     const nearestWithMeta: Merge<RouteRecord, {
         meta: {
             title?: metaTitle,
