@@ -9,6 +9,7 @@
     import {mixins}    from 'vue-class-component';
     import MainMixin   from '@/mixins/Main';
 
+    /** @description The component wrapping the whole application. */
     @Component({
         name: `App`
     })
@@ -27,6 +28,7 @@
                 console.error(err);
             });
 
+            /** @description If any query parameters exist, remove them from the URL. */
             if (Object.keys(this.$route.query).length)
             {
                 this.$router.replace({hash: this.$route.hash, query: {}});

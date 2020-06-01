@@ -19,10 +19,13 @@ import dayjs                                  from '@/plugins/dayjsPlugin';
 import VueString                              from '@/plugins/VueStringPlugin';
 import Range                                  from '@/plugins/NumericRangePlugin';
 
+/** @description Loads the polyfills. */
 require(`./polyfills`);
 
+/** @description Adds scroll-behavior: smooth to browsers which do not support it natively. */
 smoothscroll.polyfill();
 
+/** @description Initializes the plugins. */
 Vue.use(VueHttp);
 Vue.use(dayjs);
 Vue.use(Rand);
@@ -30,19 +33,25 @@ Vue.use(Tomwork);
 Vue.use(VueString);
 Vue.use(Range);
 
+/** @description Adds the Font Awesome icons. */
 library.add(faFacebookF, faTwitter, faLinkedinIn, faEnvelope, faSmile, faTimes);
 
+/** @description Creates the  font-awesome-icon component. */
 Vue.component(`font-awesome-icon`, FontAwesomeIcon);
 
+/** @description Prevents the production tip on Vue startup. */
 Vue.config.productionTip = false;
 
+/** @description Initializes the global mixin. */
 Vue.mixin(mainMixin);
 
+/** @description Initializes Google Analytics. */
 Vue.use(VueAnalytics, {
     id: `UA-96781792-2`,
     router
 });
 
+/** @description Mounts the Vue application. */
 new Vue({
     router,
     store,
