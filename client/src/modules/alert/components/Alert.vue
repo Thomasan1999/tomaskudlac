@@ -19,22 +19,29 @@
     import text              from '@/locales';
     import MainMixin         from '@/mixins/Main';
 
+    /** @description A component containing a custom alert. */
     @Component({
         name: `Alert`
     })
     export default class Alert extends mixins(MainMixin)
     {
+        /** @description The id of the alert. */
         @Prop(Number) public readonly id!: number;
+        /** @description The name of the alert. */
         @Prop(String) public readonly name!: string;
+        /** @description Determines whether the alert reports a success or a failure and contains information related to it.  */
         @Prop(Object) public readonly state!: object;
 
+        /** @description Runs on click of a delete button. */
         public deleteClickOn(): void
         {
             this.$emit(`destroy`, this.id);
         }
 
+        /** @description Lifetime of the alert in milliseconds. */
         public readonly lifetime: number = 1e4;
 
+        /** @description Locales of the component. */
         public get text(): typeof text.sk.alert
         {
             return this.texts.alert;
@@ -42,6 +49,7 @@
 
         public mounted()
         {
+            /** @description Destroys the alert after the lifetime has passed. */
             setTimeout(() =>
             {
                 this.$emit(`destroy`, this.id);

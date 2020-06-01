@@ -44,8 +44,8 @@ declare global
      * @description Data related to a programming language.
      * @property [an] Determines whether in English the programming language is preceded by an.
      * @property [children] Children of the programming language.
-     * @property [home] Determines whether the programming language might appear in the home section.
-     * @property order Determines the order of the programming language in the text in the about myself section.
+     * @property [home] Determines whether the programming language might appear in the Home section.
+     * @property order Determines the order of the programming language in the text in the About myself section.
      * */
     type ProgrammingLanguage = {
         an?: boolean,
