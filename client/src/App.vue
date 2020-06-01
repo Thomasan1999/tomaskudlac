@@ -31,9 +31,6 @@
             {
                 this.$router.replace({hash: this.$route.hash, query: {}});
             }
-
-            // @ts-ignore
-            window._vm = this;
         }
     }
 </script>
