@@ -5,11 +5,12 @@
 </template>
 
 <script lang="ts">
-    import {mixins}           from 'vue-class-component';
-    import {Component, Watch} from 'vue-property-decorator';
-    import MainMixin          from '@/mixins/Main';
-    import Alert              from './Alert.vue';
+    import {mixins}    from 'vue-class-component';
+    import {Component} from 'vue-property-decorator';
+    import MainMixin   from '@/mixins/Main';
+    import Alert       from './Alert.vue';
 
+    /** @description The component containing all custom alerts. */
     @Component({
         components: {
             Alert
@@ -18,6 +19,10 @@
     })
     export default class AlertContainer extends mixins(MainMixin)
     {
+        /**
+         * @description Runs on an attempt to destroy an alert.
+         * @param alertId Id of the alert to destroy.
+         * */
         public alertDestroyOn(alertId: number): void
         {
             this.alerts = this.alerts.filter(({id}) =>
@@ -26,39 +31,31 @@
             });
         }
 
+        /** @description Array of all alerts of the container. */
         public alerts: { id: number, name: string }[] = [];
+        /** @description Id of the next alert which will be created. */
         public id: number = 0;
-        public sectionsActiveLoaded: boolean = false;
+        /** @description Object containing all alert types which corresponding state type. */
         public readonly states: { [s: string]: AlertState } = {
             empty: {type: `fail`},
             invalid: {type: `fail`},
             success: {type: `success`}
         };
+        /** @description Object containing all possible state types of the alerts with all the parameters needed to differentiate the alerts visually. */
         public readonly stateTypes: { [s: string]: { backgroundColor: string, color: string } } = {
             fail: {backgroundColor: `#ff262b`, color: `#ffffff`},
             success: {backgroundColor: `#00d12a`, color: `#ffffff`}
         };
 
-        @Watch('sectionsActive')
-        public sectionsActiveChangeOn()
-        {
-            if (!this.sectionsActiveLoaded)
-            {
-                this.sectionsActiveLoaded = true;
-                return;
-            }
-
-            this.alerts = [];
-            this.id = 0;
-        }
-
         public mounted()
         {
+            /** @description Assigns the parameters of the state types to the alert types. */
             Object.entries(this.states).forEach(([stateName, state]) =>
             {
                 this.states[stateName] = {...this.stateTypes[state.type], type: state.type};
             });
 
+            /** @description Creates an alert. */
             this.$root.$on(`alert-show`, (name: string) =>
             {
                 this.alerts.push({id: this.id, name});
