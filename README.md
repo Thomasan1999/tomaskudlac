@@ -1,7 +1,6 @@
 # Tomáš Kudláč's portfolio
 
-Repository hosting the codebase of the portfolio developed by Tomáš Kudláč available in English at: https://tomaskudlac.sk/en?ref=github and in Slovak at: https://tomaskudlac.sk
-/?ref=github.
+Repository hosting the codebase of the portfolio developed by Tomáš Kudláč available in English at: https://tomaskudlac.sk/en?ref=github and in Slovak at: https://tomaskudlac.sk/?ref=github.
 
 ## About project
 

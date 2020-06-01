@@ -1,7 +1,6 @@
 # Front-end of the Tomáš Kudláč's portfolio
 
-Front-end of the portfolio developed by Tomáš Kudláč available in English at: https://tomaskudlac.sk/en?ref=github and in Slovak at: https://tomaskudlac.sk
-/?ref=github.
+Front-end of the portfolio developed by Tomáš Kudláč available in English at: https://tomaskudlac.sk/en?ref=github and in Slovak at: https://tomaskudlac.sk/?ref=github.
 
 ## About project
 
