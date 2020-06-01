@@ -57,7 +57,7 @@ const getters = {
     {
         return texts[lang] as typeof textsSrc.sk;
     },
-    /** @description Determines whether the screen is narrower than 1024px. */
+    /** @description Determines whether the viewport is narrower than 1024px. */
     touchscreen({windowWidth}: typeof storeState): boolean
     {
         return windowWidth < 1024;
