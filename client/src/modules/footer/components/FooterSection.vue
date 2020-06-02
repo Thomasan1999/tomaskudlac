@@ -17,18 +17,22 @@
     import text      from '@/locales';
     import MainMixin from '@/mixins/Main';
 
+    /** @description The component containing the footer of the website located under the Contact section. */
     @Component({
         name: `FooterSection`
     })
     export default class FooterSection extends mixins(MainMixin)
     {
+        /** @description Determines whether the cookies popup is shown. */
         @Prop(Boolean) public readonly cookiesShow!: boolean;
 
+        /** @description Listener of the click on the link which opens a cookies info popup. */
         public clickOn(): void
         {
             this.$emit(`click`, !this.cookiesShow);
         }
 
+        /** @description Locales of the component. */
         public get text(): typeof text.sk.footer
         {
             return this.texts.footer;

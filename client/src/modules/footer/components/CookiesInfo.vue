@@ -16,18 +16,22 @@
     import MainMixin   from '@/mixins/Main';
     import text        from '@/locales';
 
+    /** @description The component containing a popup with the information about cookies. */
     @Component({
         name: `CookiesInfo`
     })
     export default class CookiesInfo extends mixins(MainMixin)
     {
+        /** @description Listener of the click on the close button in the popup. */
         public clickOn(): void
         {
             this.$emit(`close`);
         }
 
+        /** @description Array of strings which determine what Font Awesome icon is used to create the close button icon. */
         public readonly cookiesCloseIcon: [string, string] = [`fas`, `times`];
 
+        /** @description Locales of the component. */
         public get text(): typeof text.sk.footer.cookiesInfo
         {
             return this.texts.footer.cookiesInfo;

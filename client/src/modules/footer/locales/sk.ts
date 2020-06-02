@@ -1,6 +1,12 @@
+import {CookiesInfoLocales} from '@/modules/footer/types/locales.d';
+
+/** @description Locales of the footer of the website. */
 export default {
+    /** @description Text informing the user that cookies are being used on the website. */
     'cookies': 'Táto stránka používa <button class="cookies button-transparent">cookies.</button>',
+    /** @description Locales related to the cookies info popup. */
     'cookiesInfo': {
+        /** @description Text displayed inside the cookies info popup. */
         'text': [
             {
                 'title': 'Súbory cookie',
@@ -22,7 +28,8 @@ export default {
                 'title': 'Ako odmietnuť používanie súborov cookie?',
                 'text': 'Používanie súborov cookie je možné nastaviť pomocou vášho internetového prehliadača. Väčšina prehliadačov súbory cookie automaticky prijíma už v úvodnom nastavení.'
             }
-        ]
+        ] as CookiesInfoLocales[]
     },
+    /** @description Text containing the information about copyright.  */
     'copyright': 'Všetky práva vyhradené'
 };
