@@ -28,7 +28,7 @@
             this.$emit(`close`);
         }
 
-        /** @description Array of strings which determine what Font Awesome icon is used to create the close button icon. */
+        /** @description An array of 2 strings which determine what Font Awesome icon is used to create the close button icon. */
         public readonly cookiesCloseIcon: [string, string] = [`fas`, `times`];
 
         /** @description Locales of the component. */

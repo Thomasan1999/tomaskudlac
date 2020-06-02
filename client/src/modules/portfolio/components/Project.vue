@@ -21,19 +21,26 @@
     import MainMixin from '@/mixins/Main';
     import text      from '@/locales';
 
+    /** @description A component containing a project in the Portfolio section. The project represents a reference, contains an image from the website which it refers to, some
+     * basic information about my contribution to the development of the website and the name of the referred website. */
     @Component({
         name: `Project`
     })
     export default class Project extends mixins(MainMixin)
     {
+        /** @description The key of the project by which it is accessed in the locales object. */
         @Prop(String) public readonly name!: string;
 
+        /** @description List of all project parts. */
         public projectParts: ProjectPart[] =  [`design`, `frontEnd`, `backEnd`];
 
+        /** @description The href attribute of the project which points to the referred website. */
         public get href(): string
         {
             return (this.text[this.name] as Project).href;
         }
+
+        /** @description Locales of the Portfolio section. */
         public get text(): typeof text.sk.portfolio
         {
             return this.texts.portfolio;

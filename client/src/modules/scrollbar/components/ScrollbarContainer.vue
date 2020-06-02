@@ -15,7 +15,7 @@
     })
     export default class ScrollbarContainer extends mixins(MainMixin)
     {
-        /** @description Listener of the scroll event with the scrollbar-content being the target. */
+        /** @description Listener of the scroll event targeted at the scrollbar-content. */
         public scrollOn(): void
         {
             this.$emit(`scroll`, this.$el.scrollTop);

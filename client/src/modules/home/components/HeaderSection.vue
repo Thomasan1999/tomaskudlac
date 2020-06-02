@@ -27,24 +27,31 @@
 </template>
 
 <script lang="ts">
-    import {Component} from 'vue-property-decorator';
-    import {mixins}  from 'vue-class-component';
-    import MainMixin from '@/mixins/Main';
+    import {Component}     from 'vue-property-decorator';
+    import {mixins}        from 'vue-class-component';
+    import MainMixin       from '@/mixins/Main';
+    // eslint-disable-next-line no-unused-vars
+    import {SocialNetwork} from '@/modules/home/types/components.d';
 
+    /** @description The component containing the header of the website located at the top of the website. */
     @Component({
         name: `HeaderSection`
     })
     export default class HeaderSection extends mixins(MainMixin)
     {
+        /** @description Listener of the click event targeted on a nav-bar icon. */
         public navIconClickOn(): void
         {
             this.slidedDown = !this.slidedDown;
             this.$emit(`nav-icon-click`);
         }
 
+        /** @description List of all nav-bar links which point to sections of the website. */
         public readonly navItems: SectionMainName[] = [...this.$store.state.sections];
+        /** @description Determines whether the nav-bar is slided down, sliding down works only if the viewport is narrower than 1024px. */
         public slidedDown: boolean = false;
-        public readonly socialNetworks: { href: string, icon: [string, string], title: string }[] = [
+        /** @description List of all social network links located in the header. */
+        public readonly socialNetworks: SocialNetwork[] = [
             {
                 href: `https://facebook.com/TomasKudlac99`, icon: [`fab`, `facebook-f`], title: `Facebook`
             },

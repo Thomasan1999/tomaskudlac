@@ -28,7 +28,7 @@ export default {
     lang: `sk` as Lang,
     /** @description The name of the active nav-bar item. */
     navItemActive: `home` as SectionMainName,
-    /** @description Determines whether the nav-bar is slided down on mobile devices. */
+    /** @description Determines whether the nav-bar is slided down on screens narrower than 1024px. */
     navSlidedDown: false as boolean,
     /** @description Stores all data about programming languages. */
     programmingLanguages: {

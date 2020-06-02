@@ -42,15 +42,15 @@ declare global
     type TextSection = {title: string};
     /**
      * @description Data related to a programming language.
-     * @property [an] Determines whether in English the programming language is preceded by an.
-     * @property [children] Children of the programming language.
-     * @property [home] Determines whether the programming language might appear in the Home section.
-     * @property order Determines the order of the programming language in the text in the About myself section.
      * */
     type ProgrammingLanguage = {
+        /** @description Determines whether the programming language is preceded by an 'an' article in English. */
         an?: boolean,
+        /** @description Children of the programming language. */
         children?: {[s: string]: ProgrammingLanguage},
+        /** @description Determines whether the programming language appears in the Home section. */
         home?: boolean,
+        /** @description Determines the order of the programming language in the text in the About myself section. */
         order: number
     };
 }
