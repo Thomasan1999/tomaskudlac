@@ -9,11 +9,13 @@
     import {Component} from 'vue-property-decorator';
     import MainMixin   from '@/mixins/Main';
 
+    /** @description A component containing helper methods for HTML Elements with a vertical scrollbar. */
     @Component({
         name: `ScrollbarContainer`
     })
     export default class ScrollbarContainer extends mixins(MainMixin)
     {
+        /** @description Listener of the scroll event with the scrollbar-content being the target. */
         public scrollOn(): void
         {
             this.$emit(`scroll`, this.$el.scrollTop);
