@@ -59,10 +59,10 @@
                 href: `mailto:ahoj@tomaskudlac.sk`, icon: [`fas`, `envelope`], title: `Email`
             },
             {
-                href: `https://linkedin.com/in/kudlac/`, icon: [`fab`, `linkedin-in`], title: `Linkedin`
+                href: `https://linkedin.com/in/kudlac/`, icon: [`fab`, `linkedin-in`], title: `LinkedIn`
             },
             {
-                href: `https://twitter.com/tomas_kudlac`, icon: [`fab`, `twitter`], title: `Twitter`
+                href: `https://github.com/Thomasan1999`, icon: [`fab`, `github`], title: `GitHub`
             }
         ];
     }

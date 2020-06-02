@@ -1,23 +1,23 @@
-import Vue                                    from 'vue';
+import Vue                                   from 'vue';
 import './registerServiceWorker';
 // @ts-ignore
-import VueAnalytics                           from 'vue-analytics';
-import {library}                              from '@fortawesome/fontawesome-svg-core';
-import {faEnvelope, faTimes}                  from '@fortawesome/free-solid-svg-icons';
-import {faFacebookF, faTwitter, faLinkedinIn} from '@fortawesome/free-brands-svg-icons';
-import {faSmile}                              from '@fortawesome/free-regular-svg-icons';
-import {FontAwesomeIcon}                      from '@fortawesome/vue-fontawesome';
-import smoothscroll                           from 'smoothscroll-polyfill';
-import App                                    from '@/App.vue';
-import router                                 from '@/router';
-import store                                  from '@/store';
-import mainMixin                              from '@/mixins/Main';
-import VueHttp                                from '@/plugins/VueHttpPlugin';
-import Rand                                   from '@/plugins/RandPlugin';
-import Tomwork                                from '@/plugins/TomworkPlugin';
-import dayjs                                  from '@/plugins/dayjsPlugin';
-import VueString                              from '@/plugins/VueStringPlugin';
-import Range                                  from '@/plugins/NumericRangePlugin';
+import VueAnalytics                          from 'vue-analytics';
+import {library}                             from '@fortawesome/fontawesome-svg-core';
+import {faEnvelope, faTimes}                 from '@fortawesome/free-solid-svg-icons';
+import {faFacebookF, faLinkedinIn, faGithub} from '@fortawesome/free-brands-svg-icons';
+import {faSmile}                             from '@fortawesome/free-regular-svg-icons';
+import {FontAwesomeIcon}                     from '@fortawesome/vue-fontawesome';
+import smoothscroll                          from 'smoothscroll-polyfill';
+import App                                   from '@/App.vue';
+import router                                from '@/router';
+import store                                 from '@/store';
+import mainMixin                             from '@/mixins/Main';
+import VueHttp                               from '@/plugins/VueHttpPlugin';
+import Rand                                  from '@/plugins/RandPlugin';
+import Tomwork                               from '@/plugins/TomworkPlugin';
+import dayjs                                 from '@/plugins/dayjsPlugin';
+import VueString                             from '@/plugins/VueStringPlugin';
+import Range                                 from '@/plugins/NumericRangePlugin';
 
 /** @description Loads the polyfills. */
 require(`./polyfills`);
@@ -34,7 +34,7 @@ Vue.use(VueString);
 Vue.use(Range);
 
 /** @description Adds the Font Awesome icons. */
-library.add(faFacebookF, faTwitter, faLinkedinIn, faEnvelope, faSmile, faTimes);
+library.add(faFacebookF, faGithub, faLinkedinIn, faEnvelope, faSmile, faTimes);
 
 /** @description Creates the  font-awesome-icon component. */
 Vue.component(`font-awesome-icon`, FontAwesomeIcon);
