@@ -15,44 +15,33 @@
 </template>
 
 <script lang="ts">
-    import {mixins}    from 'vue-class-component';
-    import {Component} from 'vue-property-decorator';
-    import text      from '@/locales';
-    import MainMixin from '@/mixins/Main';
+    import {mixins}      from 'vue-class-component';
+    import {Component}   from 'vue-property-decorator';
+    import text          from '@/locales';
+    import MainMixin                   from '@/mixins/Main';
+    // eslint-disable-next-line no-unused-vars
+    import {FormDefaults, FormElement, FormElementErrorType, FormDefaultsType} from '@/modules/contact/types/components.d';
 
-    type FormElementErrorType = 'empty' | 'invalid' | '';
-
-    type FormElement = {
-        color: string,
-        errorShow: boolean,
-        errorType: FormElementErrorType,
-        readonly htmlName: string,
-        inputting: boolean,
-        readonly length: { min: number, max: number },
-        readonly name: string,
-        readonly required: boolean,
-        readonly tag: 'input' | 'textarea' | 'span',
-        readonly type: string,
-        valid: boolean,
-        readonly validateRegex: RegExp,
-        validLength: boolean,
-        value: string
-    }
-
-    type FormElements = 'email' | 'message' | 'name' | 'tel';
-    type FormDefaults = 'default' | FormElements;
-
+    /** @description The component containing the contact form. */
     @Component({
         name: `ContactForm`
     })
     export default class ContactForm extends mixins(MainMixin)
     {
+        /**
+         * @description Listens to the blur event of a form element.
+         * @param element The form element which was the target of the event.
+         * */
         public blurOn(element: FormElement): void
         {
             element.inputting = false;
             this.errorTypeUpdate(element);
         }
 
+        /**
+         * @description Updates properties of a form element which are based on other properties.
+         * @param element The form element to modify.
+         * */
         public computedPropertiesUpdate(element: FormElement): void
         {
             this.formDataUpdate(element);
@@ -61,23 +50,27 @@
             this.errorTypeUpdate(element);
         }
 
+        /**
+         * @description Initializes all form elements and assigns them initial values of their properties based on their types and data passed to the method..
+         * @param elements Form elements to initialize.
+         * @returns Form elements ready to be used in a form.
+         * */
         public elementsInit(elements: { [s: string]: Partial<FormElement> }): { [s: string]: FormElement }
         {
-            type FormType<T> = { [s in FormDefaults]?: T } | T;
-
+            /** @description The object containing all possible default values of all form element properties. */
             const defaults: DeepReadonlyObject<{
-                autocomplete: FormType<string>,
-                errorShow: FormType<boolean>,
-                errorType: FormType<string>,
-                input: FormType<string>,
-                inputting: FormType<boolean>,
-                length: FormType<{ min: number, max: number }>,
-                required: FormType<boolean>,
-                tag: FormType<string>,
-                type: FormType<string>,
-                valid: FormType<boolean>,
-                validLength: FormType<boolean>,
-                validateRegex: FormType<RegExp>,
+                autocomplete: FormDefaultsType<string>,
+                errorShow: FormDefaultsType<boolean>,
+                errorType: FormDefaultsType<string>,
+                input: FormDefaultsType<string>,
+                inputting: FormDefaultsType<boolean>,
+                length: FormDefaultsType<{ min: number, max: number }>,
+                required: FormDefaultsType<boolean>,
+                tag: FormDefaultsType<string>,
+                type: FormDefaultsType<string>,
+                valid: FormDefaultsType<boolean>,
+                validLength: FormDefaultsType<boolean>,
+                validateRegex: FormDefaultsType<RegExp>,
                 value: { boolean: string, default: string, [s: string]: string }
             }> = {
                 autocomplete: {
@@ -161,6 +154,11 @@
             return elements as { [s: string]: FormElement };
         }
 
+        /**
+         * @description Determines whether and which error type should be displayed next to a form element.
+         * @param element The form element to get the error type from.
+         * @returns Error type, if empty error message is not displayed.
+         * */
         public errorTypeGet({inputting, required, valid, value}: FormElement): FormElementErrorType
         {
             if ((!value && !required) || inputting)
@@ -181,14 +179,23 @@
             return ``;
         }
 
-        public errorTypeUpdate(element: FormElement)
+        /**
+         * @description Assigns an error type to a form element.
+         * @param element The form element to assign the error type to.
+         * */
+        public errorTypeUpdate(element: FormElement): void
         {
             element.errorType = this.errorTypeGet(element);
             element.errorShow = Boolean(element.errorType);
         }
 
+        /**
+         * @description Listens to the focus event of a form element.
+         * @param element The form element which was the target of the event.
+         * */
         public focusOn(element: FormElement): void
         {
+            /** @description Prevents auto-inputting of some browsers. */
             if (element.color !== `transparent`)
             {
                 return;
@@ -198,6 +205,10 @@
             element.color = ``;
         }
 
+        /**
+         * @description Updates the form data related to a form element.
+         * @param element The form element to get the data from.
+         * */
         public formDataUpdate(element: FormElement): void
         {
             if (element.tag === `span`)
@@ -208,6 +219,9 @@
             this.formData[element.name] = element.value || null;
         }
 
+        /**
+         * @description Submits the form to the server.
+         * */
         public formSubmit(): void
         {
             if (!this.valid)
@@ -220,8 +234,10 @@
                 this.elements[name].inputting = false;
             });
 
+            /** @description The object to assign the form data to. It will store the data in a format which is easier to parse by the server. */
             const formData: FormData = new FormData();
 
+            /** @description Assigns the form data to the object. */
             Object.entries(this.formData).filter(([, formFieldValue]: [string, any]) =>
             {
                 return formFieldValue !== null;
@@ -230,6 +246,7 @@
                 return formData.append(formFieldName, formFieldValue);
             });
 
+            /** @description Sends the form data to the server. */
             this.$http.post(`/${this.url}`, formData).then(() =>
             {
                 this.$root.$emit(`alert-show`, `success`);
@@ -245,6 +262,11 @@
             });
         }
 
+        /**
+         * @description Listens to the blur event of a form element.
+         * @param $event The data related to the event.
+         * @param element The form element which was the target of the event.
+         * */
         public inputOn($event: KeyboardEvent, element: FormElement): void
         {
             element.inputting = true;
@@ -252,11 +274,19 @@
             this.computedPropertiesUpdate(element);
         }
 
+        /**
+         * @description Determines whether the length of the form element value is valid.
+         * @param element The form element to get the validity of its value length from..
+         * @returns Whether the length of the form element value is valid.
+         * */
         public lengthValidityGet({length, value}: FormElement): boolean
         {
             return new this.$Range(length.min, length.max).includes(value.length);
         }
 
+        /**
+         * @description Listens to the submit event of the form.
+         * */
         public submitOn(): void
         {
             if (Object.values(this.elements).filter((element) =>
@@ -285,13 +315,20 @@
             this.formSubmit();
         }
 
+        /**
+         * @description Determines whether the form element value is valid.
+         * @param element The form element to get the validity of the value from..
+         * @returns Whether the form element value is valid.
+         * */
         public validityGet({required, validateRegex, validLength, value}: FormElement): boolean
         {
             return (validateRegex.test(value) || (!value && !required)) && validLength;
         }
 
+        /** @description The object containing all basic form elements. */
         public elements!: { [s: string]: FormElement };
 
+        /** @description The object containing all extra form elements which are not modifiable directly by the user. */
         public elementsExtra!: { [s: string]: FormElement };
 
         public data()
@@ -302,9 +339,12 @@
             };
         }
 
+        /** @description The object containing all the form data which will be sent to the server in case of submit. */
         public formData: { lang?: Lang, [s: string]: any } = {};
+        /** @description The URL which will be called in case of a form submit. */
         public readonly url: string = `contact-form/send-mail`;
 
+        /** @description The object containing all form elements. */
         public get elementsAll(): { [s: string]: FormElement }
         {
             return {
@@ -312,11 +352,13 @@
             } as { [s: string]: FormElement };
         }
 
+        /** @description Locales of the component. */
         public get text(): typeof text.sk.contact.form
         {
             return this.texts.contact.form;
         }
 
+        /** @description Determines whether the form is valid. */
         public get valid(): boolean
         {
             return !Object.values(this.elementsAll).filter((element) =>
