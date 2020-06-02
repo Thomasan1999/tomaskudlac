@@ -51,7 +51,7 @@ module.exports = {
     pwa: {
         workboxPluginMode: `GenerateSW`,
         workboxOptions: {
-            exclude: [/\.html$/, /node_modules/],
+            exclude: [/\.html$/, /node_modules/, /^\.htaccess$/],
             skipWaiting: true
         } as GenerateSWOptions
     }
