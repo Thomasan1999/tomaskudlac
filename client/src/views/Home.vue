@@ -56,6 +56,7 @@
     import text               from '@/locales';
     import MainMixin          from '@/mixins/Main';
 
+    /** The component containing the Home view. It is the default view. */
     @Component({
         components: {
             AboutMyselfColumn,
@@ -73,17 +74,25 @@
     export default class Home extends mixins(MainMixin)
     {
         public readonly $refs!: Vue['$refs'] & {
+            /** @description The vertically scrollable HTML Element containing most of the view. */
             scrollbarContainer: Vue
         };
 
-        public clickOn($event: MouseEvent): void
+        /**
+         * @description Listener of the click event targeted on the cookies popup link or the cookies popup close button.
+         * @param $event The data related to the event.
+         * */
+        public clickOn($event: Merge<MouseEvent, {target: HTMLElement}>): void
         {
-            if (this.cookiesShow && !($event.target as HTMLElement).closest(`.cookies-info, .cookies`))
+            if (this.cookiesShow && !$event.target.closest(`.cookies-info, .cookies`))
             {
                 this.cookiesShow = false;
             }
         }
 
+        /**
+         * @description Jumps to the section which corresponds to the hash value of the URL.
+         * */
         public jumpByHash(): void
         {
             if (!this.activeSection.$el)
@@ -94,11 +103,18 @@
             this.$refs.scrollbarContainer.$el.scrollTop = this.activeSection.$el.offsetTop - this.$store.getters.navHeight;
         }
 
+        /**
+         * @description Listener of the resize event targeted on the window object.
+         * */
         public resizeOn(): void
         {
             this.$store.commit(`set`, {props: {windowHeight: window.innerHeight, windowWidth: window.innerWidth}});
         }
 
+        /**
+         * @description Scrolls to a section by name of the section.
+         * @name name Name of the section to scroll to.
+         * */
         public scrollToSection(name: string): void
         {
             this.$refs.scrollbarContainer.$el.scrollTo({
@@ -107,6 +123,10 @@
             });
         }
 
+        /**
+         * @description Returns the active section based on the scroll top of the scrollbar container.
+         * @param scrollTop Scroll top value of the scrollbar container.
+         * */
         public sectionCurrentGet(scrollTop: number): void
         {
             const {commit, state} = this.$store;
@@ -124,11 +144,16 @@
             }
         }
 
+        /** @description List of all about myself columns. */
         public readonly aboutMyselfColumns: string[] = [`whereAmINow`, `freeTimeActivities`, `usefulActivities`];
+        /** @description Determines whether the cookies info popup is shown. */
         public cookiesShow: boolean = false;
+        /** @description Number of already loaded images. */
         public loadedImages: number = 0;
+        /** @description List of all projects of the Portfolio section. */
         public readonly projects: string[] = [`fifamaniaci`, `simonQ`, `villaromaine`, `havranPub`];
 
+        /** @description The active section. */
         public get activeSection(): SectionMain
         {
             const sectionMainName: SectionMainName = this.$store.state.navItemActive;
@@ -136,11 +161,13 @@
             return {$el: this.$refs[sectionMainName] as HTMLElement, href: new this.$String((this.text[sectionMainName] as TextSection).title).urlTo() as string};
         }
 
+        /** @description The current URL hash. */
         public get hash(): string
         {
             return this.activeSection.href;
         }
 
+        /** @description Locales of the component. */
         public get text(): typeof text.sk
         {
             return this.texts;
@@ -148,29 +175,22 @@
 
         public created()
         {
+            /** @description The current hash value. */
             const hash: string = (this.$route.hash.match(/[^?]+/) || [``])[0];
 
-            if (hash !== this.$route.hash)
-            {
-                this.$router.push({
-                    hash,
-                    params: {}
-                }).catch((err) =>
-                {
-                    console.error(err);
-                });
-            }
-
+            /** @description Array containing hrefs and names of all sections. */
             const sections: Section[] = this.$store.state.sections.map((sectionName: string) =>
             {
                 return {href: new this.$String((this.texts[sectionName] as TextSection).title).urlTo() as string, name: sectionName};
             });
 
+            /** @description The section which should be active based on the URL hash. */
             const sectionCurrent: Section | undefined = sections.find((section) =>
             {
                 return section.href === hash.replace(/^#/, ``);
             });
 
+            /** @description If an active section is proposed, assign it globally. */
             if (sectionCurrent)
             {
                 this.$store.commit(`set`, {props: {navItemActive: sectionCurrent.name}});
@@ -179,12 +199,16 @@
             window.addEventListener(`resize`, this.resizeOn);
         }
 
+        /** @description If the hash property is changed, change the URL hash accordingly. */
         @Watch(`hash`)
         public hashChangeOn()
         {
             window.location.hash = this.hash;
         }
 
+        /** @description If an image is loaded, jump to the top of the active section, an image might change the height of the section, therefore, the whole page might have a
+         * different height and the scroll top has to adjusted accordingly.
+         *  */
         @Watch(`loadedImages`)
         public loadedImagesChangeOn()
         {

@@ -23,7 +23,7 @@
     })
     export default class FooterSection extends mixins(MainMixin)
     {
-        /** @description Determines whether the cookies popup is shown. */
+        /** @description Determines whether the cookies info popup is shown. */
         @Prop(Boolean) public readonly cookiesShow!: boolean;
 
         /** @description Listener of the click on the link which opens a cookies info popup. */
