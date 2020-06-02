@@ -1,4 +1,4 @@
-/** @description Locales of tne Contact section. */
+/** @description Locales of the Contact section. */
 export default {
     /** @description Contact form. */
     'form': {

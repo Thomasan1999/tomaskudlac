@@ -1,6 +1,6 @@
 import {AboutMyselfColumnLocales} from '@/modules/about-myself/types/locales.d';
 
-/** @description Locales of tne About myself section. */
+/** @description Locales of the About myself section. */
 export default {
     /** @description The Free time activities column. */
     'freeTimeActivities': {
