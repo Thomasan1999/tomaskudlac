@@ -53,10 +53,11 @@
         p
             margin-vertical 0
 
-        >>> button
+        >>> button, >>> a
             background-color transparent
             border 0
             font inherit
+            transition .25s
 
             &:hover
                 font-color $anchor_hover
