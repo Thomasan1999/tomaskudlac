@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.902225e8dccd65ef204bc3055aee6d2d.js"
+  "/precache-manifest.bee3f90ab58e9f937171f40ceaeeac4f.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "tomaskudlac"});
