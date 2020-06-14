@@ -3,12 +3,12 @@
        :title="text[name].title" :style="{backgroundImage: `url('${require(`@/modules/portfolio/assets/${new $String(name).urlTo()}.${$store.state.imageFormat}`)}')`}">
         <div class="curtain"></div>
         <div class="text-container">
-            <p class="title" v-html="text[name].title"></p>
+            <p class="title">{{text[name].title}}</p>
             <div class="text">
                 <p>
-                    <span class="what-ive-done" v-html="`${text.whatIveDone}:`"></span><br>
-                    <span v-for="projectPart in projectParts" :key="projectPart.id"
-                          v-html="`${text[projectPart]}: ${text[new $String(name).caseCamelTo()][projectPart] || `100%`}<br>`"></span>
+                    <span class="what-ive-done">{{`${text.whatIveDone}:`}}</span><br>
+                    <span v-for="projectPart in projectParts" :key="projectPart.id">{{`${text[projectPart]}: ${text[new $String(name).caseCamelTo()][projectPart] || `100%`}`}}<br>
+                    </span>
                 </p>
             </div>
         </div>

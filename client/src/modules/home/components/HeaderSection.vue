@@ -6,10 +6,10 @@
                 <div class="nav-item-container">
                     <a v-for="navItem in navItems" :key="navItem" class="nav-item link" :class="{active: $store.state.navItemActive === navItem}"
                        :href="`#${new $String(texts[navItem].title).urlTo()}`"
-                       v-html="texts[navItem].title" @click.prevent="$emit(`nav-click`, navItem)"></a>
+                       @click.prevent="$emit(`nav-click`, navItem)">{{texts[navItem].title}}</a>
                 </div>
-                <router-link :to="$store.getters.langOtherProps.href" class="link language" v-html="$store.getters.langOtherProps.nameUpper"
-                             @click.native="$store.dispatch(`langUpdate`)"/>
+                <router-link :to="$store.getters.langOtherProps.href" class="link language"
+                             @click.native="$store.dispatch(`langUpdate`)">{{$store.getters.langOtherProps.nameUpper}}</router-link>
                 <div class="inline-block-container social-network-container">
                     <a v-for="socialNetwork in socialNetworks" :key="socialNetwork.title" target="_blank" rel="noopener noreferrer" :href="socialNetwork.href"
                        class="social-network link" :title="socialNetwork.title">

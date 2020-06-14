@@ -10,13 +10,13 @@
                     </div>
                 </section>
                 <section class="section-main" ref="portfolio">
-                    <h2 v-html="text.portfolio.title"></h2>
+                    <h2>{{text.portfolio.title}}</h2>
                     <div class="project-container">
                         <project v-for="project in projects" :key="project" :name="project"/>
                     </div>
                 </section>
                 <section class="about-myself section-main" ref="aboutMyself">
-                    <h2 v-html="text.aboutMyself.title"></h2>
+                    <h2>{{text.aboutMyself.title}}</h2>
                     <picture>
                         <source type="image/webp" srcset="../modules/about-myself/assets/myself.webp">
                         <source type="image/jpeg" srcset="../modules/about-myself/assets/myself.jpg">
@@ -27,7 +27,7 @@
                     </div>
                 </section>
                 <section class="section-main" ref="contact">
-                    <h2 v-html="new $String(text.contact.title).htmlParse()"></h2>
+                    <h2>{{text.contact.title}}</h2>
                     <p class="contact-text" v-html="new $String(text.contact.text).htmlParse()"></p>
                     <contact-form/>
                     <cookies-info v-if="$store.state.lang === `sk` && cookiesShow" @close="cookiesShow = false"/>

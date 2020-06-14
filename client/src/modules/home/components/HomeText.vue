@@ -1,12 +1,12 @@
 <template>
     <h1 class="home-text">
-        <span v-html="homeText[0]"/>
+        <span>{{homeText[0]}}</span>
         <span class="programming-language">
             <span v-html="htmlParse(current)"/>
             <mark v-html="htmlParse(marked)"/>
             <span :class="{blinking}" class="cursor"/>
         </span>
-        <span v-html="homeText[1]"/>
+        <span>{{homeText[1]}}</span>
     </h1>
 </template>
 

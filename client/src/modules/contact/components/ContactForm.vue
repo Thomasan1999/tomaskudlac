@@ -2,15 +2,15 @@
     <form action="/contact-form/send-mail" class="contact-form" method="post" @submit.prevent="submitOn">
         <div v-for="(element, elementName) in elements" class="element inline-block-container" :class="{[`error-form-element`]: element.errorShow}" :key="elementName"
              ref="elements">
-            <label :for="element.htmlName" v-html="new $String(`${text[elementName]}:${element.required ? `*` : ``}`).htmlParse()"></label>
+            <label :for="element.htmlName">{{`${text[elementName]}:${element.required ? `*` : ``}`}}</label>
             <input v-if="element.tag === `input`" :style="{color: element.color}" :id="element.htmlName" :autocomplete="element.autocomplete" :minlength="element.length.min"
                    :maxlength="element.length.max"
                    :type="element.input" :value="element.value" @blur="blurOn(element)" @focus="focusOn(element)" @input="inputOn($event, element)">
             <textarea v-else-if="element.tag === `textarea`" :style="{color: element.color}" :id="element.htmlName" :value="element.value" @blur="blurOn(element)"
                       @focus="focusOn(element)" @input="inputOn($event, element)"></textarea>
         </div>
-        <p class="contact-required-fields-legend" v-html="new $String(`* - ${text.requiredFields}`).htmlParse()"></p>
-        <button type="submit" v-html="new $String(text.submit).htmlParse()"></button>
+        <p class="contact-required-fields-legend">{{`* - ${text.requiredFields}`}}</p>
+        <button type="submit">{{text.submit}}</button>
     </form>
 </template>
 
@@ -20,7 +20,7 @@
     import text          from '@/locales';
     import MainMixin                   from '@/mixins/Main';
     // eslint-disable-next-line no-unused-vars
-    import {FormDefaults, FormElement, FormElementErrorType, FormDefaultsType} from '@/modules/contact/types/components.d';
+    import {FormElement, FormElementErrorType, FormDefaultsType} from '@/modules/contact/types/components.d';
 
     /** @description The component containing the contact form. */
     @Component({

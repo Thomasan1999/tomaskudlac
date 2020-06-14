@@ -1,7 +1,7 @@
 <template>
     <transition name="fade">
         <div class="alert" :style="state">
-            <p v-html="text[name]"/>
+            <p>{{text[name]}}</p>
             <div class="alert-remove" @click="deleteClickOn">
                 <svg :style="{stroke: state.color}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 15">
                     <title>Zrušiť</title>

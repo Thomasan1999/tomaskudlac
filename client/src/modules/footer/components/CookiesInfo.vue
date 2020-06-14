@@ -4,8 +4,8 @@
             <font-awesome-icon :icon="cookiesCloseIcon" @click="clickOn"/>
         </button>
         <div v-for="(paragraph, index) in text.text" :key="index">
-            <h3 v-html="paragraph.title"></h3>
-            <p v-html="new $String(paragraph.text).htmlParse().toString()"></p>
+            <h3>{{paragraph.title}}</h3>
+            <p>{{paragraph.text}}</p>
         </div>
     </div>
 </template>
