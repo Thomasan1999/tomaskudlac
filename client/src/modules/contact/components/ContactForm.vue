@@ -15,10 +15,10 @@
 </template>
 
 <script lang="ts">
-    import {mixins}      from 'vue-class-component';
-    import {Component}   from 'vue-property-decorator';
-    import text          from '@/locales';
-    import MainMixin                   from '@/mixins/Main';
+    import {mixins}                                              from 'vue-class-component';
+    import {Component}                                           from 'vue-property-decorator';
+    import text                                                  from '@/locales';
+    import MainMixin                                             from '@/mixins/Main';
     // eslint-disable-next-line no-unused-vars
     import {FormElement, FormElementErrorType, FormDefaultsType} from '@/modules/contact/types/components.d';
 
