@@ -17,6 +17,7 @@ module.exports = {
         'import/prefer-default-export': 'off',
         'newline-per-chained-call': 'off',
         'import/no-cycle': 'off',
+        'import/no-extraneous-dependencies': 'off',
         'lines-between-class-members': 'off',
         'max-len': 'off',
         'new-cap': 'off',
@@ -25,6 +26,8 @@ module.exports = {
         'no-floating-decimal': 'off',
         'no-multi-spaces': 'off',
         'no-param-reassign': ['error', {props: false}],
+        'no-undef': 'off',
+        'no-unused-vars': 'off',
         'no-use-before-define': 'off',
         'no-restricted-globals': 'off',
         'no-template-curly-in-string': 'off',
@@ -36,6 +39,7 @@ module.exports = {
         'prefer-promise-reject-errors': 'off',
         'quote-props': 'off',
         quotes: 'off',
+        'vue/experimental-script-setup-vars': 'off',
         'vue/script-indent': ['off', 4, {
             baseIndent: 1
         }]

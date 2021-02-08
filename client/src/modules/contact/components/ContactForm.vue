@@ -19,7 +19,6 @@
     import {Component}                                           from 'vue-property-decorator';
     import text                                                  from '@/locales';
     import MainMixin                                             from '@/mixins/Main';
-    // eslint-disable-next-line no-unused-vars
     import {FormElement, FormElementErrorType, FormDefaultsType} from '@/modules/contact/types/components.d';
 
     /** @description The component containing the contact form. */
@@ -478,7 +477,6 @@
             background-color #3e2d2d !important
             border 1px #cc0000
             box-sizing border-box
-
 
     .contact-required-fields-legend
         font-family 'Montserrat', sans-serif

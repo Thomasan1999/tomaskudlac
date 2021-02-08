@@ -3,7 +3,7 @@
         <footer>
             <div class="copyright">
                 <p>
-                    <span>{{`© 2017 - 2020 ${text.copyright}. `}}</span>
+                    <span>{{`© 2017 - 2021 ${text.copyright}. `}}</span>
                     <span v-html="new $String(text.cookies).htmlParse().toString()" @click="clickOn"></span>
                 </p>
             </div>

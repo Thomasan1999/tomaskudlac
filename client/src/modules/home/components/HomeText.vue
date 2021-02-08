@@ -183,7 +183,9 @@
              * @param programmingLanguageProps The data related to the programming language.
              * @returns The HTML string of a programming language.
              * */
-            const htmlGet: (args: { programmingLanguage: string, programmingLanguageProps: ProgrammingLanguage }) => string = ({programmingLanguage, programmingLanguageProps}) =>
+            const htmlGet: (
+                args: { programmingLanguage: string, programmingLanguageProps: ProgrammingLanguage }
+            ) => string = ({programmingLanguage, programmingLanguageProps}) =>
             {
                 return `${programmingLanguageProps.an && this.$store.state.lang === `en` ? `n ` : ` `}${programmingLanguages[programmingLanguage]}`;
             };

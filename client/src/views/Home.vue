@@ -283,7 +283,6 @@
             max-width 384px
             width calc(100% - 30px)
 
-
         .column-container
             display flex
             justify-content center

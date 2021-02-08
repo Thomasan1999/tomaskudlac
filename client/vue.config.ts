@@ -1,7 +1,6 @@
 import * as path              from 'path';
 import {BundleAnalyzerPlugin} from 'webpack-bundle-analyzer';
 import {GenerateSWOptions}    from 'workbox-webpack-plugin';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import {ProjectOptions}       from '@vue/cli-service';
 
 function addStyleResource(rule): void

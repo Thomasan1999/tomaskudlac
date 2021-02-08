@@ -46,7 +46,6 @@ export default class VueString extends String
         })}`.toLowerCase().replace(/ /g, `-`).replace(/--/g, `-`)) : this;
     }
 
-
     /**
      * @description Converts the first character of the string value to lowercase.
      * @returns A VueString instance containing the string value the method is performed on with lowercase first character.
