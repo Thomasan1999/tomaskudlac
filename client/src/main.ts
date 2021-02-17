@@ -19,9 +19,6 @@ import dayjs                                 from '@/plugins/dayjsPlugin';
 import VueString                             from '@/plugins/VueStringPlugin';
 import Range                                 from '@/plugins/NumericRangePlugin';
 
-/** @description Loads the polyfills. */
-require(`./polyfills`);
-
 /** @description Adds scroll-behavior: smooth to browsers which do not support it natively. */
 smoothscroll.polyfill();
 
