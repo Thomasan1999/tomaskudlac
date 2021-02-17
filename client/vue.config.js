@@ -24,7 +24,6 @@ const webpack_bundle_analyzer_1 = require("webpack-bundle-analyzer");
 function addStyleResource(rule) {
     rule.use(`style-resource`).loader(`style-resources-loader`).options({
         patterns: [
-            path.resolve(__dirname, `./src/styles/variables.styl`),
             path.resolve(__dirname, `./src/styles/tomwork.functions.styl`)
         ]
     });

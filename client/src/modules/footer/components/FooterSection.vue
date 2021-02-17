@@ -2,9 +2,13 @@
     <section class="footer">
         <footer>
             <div class="copyright">
-                <p>
-                    <span>{{`© 2017 - 2021 ${text.copyright}. `}}</span>
-                    <span v-html="new $String(text.cookies).htmlParse().toString()" @click="clickOn"></span>
+                <p class="copyright-text">
+                    <span class="cookies-text-non-link">{{`© 2017 - 2021 ${text.copyright}. `}}</span>
+                    <span
+                        class="cookies-info-link"
+                        v-html="new $String(text.cookies).htmlParse().toString()"
+                        @click="clickOn"
+                    ></span>
                 </p>
             </div>
         </footer>
@@ -42,16 +46,13 @@
 
 <style lang="stylus" scoped>
     footer
-        background-color $primary_color
+        background-color var(--primary-color)
 
     .copyright
         font-color #ffffff
         font-weight 500
         line-height 40px
         margin-top 50px
-
-        p
-            margin-vertical 0
 
         >>> button, >>> a
             background-color transparent
@@ -60,7 +61,10 @@
             transition .25s
 
             &:hover
-                font-color $anchor_hover
+                font-color var(--primary-anchor-hover-color)
+
+    .copyright-text
+        margin-vertical 0
 
     >>> .cookies
         cursor pointer

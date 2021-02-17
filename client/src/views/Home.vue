@@ -2,7 +2,10 @@
     <div class="home" @click="clickOn">
         <scrollbar-container @scroll="sectionCurrentGet" ref="scrollbarContainer">
             <div>
-                <header-section @nav-click="scrollToSection" @nav-icon-click="$store.commit(`set`, {props: {navSlidedDown: !$store.state.navSlidedDown}})"/>
+                <header-section
+                    @nav-click="scrollToSection"
+                    @nav-icon-click="$store.commit(`set`, {props: {navSlidedDown: !$store.state.navSlidedDown}})"
+                />
                 <section class="section-home background-image" ref="home">
                     <div class="curtain-container">
                         <div class="curtain"></div>
@@ -10,29 +13,37 @@
                     </div>
                 </section>
                 <section class="section-main" ref="portfolio">
-                    <h2>{{text.portfolio.title}}</h2>
+                    <h2>{{ text.portfolio.title }}</h2>
                     <div class="project-container">
                         <project v-for="project in projects" :key="project" :name="project"/>
                     </div>
                 </section>
                 <section class="about-myself section-main" ref="aboutMyself">
-                    <h2>{{text.aboutMyself.title}}</h2>
+                    <h2>{{ text.aboutMyself.title }}</h2>
                     <picture>
                         <source type="image/webp" srcset="../modules/about-myself/assets/myself.webp">
                         <source type="image/jpeg" srcset="../modules/about-myself/assets/myself.jpg">
-                        <img :alt="text.aboutMyself.myselfAlt" @load="loadedImages += 1" src="../modules/about-myself/assets/myself.jpg">
+                        <img
+                            :alt="text.aboutMyself.myselfAlt"
+                            src="../modules/about-myself/assets/myself.jpg"
+                            @load="loadedImages += 1"
+                        >
                     </picture>
                     <div class="column-container">
-                        <about-myself-column v-for="aboutMyselfColumn in aboutMyselfColumns" :key="aboutMyselfColumn" :name="aboutMyselfColumn"/>
+                        <about-myself-column
+                            v-for="aboutMyselfColumn in aboutMyselfColumns"
+                            :key="aboutMyselfColumn"
+                            :name="aboutMyselfColumn"
+                        />
                     </div>
                 </section>
                 <section class="section-main" ref="contact">
-                    <h2>{{text.contact.title}}</h2>
+                    <h2>{{ text.contact.title }}</h2>
                     <p class="contact-text" v-html="new $String(text.contact.text).htmlParse()"></p>
                     <contact-form/>
                     <cookies-info v-if="$store.state.lang === `sk` && cookiesShow" @close="cookiesShow = false"/>
                 </section>
-                <footer-section @click="(val) => cookiesShow = val" :cookies-show="cookiesShow"/>
+                <footer-section :cookies-show="cookiesShow" @click="(val) => cookiesShow = val"/>
             </div>
             <alert-container/>
         </scrollbar-container>
@@ -82,9 +93,11 @@
          * @description Listener of the click event targeted on the cookies popup link or the cookies popup close button.
          * @param $event The data related to the event.
          * */
-        public clickOn($event: Merge<MouseEvent, {target: HTMLElement}>): void
+        public clickOn($event: Merge<MouseEvent, { target: HTMLElement }>): void
         {
-            if (this.cookiesShow && !$event.target.closest(`.cookies-info, .cookies`))
+            const cookiesElementClickedIs: boolean = !$event.target.closest(`.cookies-info, .cookies`);
+
+            if (this.cookiesShow && cookiesElementClickedIs)
             {
                 this.cookiesShow = false;
             }
@@ -103,12 +116,47 @@
             this.$refs.scrollbarContainer.$el.scrollTop = this.activeSection.$el.offsetTop - this.$store.getters.navHeight;
         }
 
+        /** Determines which navbar item should be active. */
+        public navItemActiveInit(): void
+        {
+            /** @description The current hash value. */
+            const hash: string = this.$route.hash.match(/[^?]+/)?.[0] ?? ``;
+
+            /** @description Array containing hrefs and names of all sections. */
+            const sections: Section[] = this.$store.state.sections.map((sectionName: string) =>
+            {
+                const sectionText = (this.texts[sectionName] as TextSection);
+
+                const sectionTitle = sectionText.title;
+
+                return {
+                    href: new this.$String(sectionTitle).urlTo(),
+                    name: sectionName
+                };
+            });
+
+            /** @description The section which should be active based on the URL hash. */
+            const currentSection: Section | undefined = sections.find((section) =>
+            {
+                return section.href === hash.replace(/^#/, ``);
+            });
+
+            /** @description If an active section is proposed, assign it globally. */
+            if (currentSection)
+            {
+                this.$store.commit(`set`, {props: {navItemActive: currentSection.name}});
+            }
+        }
+
         /**
          * @description Listener of the resize event targeted on the window object.
          * */
         public resizeOn(): void
         {
-            this.$store.commit(`set`, {props: {windowHeight: window.innerHeight, windowWidth: window.innerWidth}});
+            const windowHeight: number = window.innerHeight;
+            const windowWidth: number = window.innerWidth;
+
+            this.$store.commit(`set`, {props: {windowHeight, windowWidth}});
         }
 
         /**
@@ -117,48 +165,75 @@
          * */
         public scrollToSection(name: string): void
         {
+            const sectionElement = this.$refs[name] as HTMLElement;
+            const sectionElementOffsetTop: number = sectionElement.offsetTop;
+
+            const {navHeight} = this.$store.getters;
+
             this.$refs.scrollbarContainer.$el.scrollTo({
                 behavior: `smooth`,
-                top: (this.$refs[name] as HTMLElement).offsetTop - this.$store.getters.navHeight
+                top: sectionElementOffsetTop - navHeight
             });
         }
 
         /**
          * @description Returns the active section based on the scroll top of the scrollbar container.
-         * @param scrollTop Scroll top value of the scrollbar container.
+         * @param scrollbarContainerScrollTop Scroll top value of the scrollbar container.
          * */
-        public sectionCurrentGet(scrollTop: number): void
+        public sectionCurrentGet(scrollbarContainerScrollTop: number): void
         {
             const {commit, state} = this.$store;
 
-            const sectionMainCurrent: string = [...state.sections].reverse().find((sectionMainName) =>
-            {
-                const $el: HTMLElement = this.$refs[sectionMainName] as HTMLElement;
+            const sectionsReversed = [...state.sections].reverse();
 
-                return $el && (scrollTop > ($el.offsetTop - (window.innerHeight / 2)));
-            }) || ``;
-
-            if (state.navItemActive !== sectionMainCurrent)
+            const currentMainSection: string = sectionsReversed.find((mainSectionName) =>
             {
-                commit(`set`, {props: {navItemActive: sectionMainCurrent}});
+                const mainSectionElement: HTMLElement = this.$refs[mainSectionName] as HTMLElement;
+
+                const mainSectionOffsetTop = mainSectionElement.offsetTop;
+
+                const mainSectionOffsetTopShifted = (mainSectionOffsetTop - (window.innerHeight / 2));
+
+                const coversMostOfWindow: boolean = scrollbarContainerScrollTop > mainSectionOffsetTopShifted;
+
+                return mainSectionElement && coversMostOfWindow;
+            }) ?? ``;
+
+            const currentSectionsInactiveIs: boolean = state.navItemActive !== currentMainSection;
+
+            if (currentSectionsInactiveIs)
+            {
+                commit(`set`, {props: {navItemActive: currentMainSection}});
             }
         }
 
         /** @description List of all about myself columns. */
         public readonly aboutMyselfColumns: string[] = [`whereAmINow`, `freeTimeActivities`, `usefulActivities`];
+
         /** @description Determines whether the cookies info popup is shown. */
         public cookiesShow: boolean = false;
+
         /** @description Number of already loaded images. */
         public loadedImages: number = 0;
+
         /** @description List of all projects of the Portfolio section. */
         public readonly projects: string[] = [`fifamaniaci`, `simonQ`, `villaromaine`, `havranPub`];
 
         /** @description The active section. */
-        public get activeSection(): SectionMain
+        public get activeSection(): MainSection
         {
-            const sectionMainName: SectionMainName = this.$store.state.navItemActive;
+            const activeSectionName: MainSectionName = this.$store.state.navItemActive;
 
-            return {$el: this.$refs[sectionMainName] as HTMLElement, href: new this.$String((this.text[sectionMainName] as TextSection).title).urlTo() as string};
+            const activeSectionText = this.text[activeSectionName] as TextSection;
+
+            const {title} = activeSectionText;
+
+            const activeSectionElement = this.$refs[activeSectionName] as HTMLElement;
+
+            return {
+                $el: activeSectionElement,
+                href: new this.$String(title).urlTo()
+            };
         }
 
         /** @description The current URL hash. */
@@ -175,26 +250,7 @@
 
         public created()
         {
-            /** @description The current hash value. */
-            const hash: string = (this.$route.hash.match(/[^?]+/) || [``])[0];
-
-            /** @description Array containing hrefs and names of all sections. */
-            const sections: Section[] = this.$store.state.sections.map((sectionName: string) =>
-            {
-                return {href: new this.$String((this.texts[sectionName] as TextSection).title).urlTo() as string, name: sectionName};
-            });
-
-            /** @description The section which should be active based on the URL hash. */
-            const sectionCurrent: Section | undefined = sections.find((section) =>
-            {
-                return section.href === hash.replace(/^#/, ``);
-            });
-
-            /** @description If an active section is proposed, assign it globally. */
-            if (sectionCurrent)
-            {
-                this.$store.commit(`set`, {props: {navItemActive: sectionCurrent.name}});
-            }
+            this.navItemActiveInit();
 
             window.addEventListener(`resize`, this.resizeOn);
         }
@@ -206,8 +262,10 @@
             window.location.hash = this.hash;
         }
 
-        /** @description If an image is loaded, jump to the top of the active section, an image might change the height of the section, therefore, the whole page might have a
-         * different height and the scroll top has to adjusted accordingly.
+        /**
+         * @description If an image is loaded, jump to the top of the active section, an image might change the height
+         * of the section, therefore, the whole page might have different height and the scroll top has to adjusted
+         * accordingly.
          *  */
         @Watch(`loadedImages`)
         public loadedImagesChangeOn()
@@ -299,7 +357,7 @@
             transition .25s
 
             &:hover
-                font-color $anchor_hover
+                font-color var(--primary-anchor-hover-color)
 
     .project-container
         display grid

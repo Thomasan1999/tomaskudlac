@@ -21,7 +21,7 @@ export default class VueString extends String
      * @description Converts the string value to camel case.
      * @returns A VueString instance containing the string value the method is performed on in camel case.
      * */
-    public caseCamelTo(): VueString
+    public toCamelCase(): VueString
     {
         return this.toString() ? new VueString(this.replace(/([_|-]\w)/g, (word) =>
         {
@@ -33,7 +33,7 @@ export default class VueString extends String
      * @description Converts the string value to train case.
      * @returns A VueString instance containing the string value the method is performed on in train case.
      * */
-    public caseTrainTo(): VueString
+    public toTrainCase(): VueString
     {
         return this.toString() ? new VueString(`${this[0].toLowerCase()}${this.slice(1).replace(/([A-Z][a-z])|([a-z][A-Z]$)/g, (match) =>
         {
@@ -183,9 +183,11 @@ export default class VueString extends String
      * @param [vueStringReturn] Determines whether a VueString instance will be returned.
      * @returns A VueString instance or string containing the string value the method is performed on in URL-safe format.
      * */
+    public urlTo(vueStringReturn?: false): string
+    public urlTo(vueStringReturn: true): VueString
     public urlTo(vueStringReturn: boolean = false): VueString | string
     {
-        const url = this.diacriticsRemove().caseTrainTo().decapitalize();
+        const url = this.diacriticsRemove().toTrainCase().decapitalize();
         return vueStringReturn ? url : url.toString();
     }
 }

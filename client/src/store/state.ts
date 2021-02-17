@@ -27,7 +27,7 @@ export default {
     /** @description The active language of the website. */
     lang: `sk` as Lang,
     /** @description The name of the active nav-bar item. */
-    navItemActive: `home` as SectionMainName,
+    navItemActive: `home` as MainSectionName,
     /** @description Determines whether the nav-bar is slided down on screens narrower than 1024px. */
     navSlidedDown: false as boolean,
     /** @description Stores all data about programming languages. */
@@ -109,7 +109,7 @@ export default {
         }
     } as { [s: string]: ProgrammingLanguage },
     /** @description List of all sections. */
-    sections: [`home`, `portfolio`, `aboutMyself`, `contact`] as SectionMainName[],
+    sections: [`home`, `portfolio`, `aboutMyself`, `contact`] as MainSectionName[],
     /** @description Locales for all supported languages. */
     texts: textsSrc as typeof textsSrc,
     /** @description Window height in pixels. */

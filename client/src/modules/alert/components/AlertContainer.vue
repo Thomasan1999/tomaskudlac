@@ -1,6 +1,13 @@
 <template>
     <div class="alert-container">
-        <alert v-for="alert in alerts" :key="alert.id" :id="alert.id" :name="alert.name" :state="states[alert.name] || states.invalid" @destroy="alertDestroyOn"/>
+        <alert
+            v-for="alert in alerts"
+            :key="alert.id"
+            :id="alert.id"
+            :type="alert.type"
+            v-bind="alertStateGet(alert)"
+            @destroy="alertDestroy"
+        />
     </div>
 </template>
 
@@ -23,7 +30,7 @@
          * @description Runs on an attempt to destroy an alert.
          * @param alertId Id of the alert to destroy.
          * */
-        public alertDestroyOn(alertId: number): void
+        public alertDestroy(alertId: number): void
         {
             this.alerts = this.alerts.filter(({id}) =>
             {
@@ -31,36 +38,63 @@
             });
         }
 
+        /**
+         * Gets the data for an alert.
+         * @parma alert The alert to get the data for.
+         * @returns The alert data.
+         * */
+        public alertStateGet(alert: { id: number, type: string }): AlertState
+        {
+            return this.statesStore[alert.type] ?? this.statesStore.invalid;
+        }
+
+        /**
+         * @description Creates an alert.
+         * @param type The type of the alert.
+         * */
+        public alertShow(type: string): void
+        {
+            this.alerts.push({id: this.id, type});
+            this.id += 1;
+        }
+
         /** @description Array of all alerts of the container. */
-        public alerts: { id: number, name: string }[] = [];
+        public alerts: { id: number, type: string }[] = [];
+
         /** @description Id of the next alert which will be created. */
         public id: number = 0;
+
         /** @description Object containing all alert types which corresponding state type. */
-        public readonly states: { [s: string]: AlertState } = {
+        public readonly statesStore: Record<string, AlertState> = {
             empty: {type: `fail`},
             invalid: {type: `fail`},
             success: {type: `success`}
         };
-        /** @description Object containing all possible state types of the alerts with all the parameters needed to differentiate the alerts visually. */
-        public readonly stateTypes: { [s: string]: { backgroundColor: string, color: string } } = {
+
+        /**
+         * @description Object containing all possible state types of the alerts with all the parameters needed
+         * to differentiate the alerts visually.
+         *  */
+        public readonly stateTypes: Record<string, {backgroundColor: string, color: string }> = {
             fail: {backgroundColor: `#ff262b`, color: `#ffffff`},
             success: {backgroundColor: `#00d12a`, color: `#ffffff`}
         };
 
-        public mounted()
+        /** @description Initializes the alert data store. */
+        public statesStoreInit(): void
         {
             /** @description Assigns the parameters of the state types to the alert types. */
-            Object.entries(this.states).forEach(([stateName, state]) =>
+            Object.entries(this.statesStore).forEach(([stateName, state]) =>
             {
-                this.states[stateName] = {...this.stateTypes[state.type], type: state.type};
+                this.statesStore[stateName] = {...this.stateTypes[state.type], type: state.type};
             });
+        }
 
-            /** @description Creates an alert. */
-            this.$root.$on(`alert-show`, (name: string) =>
-            {
-                this.alerts.push({id: this.id, name});
-                this.id += 1;
-            });
+        public mounted()
+        {
+            this.statesStoreInit();
+
+            this.$root.$on(`alert-show`, this.alertShow);
         }
     }
 </script>

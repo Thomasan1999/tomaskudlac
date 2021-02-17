@@ -67,59 +67,67 @@ router.beforeEach((to, from, next) =>
     }
 
     /** @description Type of the value of a HTML Meta Tag with name="title". */
-    type metaTitle = string;
+    type MetaTitle = string;
     /** @description  */
-    type metaMetaTag = { content: string, name: string };
+    type RouteMetaTagsData = { content: string, name: string };
+
+    const destinationMatchedRoutes = to.matched;
+    const destionationReversedMatchedRoutes = [...destinationMatchedRoutes].reverse();
 
     /** @description The nearest object representing all metadata which has a title attribute. */
-    const nearestWithTitle: Merge<RouteRecord, {
+    const nearestRouteWithTitle: Merge<RouteRecord, {
         meta: {
-            title: metaTitle,
-            metaTags?: metaMetaTag[]
+            title: MetaTitle,
+            metaTags?: RouteMetaTagsData[]
         }
-    }> | undefined = [...to.matched].reverse().find((r) =>
+    }> | undefined = destionationReversedMatchedRoutes.find((routeRecord) =>
     {
-        return r.meta && r.meta.title;
+        return routeRecord.meta?.title;
     });
 
     /** @description The nearest meta object which has a list of HTML Meta tags. */
-    const nearestWithMeta: Merge<RouteRecord, {
+    const nearestRouteWithMetaData: Merge<RouteRecord, {
         meta: {
-            title?: metaTitle,
-            metaTags: metaMetaTag[]
+            title?: MetaTitle,
+            metaTags: RouteMetaTagsData[]
         }
-    }> | undefined = [...to.matched].reverse().find((r) =>
+    }> | undefined = destionationReversedMatchedRoutes.find((routeRecord) =>
     {
-        return r.meta && r.meta.metaTags;
+        return routeRecord.meta?.metaTags;
     });
 
-    if (nearestWithTitle)
+    if (nearestRouteWithTitle)
     {
-        document.title = nearestWithTitle.meta.title;
+        document.title = nearestRouteWithTitle.meta.title;
     }
 
-    [...document.querySelectorAll(`[data-vue-router-controlled]`)].map((el: Node) =>
+    const metaTagsNodeList = document.querySelectorAll<HTMLMetaElement>(`[data-vue-router-controlled]`);
+    const metaTagsArray = [...metaTagsNodeList];
+
+    metaTagsArray.map((metaTag) =>
     {
-        return (el.parentNode as HTMLElement).removeChild(el);
+        const metaTagContainer = (metaTag.parentNode as HTMLElement);
+
+        return metaTagContainer.removeChild(metaTag);
     });
 
-    if (!nearestWithMeta)
+    if (!nearestRouteWithMetaData)
     {
         return next();
     }
 
-    nearestWithMeta.meta.metaTags.forEach((tagDef) =>
+    nearestRouteWithMetaData.meta.metaTags.forEach((routeMetaTagsData) =>
     {
-        const tag: HTMLElement = document.createElement(`meta`);
+        const metaTag = document.createElement(`meta`);
 
-        Object.keys(tagDef).forEach((key) =>
+        Object.keys(routeMetaTagsData).forEach((key) =>
         {
-            tag.setAttribute(key, tagDef[key]);
+            metaTag.setAttribute(key, routeMetaTagsData[key]);
         });
 
-        tag.setAttribute(`data-vue-router-controlled`, ``);
+        metaTag.setAttribute(`data-vue-router-controlled`, ``);
 
-        document.head.appendChild(tag);
+        document.head.appendChild(metaTag);
     });
 
     next();

@@ -34,18 +34,17 @@
 </script>
 
 <style lang="stylus" scoped>
-    $scrollbarThumbColor = #444444;
-    $scrollbarThumbHoverColor = #666666;
-    $scrollbarThumbActiveColor = #959595;
-    $scrollbarColor = #eeeeee;
-
     .scrollbar-container
         box-sizing border-box
         height 100%
         overflow-y auto
         position relative
-        scrollbar-color $scrollbarThumbColor $scrollbarColor
+        scrollbar-color var(--scrollbar-thumb-color) var(--scrollbar-color)
         width 100%
+        --scrollbar-thumb-color #444444
+        --scrollbar-thumb-hover-color #666666
+        --scrollbar-thumb-active-color #959595
+        --scrollbar-color #eeeeee
 
         @media (max-width 1023px)
             margin-right 0
@@ -58,14 +57,14 @@
         width 100%
 
     ::-webkit-scrollbar
-        background $scrollbarColor
+        background var(--scrollbar-color)
 
     ::-webkit-scrollbar-thumb
-        background $scrollbarThumbColor
+        background var(--scrollbar-thumb-color)
 
         &:hover
-            background $scrollbarThumbHoverColor
+            background var(--scrollbar-thumb-hover-color)
 
         &:active
-            background $scrollbarThumbActiveColor
+            background var(--scrollbar-thumb-active-color)
 </style>

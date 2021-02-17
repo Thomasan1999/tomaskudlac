@@ -1,16 +1,43 @@
 <template>
     <form action="/contact-form/send-mail" class="contact-form" method="post" @submit.prevent="submitOn">
-        <div v-for="(element, elementName) in elements" class="element inline-block-container" :class="{[`error-form-element`]: element.errorShow}" :key="elementName"
-             ref="elements">
-            <label :for="element.htmlName">{{`${text[elementName]}:${element.required ? `*` : ``}`}}</label>
-            <input v-if="element.tag === `input`" :style="{color: element.color}" :id="element.htmlName" :autocomplete="element.autocomplete" :minlength="element.length.min"
-                   :maxlength="element.length.max"
-                   :type="element.input" :value="element.value" @blur="blurOn(element)" @focus="focusOn(element)" @input="inputOn($event, element)">
-            <textarea v-else-if="element.tag === `textarea`" :style="{color: element.color}" :id="element.htmlName" :value="element.value" @blur="blurOn(element)"
-                      @focus="focusOn(element)" @input="inputOn($event, element)"></textarea>
+        <div
+            v-for="(element, elementName) in elements"
+            class="contact-form-element inline-block-container"
+            :class="{[`error-form-element`]: element.errorShow}"
+            :key="elementName"
+             ref="elements"
+        >
+            <label
+                class="contact-form-element-label"
+                :for="element.htmlId"
+            >{{`${text[elementName]}:${element.required ? `*` : ``}`}}</label>
+            <input
+                v-if="element.tag === `input`"
+                class="contact-form-element-input"
+                :style="{color: element.color}"
+                :id="element.htmlId"
+                :autocomplete="element.autocomplete"
+                :minlength="element.length.min"
+                :maxlength="element.length.max"
+                :type="element.input"
+                :value="element.value"
+                @blur="elementBlurOn(element)"
+                @focus="elementFocusOn(element)"
+                @input="inputOn($event, element)"
+            >
+            <textarea
+                v-else-if="element.tag === `textarea`"
+                class="contact-form-element-textarea"
+                :style="{color: element.color}"
+                :id="element.htmlId"
+                :value="element.value"
+                @blur="elementBlurOn(element)"
+                @focus="elementFocusOn(element)"
+                @input="inputOn($event, element)"
+            ></textarea>
         </div>
         <p class="contact-required-fields-legend">{{`* - ${text.requiredFields}`}}</p>
-        <button type="submit">{{text.submit}}</button>
+        <button class="contact-form-submit-button" type="submit">{{text.submit}}</button>
     </form>
 </template>
 
@@ -27,30 +54,37 @@
     })
     export default class ContactForm extends mixins(MainMixin)
     {
+        /** @description Shows an alert. */
+        public alertShow(alertType: string): void
+        {
+            this.$root.$emit(`alert-show`, alertType);
+        }
+
         /**
          * @description Listens to the blur event of a form element.
          * @param element The form element which was the target of the event.
          * */
-        public blurOn(element: FormElement): void
+        public elementBlurOn(element: FormElement): void
         {
             element.inputting = false;
-            this.errorTypeUpdate(element);
+            this.elementErrorTypeUpdate(element);
         }
 
         /**
          * @description Updates properties of a form element which are based on other properties.
          * @param element The form element to modify.
          * */
-        public computedPropertiesUpdate(element: FormElement): void
+        public elementComputedPropertiesUpdate(element: FormElement): void
         {
-            this.formDataUpdate(element);
-            element.validLength = this.lengthValidityGet(element);
+            this.elementFormDataUpdate(element);
+            element.validLength = this.elementValueLengthIsValid(element);
             element.valid = this.validityGet(element);
-            this.errorTypeUpdate(element);
+            this.elementErrorTypeUpdate(element);
         }
 
         /**
-         * @description Initializes all form elements and assigns them initial values of their properties based on their types and data passed to the method..
+         * @description Initializes all form elements and assigns them initial values of their properties based on their
+         * types and data passed to the method.
          * @param elements Form elements to initialize.
          * @returns Form elements ready to be used in a form.
          * */
@@ -105,32 +139,50 @@
                 value: {boolean: `false`, default: ``}
             };
 
+            const componentName: string = this.$options.name!;
+
             Object.entries(elements).forEach(([elementName, element]) =>
             {
-                this.$set(element, `htmlName`, new this.$String(`${(this.$options.name as string).replace(`FormElement`, ``)}-${elementName}`).caseTrainTo().toString());
-                this.$set(element, `name`, (elementName.match(/(\w+)$/) || [])[0]);
+                const idNonParsed = `${componentName}-element-${elementName}`;
+
+                const htmlId = new this.$String(idNonParsed).toTrainCase().toString();
+
+                this.$set(element, `htmlId`, htmlId);
+
+                this.$set(element, `name`, elementName);
 
                 Object.entries(defaults).filter(([prop, defaultValue]: [string, any]) =>
                 {
                     return !/^\${(.*)}$/.test(defaultValue) && typeof element[prop] === `undefined`;
                 }).forEach(([prop, defaultValue]) =>
                 {
-                    if (typeof defaultValue === `object` && !(defaultValue instanceof RegExp))
+                    const defaultValueDictionaryIs: boolean = typeof defaultValue === `object` && !(defaultValue instanceof RegExp);
+
+                    if (!defaultValueDictionaryIs)
                     {
-                        this.$set(element, prop, Object.keys(defaultValue).includes(element.type as string) ? defaultValue[element.type as string]
-                            : (defaultValue as { default: any }).default);
+                        this.$set(element, prop, defaultValue);
                         return;
                     }
 
-                    this.$set(element, prop, defaultValue);
+                    const elementTypeHasDefault: boolean = Object.keys(defaultValue).includes(element.type!);
+
+                    this.$set(
+                        element,
+                        prop,
+                        elementTypeHasDefault
+                            ? defaultValue[element.type!]
+                            : (defaultValue as Record<string, any>).default
+                    );
                 });
 
-                this.formDataUpdate(element as FormElement);
+                this.elementFormDataUpdate(element as FormElement);
 
-                Object.entries(defaults).filter(([, defaultValue]: [string, any]) =>
+                const getterDefaults = Object.entries(defaults).filter(([, defaultValue]: [string, any]) =>
                 {
                     return /^\${(.*)}$/.test(defaultValue);
-                }).forEach(([prop, defaultValue]: [string, any]) =>
+                });
+
+                getterDefaults.forEach(([prop, defaultValue]: [string, any]) =>
                 {
                     let newValue: any = defaultValue;
 
@@ -150,7 +202,7 @@
                 });
             });
 
-            return elements as { [s: string]: FormElement };
+            return elements as Record<string, FormElement>;
         }
 
         /**
@@ -158,7 +210,7 @@
          * @param element The form element to get the error type from.
          * @returns Error type, if empty error message is not displayed.
          * */
-        public errorTypeGet({inputting, required, valid, value}: FormElement): FormElementErrorType
+        public elementErrorTypeGet({inputting, required, valid, value}: FormElement): FormElementErrorType
         {
             if ((!value && !required) || inputting)
             {
@@ -182,9 +234,9 @@
          * @description Assigns an error type to a form element.
          * @param element The form element to assign the error type to.
          * */
-        public errorTypeUpdate(element: FormElement): void
+        public elementErrorTypeUpdate(element: FormElement): void
         {
-            element.errorType = this.errorTypeGet(element);
+            element.errorType = this.elementErrorTypeGet(element);
             element.errorShow = Boolean(element.errorType);
         }
 
@@ -192,7 +244,7 @@
          * @description Listens to the focus event of a form element.
          * @param element The form element which was the target of the event.
          * */
-        public focusOn(element: FormElement): void
+        public elementFocusOn(element: FormElement): void
         {
             /** @description Prevents auto-inputting of some browsers. */
             if (element.color !== `transparent`)
@@ -208,7 +260,7 @@
          * @description Updates the form data related to a form element.
          * @param element The form element to get the data from.
          * */
-        public formDataUpdate(element: FormElement): void
+        public elementFormDataUpdate(element: FormElement): void
         {
             if (element.tag === `span`)
             {
@@ -218,22 +270,22 @@
             this.formData[element.name] = element.value || null;
         }
 
-        /**
-         * @description Submits the form to the server.
-         * */
-        public formSubmit(): void
+        /** Blurs all form elements. */
+        public formBlur(): void
         {
-            if (!this.valid)
+            Object.values(this.elements).forEach((element) =>
             {
-                return;
-            }
-
-            Object.keys(this.elements).forEach((name: string) =>
-            {
-                this.elements[name].inputting = false;
+                this.elementBlurOn(element);
             });
+        }
 
-            /** @description The object to assign the form data to. It will store the data in a format which is easier to parse by the server. */
+        /** Creates a FormData object and fills it with the form data. */
+        public formDataGet(): FormData
+        {
+            /**
+             * @description The object to assign the form data to. It will store the data in a format which is easier
+             * to parse by the server.
+             * */
             const formData: FormData = new FormData();
 
             /** @description Assigns the form data to the object. */
@@ -245,19 +297,36 @@
                 return formData.append(formFieldName, formFieldValue);
             });
 
+            return formData;
+        }
+
+        /**
+         * @description Submits the form to the server.
+         * */
+        public formSubmit(): void
+        {
+            this.formBlur();
+
+            if (!this.valid)
+            {
+                return;
+            }
+
+            const formData = this.formDataGet();
+
             /** @description Sends the form data to the server. */
             this.$http.post(`/${this.url}`, formData).then(() =>
             {
-                this.$root.$emit(`alert-show`, `success`);
+                this.alertShow(`success`);
             }).catch((res) =>
             {
                 if (res.status >= 500)
                 {
-                    this.$root.$emit(`alert-show`, `serverError`);
+                    this.alertShow(`serverError`);
                     return;
                 }
 
-                this.$root.$emit(`alert-show`, `invalid`);
+                this.alertShow(`invalid`);
             });
         }
 
@@ -270,7 +339,7 @@
         {
             element.inputting = true;
             element.value = ($event.target as HTMLInputElement).value;
-            this.computedPropertiesUpdate(element);
+            this.elementComputedPropertiesUpdate(element);
         }
 
         /**
@@ -278,7 +347,7 @@
          * @param element The form element to get the validity of its value length from..
          * @returns Whether the length of the form element value is valid.
          * */
-        public lengthValidityGet({length, value}: FormElement): boolean
+        public elementValueLengthIsValid({length, value}: FormElement): boolean
         {
             return new this.$Range(length.min, length.max).includes(value.length);
         }
@@ -288,29 +357,35 @@
          * */
         public submitOn(): void
         {
-            if (Object.values(this.elements).filter((element) =>
+            const elementsValues = Object.values(this.elements);
+
+            const someElementIsEmpty: boolean = elementsValues.filter((element) =>
             {
                 return element.required;
             }).some((element: FormElement) =>
             {
                 return !element.value;
-            }))
+            });
+
+            if (someElementIsEmpty)
             {
                 this.$root.$emit(`alert-show`, `empty`);
                 return;
             }
 
-            if (Object.values(this.elements).some((element) =>
+            const someElementValueIsInvalid: boolean = elementsValues.some((element) =>
             {
                 return !element.valid;
-            }))
+            });
+
+            if (someElementValueIsInvalid)
             {
                 this.$root.$emit(`alert-show`, `invalid`);
                 return;
             }
 
             this.formData.lang = this.$store.state.lang;
-            this.computedPropertiesUpdate(this.elementsExtra.lang);
+            this.elementComputedPropertiesUpdate(this.extraElements.lang);
             this.formSubmit();
         }
 
@@ -325,10 +400,10 @@
         }
 
         /** @description The object containing all basic form elements. */
-        public elements!: { [s: string]: FormElement };
+        public elements!: Record<string, FormElement>;
 
         /** @description The object containing all extra form elements which are not modifiable directly by the user. */
-        public elementsExtra!: { [s: string]: FormElement };
+        public extraElements!: Record<string, FormElement>;
 
         public data()
         {
@@ -340,14 +415,15 @@
 
         /** @description The object containing all the form data which will be sent to the server in case of submit. */
         public formData: { lang?: Lang, [s: string]: any } = {};
+
         /** @description The URL which will be called in case of a form submit. */
         public readonly url: string = `contact-form/send-mail`;
 
         /** @description The object containing all form elements. */
-        public get elementsAll(): { [s: string]: FormElement }
+        public get allElements(): { [s: string]: FormElement }
         {
             return {
-                ...this.elements, ...this.elementsExtra
+                ...this.elements, ...this.extraElements
             } as { [s: string]: FormElement };
         }
 
@@ -360,10 +436,12 @@
         /** @description Determines whether the form is valid. */
         public get valid(): boolean
         {
-            return !Object.values(this.elementsAll).filter((element) =>
+            const requiredElements = Object.values(this.allElements).filter((element) =>
             {
                 return element.required;
-            }).some((element) =>
+            });
+
+            return !requiredElements.some((element) =>
             {
                 return !element.valid;
             });
@@ -389,7 +467,7 @@
                     type: `message`
                 }
             });
-            this.elementsExtra = this.elementsInit({
+            this.extraElements = this.elementsInit({
                 lang: {
                     value: this.$store.state.lang
                 }
@@ -400,33 +478,33 @@
 <style lang="stylus" scoped>
     .contact-form
         display inline-block
-        margin-right $label_width
+        margin-right var(--contact-form-label-width)
         max-width 700px
         width 100%
 
         @media (max-width 767px)
             margin-right 0
 
-    button
-        background-color $primary_color
-        border-color $primary_color
+    .contact-form-submit-button
+        background-color var(--primary-color)
+        border-color var(--primary-color)
         font-color #ffffff
         font-size 20px
         height 50px
-        margin-left $label_width
+        margin-left var(--contact-form-label-width)
         max-width 200px
         text-transform uppercase
         transition .25s
         width 100%
 
         &:hover
-            background-color $primary_color_light
-            border-color $primary_color_light
+            background-color var(--primary-color-light)
+            border-color var(--primary-color-light)
 
         @media (max-width 767px)
             margin-left 0
 
-    .element
+    .contact-form-element
         display inline-block
         font-size 16px
         margin-vertical 10px
@@ -435,17 +513,17 @@
         *
             font-family 'Montserrat', sans-serif
 
-    label
+    .contact-form-element-label
         padding-top 7.5px
-        width $label_width
+        width var(--contact-form-label-width)
 
         @media (max-width 767px)
             padding-bottom 5px
 
-    input
+    .contact-form-element-input
         height 40px
 
-    input, textarea
+    .contact-form-element-input, .contact-form-element-textarea
         appearance none
         background-color #2d2d2d
         border 1px #c
@@ -454,17 +532,17 @@
         font-color #ffffff
         font-size 16px
         line-height 40px
-        max-width (700px - $label_width)
+        max-width calc(700px - var(--contact-form-label-width))
         outline 0
         overflow auto
         padding-left 15px
         resize false
-        width "calc(100vw - %s)" % $label_width
+        width calc(100vw - var(--contact-form-label-width))
 
         @media (max-width 767px)
             width calc(100% - 30px)
 
-    textarea
+    .contact-form-element-textarea
         height 192px
         line-height 24px
         padding-top 8px
@@ -473,14 +551,14 @@
         *
             font-color #cc0000
 
-        input, textarea
+        .contact-form-element-input, .contact-form-element-textarea
             background-color #3e2d2d !important
             border 1px #cc0000
             box-sizing border-box
 
     .contact-required-fields-legend
         font-family 'Montserrat', sans-serif
-        margin-left ($label_width / 2)
+        margin-left calc(var(--contact-form-label-width) / 2)
         margin-top 10px
         width 100%
 

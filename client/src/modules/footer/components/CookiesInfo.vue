@@ -3,9 +3,9 @@
         <button class="cookies-close button-transparent">
             <font-awesome-icon :icon="cookiesCloseIcon" @click="clickOn"/>
         </button>
-        <div v-for="(paragraph, index) in text.text" :key="index">
-            <h3>{{paragraph.title}}</h3>
-            <p>{{paragraph.text}}</p>
+        <div v-for="(paragraph, index) in text.text" :key="index" class="cookies-info-paragraph">
+            <h3 class="cookies-info-paragraph-heading">{{paragraph.title}}</h3>
+            <p class="cookies-info-paragraph-text">{{paragraph.text}}</p>
         </div>
     </div>
 </template>
@@ -60,10 +60,10 @@
             overflow-y scroll
             padding 30px
 
-        div
-            margin 25px auto
+    .cookies-info-text
+        margin 25px auto
 
-    h3
+    .cookies-info-paragraph-heading
         font-weight 700
 
     .cookies-close
@@ -73,5 +73,5 @@
 
         &:hover
             cursor pointer
-            font-color $anchor_hover
+            font-color var(--primary-anchor-hover-color)
 </style>

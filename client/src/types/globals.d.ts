@@ -25,12 +25,12 @@ declare global
      * @property $el The HTML Section Element containing the section HTML.
      * @property href The href string of the section displayed next to the hash in the URL.
      * */
-    type SectionMain = {
+    type MainSection = {
         $el: HTMLElement,
         href: string
     };
     /** @description Names of all sections. */
-    type SectionMainName = 'home' | 'aboutMyself' | 'portfolio' | 'contact';
+    type MainSectionName = 'home' | 'aboutMyself' | 'portfolio' | 'contact';
     /**
      * @description Type of a section.
      * @property href The href string of the section displayed next to the hash in the URL.

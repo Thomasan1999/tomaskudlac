@@ -10,7 +10,7 @@ export type FormElement = {
     /** @description Determines the type of an error message. */
     errorType: FormElementErrorType,
     /** @description Snake case name of the element, used as an id in HTML. */
-    readonly htmlName: string,
+    readonly htmlId: string,
     /** @description Determines whether the user is inputting something in the form element. */
     inputting: boolean,
     /** @description Determines the minimal and maximal length of a form element input. */

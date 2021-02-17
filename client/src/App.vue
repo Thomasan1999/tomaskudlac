@@ -15,7 +15,18 @@
     })
     export default class App extends mixins(MainMixin)
     {
-        public beforeCreate()
+        /** @description Initializes the router. */
+        public routerInit(): void
+        {
+            /** @description If any query parameters exist, remove them from the URL. */
+            if (Object.keys(this.$route.query).length)
+            {
+                this.$router.replace({hash: this.$route.hash, query: {}});
+            }
+        }
+
+        /** Initializes the store. */
+        public storeInit(): void
         {
             const {dispatch} = this.$store;
 
@@ -27,12 +38,13 @@
             {
                 console.error(err);
             });
+        }
 
-            /** @description If any query parameters exist, remove them from the URL. */
-            if (Object.keys(this.$route.query).length)
-            {
-                this.$router.replace({hash: this.$route.hash, query: {}});
-            }
+        public created()
+        {
+            this.storeInit();
+
+            this.routerInit();
         }
     }
 </script>
@@ -42,11 +54,21 @@
     @import './styles/reset.styl';
     @import './styles/tomwork.styl';
 
+    html, body
+        --primary-color #191970
+        --primary-color-light lighten(#191970, 16)
+        --primary-red #da0b24
+        --primary-green #1e9f31
+        --contact-form-label-width 100px
+        --selection-color #0e6beb
+        --primary-orange #cc7832
+        --primary-anchor-hover-color var(--primary-orange)
+
     +selection()
-        background-color $selection_color
+        background-color var(--selection-color)
 
     mark
-        background-color $selection_color
+        background-color var(--selection-color)
         font-color #ffffff
 
     #app
