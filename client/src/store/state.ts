@@ -34,78 +34,63 @@ export default {
     programmingLanguages: {
         css: {
             children: {
-                bootstrap: {
-                    order: 3
-                },
                 less: {
-                    order: 0
+                    order: 2
                 },
                 sass: {
                     order: 1
                 },
                 stylus: {
-                    order: 2
-                }
-            },
-            home: true,
-            order: 1
-        },
-        html: {
-            an: true,
-            home: true,
-            order: 0
-        },
-        js: {
-            children: {
-                babylonJs: {
-                    home: true,
-                    order: 3
-                },
-                jQuery: {
-                    home: true,
-                    order: 4
-                },
-                nodeJs: {
-                    home: true,
-                    order: 1
-                },
-                typescript: {
-                    home: true,
                     order: 0
-                },
-                vueJs: {
-                    home: true,
-                    order: 2
                 }
             },
             home: true,
             order: 2
         },
+        html: {
+            an: true,
+            home: true,
+            order: 1
+        },
+        js: {
+            children: {
+                nodeJs: {
+                    home: true,
+                    order: 2
+                },
+                typescript: {
+                    home: true,
+                    order: 1
+                },
+                vueJs: {
+                    home: true,
+                    order: 0
+                }
+            },
+            home: true,
+            order: 0
+        },
         noSql: {
             children: {
                 mongoDb: {
                     home: true,
-                    order: 3
-                }
+                    order: 0
+                },
             },
-            order: 5
+            order: 4
         },
         php: {
             home: true,
-            order: 3
+            order: 5
         },
         sql: {
             children: {
-                mySql: {
-                    home: true,
-                    order: 0
-                },
                 postgreSql: {
                     home: true,
-                    order: 1
+                    order: 0
                 }
             },
-            order: 4
+            order: 3
         }
     } as { [s: string]: ProgrammingLanguage },
     /** @description List of all sections. */
