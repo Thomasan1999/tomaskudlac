@@ -35,7 +35,8 @@
         {
             const columnPartText = this.text[this.name][part];
 
-            const {age, programmingLanguages} = this.$store.state;
+            const {age} = this.$store.state;
+            const {programmingLanguages} = this.$store.getters;
 
             return new this.$String(columnPartText)
                 .htmlParse({
