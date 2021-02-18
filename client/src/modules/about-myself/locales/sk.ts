@@ -16,12 +16,12 @@ export default {
     /** @description The Useful activities column. */
     'usefulActivities': {
         'title': 'Užitočné záľuby',
-        'text': 'Kódujem v <b>${programmingLanguages}.</b> Čo sa týka rôznych frameworkov a knižníc, pokiaľ viem danú vec urobiť jednoducho a rýchlo sám, snažím sa im vyhnúť, ale ak mi vedia výrazne pomôcť, nemám problém ich použiť.'
+        'text': 'Ovládam <b>${programmingLanguages}.</b> Rád sa učím novým technológiám a skúmám, ako sa vyvíjajú. Pomáha mi to byť v obraze a využiť každú novú príležitosť na lepší vývoj.'
     } as AboutMyselfColumnLocales,
     /** @description The Where am I now column. */
     'whereAmINow': {
         'title': 'Kde som teraz',
         'text': 'Mám <b>${age} rokov</b> a som <b>freelancer</b> (živnostník). Mojou pracovnou náplňou je'
-            + ' <b>web development.</b> Väčšinu svojho času venujem projektu <b>FIFA maniaci</b>. Popritom vytváram webstránky pre rôznych klientov.'
+            + ' <b>web development.</b> Momentálne pracujem na front-ende projektu vyvíjanom vo <b>Vue.js</b> a <span style="word-break: keep-all"><b>TypeScript</b>-e</span>. S technológiami som spokojný a pokladám ich za veľmi užitočné pri vývoji webovej aplikácie.'
     } as AboutMyselfColumnLocales
 };

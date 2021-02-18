@@ -8,10 +8,10 @@ export default {
     'title': 'About myself',
     'usefulActivities': {
         'title': 'Useful activities',
-        'text': 'I code in <b>${programmingLanguages}.</b> When it comes to various frameworks and libraries, if I\'m able to do it simply and quickly on my own, I try to avoid them, but if they can help me significantly, I don\'t mind using them at all.'
+        'text': 'I know <b>${programmingLanguages}.</b> I like to learn new technologies and watch how do they develop. It helps me to be keep track with them and use every new opportunity to better development.'
     } as AboutMyselfColumnLocales,
     'whereAmINow': {
         'title': 'Where am I now',
-        'text': 'I\'m <b>${age} years old</b> and I\'m a <b>freelancer</b> (self-employed). The scope of my work is <b>web development</b>. Most of my time I dedicate to the project called <b>FIFA maniaci</b>. Moreover, I create websites for various clients.'
+        'text': 'I\'m <b>${age} years old</b> and I\'m a <b>freelancer</b> (self-employed). The scope of my work is <b>web development</b>. Currently, I work on front-end of a project developed in <b>Vue.js</b> and <b>TypeScript</b>. I\'m satisfied with the chosen technologies and I consider them to be the very useful when developing a web application.'
     } as AboutMyselfColumnLocales
 };

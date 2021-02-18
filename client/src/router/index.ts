@@ -21,7 +21,7 @@ const router = new Router({
                 metaTags: [
                     {
                         name: `description`,
-                        content: `Mám ${age} rokov a som freelancer (živnostník). Mojou pracovnou náplňou je web development. Kódujem v ${programmingLanguages}. Čo sa týka rôznych frameworkov a knižníc, pokiaľ viem danú vec urobiť jednoducho a rýchlo sám, snažím sa im vyhnúť, ale ak mi vedia výrazne pomôcť, nemám problém ich použiť.`
+                        content: `Mám ${age} rokov a som freelancer (živnostník). Mojou pracovnou náplňou je web development. Kódujem v ${programmingLanguages}. Rád sa učím novým technológiám a skúmám, ako sa vyvíjajú. Pomáha mi to byť v obraze a využiť každú novú príležitosť na lepší vývoj..`
                     }
                 ]
             }
@@ -35,7 +35,7 @@ const router = new Router({
                 metaTags: [
                     {
                         name: `description`,
-                        content: `I'm ${age} years old, I"m a freelancer (self-employed). The scope of my work is web development. I code in ${programmingLanguages}. When it comes to various frameworks and libraries, if I'm able to do it simply and quickly on my own, I try to avoid them, but if they can help me significantly, I don't mind using them at all.`
+                        content: `I'm ${age} years old, I"m a freelancer (self-employed). The scope of my work is web development. I code in ${programmingLanguages}. I like to learn new technologies and watch how do they develop. It helps me to be keep track with them and use every new opportunity to better development..`
                     }
                 ]
             }
