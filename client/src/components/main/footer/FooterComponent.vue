@@ -1,0 +1,81 @@
+<template lang="pug">
+section.footer-component
+    footer.footer
+        div.text-content
+            p.footer-text
+                | {{locales.copyrightText}}
+                | {{' '}}
+                external-link.footer-copyright-link(
+                    v-if="language === 'en'"
+                    href="http://www.whatarecookies.com"
+                    :title="locales.copyrightLinkTitle"
+                ) {{locales.copyrightLinkText}}.
+                span.footer-copyright-link(
+                    v-else
+                    :title="locales.copyrightLinkTitle"
+                    @click="showCookies = true"
+                ) {{locales.copyrightLinkText}}.
+    cookies-modal(v-if="showCookies" @close="showCookies = false")
+</template>
+
+<script lang="ts">
+import {computed, defineAsyncComponent, ref} from 'vue';
+import store from '@/store';
+import ExternalLink from '@/components/ExternalLink.vue';
+
+export default {
+    name: 'Footer',
+    components: {
+        CookiesModal: defineAsyncComponent({loader: () => import('./CookiesModal.vue')}),
+        ExternalLink
+    },
+    setup()
+    {
+        const showCookies = ref(false);
+
+        const language = computed(() =>
+        {
+            return store.language.value;
+        });
+
+        const locales = computed(() =>
+        {
+            return store.locales.value.footer;
+        });
+
+        return {
+            language,
+            locales,
+            showCookies
+        };
+    }
+};
+</script>
+
+<style lang="scss" scoped>
+.footer-component
+{
+    --footer-height: 40px;
+
+    background-color: var(--primary-color);
+    line-height: var(--footer-height);
+}
+
+.footer, .footer-text
+{
+    font-weight: 500;
+    line-height: var(--footer-height);
+}
+
+.footer-copyright-link
+{
+    cursor: pointer;
+    text-decoration: underline;
+    transition: color var(--base-transition-duration);
+
+    &:hover
+    {
+        color: var(--text-highlight-color)
+    }
+}
+</style>
