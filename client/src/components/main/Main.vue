@@ -67,7 +67,7 @@ export default {
 
         const putSectionNameToUrl = (sectionName: string) =>
         {
-            router.push({hash: mainSections[sectionName].url});
+            router.replace({hash: mainSections[sectionName].url});
         };
 
         const scrollToSection = (sectionName: string, behavior: ScrollBehavior = 'smooth') =>
