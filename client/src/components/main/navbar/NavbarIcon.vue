@@ -37,7 +37,7 @@ export default {
 
         const locales = computed(() =>
         {
-            return store.locales.value.navbar;
+            return store.locales.navbar;
         });
 
         return {

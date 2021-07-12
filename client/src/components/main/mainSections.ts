@@ -1,25 +1,26 @@
 import MainSectionObject from '@/components/main/MainSectionObject';
+import {reactive} from 'vue';
 
 const mainSections: Record<string, MainSectionObject> = {
-    aboutMyself: new MainSectionObject({
+    aboutMyself: reactive(new MainSectionObject({
         heading: true,
         name: 'aboutMyself',
         order: 2,
-    }),
-    contact: new MainSectionObject({
+    })),
+    contact: reactive(new MainSectionObject({
         heading: true,
         name: 'contact',
         order: 3,
-    }),
-    home: new MainSectionObject({
+    })),
+    home: reactive(new MainSectionObject({
         name: 'home',
         order: 0,
-    }),
-    projects: new MainSectionObject({
+    })),
+    projects: reactive(new MainSectionObject({
         heading: true,
         name: 'projects',
         order: 1
-    })
+    }))
 }
 
 export default mainSections

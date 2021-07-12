@@ -104,12 +104,12 @@ export default {
 
         const locales = computed(() =>
         {
-            return store.locales.value.navbar;
+            return store.locales.navbar;
         });
 
         const touchscreen = computed(() =>
         {
-            return store.isTouchscreen.value;
+            return store.isTouchscreen;
         });
 
         onMounted(() =>

@@ -14,8 +14,8 @@ import Project from '@/components/main/projects/Project.vue';
 export default {
     name: 'Projects',
     components: {
-        Project,
-        MainSection
+        MainSection,
+        Project
     },
     setup()
     {

@@ -29,8 +29,8 @@ export default {
                 {
                     return `<strong>${text.slice(1, -1)}</strong>`;
                 })
-                .replace(/{{age}}/, store.age.value)
-                .replace(/{{programmingLanguages}}/, store.programmingLanguagesString.value);
+                .replace(/{{age}}/, store.age)
+                .replace(/{{programmingLanguages}}/, store.programmingLanguagesString);
         });
 
         return {

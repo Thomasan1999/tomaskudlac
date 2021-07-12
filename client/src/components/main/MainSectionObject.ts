@@ -29,7 +29,7 @@ export default class MainSectionObject
 
     get title(): string
     {
-        return store.locales.value.sections[this.name].title;
+        return store.locales.sections[this.name].title;
     }
 
     get url(): string

@@ -35,12 +35,12 @@ export default {
 
         const language = computed(() =>
         {
-            return store.language.value;
+            return store.language;
         });
 
         const locales = computed(() =>
         {
-            return store.locales.value.footer;
+            return store.locales.footer;
         });
 
         return {

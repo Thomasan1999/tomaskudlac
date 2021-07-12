@@ -18,7 +18,7 @@ export default {
     {
         const locales = computed(() =>
         {
-            return store.locales.value.sections.contact.form.errors;
+            return store.locales.sections.contact.form.errors;
         });
 
         const message = computed(() =>

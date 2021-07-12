@@ -135,7 +135,7 @@ export default {
 
         const locales = computed(() =>
         {
-            return store.locales.value.sections.contact.form;
+            return store.locales.sections.contact.form;
         });
 
         const missingValue = computed(() =>

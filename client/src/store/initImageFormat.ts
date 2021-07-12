@@ -12,5 +12,5 @@ export default async function initImageFormat(): Promise<void>
         localStorage.setItem('imageFormat', imageFormat);
     }
 
-    store.imageFormat.value = imageFormat;
+    store.imageFormat = imageFormat;
 }

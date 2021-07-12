@@ -1,4 +1,4 @@
-import {computed, ref} from 'vue';
+import {reactive} from 'vue';
 import {DeepReadonly} from 'ts-essentials';
 import skLocales from '@/locales/sk';
 import enLocales from '@/locales/en';
@@ -8,15 +8,15 @@ import {ImageFormat, ProgrammingLanguage, SiteLanguage} from '@/store/types';
 
 class Store
 {
-    readonly age = age;
-    readonly imageFormat = ref<ImageFormat>('webp');
-    readonly isTouchscreen = computed(() =>
+    age = age;
+    imageFormat: ImageFormat ='webp';
+    get isTouchscreen()
     {
-        return this.windowWidth.value < 1024;
-    });
-    readonly language = ref('sk' as SiteLanguage);
-    readonly locales = ref<typeof skLocales | typeof enLocales>(null as any);
-    readonly navbarHeight = ref(60);
+        return this.windowWidth < 1024;
+    }
+    language: SiteLanguage = 'sk';
+    locales: typeof skLocales | typeof enLocales = null as any;
+    navbarHeight = 60;
     readonly programmingLanguages: DeepReadonly<ProgrammingLanguage[]> = [
         {
             children: [
@@ -93,14 +93,14 @@ class Store
             title: 'PHP'
         }
     ];
-    readonly programmingLanguagesString = computed(() =>
+    get programmingLanguagesString()
     {
         return stringifyProgrammingLanguages(this.programmingLanguages);
-    });
-    readonly windowHeight = ref(window.innerHeight);
-    readonly windowWidth = ref(window.innerWidth);
+    }
+    windowHeight = window.innerHeight;
+    windowWidth = window.innerWidth;
 }
 
-const store = new Store();
+const store = reactive(new Store());
 
 export default store;

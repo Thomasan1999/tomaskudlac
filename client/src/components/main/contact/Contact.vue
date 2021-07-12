@@ -24,7 +24,7 @@ export default {
     {
         const locales = computed(() =>
         {
-            return store.locales.value.sections.contact;
+            return store.locales.sections.contact;
         });
 
         const briefText = computed(() =>

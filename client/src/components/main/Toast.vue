@@ -36,12 +36,12 @@ export default {
 
         const lifetime = computed(() =>
         {
-            return store.isTouchscreen.value ? baseLifetime.value / 2 : baseLifetime.value;
+            return store.isTouchscreen ? baseLifetime.value / 2 : baseLifetime.value;
         })
 
         const locales = computed(() =>
         {
-            return store.locales.value.toasts;
+            return store.locales.toasts;
         });
 
         onMounted(() =>

@@ -20,13 +20,13 @@ export default {
 
         const windowHeight = computed(() =>
         {
-            return store.windowHeight.value
+            return store.windowHeight
         })
 
         window.addEventListener('resize', () =>
         {
-            store.windowHeight.value = window.innerHeight;
-            store.windowWidth.value = window.innerWidth;
+            store.windowHeight = window.innerHeight;
+            store.windowWidth = window.innerWidth;
         });
 
         return {

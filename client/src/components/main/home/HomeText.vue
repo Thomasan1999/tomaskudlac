@@ -95,7 +95,7 @@ export default {
 
         const languageHasAnPrefix = (programmingLanguage: ProgrammingLanguage) =>
         {
-            return programmingLanguage.an && store.language.value === 'en';
+            return programmingLanguage.an && store.language === 'en';
         };
 
         const markProgrammingLanguage = async () =>
@@ -215,7 +215,7 @@ export default {
 
         const locales = computed(() =>
         {
-            return store.locales.value.sections.home;
+            return store.locales.sections.home;
         });
 
         const nonMarkedTextNonRemovable = computed(() =>
@@ -243,9 +243,9 @@ export default {
 
         setTimeout(changeProgrammingLanguage, Rand.int({min: 3000, max: 5000}));
 
-        watch(store.language, () =>
+        watch(() => store.language, () =>
         {
-            if (store.language.value === 'sk')
+            if (store.language === 'sk')
             {
                 nonMarkedText.value = removeAnPrefix(nonMarkedText.value);
                 markedText.value = removeAnPrefix(markedText.value);

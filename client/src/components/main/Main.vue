@@ -72,7 +72,7 @@ export default {
 
         const scrollToSection = (sectionName: string, behavior: ScrollBehavior = 'smooth') =>
         {
-            const newTop = sectionElements.value[sectionName].offsetTop - navbarHeight.value
+            const newTop = sectionElements.value[sectionName].offsetTop - navbarHeight.value;
 
             root.value!.scroll({behavior, top: newTop});
             putSectionNameToUrl(sectionName);
@@ -88,7 +88,7 @@ export default {
 
         const navbarHeight = computed(() =>
         {
-            return store.navbarHeight.value;
+            return store.navbarHeight;
         });
 
         const sortedSections = computed(() =>

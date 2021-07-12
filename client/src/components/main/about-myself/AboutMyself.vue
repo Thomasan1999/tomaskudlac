@@ -28,7 +28,7 @@ export default {
     {
         const locales = computed(() =>
         {
-            return store.locales.value.sections.aboutMyself;
+            return store.locales.sections.aboutMyself;
         });
 
         return {

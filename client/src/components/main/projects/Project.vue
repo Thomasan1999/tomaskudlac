@@ -48,22 +48,22 @@ export default {
 
         const backgroundImage = computed(() =>
         {
-            return `url(/images/${kebabCase(props.name)}.${store.imageFormat.value})`;
+            return `url(/images/${kebabCase(props.name)}.${store.imageFormat})`;
         });
 
         const generalLocales = computed(() =>
         {
-            return store.locales.value.sections.projects;
+            return store.locales.sections.projects;
         });
 
         const projectLocales = computed(() =>
         {
-            const root = store.locales.value.sections.projects.projects;
+            const root = store.locales.sections.projects.projects;
 
             return root[props.name as keyof typeof root];
         });
 
-        watch(store.language, setTextHoverHeight);
+        watch(() => store.language, setTextHoverHeight);
 
         onMounted(() =>
         {

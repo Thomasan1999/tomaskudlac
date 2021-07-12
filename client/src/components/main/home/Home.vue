@@ -24,7 +24,7 @@ export default {
     {
         const imageFormat = computed(() =>
         {
-            return store.imageFormat.value;
+            return store.imageFormat;
         });
 
         return {

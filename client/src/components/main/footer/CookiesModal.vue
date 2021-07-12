@@ -27,7 +27,7 @@ export default {
     {
         const locales = computed(() =>
         {
-            return (store.locales.value as typeof skLocales).cookies;
+            return (store.locales as typeof skLocales).cookies;
         });
 
         return {

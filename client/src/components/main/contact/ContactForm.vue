@@ -95,12 +95,12 @@ export default {
 
         const language = computed(() =>
         {
-            return store.language.value;
+            return store.language;
         });
 
         const locales = computed(() =>
         {
-            return store.locales.value.sections.contact.form;
+            return store.locales.sections.contact.form;
         });
 
         const submitTitle = computed(() =>
