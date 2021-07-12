@@ -2,6 +2,7 @@ import {createRouter, createWebHistory} from 'vue-router';
 import Main from '@/components/main/Main.vue';
 import store from '@/store';
 import {SiteLanguage} from '@/store/types';
+import mainSections from '@/components/main/mainSections';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -38,12 +39,13 @@ const router = createRouter({
 
 let lastLanguage: SiteLanguage | undefined = undefined;
 
-router.beforeEach(async (to) =>
+router.beforeEach(async (to, from, next) =>
 {
     const language = to.meta.language as 'sk' | 'en';
 
     if (lastLanguage === language)
     {
+        next();
         return;
     }
 
@@ -84,6 +86,14 @@ router.beforeEach(async (to) =>
     manifestTag.href = `/manifest_${language}.webmanifest`;
 
     document.title = to.meta.title as string;
+
+    if (store.activeSection)
+    {
+        next({hash: mainSections[store.activeSection].url, path: to.path});
+        return;
+    }
+
+    next();
 });
 
 export default router;

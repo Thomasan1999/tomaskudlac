@@ -55,7 +55,7 @@ export default {
 
         const onScroll = () =>
         {
-            activeSection.value = [...sortedSections.value]
+            store.activeSection = [...sortedSections.value]
                 .reverse()
                 .find(([sectionName]) =>
                 {
@@ -78,13 +78,16 @@ export default {
             putSectionNameToUrl(sectionName);
         };
 
-        const activeSection = ref<string | undefined>();
-
         const navigatingTo = ref<string | undefined>();
 
         const root = ref<HTMLDivElement | null>(null);
 
         const sectionElements = ref<Record<string, HTMLDivElement>>({});
+
+        const activeSection = computed(() =>
+        {
+            return store.activeSection
+        })
 
         const navbarHeight = computed(() =>
         {
@@ -100,18 +103,18 @@ export default {
                 });
         });
 
-        watch(activeSection, () =>
+        watch(() => store.activeSection, () =>
         {
             if (navigatingTo.value)
             {
-                if (activeSection.value === navigatingTo.value)
+                if (store.activeSection === navigatingTo.value)
                 {
                     navigatingTo.value = '';
                 }
                 return;
             }
 
-            putSectionNameToUrl(activeSection.value!);
+            putSectionNameToUrl(store.activeSection!);
         });
 
         onMounted(() =>
@@ -123,8 +126,8 @@ export default {
                 return sectionData.url === currentHash;
             })?.[0];
 
-            activeSection.value = newActiveSection ?? 'home';
-            scrollToSection(activeSection.value, 'auto');
+            store.activeSection = newActiveSection ?? 'home';
+            scrollToSection(store.activeSection, 'auto');
 
             root.value!.addEventListener('scroll', onScroll);
         });

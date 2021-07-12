@@ -8,6 +8,7 @@ import {ImageFormat, ProgrammingLanguage, SiteLanguage} from '@/store/types';
 
 class Store
 {
+    activeSection?: string
     age = age;
     imageFormat: ImageFormat ='webp';
     get isTouchscreen()
