@@ -3,7 +3,7 @@ component.navbar-link(
     :is="routerLink ? 'router-link' : 'external-link'"
     :class="[$attrs.class, {active}]"
     :title="title"
-    v-bind="{[routerLink ? 'to' : 'href']: to}"
+    v-bind="dynamicProps"
     @click="onClick"
 )
     slot {{text ?? title}}
@@ -23,6 +23,10 @@ export default {
     inheritAttrs: false,
     props: {
         active: {
+            type: Boolean
+        },
+        replace: {
+            default: false,
             type: Boolean
         },
         routerLink: {
@@ -54,14 +58,22 @@ export default {
             emit('click');
         };
 
+        const dynamicProps = computed(() =>
+        {
+            return {
+                [props.routerLink ? 'to' : 'href']: to.value,
+                ...(props.replace && {replace: props.replace})
+            }
+        })
+
         const to = computed(() =>
         {
             return mainSections[props.to]?.url ?? props.to;
         });
 
         return {
-            onClick,
-            to
+            dynamicProps,
+            onClick
         };
     }
 };

@@ -3,6 +3,7 @@ nav.navbar(:class="{opened}" ref="root" :style="`--navbar-max-height: ${maxHeigh
     div.navbar-part.navbar-left-part.navbar-outer-part
         navbar-link.navbar-left-link.navbar-logo(
             :router-link="true"
+            :replace="true"
             title="Tomáš Kudláč"
             to="home"
             @click="$emit('linkClick', 'home')"
@@ -12,6 +13,7 @@ nav.navbar(:class="{opened}" ref="root" :style="`--navbar-max-height: ${maxHeigh
             v-for="[name, section] in sections"
             :active="name === activeSection"
             :router-link="true"
+            :replace="true"
             :title="section.title"
             :to="name"
             @click="onLinkClick(name)"

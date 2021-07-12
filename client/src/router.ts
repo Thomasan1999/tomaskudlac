@@ -87,13 +87,11 @@ router.beforeEach(async (to, from, next) =>
 
     document.title = to.meta.title as string;
 
-    if (store.activeSection)
-    {
-        next({hash: mainSections[store.activeSection].url, path: to.path});
-        return;
-    }
+    const newHash = store.activeSection && mainSections[store.activeSection].url;
 
-    next();
+    const hashChanged = newHash && newHash !== to.hash;
+
+    next(hashChanged ? {hash: newHash, path: to.path, replace: true} : undefined as any);
 });
 
 export default router;
