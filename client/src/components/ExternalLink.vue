@@ -9,9 +9,6 @@ a.external-link(
 
 <script lang="ts">
 export default {
-    name: 'ExternalLink',
-    setup()
-    {
-    }
+    name: 'ExternalLink'
 };
 </script>

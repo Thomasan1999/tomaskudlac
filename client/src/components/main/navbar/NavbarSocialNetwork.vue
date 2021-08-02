@@ -37,9 +37,6 @@ export default {
             required: true,
             type: String
         }
-    },
-    setup()
-    {
     }
 };
 </script>

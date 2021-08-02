@@ -6,10 +6,7 @@ svg.close-icon(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 121.31 122.876" x
 
 <script lang="ts">
 export default {
-    name: 'CloseIcon',
-    setup()
-    {
-    }
+    name: 'CloseIcon'
 };
 </script>
 
