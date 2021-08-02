@@ -30,7 +30,7 @@ router.beforeEach(async (to, from, next) =>
 
     store.language = language;
 
-    store.locales = (await import(`./locales/${store.language}.ts`)).default;
+    store.locales = (await import(`../locales/${store.language}.ts`)).default;
     document.documentElement.lang = language;
 
     const metaDescription = getMetaElement('description');
