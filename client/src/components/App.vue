@@ -4,7 +4,6 @@ router-view(v-if="initialized" :style="`--vh: ${windowHeight / 100}px`")
 
 <script lang="ts">
 import store from '@/store';
-import initImageFormat from '@/store/initImageFormat';
 import {computed, ref} from 'vue';
 
 export default {
@@ -13,26 +12,20 @@ export default {
     {
         let initialized = ref(false);
 
-        initImageFormat().then(() =>
+        store.init().then(() =>
         {
-            initialized.value = true
+            initialized.value = true;
         });
 
         const windowHeight = computed(() =>
         {
-            return store.windowHeight
-        })
-
-        window.addEventListener('resize', () =>
-        {
-            store.windowHeight = window.innerHeight;
-            store.windowWidth = window.innerWidth;
+            return store.windowHeight;
         });
 
         return {
             initialized,
             windowHeight
-        }
+        };
     }
 };
 </script>

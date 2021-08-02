@@ -19,7 +19,7 @@ import {DeepReadonly} from 'ts-essentials';
 import Rand from '@/utils/Rand';
 import sleep from '@/utils/sleep';
 import HomeTextProgrammingLanguage from '@/components/main/home/HomeTextProgrammingLanguage.vue';
-import {ProgrammingLanguage} from '@/store/types';
+import {ProgrammingLanguage} from '@/store/ProgrammingLanguage';
 
 export default {
     name: 'HomeText',
