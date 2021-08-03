@@ -3,12 +3,14 @@ import {defineConfig} from 'vite';
 import * as path from 'path';
 import {VitePWA} from 'vite-plugin-pwa';
 import {minifyHtml} from 'vite-plugin-html';
+import eslintPlugin from 'vite-plugin-eslint';
 
 export default defineConfig({
     build: {
         outDir: path.resolve(__dirname, '../server/public')
     },
     plugins: [
+        eslintPlugin(),
         vue(),
         minifyHtml(),
         VitePWA({
