@@ -22,10 +22,7 @@ export default {
     },
     setup()
     {
-        const imageFormat = computed(() =>
-        {
-            return store.imageFormat;
-        });
+        const imageFormat = computed(() => store.imageFormat);
 
         return {
             imageFormat

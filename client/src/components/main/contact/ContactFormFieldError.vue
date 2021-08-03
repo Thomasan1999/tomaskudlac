@@ -16,15 +16,9 @@ export default {
     },
     setup(props)
     {
-        const locales = computed(() =>
-        {
-            return store.locales.sections.contact.form.errors;
-        });
+        const locales = computed(() => store.locales.sections.contact.form.errors);
 
-        const message = computed(() =>
-        {
-            return locales.value[props.error];
-        });
+        const message = computed(() => locales.value[props.error]);
 
         return {
             message

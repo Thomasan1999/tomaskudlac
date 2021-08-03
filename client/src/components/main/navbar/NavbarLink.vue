@@ -63,13 +63,10 @@ export default {
             return {
                 [props.routerLink ? 'to' : 'href']: to.value,
                 ...(props.replace && {replace: props.replace})
-            }
-        })
-
-        const to = computed(() =>
-        {
-            return mainSections[props.to]?.url ?? props.to;
+            };
         });
+
+        const to = computed(() => mainSections[props.to]?.url ?? props.to);
 
         return {
             dynamicProps,

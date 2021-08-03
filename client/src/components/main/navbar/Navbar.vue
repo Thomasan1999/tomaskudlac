@@ -61,9 +61,9 @@ export default {
     {
         const onLinkClick = (sectionName: string) =>
         {
-            opened.value = false
-            emit('linkClick', sectionName)
-        }
+            opened.value = false;
+            emit('linkClick', sectionName);
+        };
 
         const onResize = () =>
         {
@@ -104,15 +104,9 @@ export default {
             }
         ];
 
-        const locales = computed(() =>
-        {
-            return store.locales.navbar;
-        });
+        const locales = computed(() => store.locales.navbar);
 
-        const touchscreen = computed(() =>
-        {
-            return store.isTouchscreen;
-        });
+        const touchscreen = computed(() => store.isTouchscreen);
 
         onMounted(() =>
         {

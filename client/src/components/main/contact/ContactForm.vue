@@ -88,41 +88,17 @@ export default {
 
         const toasts = reactive<{messageType: string, type: 'fail' | 'success'}[]>([]);
 
-        const disabled = computed(() =>
-        {
-            return touched.value && !valid.value;
-        });
+        const disabled = computed(() => touched.value && !valid.value);
 
-        const language = computed(() =>
-        {
-            return store.language;
-        });
+        const language = computed(() => store.language);
 
-        const locales = computed(() =>
-        {
-            return store.locales.sections.contact.form;
-        });
+        const locales = computed(() => store.locales.sections.contact.form);
 
-        const submitTitle = computed(() =>
-        {
-            return valid.value ? locales.value.submitTitle : locales.value.submitTitleDisabled;
-        });
+        const submitTitle = computed(() => valid.value ? locales.value.submitTitle : locales.value.submitTitleDisabled);
 
-        const touched = computed(() =>
-        {
-            return fields.some((field) =>
-            {
-                return field.touched;
-            });
-        });
+        const touched = computed(() => fields.some((field) => field.touched));
 
-        const valid = computed(() =>
-        {
-            return fields.every((field) =>
-            {
-                return field.valid;
-            });
-        });
+        const valid = computed(() => fields.every((field) => field.valid));
 
         return {
             disabled,

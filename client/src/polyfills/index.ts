@@ -1,1 +1,1 @@
-import './smoothScroll'
+import './smoothScroll';

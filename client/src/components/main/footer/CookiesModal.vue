@@ -25,10 +25,7 @@ export default {
     emits: ['close'],
     setup()
     {
-        const locales = computed(() =>
-        {
-            return (store.locales as typeof skLocales).cookies;
-        });
+        const locales = computed(() => (store.locales as typeof skLocales).cookies);
 
         return {
             locales

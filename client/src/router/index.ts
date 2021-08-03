@@ -1,4 +1,4 @@
-import {createRouter, createWebHistory, NavigationGuardNext} from 'vue-router';
+import {createRouter, createWebHistory, RouteLocationRaw} from 'vue-router';
 import store from '@/store';
 import {SiteLanguage} from '@/store/types';
 import mainSections from '@/components/main/mainSections';
@@ -12,7 +12,7 @@ const router = createRouter({
 });
 
 /** The language of the previous route. */
-let lastLanguage: SiteLanguage | undefined = undefined;
+let lastLanguage: SiteLanguage | undefined;
 
 router.beforeEach(async (to, from, next) =>
 {
@@ -45,8 +45,8 @@ router.beforeEach(async (to, from, next) =>
 
     const hashChanged = newRouteHash && newRouteHash !== to.hash;
 
-    const newRoute: NavigationGuardNext = hashChanged
-        ? {hash: newRouteHash, path: to.path, replace: true}
+    const newRoute = hashChanged
+        ? {hash: newRouteHash, path: to.path, replace: true} as RouteLocationRaw
         : undefined as any;
 
     next(newRoute);

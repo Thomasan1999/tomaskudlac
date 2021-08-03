@@ -101,7 +101,9 @@ class Store
     /** List of programming languages joined by commas. */
     get programmingLanguagesString()
     {
-        return this.programmingLanguages.map((language) => language.toString()).join(', ');
+        return this.programmingLanguages
+            .map((language) => language.toString())
+            .join(', ');
     }
 
     windowHeight = window.innerHeight;

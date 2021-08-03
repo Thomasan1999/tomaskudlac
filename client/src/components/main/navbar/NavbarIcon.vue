@@ -35,10 +35,7 @@ export default {
             emit('click');
         };
 
-        const locales = computed(() =>
-        {
-            return store.locales.navbar;
-        });
+        const locales = computed(() => store.locales.navbar);
 
         return {
             locales,

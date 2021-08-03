@@ -26,10 +26,7 @@ export default {
     },
     setup()
     {
-        const locales = computed(() =>
-        {
-            return store.locales.sections.aboutMyself;
-        });
+        const locales = computed(() => store.locales.sections.aboutMyself);
 
         return {
             locales

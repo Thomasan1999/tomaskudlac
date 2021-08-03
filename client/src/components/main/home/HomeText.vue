@@ -93,10 +93,9 @@ export default {
             return `${prefix}${programmingLanguage.title}`;
         };
 
-        const languageHasAnPrefix = (programmingLanguage: ProgrammingLanguage) =>
-        {
-            return programmingLanguage.an && store.language === 'en';
-        };
+        const languageHasAnPrefix = (programmingLanguage: ProgrammingLanguage) => (
+            programmingLanguage.an && store.language === 'en'
+        );
 
         const markProgrammingLanguage = async () =>
         {
@@ -134,10 +133,7 @@ export default {
             });
         };
 
-        const removeAnPrefix = (text: string) =>
-        {
-            return text.replace(/^n$|^n /, ' ');
-        };
+        const removeAnPrefix = (text: string) => text.replace(/^n$|^n /, ' ');
 
         const setCursorBlinking = (value: boolean) =>
         {
@@ -150,10 +146,7 @@ export default {
 
             generateNextProgrammingLanguage();
 
-            const currentLanguageTitle = computed(() =>
-            {
-                return getNonMarkedText(currentProgrammingLanguage.value);
-            });
+            const currentLanguageTitle = computed(() => getNonMarkedText(currentProgrammingLanguage.value));
 
             return new Promise<void>((resolve) =>
             {
@@ -185,25 +178,17 @@ export default {
         const markedText = ref('');
 
         const flattenedProgrammingLanguages = computed<DeepReadonly<ProgrammingLanguage[]>>(() =>
-        {
-            return programmingLanguages
+            programmingLanguages
                 .value
                 .flatMap(flattenProgrammingLanguage)
-                .filter((programmingLanguage) =>
-                {
-                    return programmingLanguage.home;
-                });
-        });
+                .filter((programmingLanguage) => programmingLanguage.home)
+        );
 
-        const programmingLanguages = computed(() =>
-        {
-            return store.programmingLanguages;
-        });
+        const programmingLanguages = computed(() => store.programmingLanguages);
 
-        const shuffledProgrammingLanguages = computed(() =>
-        {
-            return shuffle(flattenedProgrammingLanguages.value) as ProgrammingLanguage[];
-        });
+        const shuffledProgrammingLanguages = computed(() => (
+            shuffle(flattenedProgrammingLanguages.value) as ProgrammingLanguage[]
+        ));
 
         const programmingLanguageGenerator = createProgrammingLanguageGenerator();
 
@@ -213,10 +198,7 @@ export default {
 
         const nonMarkedText = ref(getNonMarkedText(currentProgrammingLanguage.value));
 
-        const locales = computed(() =>
-        {
-            return store.locales.sections.home;
-        });
+        const locales = computed(() => store.locales.sections.home);
 
         const nonMarkedTextNonRemovable = computed(() =>
         {
@@ -249,7 +231,8 @@ export default {
             {
                 nonMarkedText.value = removeAnPrefix(nonMarkedText.value);
                 markedText.value = removeAnPrefix(markedText.value);
-            } else
+            }
+            else
             {
                 if (languageHasAnPrefix(nextProgrammingLanguage.value))
                 {
@@ -257,12 +240,14 @@ export default {
                     {
                         nonMarkedText.value = '';
                     }
-                } else if (languageHasAnPrefix(currentProgrammingLanguage.value))
+                }
+                else if (languageHasAnPrefix(currentProgrammingLanguage.value))
                 {
                     if (nonMarkedText.value)
                     {
                         nonMarkedText.value = `n${nonMarkedText.value}`;
-                    } else if (markedText.value)
+                    }
+                    else if (markedText.value)
                     {
                         markedText.value = `n${markedText.value}`;
                     }

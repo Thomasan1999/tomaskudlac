@@ -46,15 +46,9 @@ export default {
 
         const textContent = ref<HTMLDivElement | null>(null);
 
-        const backgroundImage = computed(() =>
-        {
-            return `url(/images/${kebabCase(props.name)}.${store.imageFormat})`;
-        });
+        const backgroundImage = computed(() => `url(/images/${kebabCase(props.name)}.${store.imageFormat})`);
 
-        const generalLocales = computed(() =>
-        {
-            return store.locales.sections.projects;
-        });
+        const generalLocales = computed(() => store.locales.sections.projects);
 
         const projectLocales = computed(() =>
         {

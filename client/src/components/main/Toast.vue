@@ -34,15 +34,9 @@ export default {
 
         const opened = ref(false);
 
-        const lifetime = computed(() =>
-        {
-            return store.isTouchscreen ? baseLifetime.value / 2 : baseLifetime.value;
-        })
+        const lifetime = computed(() => store.isTouchscreen ? baseLifetime.value / 2 : baseLifetime.value);
 
-        const locales = computed(() =>
-        {
-            return store.locales.toasts;
-        });
+        const locales = computed(() => store.locales.toasts);
 
         onMounted(() =>
         {

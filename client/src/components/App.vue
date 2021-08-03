@@ -10,17 +10,14 @@ export default {
     name: 'App',
     setup()
     {
-        let initialized = ref(false);
+        const initialized = ref(false);
 
         store.init().then(() =>
         {
             initialized.value = true;
         });
 
-        const windowHeight = computed(() =>
-        {
-            return store.windowHeight;
-        });
+        const windowHeight = computed(() => store.windowHeight);
 
         return {
             initialized,

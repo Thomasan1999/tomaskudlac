@@ -29,20 +29,11 @@ export default {
     {
         const root = ref<HTMLDivElement | null>(null);
 
-        const activeSection = computed(() =>
-        {
-            return mainSections[props.name];
-        });
+        const activeSection = computed(() => mainSections[props.name]);
 
-        const id = computed(() =>
-        {
-            return activeSection.value.id;
-        });
+        const id = computed(() => activeSection.value.id);
 
-        const title = computed(() =>
-        {
-            return activeSection.value.title;
-        });
+        const title = computed(() => activeSection.value.title);
 
         return {
             id,

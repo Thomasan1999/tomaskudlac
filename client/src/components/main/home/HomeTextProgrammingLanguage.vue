@@ -25,12 +25,9 @@ export default {
             return textHasAnPrefix ? props.programmingLanguage[0] : '';
         });
 
-        const base = computed(() =>
-        {
-            return anPrefix.value.length ?
-                props.programmingLanguage.slice(1) :
-                props.programmingLanguage;
-        });
+        const base = computed(() => (
+            anPrefix.value.length ? props.programmingLanguage.slice(1) : props.programmingLanguage
+        ));
 
         return {
             anPrefix,

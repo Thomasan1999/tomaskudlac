@@ -43,7 +43,8 @@ export default {
     grid-template-columns: repeat(2, 1fr);
     width: 100%;
 
-    @media (max-width: 1023px) {
+    @media (max-width: 1023px)
+    {
         grid-template-columns: 1fr;
     }
 }

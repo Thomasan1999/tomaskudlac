@@ -23,15 +23,12 @@ export default {
     setup(props)
     {
         const text = computed(() =>
-        {
-            return props.text
+            props.text
                 .replace(/\*[^*]+\*/g, (text) =>
-                {
-                    return `<strong>${text.slice(1, -1)}</strong>`;
-                })
+                    `<strong>${text.slice(1, -1)}</strong>`)
                 .replace(/{{age}}/, store.age)
-                .replace(/{{programmingLanguages}}/, store.programmingLanguagesString);
-        });
+                .replace(/{{programmingLanguages}}/, store.programmingLanguagesString)
+        );
 
         return {
             text

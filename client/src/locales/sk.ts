@@ -116,14 +116,14 @@ export default {
                     designDesc: 'responzivita a dolaďovačky',
                     frontEndDesc: '100%',
                     href: 'http://simon-q.sk',
-                    title: 'Šimon-q',
+                    title: 'Šimon-q'
                 },
                 villaRomaine: {
                     backEndDesc: '100%',
                     designDesc: 'dolaďovačky',
                     frontEndDesc: '100%',
                     href: 'http://villaraomaine.sk',
-                    title: 'Villa Romaine',
+                    title: 'Villa Romaine'
                 }
             },
             showProject: 'Zobraziť projekt',
@@ -134,4 +134,4 @@ export default {
     toasts: {
         closeButtonTitle: 'Zavrieť'
     }
-}
+};

@@ -85,11 +85,7 @@ export default {
     },
     setup(props, {emit})
     {
-        const convertRegexToValidHtml = (regex: RegExp) =>
-        {
-            return regex.toString()
-                .replace(/^\/|\/[^/]*$/g, '');
-        };
+        const convertRegexToValidHtml = (regex: RegExp) => regex.toString().replace(/^\/|\/[^/]*$/g, '');
 
         const onBlur = () =>
         {
@@ -108,12 +104,13 @@ export default {
         const inputting = ref(false);
 
         const dynamicProps = computed(() =>
-        {
-            return props.element === 'input' ? {
-                ...(props.pattern && {pattern: convertRegexToValidHtml(props.pattern)}),
-                type: props.type
-            } : undefined;
-        });
+            props.element === 'input'
+                ? {
+                    ...(props.pattern && {pattern: convertRegexToValidHtml(props.pattern)}),
+                    type: props.type
+                }
+                : undefined
+        );
 
         const error = computed(() =>
         {
@@ -133,20 +130,11 @@ export default {
             }
         });
 
-        const locales = computed(() =>
-        {
-            return store.locales.sections.contact.form;
-        });
+        const locales = computed(() => store.locales.sections.contact.form);
 
-        const missingValue = computed(() =>
-        {
-            return props.required && !props.modelValue;
-        });
+        const missingValue = computed(() => props.required && !props.modelValue);
 
-        const validFormat = computed(() =>
-        {
-            return Boolean(props.modelValue.match(props.pattern));
-        });
+        const validFormat = computed(() => Boolean(props.modelValue.match(props.pattern)));
 
         watch(() => props.modelValue, () =>
         {

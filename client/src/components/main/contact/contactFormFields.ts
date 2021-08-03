@@ -40,6 +40,6 @@ const contactFormFields = reactive<ContactFormFieldData[]>([
         valid: false,
         value: ''
     }
-])
+]);
 
-export default contactFormFields
+export default contactFormFields;

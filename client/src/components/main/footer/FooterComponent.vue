@@ -33,15 +33,9 @@ export default {
     {
         const showCookies = ref(false);
 
-        const language = computed(() =>
-        {
-            return store.language;
-        });
+        const language = computed(() => store.language);
 
-        const locales = computed(() =>
-        {
-            return store.locales.footer;
-        });
+        const locales = computed(() => store.locales.footer);
 
         return {
             language,

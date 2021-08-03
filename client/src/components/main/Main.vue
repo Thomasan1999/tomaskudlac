@@ -84,24 +84,14 @@ export default {
 
         const sectionElements = ref<Record<string, HTMLDivElement>>({});
 
-        const activeSection = computed(() =>
-        {
-            return store.activeSection
-        })
+        const activeSection = computed(() => store.activeSection);
 
-        const navbarHeight = computed(() =>
-        {
-            return store.navbarHeight;
-        });
+        const navbarHeight = computed(() => store.navbarHeight);
 
-        const sortedSections = computed(() =>
-        {
-            return Object.entries(mainSections)
-                .sort(([, sectionDataA], [, sectionDataB]) =>
-                {
-                    return sectionDataA.order - sectionDataB.order;
-                });
-        });
+        const sortedSections = computed(() => (
+            Object.entries(mainSections)
+                .sort(([, sectionDataA], [, sectionDataB]) => sectionDataA.order - sectionDataB.order)
+        ));
 
         watch(() => store.activeSection, () =>
         {
@@ -121,10 +111,8 @@ export default {
         {
             const currentHash = router.currentRoute.value.hash;
 
-            const newActiveSection = Object.entries(mainSections).find(([, sectionData]) =>
-            {
-                return sectionData.url === currentHash;
-            })?.[0];
+            const newActiveSection = Object.entries(mainSections)
+                .find(([, sectionData]) => sectionData.url === currentHash)?.[0];
 
             store.activeSection = newActiveSection ?? 'home';
             scrollToSection(store.activeSection, 'auto');
