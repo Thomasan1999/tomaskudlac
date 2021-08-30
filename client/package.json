@@ -3,11 +3,15 @@
     "scripts": {
         "serve": "vite",
         "build": "vue-tsc --noEmit && vite build --emptyOutDir",
+        "test": "jest --passWithNoTests",
         "pre-commit": "lint-staged"
     },
     "lint-staged": {
         "*.{js,jsx,ts,tsx,vue}": [
             "eslint"
+        ],
+        "**/*.ts": [
+            "npm run test"
         ]
     },
     "dependencies": {
@@ -28,6 +32,7 @@
         "vue-router": "4.0.11"
     },
     "devDependencies": {
+        "@types/jest": "27.0.1",
         "@types/lodash": "4.14.172",
         "@typescript-eslint/eslint-plugin": "4.29.3",
         "@typescript-eslint/parser": "4.29.3",
@@ -39,9 +44,12 @@
         "eslint-import-resolver-typescript": "2.4.0",
         "eslint-plugin-import": "2.24.2",
         "eslint-plugin-vue": "7.17.0",
+        "jest": "27.1.0",
         "lint-staged": "11.1.2",
         "sass-loader": "12.1.0",
         "ts-essentials": "8.1.0",
+        "ts-jest": "27.0.5",
+        "ts-node": "10.2.1",
         "typescript": "4.4.2",
         "vite": "2.5.1",
         "vite-plugin-eslint": "1.3.0",
