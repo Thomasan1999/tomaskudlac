@@ -38,12 +38,14 @@ export class ProgrammingLanguage
      * */
     toString(): string
     {
-        if (!this.children)
+        if (!this.children.length)
         {
             return this.title;
         }
 
-        const childrenString = this.children.map((language) => language.toString());
+        const childrenString = this.children
+            .map((language) => language.toString())
+            .join(', ');
 
         return `${this.title} (${childrenString})`;
     }
