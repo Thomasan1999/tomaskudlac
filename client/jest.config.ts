@@ -5,7 +5,7 @@ import {compilerOptions} from './tsconfig.json';
 const config = {
     moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {prefix: '<rootDir>'}),
     preset: 'ts-jest',
-    testEnvironment: 'node'
+    testEnvironment: 'jsdom'
 } as InitialOptionsTsJest;
 
 export default config;
