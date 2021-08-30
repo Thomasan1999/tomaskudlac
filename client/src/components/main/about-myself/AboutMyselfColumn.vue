@@ -6,7 +6,7 @@ div.about-myself-column
 
 <script lang="ts">
 import {computed} from 'vue';
-import store from '@/store';
+import useStore from '@/store';
 
 export default {
     name: 'AboutMyselfColumn',
@@ -22,6 +22,8 @@ export default {
     },
     setup(props)
     {
+        const store = useStore();
+
         const text = computed(() =>
             props.text
                 .replace(/\*[^*]+\*/g, (text) =>

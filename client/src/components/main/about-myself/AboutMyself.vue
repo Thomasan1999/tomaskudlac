@@ -16,7 +16,7 @@ main-section.about-myself(
 import MainSection from '@/components/main/MainSection.vue';
 import AboutMyselfColumn from '@/components/main/about-myself/AboutMyselfColumn.vue';
 import {computed} from 'vue';
-import store from '@/store';
+import useStore from '@/store';
 
 export default {
     name: 'AboutMyself',
@@ -26,6 +26,8 @@ export default {
     },
     setup()
     {
+        const store = useStore();
+
         const locales = computed(() => store.locales.sections.aboutMyself);
 
         return {

@@ -8,7 +8,7 @@ teleport(to="#modal-container")
 </template>
 
 <script lang="ts">
-import store from '@/store';
+import useStore from '@/store';
 import {computed, onMounted, ref} from 'vue';
 import CloseIcon from '@/components/main/CloseIcon.vue';
 
@@ -30,6 +30,8 @@ export default {
     },
     setup()
     {
+        const store = useStore();
+
         const baseLifetime = ref(10000);
 
         const opened = ref(false);

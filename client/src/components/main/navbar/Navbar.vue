@@ -35,7 +35,7 @@ nav.navbar(:class="{opened}" ref="root" :style="`--navbar-max-height: ${maxHeigh
 <script lang="ts">
 import NavbarLink from '@/components/main/navbar/NavbarLink.vue';
 import {computed, onBeforeUnmount, onMounted, ref} from 'vue';
-import store from '@/store';
+import useStore from '@/store';
 import NavbarSocialNetwork from '@/components/main/navbar/NavbarSocialNetwork.vue';
 import NavbarIcon from '@/components/main/navbar/NavbarIcon.vue';
 
@@ -59,6 +59,8 @@ export default {
     },
     setup(props, {emit})
     {
+        const store = useStore();
+
         const onLinkClick = (sectionName: string) =>
         {
             opened.value = false;

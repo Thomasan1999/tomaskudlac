@@ -20,7 +20,7 @@ label.contact-form-field(:class="{'has-error': error}")
 
 <script lang="ts">
 import {computed, ref, watch} from 'vue';
-import store from '@/store';
+import useStore from '@/store';
 import {Merge} from 'ts-essentials';
 import ContactFormFieldError from '@/components/main/contact/ContactFormFieldError.vue';
 
@@ -85,6 +85,8 @@ export default {
     },
     setup(props, {emit})
     {
+        const store = useStore();
+
         const convertRegexToValidHtml = (regex: RegExp) => regex.toString().replace(/^\/|\/[^/]*$/g, '');
 
         const onBlur = () =>

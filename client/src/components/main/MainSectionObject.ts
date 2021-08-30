@@ -1,6 +1,6 @@
 import {kebabCase, upperFirst} from 'lodash';
 import {Merge} from 'ts-essentials';
-import store from '@/store';
+import useStore from '@/store';
 
 type MainSectionObjectConstructor = Merge<Partial<Pick<MainSectionObject, 'heading'>>, Pick<MainSectionObject, 'name' | 'order'>>
 
@@ -29,6 +29,8 @@ export default class MainSectionObject
 
     get title(): string
     {
+        const store = useStore();
+
         return store.locales.sections[this.name].title;
     }
 

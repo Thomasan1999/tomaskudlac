@@ -1,5 +1,5 @@
 import {createRouter, createWebHistory, RouteLocationRaw} from 'vue-router';
-import store from '@/store';
+import useStore from '@/store';
 import {SiteLanguage} from '@/store/types';
 import mainSections from '@/components/main/mainSections';
 import routes from '@/router/routes';
@@ -16,6 +16,8 @@ let lastLanguage: SiteLanguage | undefined;
 
 router.beforeEach(async (to, from, next) =>
 {
+    const store = useStore();
+
     const language = to.meta.language;
 
     const languageUnchanged = lastLanguage === language;
@@ -34,7 +36,9 @@ router.beforeEach(async (to, from, next) =>
     document.documentElement.lang = language;
 
     const metaDescription = getMetaElement('description');
-    metaDescription.content = to.meta.description;
+    metaDescription.content = to.meta.description
+        .replace('{{age}}', store.age.toString())
+        .replace('{{programmingLanguagesString}}', store.programmingLanguagesString);
 
     const manifestElement = getManifestElement();
     manifestElement.href = `/manifest_${language}.webmanifest`;

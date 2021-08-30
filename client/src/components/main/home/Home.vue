@@ -12,7 +12,7 @@ main-section.home.has-curtain(
 import MainSection from '@/components/main/MainSection.vue';
 import HomeText from '@/components/main/home/HomeText.vue';
 import {computed} from 'vue';
-import store from '@/store';
+import useStore from '@/store';
 
 export default {
     name: 'Home',
@@ -22,6 +22,8 @@ export default {
     },
     setup()
     {
+        const store = useStore();
+
         const imageFormat = computed(() => store.imageFormat);
 
         return {

@@ -13,7 +13,7 @@ p.home-text
 
 <script lang="ts">
 import {computed, ref, watch} from 'vue';
-import store from '@/store';
+import useStore from '@/store';
 import {shuffle} from 'lodash';
 import {DeepReadonly} from 'ts-essentials';
 import Rand from '@/utils/Rand';
@@ -28,6 +28,8 @@ export default {
     },
     setup()
     {
+        const store = useStore();
+
         const baseInterval = 50;
 
         const changeProgrammingLanguage = async () =>

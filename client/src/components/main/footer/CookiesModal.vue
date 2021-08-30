@@ -13,7 +13,7 @@ teleport(to="#modal-container")
 
 <script lang="ts">
 import {computed} from 'vue';
-import store from '@/store';
+import useStore from '@/store';
 import skLocales from '@/locales/sk';
 import CloseIcon from '@/components/main/CloseIcon.vue';
 
@@ -25,6 +25,8 @@ export default {
     emits: ['close'],
     setup()
     {
+        const store = useStore();
+
         const locales = computed(() => (store.locales as typeof skLocales).cookies);
 
         return {

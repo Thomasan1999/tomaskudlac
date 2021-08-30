@@ -27,7 +27,7 @@ import AboutMyself from '@/components/main/about-myself/AboutMyself.vue';
 import Projects from '@/components/main/projects/Projects.vue';
 import Contact from '@/components/main/contact/Contact.vue';
 import Home from '@/components/main/home/Home.vue';
-import store from '@/store';
+import useStore from '@/store';
 import FooterComponent from '@/components/main/footer/FooterComponent.vue';
 
 export default {
@@ -42,6 +42,8 @@ export default {
     name: 'Main',
     setup()
     {
+        const store = useStore();
+
         const onLinkClick = (linkName: string) =>
         {
             if (!linkName)

@@ -5,7 +5,7 @@ div.contact-form-field-error(v-if="error")
 
 <script lang="ts">
 import {computed} from 'vue';
-import store from '@/store';
+import useStore from '@/store';
 
 export default {
     name: 'ContactFormFieldError',
@@ -16,6 +16,8 @@ export default {
     },
     setup(props)
     {
+        const store = useStore();
+
         const locales = computed(() => store.locales.sections.contact.form.errors);
 
         const message = computed(() => locales.value[props.error]);

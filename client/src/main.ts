@@ -1,15 +1,16 @@
-import '@/polyfills';
-import app from '@/app';
-
 import VueGtag from 'vue-gtag';
-import router from '@/router';
+import {createPinia} from 'pinia';
 
+import '@/polyfills';
 import './register-service-worker';
+import router from '@/router';
+import app from '@/app';
 
 app.use(VueGtag, {
     config: {id: 'UA-96781792-2'}
 });
 
+app.use(createPinia());
 app.use(router);
 
 app.mount('#app');

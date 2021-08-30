@@ -20,7 +20,7 @@ section.footer-component
 
 <script lang="ts">
 import {computed, defineAsyncComponent, ref} from 'vue';
-import store from '@/store';
+import useStore from '@/store';
 import ExternalLink from '@/components/ExternalLink.vue';
 
 export default {
@@ -31,6 +31,8 @@ export default {
     },
     setup()
     {
+        const store = useStore();
+
         const showCookies = ref(false);
 
         const language = computed(() => store.language);

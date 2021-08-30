@@ -17,7 +17,7 @@ div.navbar-icon(
 
 <script lang="ts">
 import {computed} from 'vue';
-import store from '@/store';
+import useStore from '@/store';
 
 export default {
     name: 'NavbarIcon',
@@ -30,6 +30,8 @@ export default {
     },
     setup(props, {emit})
     {
+        const store = useStore();
+
         const onClick = () =>
         {
             emit('click');

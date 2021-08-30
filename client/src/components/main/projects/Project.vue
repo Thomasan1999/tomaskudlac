@@ -17,7 +17,7 @@ external-link.project.cover-background.has-curtain(
 
 <script lang="ts">
 import {computed, onBeforeUnmount, onMounted, ref, watch} from 'vue';
-import store from '@/store';
+import useStore from '@/store';
 import {kebabCase} from 'lodash';
 import ExternalLink from '@/components/ExternalLink.vue';
 
@@ -32,6 +32,8 @@ export default {
     },
     setup(props)
     {
+        const store = useStore();
+
         const setTextHoverHeight = async () =>
         {
             if (!textContent.value)

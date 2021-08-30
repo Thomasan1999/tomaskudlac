@@ -26,7 +26,7 @@ toast(v-for="(toast, toastIndex) in toasts"
 
 <script lang="ts">
 import {computed, reactive, ref} from 'vue';
-import store from '@/store';
+import useStore from '@/store';
 import ContactFormField from '@/components/main/contact/ContactFormField.vue';
 import Toast from '@/components/main/Toast.vue';
 import contactFormFields from '@/components/main/contact/contactFormFields';
@@ -40,6 +40,8 @@ export default {
     },
     setup()
     {
+        const store = useStore();
+
         const onSubmit = async () =>
         {
             const form = root.value!;

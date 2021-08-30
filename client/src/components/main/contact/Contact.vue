@@ -10,7 +10,7 @@ main-section.contact(
 
 <script lang="ts">
 import MainSection from '@/components/main/MainSection.vue';
-import store from '@/store';
+import useStore from '@/store';
 import {computed} from 'vue';
 import ContactForm from '@/components/main/contact/ContactForm.vue';
 
@@ -22,6 +22,8 @@ export default {
     },
     setup()
     {
+        const store = useStore();
+
         const locales = computed(() => store.locales.sections.contact);
 
         const briefText = computed(() =>
