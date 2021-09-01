@@ -5,7 +5,10 @@ import {compilerOptions} from './tsconfig.json';
 const config = {
     moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {prefix: '<rootDir>'}),
     preset: 'ts-jest',
-    testEnvironment: 'jsdom'
+    testEnvironment: 'jsdom',
+    transform: {
+        '.*\\.(vue)$': 'vue-jest'
+    }
 } as InitialOptionsTsJest;
 
 export default config;
