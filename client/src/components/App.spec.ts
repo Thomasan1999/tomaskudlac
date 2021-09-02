@@ -7,14 +7,6 @@ describe('App', () =>
 {
     it('renders router view after component is initialized', async () =>
     {
-        // Prevent image creation hanging when initializing store
-        Object.defineProperty(global.Image.prototype, 'src', {
-            set()
-            {
-                this.onload();
-            }
-        });
-
         const wrapper = mount(App, {
             global: {
                 plugins: [createPinia()],

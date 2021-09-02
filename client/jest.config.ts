@@ -6,6 +6,9 @@ const config = {
     moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {prefix: '<rootDir>'}),
     preset: 'ts-jest',
     testEnvironment: 'jsdom',
+    testEnvironmentOptions: {
+        resources: 'usable'
+    },
     transform: {
         '.*\\.(vue)$': 'vue-jest'
     }
