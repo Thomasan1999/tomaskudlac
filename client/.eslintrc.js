@@ -43,6 +43,7 @@ module.exports = {
         'prefer-promise-reject-errors': 'off',
         'quote-props': 'off',
         quotes: 'off',
+        semi: ['error', 'always'],
         'vue/experimental-script-setup-vars': 'off',
         'vue/script-indent': ['off', 4, {
             baseIndent: 1
