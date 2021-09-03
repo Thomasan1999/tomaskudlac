@@ -2,18 +2,13 @@ import {mount} from '@vue/test-utils';
 import App from '@/components/App.vue';
 import {createPinia} from 'pinia';
 import {nextTick} from 'vue';
+import mockImageSrc from '@/mocks/mockImageSrc';
 
 describe('App', () =>
 {
     it('renders router view after component is initialized', async () =>
     {
-        // Prevent image creation hanging when initializing store
-        Object.defineProperty(global.Image.prototype, 'src', {
-            set()
-            {
-                this.onload();
-            }
-        });
+        mockImageSrc();
 
         const wrapper = mount(App, {
             global: {
