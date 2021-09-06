@@ -2,6 +2,7 @@
 nav.navbar(:class="{opened}" ref="root" :style="`--navbar-max-height: ${maxHeight}`")
     div.navbar-part.navbar-left-part.navbar-outer-part
         navbar-link.navbar-left-link.navbar-logo(
+            data-testid="logo"
             :router-link="true"
             :replace="true"
             title="Tomáš Kudláč"
@@ -11,7 +12,9 @@ nav.navbar(:class="{opened}" ref="root" :style="`--navbar-max-height: ${maxHeigh
     div.navbar-part.navbar-middle-part
         navbar-link.navbar-middle-link(
             v-for="[name, section] in sections"
+            :key="name"
             :active="name === activeSection"
+            data-testid="sectionLink"
             :router-link="true"
             :replace="true"
             :title="section.title"
@@ -21,6 +24,7 @@ nav.navbar(:class="{opened}" ref="root" :style="`--navbar-max-height: ${maxHeigh
     div.navbar-part.navbar-right-part.navbar-outer-part
         div.navbar-other-lang-container
             navbar-link.navbar-other-lang(
+                data-testid="navbarOtherLang"
                 :router-link="true"
                 :text="locales.otherLangCode"
                 :title="locales.otherLangLinkTitle"

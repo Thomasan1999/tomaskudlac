@@ -20,7 +20,6 @@ export default {
         ExternalLink
     },
     emits: ['click'],
-    inheritAttrs: false,
     props: {
         active: {
             type: Boolean
