@@ -6,7 +6,9 @@ import {DeepPartial, DeepReadonly} from 'ts-essentials';
  * */
 export class ProgrammingLanguage
 {
-    /** Determines whether the language is preceded by 'an' indefinite article in home section in the English version. */
+    /**
+     * Determines whether the language is preceded by 'an' indefinite article in home section in the English version.
+     * */
     readonly an: boolean;
     /**
      * All languages which are a sub-languages of this language for example SCSS is a sub-language of CSS or TypeScript

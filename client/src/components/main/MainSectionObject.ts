@@ -2,7 +2,11 @@ import {kebabCase, upperFirst} from 'lodash';
 import {Merge} from 'ts-essentials';
 import useStore from '@/store';
 
-type MainSectionObjectConstructor = Merge<Partial<Pick<MainSectionObject, 'heading'>>, Pick<MainSectionObject, 'name' | 'order'>>
+type ConstructorOptionalParams = Partial<Pick<MainSectionObject, 'heading'>>;
+
+type ConstructorRequiredParams = Pick<MainSectionObject, 'name' | 'order'>;
+
+type ConstructorType = Merge<ConstructorOptionalParams, ConstructorRequiredParams>;
 
 export default class MainSectionObject
 {
@@ -10,7 +14,7 @@ export default class MainSectionObject
     readonly name: string;
     readonly order: number;
 
-    constructor({heading = false, name, order}: MainSectionObjectConstructor)
+    constructor({heading = false, name, order}: ConstructorType)
     {
         this.heading = heading;
         this.name = name;

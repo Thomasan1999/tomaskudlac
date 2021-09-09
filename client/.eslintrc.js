@@ -3,6 +3,14 @@ module.exports = {
     env: {
         node: true
     },
+    overrides: [
+        {
+            files: '*.vue',
+            rules: {
+                'max-len': 'off'
+            }
+        }
+    ],
     rules: {
         'arrow-body-style': ['error', 'as-needed', {requireReturnForObjectLiteral: true}],
         'brace-style': ['error', 'allman'],
@@ -21,7 +29,7 @@ module.exports = {
         'import/no-extraneous-dependencies': 'off',
         'linebreak-style': ['error', 'windows'],
         'lines-between-class-members': 'off',
-        'max-len': 'off',
+        'max-len': ['error', 120],
         'new-cap': 'off',
         'no-console': 'off',
         'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
