@@ -11,6 +11,23 @@ describe('Navbar', () =>
 {
     let pinia: Pinia;
 
+    const sections: [string, MainSectionObject][] = [
+        [
+            'home',
+            reactive(new MainSectionObject({
+                name: 'home',
+                order: 0
+            }))
+        ],
+        [
+            'aboutMyself',
+            reactive(new MainSectionObject({
+                name: 'aboutMyself',
+                order: 1
+            }))
+        ]
+    ];
+
     function createNavbarWrapper(sectionsLength: number = Infinity): VueWrapper<ComponentPublicInstance>
     {
         return mount(Navbar, {
@@ -34,23 +51,6 @@ describe('Navbar', () =>
 
         return navbarLinks.filter((navbarLink) => (navbarLink.element as HTMLElement).dataset.testid === 'sectionLink');
     }
-
-    const sections = [
-        [
-            'home',
-            reactive(new MainSectionObject({
-                name: 'home',
-                order: 0
-            }))
-        ],
-        [
-            'aboutMyself',
-            reactive(new MainSectionObject({
-                name: 'aboutMyself',
-                order: 1
-            }))
-        ]
-    ];
 
     beforeAll(async () =>
     {
