@@ -3,7 +3,11 @@ teleport(to="#modal-container")
     transition(name="fade" @after-leave="$emit('close')")
         div.toast(v-if="opened" :class="[`type-${type}`]")
             div.toast-message {{message}}
-            button.toast-close-button(:title="locales.closeButtonTitle" @click="opened = false")
+            button.toast-close-button(
+                data-testid="closeButton"
+                :title="locales.closeButtonTitle"
+                @click="opened = false"
+            )
                 close-icon.toast-close-button-icon
 </template>
 
