@@ -6,9 +6,9 @@ external-link.project.cover-background.has-curtain(
 )
     div.text-content
         div.project-content
-            h3.project-title {{projectLocales.title}}
+            h3.project-title(data-testid="title") {{projectLocales.title}}
             div.project-text(:style="`--hover-height: ${textHoverHeight}px`")
-                div.project-text-content(ref="textContent")
+                div.project-text-content(data-testid="textContent" ref="textContent")
                     h4.project-what-ive-done {{generalLocales.whatIveDone}}:
                     p.project-text-design {{generalLocales.designLabel}}: {{projectLocales.designDesc}}
                     p.project-text-front-end {{generalLocales.frontEndLabel}}: {{projectLocales.frontEndDesc}}
@@ -23,7 +23,9 @@ import ExternalLink from '@/components/ExternalLink.vue';
 
 export default {
     name: 'Project',
-    components: {ExternalLink},
+    components: {
+        ExternalLink
+    },
     props: {
         name: {
             required: true,
