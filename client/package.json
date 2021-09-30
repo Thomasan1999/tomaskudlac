@@ -5,6 +5,7 @@
         "build": "vue-tsc --noEmit && vite build --emptyOutDir",
         "test:all": "jest --passWithNoTests",
         "test:file": "jest --bail --findRelatedTests",
+        "test:unit": "jest --bail --findRelatedTests",
         "pre-commit": "lint-staged"
     },
     "lint-staged": {
