@@ -1,5 +1,5 @@
 <template lang="pug">
-section.main-section(:id="id" :class="{background}" ref="root")
+section.main-section(:id="id" ref="root")
     div.text-content
         h2.main-section-name(v-if="heading") {{title}}
     slot
@@ -12,10 +12,6 @@ import mainSections from '@/components/main/mainSections';
 export default {
     name: 'MainSection',
     props: {
-        background: {
-            default: false,
-            type: Boolean
-        },
         heading: {
             default: false,
             type: Boolean

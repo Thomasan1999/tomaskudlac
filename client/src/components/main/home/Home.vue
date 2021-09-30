@@ -1,7 +1,6 @@
 <template lang="pug">
 main-section.home.has-curtain(
     :class="`image-format-${imageFormat}`"
-    :has-background="true"
     name="home"
 )
     div.text-content
