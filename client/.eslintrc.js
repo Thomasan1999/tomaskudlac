@@ -16,10 +16,10 @@ module.exports = {
         'brace-style': ['error', 'allman'],
         camelcase: 'off',
         'class-methods-use-this': 'off',
-        'comma-dangle': 'off',
+        'comma-dangle': ['error', 'never'],
         'consistent-return': 'off',
         'global-require': 'off',
-        indent: 'off',
+        indent: ['error', 4],
         'indent-legacy': 'off',
         'import/extensions': 'off',
         'import/no-dynamic-require': 'off',
@@ -52,6 +52,11 @@ module.exports = {
         'quote-props': 'off',
         quotes: 'off',
         semi: ['error', 'always'],
+        'space-before-function-paren': ['error', {
+            anonymous: 'always',
+            asyncArrow: 'always',
+            named: 'never'
+        }],
         'vue/experimental-script-setup-vars': 'off',
         'vue/script-indent': ['off', 4, {
             baseIndent: 1
