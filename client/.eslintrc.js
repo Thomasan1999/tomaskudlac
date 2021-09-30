@@ -13,6 +13,8 @@ module.exports = {
     ],
     rules: {
         'arrow-body-style': ['error', 'as-needed', {requireReturnForObjectLiteral: true}],
+        'arrow-parens': ['error', 'always'],
+        'arrow-spacing': ['error', {after: true, before: true}],
         'brace-style': ['error', 'allman'],
         camelcase: 'off',
         'class-methods-use-this': 'off',
