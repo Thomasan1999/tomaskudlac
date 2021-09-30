@@ -52,7 +52,7 @@ module.exports = {
         'prefer-destructuring': 'off',
         'prefer-promise-reject-errors': 'off',
         'quote-props': 'off',
-        quotes: 'off',
+        quotes: ['error', 'single', {allowTemplateLiterals: true}],
         semi: ['error', 'always'],
         'space-before-function-paren': ['error', {
             anonymous: 'always',
