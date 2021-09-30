@@ -7,7 +7,7 @@ main-section.about-myself(
         picture.about-myself-photo-container
             source(type="image/webp" srcset="/images/myself.webp")
             source(type="image/jpeg" srcset="/images/myself.jpg")
-            img.about-myself-photo(:alt="locales.photoAlt" src="/images/myself.jpg")
+            img.about-myself-photo(:alt="locales.photoAlt" data-testid="photo" src="/images/myself.jpg")
         div.about-myself-column-container
             about-myself-column(v-for="column in locales.columns" v-bind="column")
 </template>

@@ -1,7 +1,7 @@
 <template lang="pug">
 div.about-myself-column
-    h3.about-myself-column-title {{title}}
-    p.about-myself-column-text(v-html="text")
+    h3.about-myself-column-title(data-testid="title") {{title}}
+    p.about-myself-column-text(data-testid="text" v-html="text")
 </template>
 
 <script lang="ts">
