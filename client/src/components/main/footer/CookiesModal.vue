@@ -1,9 +1,13 @@
 <template lang="pug">
 teleport(to="#modal-container")
     div.cookies-modal
-        div.cookies-modal-overlay(@click="$emit('close')")
+        div.cookies-modal-overlay(data-testid="overlay" @click="$emit('close')")
         div.cookies-modal-content
-            button.cookies-modal-close-button(:title="locales.closeButtonTitle" @click="$emit('close')")
+            button.cookies-modal-close-button(
+                data-testid="closeButton"
+                :title="locales.closeButtonTitle"
+                @click="$emit('close')"
+            )
                 close-icon.cookies-modal-close-button-icon
             div.cookies-modal-paragraph-container
                 div.cookies-modal-paragraph(v-for="paragraph in locales.paragraphs")

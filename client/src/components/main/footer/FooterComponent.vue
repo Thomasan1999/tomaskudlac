@@ -7,11 +7,13 @@ section.footer-component
                 | {{' '}}
                 external-link.footer-copyright-link(
                     v-if="language === 'en'"
+                    data-testid="copyrightLink"
                     href="http://www.whatarecookies.com"
                     :title="locales.copyrightLinkTitle"
                 ) {{locales.copyrightLinkText}}.
                 span.footer-copyright-link(
                     v-else
+                    data-testid="copyrightLink"
                     :title="locales.copyrightLinkTitle"
                     @click="showCookies = true"
                 ) {{locales.copyrightLinkText}}.
