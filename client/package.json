@@ -37,7 +37,7 @@
         "@types/jest": "27.0.1",
         "@types/lodash": "4.14.172",
         "@typescript-eslint/eslint-plugin": "4.29.3",
-        "@typescript-eslint/parser": "4.29.3",
+        "@typescript-eslint/parser": "4.32.0",
         "@vitejs/plugin-vue": "1.6.0",
         "@vue/compiler-sfc": "3.2.6",
         "@vue/eslint-config-airbnb": "5.3.0",
