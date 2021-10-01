@@ -39,7 +39,7 @@
         "@typescript-eslint/eslint-plugin": "4.29.3",
         "@typescript-eslint/parser": "4.32.0",
         "@vitejs/plugin-vue": "1.6.0",
-        "@vue/compiler-sfc": "3.2.6",
+        "@vue/compiler-sfc": "3.2.19",
         "@vue/eslint-config-airbnb": "5.3.0",
         "@vue/test-utils": "2.0.0-rc.13",
         "dart-sass": "1.25.0",
