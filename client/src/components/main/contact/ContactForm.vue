@@ -17,7 +17,8 @@ form.contact-form(
     div.contact-form-bottom-part
         p.contact-form-required-legend {{locales.requiredLegend}}
         button.contact-form-submit(:disabled="disabled" :title="submitTitle" @click="touch") {{locales.submitLabel}}
-toast(v-for="(toast, toastIndex) in toasts"
+toast(
+    v-for="(toast, toastIndex) in toasts"
     :message="locales.apiMessages[toast.messageType] ?? 'Unable to send the mail'"
     :type="toast.type"
     @close="toasts.splice(toastIndex, 1)"

@@ -1,8 +1,12 @@
 <template lang="pug">
 label.contact-form-field(:class="{'has-error': error}")
-    span.contact-form-label
+    span.contact-form-label(data-testid="label")
         | {{label}}:
-        span.contact-form-required(:style="{visibility: required ? 'visible' : 'hidden'}" :title="locales.required") *
+        span.contact-form-required(
+            data-testid="required"
+            :style="{visibility: required ? 'visible' : 'hidden'}"
+            :title="locales.required"
+        ) *
     component.contact-form-data(
         :is="element"
         :class="[`contact-form-${element}`]"

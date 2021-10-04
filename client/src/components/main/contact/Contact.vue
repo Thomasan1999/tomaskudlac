@@ -4,7 +4,7 @@ main-section.contact(
     name="contact"
 )
     div.text-content
-        div.contact-brief-text(v-html="briefText")
+        div.contact-brief-text(data-testid="briefText" v-html="briefText")
         contact-form
 </template>
 
