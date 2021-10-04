@@ -1,4 +1,5 @@
 {
+  "name": "tomaskudlac",
   "scripts": {
     "prepare": "husky install"
   },
