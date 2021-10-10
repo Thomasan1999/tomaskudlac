@@ -2,7 +2,7 @@
     "version": "0.0.0",
     "scripts": {
         "serve": "vite",
-        "build": "vue-tsc --noEmit && vite build --emptyOutDir",
+        "build": "vite build --emptyOutDir",
         "test:all": "jest --passWithNoTests",
         "test:file": "jest --bail --findRelatedTests",
         "test:unit": "jest --bail --findRelatedTests",
