@@ -1,7 +1,7 @@
 <template lang="pug">
 p.home-text
     span {{locales.welcome}}
-    span.home-programming-language
+    span.home-programming-language(data-testid="programmingLanguage")
         span.home-programming-language-non-marked
             home-text-programming-language(:programming-language="nonMarkedText")
         mark.home-programming-language-marked
@@ -46,10 +46,7 @@ export default {
 
             setCursorBlinking(true);
 
-            setTimeout(() =>
-            {
-                changeProgrammingLanguage();
-            }, Rand.int({min: 3000, max: 5000}));
+            setTimeout(changeProgrammingLanguage, Rand.int({min: 3000, max: 5000}));
         };
 
         const clearMarkedText = () =>
@@ -134,6 +131,8 @@ export default {
                 markChar();
             });
         };
+
+        const addAnPrefix = (text: string) => `n${text}`;
 
         const removeAnPrefix = (text: string) => text.replace(/^n$|^n /, ' ');
 
@@ -247,11 +246,11 @@ export default {
                 {
                     if (nonMarkedText.value)
                     {
-                        nonMarkedText.value = `n${nonMarkedText.value}`;
+                        nonMarkedText.value = addAnPrefix(nonMarkedText.value);
                     }
                     else if (markedText.value)
                     {
-                        markedText.value = `n${markedText.value}`;
+                        markedText.value = addAnPrefix(markedText.value);
                     }
                 }
             }
