@@ -87,7 +87,7 @@ export default {
 
         const fields = contactFormFields;
 
-        const root = ref<HTMLFormElement | null>(null);
+        const root = ref<HTMLFormElement>();
 
         const toasts = reactive<{messageType: string, type: 'fail' | 'success'}[]>([]);
 
