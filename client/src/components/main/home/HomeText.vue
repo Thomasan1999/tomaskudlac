@@ -193,9 +193,9 @@ export default {
 
         const programmingLanguageGenerator = createProgrammingLanguageGenerator();
 
-        const nextProgrammingLanguage = ref(programmingLanguageGenerator.next().value! as ProgrammingLanguage);
+        const currentProgrammingLanguage = ref(programmingLanguageGenerator.next().value!);
 
-        const currentProgrammingLanguage = ref(nextProgrammingLanguage.value);
+        const nextProgrammingLanguage = ref(programmingLanguageGenerator.next().value!);
 
         const nonMarkedText = ref(getNonMarkedText(currentProgrammingLanguage.value));
 
