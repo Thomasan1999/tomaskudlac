@@ -2,11 +2,11 @@
 p.home-text
     span {{locales.welcome}}
     span.home-programming-language(data-testid="programmingLanguage")
-        span.home-programming-language-non-marked
+        span.home-programming-language-non-marked(data-testid="nonMarkedText")
             home-text-programming-language(:programming-language="nonMarkedText")
-        mark.home-programming-language-marked
+        mark.home-programming-language-marked(data-testid="markedText")
             home-text-programming-language(:programming-language="markedText")
-    span.home-text-cursor(:class="{blinking: cursorIsBlinking}")
+    span.home-text-cursor(:class="{blinking: cursorIsBlinking}" data-testid="cursor")
     span {{' '}}
     span {{locales.developer}}.
 </template>
