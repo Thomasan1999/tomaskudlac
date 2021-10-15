@@ -31,7 +31,7 @@
         "scroll-behavior-polyfill": "2.0.13",
         "vue": "3.2.20",
         "vue-gtag": "2.0.1",
-        "vue-router": "4.0.11"
+        "vue-router": "4.0.12"
     },
     "devDependencies": {
         "@types/jest": "27.0.2",
