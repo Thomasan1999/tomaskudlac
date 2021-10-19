@@ -84,7 +84,7 @@ export default {
                     backEndDesc: '100%',
                     designDesc: 'finetuning',
                     frontEndDesc: 'redesign built upon the previous version',
-                    href: 'https://havran-pub.sk',
+                    href: 'https://www.havran-pub.sk',
                     title: 'Havran-pub'
                 },
                 simonQ: {
@@ -98,7 +98,7 @@ export default {
                     backEndDesc: '100%',
                     designDesc: 'finetuning',
                     frontEndDesc: '100%',
-                    href: 'http://villaraomaine.sk',
+                    href: 'http://villaromaine.sk',
                     title: 'Villa Romaine'
                 }
             },
