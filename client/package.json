@@ -38,7 +38,7 @@
         "@types/lodash": "4.14.177",
         "@typescript-eslint/eslint-plugin": "4.33.0",
         "@typescript-eslint/parser": "4.33.0",
-        "@vitejs/plugin-vue": "1.9.4",
+        "@vitejs/plugin-vue": "1.10.1",
         "@vue/compiler-sfc": "3.2.22",
         "@vue/eslint-config-airbnb": "5.3.0",
         "@vue/test-utils": "2.0.0-rc.16",
