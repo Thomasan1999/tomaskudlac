@@ -62,8 +62,6 @@ describe('HomeText', () =>
 
         const store = useStore();
 
-        store.$reset();
-
         store.programmingLanguages = [
             new ProgrammingLanguage({
                 an: true,
