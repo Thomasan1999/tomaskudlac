@@ -1,6 +1,6 @@
 <template lang="pug">
 component.navbar-link(
-    :is="routerLink ? 'router-link' : 'external-link'"
+    :is="routerLink ? 'router-link' : ExternalLink"
     :class="[$attrs.class, {active}]"
     :title="title"
     v-bind="dynamicProps"
@@ -12,6 +12,7 @@ component.navbar-link(
 <script lang="ts" setup>
 import mainSections from '@/components/main/mainSections';
 import {computed} from 'vue';
+import ExternalLink from '@/components/ExternalLink.vue';
 
 const props = withDefaults(
     defineProps<{active?: boolean, replace?: boolean, routerLink?: boolean, text?: string, title: string, to: string}>(),
