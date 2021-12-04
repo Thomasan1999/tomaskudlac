@@ -4,39 +4,21 @@ div.about-myself-column
     p.about-myself-column-text(data-testid="text" v-html="text")
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import {computed} from 'vue';
 import useStore from '@/store';
 
-export default {
-    name: 'AboutMyselfColumn',
-    props: {
-        title: {
-            required: true,
-            type: String
-        },
-        text: {
-            required: true,
-            type: String
-        }
-    },
-    setup(props)
-    {
-        const store = useStore();
+const props = defineProps<{title: string, text: string}>();
 
-        const text = computed(() =>
-            props.text
-                .replace(/\*[^*]+\*/g, (text) =>
-                    `<strong>${text.slice(1, -1)}</strong>`)
-                .replace(/{{age}}/, store.age)
-                .replace(/{{programmingLanguages}}/, store.programmingLanguagesString)
-        );
+const store = useStore();
 
-        return {
-            text
-        };
-    }
-};
+const text = computed(() =>
+    props.text
+        .replace(/\*[^*]+\*/g, (text) =>
+            `<strong>${text.slice(1, -1)}</strong>`)
+        .replace(/{{age}}/, store.age.toString())
+        .replace(/{{programmingLanguages}}/, store.programmingLanguagesString)
+);
 </script>
 
 <style lang="scss" scoped>

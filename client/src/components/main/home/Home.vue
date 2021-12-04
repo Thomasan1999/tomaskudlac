@@ -7,29 +7,15 @@ main-section.home.has-curtain(
         home-text
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import MainSection from '@/components/main/MainSection.vue';
 import HomeText from '@/components/main/home/HomeText.vue';
 import {computed} from 'vue';
 import useStore from '@/store';
 
-export default {
-    name: 'Home',
-    components: {
-        HomeText,
-        MainSection
-    },
-    setup()
-    {
-        const store = useStore();
+const store = useStore();
 
-        const imageFormat = computed(() => store.imageFormat);
-
-        return {
-            imageFormat
-        };
-    }
-};
+const imageFormat = computed(() => store.imageFormat);
 </script>
 
 <style lang="scss" scoped>

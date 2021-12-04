@@ -5,39 +5,19 @@ section.main-section(:id="id" ref="root")
     slot
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import {computed, ref} from 'vue';
 import mainSections from '@/components/main/mainSections';
 
-export default {
-    name: 'MainSection',
-    props: {
-        heading: {
-            default: false,
-            type: Boolean
-        },
-        name: {
-            required: true,
-            type: String
-        }
-    },
-    setup(props)
-    {
-        const root = ref<HTMLDivElement | null>(null);
+const props = withDefaults(defineProps<{heading?: boolean, name: string}>(), {heading: false});
 
-        const activeSection = computed(() => mainSections[props.name]);
+const root = ref<HTMLDivElement | null>(null);
 
-        const id = computed(() => activeSection.value.id);
+const activeSection = computed(() => mainSections[props.name]);
 
-        const title = computed(() => activeSection.value.title);
+const id = computed(() => activeSection.value.id);
 
-        return {
-            id,
-            root,
-            title
-        };
-    }
-};
+const title = computed(() => activeSection.value.title);
 </script>
 
 <style lang="scss" scoped>

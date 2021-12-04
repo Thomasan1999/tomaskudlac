@@ -25,100 +25,75 @@ toast(
 )
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import {computed, reactive, ref} from 'vue';
 import useStore from '@/store';
 import ContactFormField from '@/components/main/contact/ContactFormField.vue';
 import Toast from '@/components/main/Toast.vue';
 import contactFormFields from '@/components/main/contact/contactFormFields';
-import {ContactFormFieldData} from '@/components/main/contact/types';
+import type {ContactFormFieldData} from '@/components/main/contact/types';
 
-export default {
-    name: 'ContactForm',
-    components: {
-        ContactFormField,
-        Toast
-    },
-    setup()
+const store = useStore();
+
+const onSubmit = async () =>
+{
+    const form = root.value!;
+
+    touch();
+
+    if (!valid.value)
     {
-        const store = useStore();
+        return;
+    }
 
-        const onSubmit = async () =>
+    return fetch(form.action, {body: new FormData(form), method: form.method})
+        .then(async (res) =>
         {
-            const form = root.value!;
-
-            touch();
-
-            if (!valid.value)
+            if (res.status >= 400)
             {
-                return;
+                throw new Error(await res.text());
             }
 
-            return fetch(form.action, {body: new FormData(form), method: form.method})
-                .then(async (res) =>
-                {
-                    if (res.status >= 400)
-                    {
-                        throw new Error(await res.text());
-                    }
-
-                    toasts.push({messageType: 'success', type: 'success'});
-                    form.reset();
-                })
-                .catch((err: Error) =>
-                {
-                    toasts.push({messageType: err.message, type: 'fail'});
-                });
-        };
-
-        const onValidSet = (field: ContactFormFieldData, newValue) =>
+            toasts.push({messageType: 'success', type: 'success'});
+            form.reset();
+        })
+        .catch((err: Error) =>
         {
-            field.touched = true;
-            field.valid = newValue;
-        };
-
-        const touch = () =>
-        {
-            fields.forEach((field) =>
-            {
-                field.touched = true;
-            });
-        };
-
-        const fields = contactFormFields;
-
-        const root = ref<HTMLFormElement>();
-
-        const toasts = reactive<{messageType: string, type: 'fail' | 'success'}[]>([]);
-
-        const disabled = computed(() => touched.value && !valid.value);
-
-        const language = computed(() => store.language);
-
-        const locales = computed(() => store.locales.sections.contact.form);
-
-        const submitTitle = computed(() => valid.value ? locales.value.submitTitle : locales.value.submitTitleDisabled);
-
-        const touched = computed(() => fields.some((field) => field.touched));
-
-        const valid = computed(() => fields.every((field) => field.valid));
-
-        return {
-            disabled,
-            fields,
-            language,
-            locales,
-            onSubmit,
-            onValidSet,
-            root,
-            toasts,
-            touch,
-            touched,
-            submitTitle,
-            valid
-        };
-    }
+            toasts.push({messageType: err.message, type: 'fail'});
+        });
 };
+
+const onValidSet = (field: ContactFormFieldData, newValue) =>
+{
+    field.touched = true;
+    field.valid = newValue;
+};
+
+const touch = () =>
+{
+    fields.forEach((field) =>
+    {
+        field.touched = true;
+    });
+};
+
+const fields = contactFormFields;
+
+const root = ref<HTMLFormElement>();
+
+const toasts = reactive<{messageType: string, type: 'fail' | 'success'}[]>([]);
+
+const disabled = computed(() => touched.value && !valid.value);
+
+const language = computed(() => store.language);
+
+const locales = computed(() => store.locales.sections.contact.form);
+
+const submitTitle = computed(() => valid.value ? locales.value.submitTitle : locales.value.submitTitleDisabled);
+
+const touched = computed(() => fields.some((field) => field.touched));
+
+const valid = computed(() => fields.every((field) => field.valid));
 </script>
 
 <style lang="scss" scoped>

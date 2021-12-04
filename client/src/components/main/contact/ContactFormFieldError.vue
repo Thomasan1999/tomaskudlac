@@ -3,30 +3,17 @@ div.contact-form-field-error(v-if="error")
     div.contact-form-field-error-message {{message}}
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import {computed} from 'vue';
 import useStore from '@/store';
 
-export default {
-    name: 'ContactFormFieldError',
-    props: {
-        error: {
-            type: String
-        }
-    },
-    setup(props)
-    {
-        const store = useStore();
+const props = defineProps<{error?: string}>();
 
-        const locales = computed(() => store.locales.sections.contact.form.errors);
+const store = useStore();
 
-        const message = computed(() => locales.value[props.error]);
+const locales = computed(() => store.locales.sections.contact.form.errors);
 
-        return {
-            message
-        };
-    }
-};
+const message = computed(() => locales.value[props.error!]);
 </script>
 
 <style lang="scss" scoped>

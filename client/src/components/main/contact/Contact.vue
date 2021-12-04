@@ -8,41 +8,26 @@ main-section.contact(
         contact-form
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import MainSection from '@/components/main/MainSection.vue';
 import useStore from '@/store';
 import {computed} from 'vue';
 import ContactForm from '@/components/main/contact/ContactForm.vue';
 
-export default {
-    name: 'Contact',
-    components: {
-        ContactForm,
-        MainSection
-    },
-    setup()
-    {
-        const store = useStore();
+const store = useStore();
 
-        const locales = computed(() => store.locales.sections.contact);
+const locales = computed(() => store.locales.sections.contact);
 
-        const briefText = computed(() =>
-        {
-            const phoneTitle = locales.value.phoneTitle;
+const briefText = computed(() =>
+{
+    const phoneTitle = locales.value.phoneTitle;
 
-            return locales.value.briefText
-                .replace(
-                    /{{phoneNumber}}/,
-                    `<a class="phone-number-link" href="tel:+421949353783" title="${phoneTitle}">+421 949 353 783</a>`
-                );
-        });
-
-        return {
-            briefText,
-            locales
-        };
-    }
-};
+    return locales.value.briefText
+        .replace(
+            /{{phoneNumber}}/,
+            `<a class="phone-number-link" href="tel:+421949353783" title="${phoneTitle}">+421 949 353 783</a>`
+        );
+});
 </script>
 
 <style lang="scss" scoped>

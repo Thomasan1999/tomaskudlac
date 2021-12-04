@@ -3,38 +3,23 @@ span.home-programming-language-an-prefix {{anPrefix}}
 span.home-programming-language-base {{base}}
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import {computed} from 'vue';
 
-export default {
-    name: 'HomeTextProgrammingLanguage',
-    props: {
-        programmingLanguage: {
-            required: true,
-            type: String
-        }
-    },
-    setup(props)
-    {
-        const anPrefix = computed(() =>
-        {
-            const programmingLanguage = props.programmingLanguage;
+const props = defineProps<{programmingLanguage: string}>();
 
-            const textHasAnPrefix = programmingLanguage.match(/^n$|^n /);
+const anPrefix = computed(() =>
+{
+    const programmingLanguage = props.programmingLanguage;
 
-            return textHasAnPrefix ? props.programmingLanguage[0] : '';
-        });
+    const textHasAnPrefix = programmingLanguage.match(/^n$|^n /);
 
-        const base = computed(() => (
-            anPrefix.value.length ? props.programmingLanguage.slice(1) : props.programmingLanguage
-        ));
+    return textHasAnPrefix ? props.programmingLanguage[0] : '';
+});
 
-        return {
-            anPrefix,
-            base
-        };
-    }
-};
+const base = computed(() => (
+    anPrefix.value.length ? props.programmingLanguage.slice(1) : props.programmingLanguage
+));
 </script>
 
 <style lang="scss" scoped>

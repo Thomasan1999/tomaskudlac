@@ -3,7 +3,7 @@ navbar-link(position="right" :title="title" :to="to")
     font-awesome-icon.navbar-social-network(:icon="icon")
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import {library} from '@fortawesome/fontawesome-svg-core';
 import {faEnvelope, faTimes} from '@fortawesome/free-solid-svg-icons';
 import {faFacebookF, faGithub, faLinkedinIn} from '@fortawesome/free-brands-svg-icons';
@@ -15,30 +15,10 @@ import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome';
 if (!app.component('font-awesome-icon'))
 {
     app.component('font-awesome-icon', FontAwesomeIcon);
+    library.add(faFacebookF, faGithub, faLinkedinIn, faEnvelope, faSmile, faTimes);
 }
 
-library.add(faFacebookF, faGithub, faLinkedinIn, faEnvelope, faSmile, faTimes);
-
-export default {
-    name: 'NavbarSocialNetwork',
-    components: {
-        NavbarLink
-    },
-    props: {
-        icon: {
-            required: true,
-            type: Array
-        },
-        title: {
-            required: true,
-            type: String
-        },
-        to: {
-            required: true,
-            type: String
-        }
-    }
-};
+defineProps<{icon: [string, string], title: string, to: string}>();
 </script>
 
 <style lang="scss" scoped>

@@ -10,7 +10,7 @@ div.main(ref="root" :style="`--navbar-height: ${navbarHeight}px`")
         component(
             v-for="([sectionName, sectionData]) in sections"
             :key="sectionName"
-            :is="sectionData.componentName"
+            :is="components[sectionData.componentName]"
             :name="sectionName"
             :ref="(component) => sectionElements[sectionName] = component.$el"
         )
@@ -18,7 +18,7 @@ div.main(ref="root" :style="`--navbar-height: ${navbarHeight}px`")
     div#modal-container
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import Navbar from '@/components/main/navbar/Navbar.vue';
 import mainSections from '@/components/main/mainSections';
 import {computed, onBeforeUnmount, onMounted, ref, watch} from 'vue';
@@ -30,114 +30,98 @@ import Home from '@/components/main/home/Home.vue';
 import useStore from '@/store';
 import FooterComponent from '@/components/main/footer/FooterComponent.vue';
 
-export default {
-    components: {
-        AboutMyself,
-        Contact,
-        FooterComponent,
-        Home,
-        Navbar,
-        Projects
-    },
-    name: 'Main',
-    setup()
-    {
-        const store = useStore();
-
-        const onLinkClick = (linkName: string) =>
-        {
-            if (!linkName)
-            {
-                return;
-            }
-
-            navigatingTo.value = linkName;
-            scrollToSection(linkName);
-        };
-
-        const onScroll = () =>
-        {
-            store.activeSection = [...sortedSections.value]
-                .reverse()
-                .find(([sectionName]) =>
-                {
-                    const sectionElement = sectionElements.value[sectionName];
-
-                    return root.value!.scrollTop >= (sectionElement.offsetTop - (window.innerHeight / 2));
-                })![0];
-        };
-
-        const putSectionNameToUrl = (sectionName: string) =>
-        {
-            router.replace({hash: mainSections[sectionName].url});
-        };
-
-        const scrollToSection = (sectionName: string, behavior: ScrollBehavior = 'smooth') =>
-        {
-            const newTop = sectionElements.value[sectionName].offsetTop - navbarHeight.value;
-
-            root.value!.scroll({behavior, top: newTop});
-            putSectionNameToUrl(sectionName);
-        };
-
-        const navigatingTo = ref<string | undefined>();
-
-        const root = ref<HTMLDivElement | null>(null);
-
-        const sectionElements = ref<Record<string, HTMLDivElement>>({});
-
-        const activeSection = computed(() => store.activeSection);
-
-        const navbarHeight = computed(() => store.navbarHeight);
-
-        const sortedSections = computed(() => (
-            Object.entries(mainSections)
-                .sort(([, sectionDataA], [, sectionDataB]) => sectionDataA.order - sectionDataB.order)
-        ));
-
-        watch(() => store.activeSection, () =>
-        {
-            if (navigatingTo.value)
-            {
-                if (store.activeSection === navigatingTo.value)
-                {
-                    navigatingTo.value = '';
-                }
-                return;
-            }
-
-            putSectionNameToUrl(store.activeSection!);
-        });
-
-        onMounted(() =>
-        {
-            const currentHash = router.currentRoute.value.hash;
-
-            const newActiveSection = Object.entries(mainSections)
-                .find(([, sectionData]) => sectionData.url === currentHash)?.[0];
-
-            store.activeSection = newActiveSection ?? 'home';
-            scrollToSection(store.activeSection, 'auto');
-
-            root.value!.addEventListener('scroll', onScroll);
-        });
-
-        onBeforeUnmount(() =>
-        {
-            root.value!.removeEventListener('scroll', onScroll);
-        });
-
-        return {
-            activeSection,
-            onLinkClick,
-            navbarHeight,
-            navigatingTo,
-            root,
-            sectionElements,
-            sections: sortedSections
-        };
-    }
+const components = {
+    AboutMyself,
+    Contact,
+    Home,
+    Projects
 };
+
+const store = useStore();
+
+const onLinkClick = (linkName: string) =>
+{
+    if (!linkName)
+    {
+        return;
+    }
+
+    navigatingTo.value = linkName;
+    scrollToSection(linkName);
+};
+
+const onScroll = () =>
+{
+    store.activeSection = [...sections.value]
+        .reverse()
+        .find(([sectionName]) =>
+        {
+            const sectionElement = sectionElements.value[sectionName];
+
+            return root.value!.scrollTop >= (sectionElement.offsetTop - (window.innerHeight / 2));
+        })![0];
+};
+
+const putSectionNameToUrl = (sectionName: string) =>
+{
+    router.replace({hash: mainSections[sectionName].url});
+};
+
+const scrollToSection = (sectionName: string, behavior: ScrollBehavior = 'smooth') =>
+{
+    const newTop = sectionElements.value[sectionName].offsetTop - navbarHeight.value;
+
+    root.value!.scroll({behavior, top: newTop});
+    putSectionNameToUrl(sectionName);
+};
+
+const navigatingTo = ref<string | undefined>();
+
+const root = ref<HTMLDivElement | null>(null);
+
+const sectionElements = ref<Record<string, HTMLDivElement>>({});
+
+const activeSection = computed(() => store.activeSection);
+
+const navbarHeight = computed(() => store.navbarHeight);
+
+const sections = computed(() => (
+    Object.entries(mainSections)
+        .sort(([, sectionDataA], [, sectionDataB]) => sectionDataA.order - sectionDataB.order)
+));
+
+watch(() => store.activeSection, () =>
+{
+    if (navigatingTo.value)
+    {
+        if (store.activeSection === navigatingTo.value)
+        {
+            navigatingTo.value = '';
+        }
+        return;
+    }
+
+    putSectionNameToUrl(store.activeSection!);
+});
+
+onMounted(() =>
+{
+    const currentHash = router.currentRoute.value.hash;
+
+    const newActiveSection = Object.entries(mainSections)
+        .find(([, sectionData]) => sectionData.url === currentHash)?.[0];
+
+    store.activeSection = newActiveSection ?? 'home';
+
+    scrollToSection(store.activeSection, 'auto');
+
+    root.value!.addEventListener('scroll', onScroll);
+});
+
+onBeforeUnmount(() =>
+{
+    root.value!.removeEventListener('scroll', onScroll);
+});
 </script>
 
 <style lang="scss" scoped>

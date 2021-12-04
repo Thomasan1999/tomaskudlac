@@ -20,34 +20,20 @@ section.footer-component
     cookies-modal(v-if="showCookies" @close="showCookies = false")
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import {computed, defineAsyncComponent, ref} from 'vue';
 import useStore from '@/store';
 import ExternalLink from '@/components/ExternalLink.vue';
 
-export default {
-    name: 'Footer',
-    components: {
-        CookiesModal: defineAsyncComponent({loader: () => import('./CookiesModal.vue')}),
-        ExternalLink
-    },
-    setup()
-    {
-        const store = useStore();
+const CookiesModal = defineAsyncComponent({loader: () => import('./CookiesModal.vue')});
 
-        const showCookies = ref(false);
+const store = useStore();
 
-        const language = computed(() => store.language);
+const showCookies = ref(false);
 
-        const locales = computed(() => store.locales.footer);
+const language = computed(() => store.language);
 
-        return {
-            language,
-            locales,
-            showCookies
-        };
-    }
-};
+const locales = computed(() => store.locales.footer);
 </script>
 
 <style lang="scss" scoped>

@@ -15,29 +15,17 @@ teleport(to="#modal-container")
                     p.cookies-modal-paragraph-text {{paragraph.text}}
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import {computed} from 'vue';
 import useStore from '@/store';
 import skLocales from '@/locales/sk';
 import CloseIcon from '@/components/main/CloseIcon.vue';
 
-export default {
-    name: 'CookiesModal',
-    components: {
-        CloseIcon
-    },
-    emits: ['close'],
-    setup()
-    {
-        const store = useStore();
+defineEmits<{(event: 'close'): void}>();
 
-        const locales = computed(() => (store.locales as typeof skLocales).cookies);
+const store = useStore();
 
-        return {
-            locales
-        };
-    }
-};
+const locales = computed(() => (store.locales as typeof skLocales).cookies);
 </script>
 
 <style lang="scss" scoped>

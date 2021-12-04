@@ -12,29 +12,15 @@ main-section.about-myself(
             about-myself-column(v-for="column in locales.columns" v-bind="column")
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import MainSection from '@/components/main/MainSection.vue';
 import AboutMyselfColumn from '@/components/main/about-myself/AboutMyselfColumn.vue';
 import {computed} from 'vue';
 import useStore from '@/store';
 
-export default {
-    name: 'AboutMyself',
-    components: {
-        AboutMyselfColumn,
-        MainSection
-    },
-    setup()
-    {
-        const store = useStore();
+const store = useStore();
 
-        const locales = computed(() => store.locales.sections.aboutMyself);
-
-        return {
-            locales
-        };
-    }
-};
+const locales = computed(() => store.locales.sections.aboutMyself);
 </script>
 
 <style lang="scss" scoped>

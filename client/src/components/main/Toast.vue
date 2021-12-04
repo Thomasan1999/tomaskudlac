@@ -11,55 +11,33 @@ teleport(to="#modal-container")
                 close-icon.toast-close-button-icon
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import useStore from '@/store';
 import {computed, onMounted, ref} from 'vue';
 import CloseIcon from '@/components/main/CloseIcon.vue';
 
-export default {
-    name: 'Toast',
-    components: {
-        CloseIcon
-    },
-    emits: ['close'],
-    props: {
-        message: {
-            required: true,
-            type: String
-        },
-        type: {
-            required: true,
-            type: String
-        }
-    },
-    setup()
+defineProps<{message: string, type: 'fail' | 'success'}>();
+defineEmits<{(event: 'close'): void}>();
+
+const store = useStore();
+
+const baseLifetime = ref(10000);
+
+const opened = ref(false);
+
+const lifetime = computed(() => store.isTouchscreen ? baseLifetime.value / 2 : baseLifetime.value);
+
+const locales = computed(() => store.locales.toasts);
+
+onMounted(() =>
+{
+    opened.value = true;
+
+    setTimeout(() =>
     {
-        const store = useStore();
-
-        const baseLifetime = ref(10000);
-
-        const opened = ref(false);
-
-        const lifetime = computed(() => store.isTouchscreen ? baseLifetime.value / 2 : baseLifetime.value);
-
-        const locales = computed(() => store.locales.toasts);
-
-        onMounted(() =>
-        {
-            opened.value = true;
-
-            setTimeout(() =>
-            {
-                opened.value = false;
-            }, lifetime.value);
-        });
-
-        return {
-            locales,
-            opened
-        };
-    }
-};
+        opened.value = false;
+    }, lifetime.value);
+});
 </script>
 
 <style lang="scss" scoped>

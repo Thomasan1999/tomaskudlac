@@ -36,107 +36,81 @@ nav.navbar(:class="{opened}" ref="root" :style="`--navbar-max-height: ${maxHeigh
             navbar-social-network(v-for="socialNetwork in socialNetworks" v-bind="socialNetwork")
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import NavbarLink from '@/components/main/navbar/NavbarLink.vue';
 import {computed, onBeforeUnmount, onMounted, ref} from 'vue';
 import useStore from '@/store';
 import NavbarSocialNetwork from '@/components/main/navbar/NavbarSocialNetwork.vue';
 import NavbarIcon from '@/components/main/navbar/NavbarIcon.vue';
+import MainSectionObject from '@/components/main/MainSectionObject';
 
-export default {
-    name: 'Navbar',
-    components: {
-        NavbarIcon,
-        NavbarLink,
-        NavbarSocialNetwork
-    },
-    emits: ['languageToggle', 'linkClick'],
-    props: {
-        activeSection: {
-            required: true,
-            type: String
-        },
-        sections: {
-            required: true,
-            type: Array
-        }
-    },
-    setup(props, {emit})
-    {
-        const store = useStore();
+const props = defineProps<{activeSection: string, sections: [string, MainSectionObject][]}>();
+const emit = defineEmits<{
+    (event: 'languageToggle'): void,
+    (event: 'linkClick', sectionName: string): void
+}>();
 
-        const onLinkClick = (sectionName: string) =>
-        {
-            opened.value = false;
-            emit('linkClick', sectionName);
-        };
+const store = useStore();
 
-        const onResize = () =>
-        {
-            setHeight();
-        };
-
-        const setHeight = () =>
-        {
-            maxHeight.value = `${root.value!.scrollHeight}px`;
-        };
-
-        const maxHeight = ref('');
-
-        const opened = ref(false);
-
-        const root = ref<HTMLDivElement | null>(null);
-
-        const socialNetworks = [
-            {
-                icon: ['fab', 'facebook-f'],
-                title: 'Facebook',
-                to: 'https://facebook.com/TomasKudlac99'
-            },
-            {
-                icon: ['fas', 'envelope'],
-                title: 'Email',
-                to: 'mailto:ahoj@tomaskudlac.sk'
-            },
-            {
-                icon: ['fab', 'linkedin-in'],
-                title: 'LinkedIn',
-                to: 'https://linkedin.com/in/kudlac/'
-            },
-            {
-                icon: ['fab', 'github'],
-                title: 'GitHub',
-                to: 'https://github.com/Thomasan1999'
-            }
-        ];
-
-        const locales = computed(() => store.locales.navbar);
-
-        const touchscreen = computed(() => store.isTouchscreen);
-
-        onMounted(() =>
-        {
-            setHeight();
-            window.addEventListener('resize', onResize);
-        });
-
-        onBeforeUnmount(() =>
-        {
-            window.removeEventListener('resize', onResize);
-        });
-
-        return {
-            locales,
-            maxHeight,
-            onLinkClick,
-            opened,
-            root,
-            sections: props.sections as any[],
-            socialNetworks,
-            touchscreen
-        };
-    }
+const onLinkClick = (sectionName: string) =>
+{
+    opened.value = false;
+    emit('linkClick', sectionName);
 };
+
+const onResize = () =>
+{
+    setHeight();
+};
+
+const setHeight = () =>
+{
+    maxHeight.value = `${root.value!.scrollHeight}px`;
+};
+
+const maxHeight = ref('');
+
+const opened = ref(false);
+
+const root = ref<HTMLDivElement | null>(null);
+
+const socialNetworks = [
+    {
+        icon: ['fab', 'facebook-f'],
+        title: 'Facebook',
+        to: 'https://facebook.com/TomasKudlac99'
+    },
+    {
+        icon: ['fas', 'envelope'],
+        title: 'Email',
+        to: 'mailto:ahoj@tomaskudlac.sk'
+    },
+    {
+        icon: ['fab', 'linkedin-in'],
+        title: 'LinkedIn',
+        to: 'https://linkedin.com/in/kudlac/'
+    },
+    {
+        icon: ['fab', 'github'],
+        title: 'GitHub',
+        to: 'https://github.com/Thomasan1999'
+    }
+];
+
+const locales = computed(() => store.locales.navbar);
+
+const touchscreen = computed(() => store.isTouchscreen);
+
+onMounted(() =>
+{
+    setHeight();
+    window.addEventListener('resize', onResize);
+});
+
+onBeforeUnmount(() =>
+{
+    window.removeEventListener('resize', onResize);
+});
 </script>
 
 <style lang="scss" scoped>

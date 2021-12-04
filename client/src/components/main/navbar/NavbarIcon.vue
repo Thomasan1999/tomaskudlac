@@ -15,36 +15,21 @@ div.navbar-icon(
             rect.line-rect(height="3" width="25")
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import {computed} from 'vue';
 import useStore from '@/store';
 
-export default {
-    name: 'NavbarIcon',
-    emits: ['click'],
-    props: {
-        mode: {
-            required: true,
-            type: String
-        }
-    },
-    setup(props, {emit})
-    {
-        const store = useStore();
+const props = defineProps<{mode: 'bars' | 'cross'}>();
+const emit = defineEmits<{(event: 'click'): void}>();
 
-        const onClick = () =>
-        {
-            emit('click');
-        };
+const store = useStore();
 
-        const locales = computed(() => store.locales.navbar);
-
-        return {
-            locales,
-            onClick
-        };
-    }
+const onClick = () =>
+{
+    emit('click');
 };
+
+const locales = computed(() => store.locales.navbar);
 </script>
 
 <style lang="scss" scoped>

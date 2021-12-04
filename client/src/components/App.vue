@@ -2,31 +2,20 @@
 router-view(v-if="initialized" :style="`--vh: ${windowHeight / 100}px`")
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import useStore from '@/store';
 import {computed, ref} from 'vue';
 
-export default {
-    name: 'App',
-    setup()
-    {
-        const store = useStore();
+const store = useStore();
 
-        const initialized = ref(false);
+const initialized = ref(false);
 
-        store.init().then(() =>
-        {
-            initialized.value = true;
-        });
+store.init().then(() =>
+{
+    initialized.value = true;
+});
 
-        const windowHeight = computed(() => store.windowHeight);
-
-        return {
-            initialized,
-            windowHeight
-        };
-    }
-};
+const windowHeight = computed(() => store.windowHeight);
 </script>
 
 <style lang="scss">

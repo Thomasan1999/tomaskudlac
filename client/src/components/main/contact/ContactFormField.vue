@@ -22,142 +22,109 @@ label.contact-form-field(:class="{'has-error': error}")
     contact-form-field-error(:error="error")
 </template>
 
-<script lang="ts">
-import {computed, ref, watch} from 'vue';
+<script lang="ts" setup>
+import {computed, defineProps, ref, watch} from 'vue';
 import useStore from '@/store';
 import {Merge} from 'ts-essentials';
 import ContactFormFieldError from '@/components/main/contact/ContactFormFieldError.vue';
 
-export default {
-    name: 'ContactFormField',
-    components: {
-        ContactFormFieldError
-    },
-    inheritAttrs: false,
-    emits: ['blur', 'update:modelValue', 'validSet'],
-    props: {
-        element: {
-            default: 'input',
-            type: String
-        },
-        label: {
-            required: true,
-            type: String
-        },
-        maxlength: {
-            type: Number,
-            validator(value: number)
-            {
-                return value > 0;
-            }
-        },
-        minlength: {
-            default: 0,
-            type: Number,
-            validator(value: number)
-            {
-                return value >= 0;
-            }
-        },
-        modelValue: {
-            required: true,
-            type: String
-        },
-        name: {
-            required: true,
-            type: String
-        },
-        pattern: {
-            type: RegExp
-        },
-        required: {
-            default: false,
-            type: Boolean
-        },
-        touched: {
-            required: true,
-            type: Boolean
-        },
-        type: {
-            default: 'text',
-            type: String
-        },
-        valid: {
-            required: true,
-            type: Boolean
-        }
-    },
-    setup(props, {emit})
-    {
-        const store = useStore();
+const props = withDefaults(
+    defineProps<{
+        element?: string,
+        label: string,
+        maxlength?: number,
+        minlength?: number,
+        modelValue: string,
+        name: string,
+        pattern?: RegExp,
+        required?: boolean,
+        touched: boolean,
+        type?: string,
+        valid: boolean
+    }>(),
+    {element: 'input', minlength: 0, required: false, type: 'text'}
+);
+const emit = defineEmits<{
+    (event: 'blur'): void,
+    (event: 'update:modelValue', value: string): void,
+    (event: 'validSet', value: boolean): void
+}>();
 
-        const convertRegexToValidHtml = (regex: RegExp) => regex.toString().replace(/^\/|\/[^/]*$/g, '');
+const store = useStore();
 
-        const onBlur = () =>
-        {
-            inputting.value = false;
-            emit('blur');
-        };
+const convertRegexToValidHtml = (regex: RegExp) => regex.toString().replace(/^\/|\/[^/]*$/g, '');
 
-        const onInput = (e: any) =>
-        {
-            const $event: Merge<KeyboardEvent, {target: HTMLInputElement | HTMLTextAreaElement}> = e;
-
-            inputting.value = true;
-            emit('update:modelValue', $event.target.value);
-        };
-
-        const inputting = ref(false);
-
-        const dynamicProps = computed(() =>
-            props.element === 'input'
-                ? {
-                    ...(props.pattern && {pattern: convertRegexToValidHtml(props.pattern)}),
-                    type: props.type
-                }
-                : undefined
-        );
-
-        const error = computed(() =>
-        {
-            if (props.valid || !props.touched || inputting.value)
-            {
-                return;
-            }
-
-            if (missingValue.value)
-            {
-                return 'empty';
-            }
-
-            if (!validFormat.value)
-            {
-                return 'invalidFormat';
-            }
-        });
-
-        const locales = computed(() => store.locales.sections.contact.form);
-
-        const missingValue = computed(() => props.required && !props.modelValue);
-
-        const validFormat = computed(() => Boolean(props.modelValue.match(props.pattern)));
-
-        watch(() => props.modelValue, () =>
-        {
-            const newValidValue = validFormat.value && !missingValue.value;
-
-            emit('validSet', newValidValue);
-        });
-
-        return {
-            dynamicProps,
-            error,
-            locales,
-            onBlur,
-            onInput
-        };
-    }
+const onBlur = () =>
+{
+    inputting.value = false;
+    emit('blur');
 };
+
+const onInput = (e: any) =>
+{
+    const $event: Merge<KeyboardEvent, {target: HTMLInputElement | HTMLTextAreaElement}> = e;
+
+    inputting.value = true;
+    emit('update:modelValue', $event.target.value);
+};
+
+const inputting = ref(false);
+
+const dynamicProps = computed(() =>
+    props.element === 'input'
+        ? {
+            ...(props.pattern && {pattern: convertRegexToValidHtml(props.pattern)}),
+            type: props.type
+        }
+        : undefined
+);
+
+const error = computed(() =>
+{
+    if (props.valid || !props.touched || inputting.value)
+    {
+        return;
+    }
+
+    if (missingValue.value)
+    {
+        return 'empty';
+    }
+
+    if (!validFormat.value)
+    {
+        return 'invalidFormat';
+    }
+});
+
+const locales = computed(() => store.locales.sections.contact.form);
+
+const missingValue = computed(() => props.required && !props.modelValue);
+
+const validFormat = computed(() => Boolean(props.modelValue.match(props.pattern)));
+
+watch(() => props.modelValue, () =>
+{
+    const newValidValue = validFormat.value && !missingValue.value;
+
+    emit('validSet', newValidValue);
+});
+
+watch(() => props.maxlength, (value) =>
+{
+    if (value <= 0)
+    {
+        throw new Error('Max length must be larger than 0');
+    }
+});
+
+watch(() => props.minlength, (value) =>
+{
+    if (value < 0)
+    {
+        throw new Error('Min length must be larger or equal to 0');
+    }
+});
 </script>
 
 <style lang="scss" scoped>

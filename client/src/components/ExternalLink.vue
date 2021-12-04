@@ -7,8 +7,5 @@ a.external-link(
     slot
 </template>
 
-<script lang="ts">
-export default {
-    name: 'ExternalLink'
-};
+<script lang="ts" setup>
 </script>

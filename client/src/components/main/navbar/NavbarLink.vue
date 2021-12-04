@@ -9,70 +9,36 @@ component.navbar-link(
     slot {{text ?? title}}
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import mainSections from '@/components/main/mainSections';
 import {computed} from 'vue';
-import ExternalLink from '@/components/ExternalLink.vue';
 
-export default {
-    name: 'NavbarLink',
-    components: {
-        ExternalLink
-    },
-    emits: ['click'],
-    props: {
-        active: {
-            type: Boolean
-        },
-        replace: {
-            default: false,
-            type: Boolean
-        },
-        routerLink: {
-            default: false,
-            type: Boolean
-        },
-        text: {
-            type: String
-        },
-        title: {
-            required: true,
-            type: String
-        },
-        to: {
-            required: true,
-            type: String
-        }
-    },
-    setup(props, {emit})
+const props = withDefaults(
+    defineProps<{active?: boolean, replace?: boolean, routerLink?: boolean, text?: string, title: string, to: string}>(),
+    {replace: false, routerLink: false}
+);
+const emit = defineEmits<{(event: 'click'): void}>();
+
+const onClick = ($event: MouseEvent) =>
+{
+    if (!props.routerLink)
     {
-        const onClick = ($event: MouseEvent) =>
-        {
-            if (!props.routerLink)
-            {
-                return;
-            }
-
-            $event.preventDefault();
-            emit('click');
-        };
-
-        const dynamicProps = computed(() =>
-        {
-            return {
-                [props.routerLink ? 'to' : 'href']: to.value,
-                ...(props.replace && {replace: props.replace})
-            };
-        });
-
-        const to = computed(() => mainSections[props.to]?.url ?? props.to);
-
-        return {
-            dynamicProps,
-            onClick
-        };
+        return;
     }
+
+    $event.preventDefault();
+    emit('click');
 };
+
+const dynamicProps = computed(() =>
+{
+    return {
+        [props.routerLink ? 'to' : 'href']: to.value,
+        ...(props.replace && {replace: props.replace})
+    };
+});
+
+const to = computed(() => mainSections[props.to]?.url ?? props.to);
 </script>
 
 <style lang="scss" scoped>
