@@ -23,7 +23,7 @@ label.contact-form-field(:class="{'has-error': error}")
 </template>
 
 <script lang="ts" setup>
-import {computed, defineProps, ref, watch} from 'vue';
+import {computed, ref, watch} from 'vue';
 import useStore from '@/store';
 import {Merge} from 'ts-essentials';
 import ContactFormFieldError from '@/components/main/contact/ContactFormFieldError.vue';
