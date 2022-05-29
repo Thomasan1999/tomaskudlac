@@ -31,7 +31,7 @@
         "lodash": "4.17.21",
         "pinia": "2.0.14",
         "scroll-behavior-polyfill": "2.0.13",
-        "vue": "3.2.31",
+        "vue": "3.2.36",
         "vue-gtag": "2.0.1",
         "vue-router": "4.0.15"
     },
