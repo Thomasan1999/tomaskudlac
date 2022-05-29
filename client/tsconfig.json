@@ -22,11 +22,6 @@
             ]
         }
     },
-    "ts-node": {
-        "moduleTypes": {
-            "jest.config.ts": "cjs"
-        }
-    },
     "include": [
         "src/**/*.ts",
         "src/**/*.d.ts",

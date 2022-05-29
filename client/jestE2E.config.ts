@@ -1,5 +1,5 @@
 import {InitialOptionsTsJest} from 'ts-jest/dist/types';
-import {pathsToModuleNameMapper} from 'ts-jest/utils';
+import {pathsToModuleNameMapper} from 'ts-jest';
 import {compilerOptions} from './tsconfig.json';
 
 const config = {
@@ -7,20 +7,19 @@ const config = {
     globals: {
         'jest-puppeteer': {},
         'ts-jest': {},
-        'vue-jest': {
+        '@vue/vue3-jest': {
             pug: {
                 doctype: 'html'
             }
         }
     },
     moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {prefix: '<rootDir>'}),
-    name: 'e2e',
     preset: './jestE2EPreset.ts',
     testMatch: [
         '**/src/tests/e2e/**/*.spec.ts'
     ],
     transform: {
-        '.*\\.(vue)$': 'vue-jest'
+        '.*\\.(vue)$': '@vue/vue3-jest'
     }
 } as InitialOptionsTsJest;
 

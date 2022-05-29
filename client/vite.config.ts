@@ -2,7 +2,7 @@ import vue from '@vitejs/plugin-vue';
 import {defineConfig} from 'vite';
 import * as path from 'path';
 import {VitePWA} from 'vite-plugin-pwa';
-import {minifyHtml} from 'vite-plugin-html';
+import {createHtmlPlugin} from 'vite-plugin-html';
 import eslintPlugin from 'vite-plugin-eslint';
 
 export default defineConfig({
@@ -12,7 +12,7 @@ export default defineConfig({
     plugins: [
         eslintPlugin(),
         vue(),
-        minifyHtml(),
+        createHtmlPlugin(),
         VitePWA({
             manifest: false
         })
