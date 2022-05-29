@@ -27,7 +27,7 @@
         "cors": "2.8.5",
         "dayjs": "1.11.2",
         "express": "4.17.3",
-        "express-static-gzip": "2.1.5",
+        "express-static-gzip": "2.1.7",
         "lodash": "4.17.21",
         "pinia": "2.0.14",
         "scroll-behavior-polyfill": "2.0.13",
