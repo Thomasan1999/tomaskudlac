@@ -1,12 +1,12 @@
 import {InitialOptionsTsJest} from 'ts-jest/dist/types';
-import {pathsToModuleNameMapper} from 'ts-jest';
+import {pathsToModuleNameMapper} from 'ts-jest/utils';
 import {compilerOptions} from './tsconfig.json';
 
 const config = {
     displayName: 'unit',
     globals: {
         'ts-jest': {},
-        '@vue/vue3-jest': {
+        'vue-jest': {
             pug: {
                 doctype: 'html'
             }
@@ -19,7 +19,7 @@ const config = {
         'src/tests/e2e'
     ],
     transform: {
-        '.*\\.(vue)$': '@vue/vue3-jest'
+        '.*\\.(vue)$': 'vue-jest'
     }
 } as InitialOptionsTsJest;
 
