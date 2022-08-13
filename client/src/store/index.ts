@@ -179,6 +179,7 @@ const useStore = defineStore('main', {
                     title: 'PHP'
                 }
             ].map((language) => new ProgrammingLanguage(language)) as DeepReadonly<ProgrammingLanguage[]>,
+            scrollbarWidth: window.innerWidth > 1023 ? 17 : 0,
             windowHeight: window.innerHeight,
             windowWidth: window.innerWidth
         };
