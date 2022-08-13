@@ -1,5 +1,5 @@
 <template lang="pug">
-router-view(v-if="initialized" :style="`--vh: ${windowHeight / 100}px`")
+router-view(v-if="initialized" :style="`--scrollbar-width: ${scrollbarWidth}px; --vh: ${windowHeight / 100}px`")
 </template>
 
 <script lang="ts" setup>
@@ -14,6 +14,8 @@ store.init().then(() =>
 {
     initialized.value = true;
 });
+
+const scrollbarWidth = computed(() => store.scrollbarWidth);
 
 const windowHeight = computed(() => store.windowHeight);
 </script>
@@ -49,7 +51,6 @@ const windowHeight = computed(() => store.windowHeight);
     --scrollbar-thumb-hover-color: #666666;
     --scrollbar-thumb-active-color: #959595;
     --scrollbar-color: #eeeeee;
-    --scrollbar-width: 17px;
 
     --about-myself-column-title-font-size: 30px;
     --big-text-font-size: 20px;
@@ -69,7 +70,6 @@ const windowHeight = computed(() => store.windowHeight);
     @media (max-width: 1023px)
     {
         --content-padding-horizontal: 15px;
-        --scrollbar-width: 0px;
     }
 
     @media (max-width: 549px)
@@ -80,16 +80,6 @@ const windowHeight = computed(() => store.windowHeight);
         --project-title-font-size: 35px;
         --text-font-size: 14px;
     }
-}
-
-#modal-container
-{
-    height: 0;
-    left: 0;
-    position: fixed;
-    top: 0;
-    width: 0;
-    z-index: 100;
 }
 
 ::-webkit-scrollbar

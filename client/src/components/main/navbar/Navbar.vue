@@ -129,9 +129,9 @@ onBeforeUnmount(() =>
     justify-content: center;
     left: 0;
     overflow: hidden;
-    position: fixed;
+    position: sticky;
     top: 0;
-    width: calc(100vw - var(--scrollbar-width));
+    width: 100%;
     z-index: 2;
 
     @media (max-width: 1023px)

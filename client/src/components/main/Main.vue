@@ -116,6 +116,7 @@ onMounted(() =>
     scrollToSection(store.activeSection, 'auto');
 
     root.value!.addEventListener('scroll', onScroll);
+    store.scrollbarWidth = root.value!.offsetWidth - root.value!.clientWidth;
 });
 
 onBeforeUnmount(() =>
@@ -132,5 +133,16 @@ onBeforeUnmount(() =>
     box-sizing: border-box;
     height: calc(100 * var(--vh));
     overflow: auto;
+    position: relative;
+}
+
+#modal-container
+{
+    height: 0;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 0;
+    z-index: 100;
 }
 </style>
