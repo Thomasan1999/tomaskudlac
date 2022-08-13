@@ -29,7 +29,7 @@
         "express": "4.18.1",
         "express-static-gzip": "2.1.7",
         "lodash": "4.17.21",
-        "pinia": "2.0.14",
+        "pinia": "2.0.18",
         "scroll-behavior-polyfill": "2.0.13",
         "vue": "3.2.37",
         "vue-gtag": "2.0.1",
