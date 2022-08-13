@@ -56,7 +56,7 @@
         "jest-puppeteer": "^6.1.1",
         "lint-staged": "13.0.3",
         "pug": "3.0.2",
-        "puppeteer": "14.2.1",
+        "puppeteer": "16.1.0",
         "sass": "1.54.4",
         "sass-loader": "13.0.2",
         "ts-essentials": "9.2.0",
