@@ -15,74 +15,53 @@ external-link.project.cover-background.has-curtain(
                     p.project-text-back-end {{generalLocales.backEndLabel}}: {{projectLocales.backEndDesc}}
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import {computed, onBeforeUnmount, onMounted, ref, watch} from 'vue';
 import useStore from '@/store';
 import {kebabCase} from 'lodash';
 import ExternalLink from '@/components/ExternalLink.vue';
 
-export default {
-    name: 'Project',
-    components: {
-        ExternalLink
-    },
-    props: {
-        name: {
-            required: true,
-            type: String
-        }
-    },
-    setup(props)
+const props = defineProps<{name: string}>();
+
+const store = useStore();
+
+const setTextHoverHeight = async () =>
+{
+    if (!textContent.value)
     {
-        const store = useStore();
-
-        const setTextHoverHeight = async () =>
-        {
-            if (!textContent.value)
-            {
-                return;
-            }
-
-            textHoverHeight.value = textContent.value!.offsetHeight;
-        };
-
-        const textHoverHeight = ref(0);
-
-        const textContent = ref<HTMLDivElement | null>(null);
-
-        const backgroundImage = computed(() => `url(/images/${kebabCase(props.name)}.${store.imageFormat})`);
-
-        const generalLocales = computed(() => store.locales.sections.projects);
-
-        const projectLocales = computed(() =>
-        {
-            const root = store.locales.sections.projects.projects;
-
-            return root[props.name as keyof typeof root];
-        });
-
-        watch(() => store.language, setTextHoverHeight);
-
-        onMounted(() =>
-        {
-            setTextHoverHeight();
-            window.addEventListener('resize', setTextHoverHeight);
-        });
-
-        onBeforeUnmount(() =>
-        {
-            window.removeEventListener('resize', setTextHoverHeight);
-        });
-
-        return {
-            backgroundImage,
-            generalLocales,
-            projectLocales,
-            textContent,
-            textHoverHeight
-        };
+        return;
     }
+
+    textHoverHeight.value = textContent.value!.offsetHeight;
 };
+
+const textHoverHeight = ref(0);
+
+const textContent = ref<HTMLDivElement | null>(null);
+
+const backgroundImage = computed(() => `url(/images/${kebabCase(props.name)}.${store.imageFormat})`);
+
+const generalLocales = computed(() => store.locales.sections.projects);
+
+const projectLocales = computed(() =>
+{
+    const root = store.locales.sections.projects.projects;
+
+    return root[props.name as keyof typeof root];
+});
+
+watch(() => store.language, setTextHoverHeight);
+
+onMounted(() =>
+{
+    setTextHoverHeight();
+    window.addEventListener('resize', setTextHoverHeight);
+});
+
+onBeforeUnmount(() =>
+{
+    window.removeEventListener('resize', setTextHoverHeight);
+});
 </script>
 
 <style lang="scss" scoped>

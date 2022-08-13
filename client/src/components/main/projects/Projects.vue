@@ -7,28 +7,16 @@ main-section.projects(
         project(v-for="project in projects" :name="project")
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import MainSection from '@/components/main/MainSection.vue';
 import Project from '@/components/main/projects/Project.vue';
 
-export default {
-    name: 'Projects',
-    components: {
-        MainSection,
-        Project
-    },
-    setup()
-    {
-        return {
-            projects: [
-                'fifaManiaci',
-                'simonQ',
-                'villaRomaine',
-                'havranPub'
-            ]
-        };
-    }
-};
+const projects = [
+    'fifaManiaci',
+    'simonQ',
+    'villaRomaine',
+    'havranPub'
+];
 </script>
 
 <style lang="scss" scoped>
