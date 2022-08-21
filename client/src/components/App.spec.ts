@@ -13,18 +13,18 @@ describe('App', () =>
         const wrapper = mount(App, {
             global: {
                 plugins: [createPinia()],
-                stubs: ['router-view']
+                stubs: ['RouterView']
             }
         });
 
-        expect(wrapper.findComponent({name: 'router-view'}).exists()).toBe(false);
+        expect(wrapper.findComponent({name: 'RouterView'}).exists()).toBe(false);
 
         await new Promise<void>((resolve) =>
         {
             wrapper.vm.$watch('initialized', async () =>
             {
                 await nextTick();
-                expect(wrapper.findComponent({name: 'router-view'}).exists()).toBe(true);
+                expect(wrapper.findComponent({name: 'RouterView'}).exists()).toBe(true);
                 resolve();
             });
         });
