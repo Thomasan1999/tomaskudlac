@@ -1,7 +1,7 @@
 <template>
-<navbar-link position="right" :title="title" :to="to">
-    <font-awesome-icon class="navbar-social-network" :icon="icon"/>
-</navbar-link>
+<NavbarLink position="right" :title="title" :to="to">
+    <FontAwesomeIcon class="navbar-social-network" :icon="icon"/>
+</NavbarLink>
 </template>
 
 <script lang="ts" setup>

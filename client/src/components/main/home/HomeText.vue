@@ -3,10 +3,10 @@
     <span>{{ locales.welcome }}</span>
     <span class="home-programming-language" data-testid="programmingLanguage">
         <span class="home-programming-language-non-marked" data-testid="nonMarkedText">
-            <home-text-programming-language :programming-language="nonMarkedText"/>
+            <HomeTextProgrammingLanguage :programming-language="nonMarkedText"/>
         </span>
         <mark class="home-programming-language-marked" data-testid="markedText">
-            <home-text-programming-language :programming-language="markedText"/>
+            <HomeTextProgrammingLanguage :programming-language="markedText"/>
         </mark>
     </span>
     <span class="home-text-cursor" :class="{blinking: cursorIsBlinking}" data-testid="cursor"/>

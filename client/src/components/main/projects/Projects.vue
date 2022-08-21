@@ -1,13 +1,13 @@
 <template>
-<main-section
+<MainSection
     class="projects"
     heading
     name="projects"
 >
     <div class="project-container">
-        <project v-for="project in projects" :name="project"/>
+        <Project v-for="project in projects" :name="project"/>
     </div>
-</main-section>
+</MainSection>
 </template>
 
 <script lang="ts" setup>

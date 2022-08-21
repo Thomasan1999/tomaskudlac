@@ -1,14 +1,14 @@
 <template>
-<main-section
+<MainSection
     class="contact"
     heading
     name="contact"
 >
     <div class="text-content">
         <div class="contact-brief-text" data-testid="briefText" v-html="briefText"/>
-        <contact-form/>
+        <ContactForm/>
     </div>
-</main-section>
+</MainSection>
 </template>
 
 <script lang="ts" setup>

@@ -1,5 +1,5 @@
 <template>
-<component
+<Component
     :is="routerLink ? 'router-link' : ExternalLink"
     class="navbar-link"
     :class="[$attrs.class, {active}]"
@@ -8,7 +8,7 @@
     @click="onClick"
 >
     <slot>{{ text ?? title }}</slot>
-</component>
+</Component>
 </template>
 
 <script lang="ts" setup>

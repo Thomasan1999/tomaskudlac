@@ -1,7 +1,7 @@
 <template>
 <nav class="navbar" :class="{opened}" ref="root" :style="`--navbar-max-height: ${maxHeight}`">
     <div class="navbar-part navbar-left-part navbar-outer-part">
-        <navbar-link
+        <NavbarLink
             class="navbar-left-link navbar-logo"
             data-testid="logo"
             :router-link="true"
@@ -12,7 +12,7 @@
         />
     </div>
     <div class="navbar-part navbar-middle-part">
-        <navbar-link
+        <NavbarLink
             class="navbar-middle-link"
             v-for="[name, section] in sections"
             :key="name"
@@ -27,7 +27,7 @@
     </div>
     <div class="navbar-part navbar-right-part navbar-outer-part">
         <div class="navbar-other-lang-container">
-            <navbar-link
+            <NavbarLink
                 class="navbar-other-lang"
                 data-testid="navbarOtherLang"
                 :router-link="true"
@@ -36,10 +36,10 @@
                 :to="locales.otherLangHref"
                 @click="$emit('languageToggle')"
             />
-            <navbar-icon v-if="touchscreen" :mode="opened ? 'cross' : 'bars'" @click="opened = !opened"/>
+            <NavbarIcon v-if="touchscreen" :mode="opened ? 'cross' : 'bars'" @click="opened = !opened"/>
         </div>
         <div class="navbar-social-network-container">
-            <navbar-social-network v-for="socialNetwork in socialNetworks" v-bind="socialNetwork"/>
+            <NavbarSocialNetwork v-for="socialNetwork in socialNetworks" v-bind="socialNetwork"/>
         </div>
     </div>
 </nav>

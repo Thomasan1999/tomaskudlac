@@ -3,6 +3,9 @@ module.exports = {
     env: {
         node: true
     },
+    extends: [
+        'plugin:vue/base'
+    ],
     overrides: [
         {
             files: '*.vue',
@@ -59,6 +62,7 @@ module.exports = {
             asyncArrow: 'always',
             named: 'never'
         }],
+        'vue/component-name-in-template-casing': ['error', 'PascalCase', {registeredComponentsOnly: false}],
         'vue/experimental-script-setup-vars': 'off',
         'vue/script-indent': ['off', 4, {
             baseIndent: 1

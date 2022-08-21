@@ -5,14 +5,14 @@
             <p class="footer-text">
                 {{ locales.copyrightText }}
                 {{ ' ' }}
-                <external-link
+                <ExternalLink
                     v-if="language === 'en'"
                     class="footer-copyright-link"
                     data-testid="copyrightLink"
                     href="http://www.whatarecookies.com"
                     :title="locales.copyrightLinkTitle"
                 >{{ locales.copyrightLinkText }}.
-                </external-link>
+                </ExternalLink>
                 <span
                     v-else
                     class="footer-copyright-link"
@@ -23,7 +23,7 @@
             </p>
         </div>
     </footer>
-    <cookies-modal v-if="showCookies" @close="showCookies = false"/>
+    <CookiesModal v-if="showCookies" @close="showCookies = false"/>
 </section>
 </template>
 

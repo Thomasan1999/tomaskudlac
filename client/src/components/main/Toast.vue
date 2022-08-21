@@ -1,6 +1,6 @@
 <template>
-<teleport to="#modal-container">
-    <transition name="fade" @after-leave="$emit('close')">
+<Teleport to="#modal-container">
+    <Transition name="fade" @after-leave="$emit('close')">
         <div v-if="opened" class="toast" :class="[`type-${type}`]">
             <div class="toast-message">{{ message }}</div>
             <button
@@ -9,11 +9,11 @@
                 :title="locales.closeButtonTitle"
                 @click="opened = false"
             >
-                <close-icon class="toast-close-button-icon"/>
+                <CloseIcon class="toast-close-button-icon"/>
             </button>
         </div>
-    </transition>
-</teleport>
+    </Transition>
+</Teleport>
 </template>
 
 <script lang="ts" setup>

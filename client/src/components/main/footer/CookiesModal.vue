@@ -1,5 +1,5 @@
 <template>
-<teleport to="#modal-container">
+<Teleport to="#modal-container">
     <div class="cookies-modal">
         <div class="cookies-modal-overlay" data-testid="overlay" @click="$emit('close')"/>
         <div class="cookies-modal-content">
@@ -9,7 +9,7 @@
                 :title="locales.closeButtonTitle"
                 @click="$emit('close')"
             >
-                <close-icon class="cookies-modal-close-button-icon"/>
+                <CloseIcon class="cookies-modal-close-button-icon"/>
             </button>
             <div class="cookies-modal-paragraph-container">
                 <div class="cookies-modal-paragraph" v-for="paragraph in locales.paragraphs">
@@ -19,7 +19,7 @@
             </div>
         </div>
     </div>
-</teleport>
+</Teleport>
 </template>
 
 <script lang="ts" setup>

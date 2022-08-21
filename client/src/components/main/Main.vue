@@ -1,13 +1,13 @@
 <template>
 <div class="main" ref="root" :style="`--navbar-height: ${navbarHeight}px`">
-    <navbar
+    <Navbar
         v-if="activeSection"
         :active-section="activeSection"
         :sections="sections"
         @linkClick="onLinkClick"
     />
     <div class="main-section-container">
-        <component
+        <Component
             v-for="([sectionName, sectionData]) in sections"
             :key="sectionName"
             :is="components[sectionData.componentName]"
@@ -15,7 +15,7 @@
             :ref="(component) => sectionElements[sectionName] = component.$el"
         />
     </div>
-    <footer-component/>
+    <FooterComponent/>
     <div id="modal-container"/>
 </div>
 </template>

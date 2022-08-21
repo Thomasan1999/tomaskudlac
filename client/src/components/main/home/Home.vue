@@ -1,13 +1,13 @@
 <template>
-<main-section
+<MainSection
     class="home has-curtain"
     :class="`image-format-${imageFormat}`"
     name="home"
 >
     <div class="text-content">
-        <home-text/>
+        <HomeText/>
     </div>
-</main-section>
+</MainSection>
 </template>
 
 <script lang="ts" setup>

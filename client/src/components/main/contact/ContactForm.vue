@@ -6,7 +6,7 @@
     ref="root"
     @submit.prevent="onSubmit"
 >
-    <contact-form-field
+    <ContactFormField
         v-for="field in fields"
         :label="locales[field.name]"
         v-bind="field"
@@ -22,7 +22,7 @@
         </button>
     </div>
 </form>
-<toast
+<Toast
     v-for="(toast, toastIndex) in toasts"
     :message="locales.apiMessages[toast.messageType] ?? 'Unable to send the mail'"
     :type="toast.type"

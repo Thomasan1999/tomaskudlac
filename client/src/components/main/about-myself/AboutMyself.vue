@@ -1,5 +1,5 @@
 <template>
-<main-section
+<MainSection
     class="about-myself"
     heading
     name="aboutMyself"
@@ -11,10 +11,10 @@
             <img class="about-myself-photo" :alt="locales.photoAlt" data-testid="photo" src="/images/myself.jpg">
         </picture>
         <div class="about-myself-column-container">
-            <about-myself-column v-for="column in locales.columns" v-bind="column"/>
+            <AboutMyselfColumn v-for="column in locales.columns" v-bind="column"/>
         </div>
     </div>
-</main-section>
+</MainSection>
 </template>
 
 <script lang="ts" setup>

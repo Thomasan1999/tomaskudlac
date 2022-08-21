@@ -9,7 +9,7 @@
             :title="locales.required"
         >*</span>
     </span>
-    <component
+    <Component
         :is="element"
         class="contact-form-data"
         :class="[`contact-form-${element}`]"
@@ -22,7 +22,7 @@
         @blur="onBlur"
         @input="onInput"
     />
-    <contact-form-field-error :error="error"/>
+    <ContactFormFieldError :error="error"/>
 </label>
 </template>
 

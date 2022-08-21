@@ -1,5 +1,5 @@
 <template>
-<external-link
+<ExternalLink
     class="project cover-background has-curtain"
     :href="projectLocales.href"
     :style="{backgroundImage}"
@@ -20,7 +20,7 @@
             </div>
         </div>
     </div>
-</external-link>
+</ExternalLink>
 </template>
 
 <script lang="ts" setup>
