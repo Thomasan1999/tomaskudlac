@@ -1,4 +1,6 @@
 import getUrlObject from '@/tests/e2e/utils/getUrlObject';
+import {ElementHandle} from 'puppeteer';
+import sleep from '@/utils/sleep';
 
 describe('navigation', () =>
 {
@@ -17,7 +19,7 @@ describe('navigation', () =>
 
         await page.waitForSelector(selector, {timeout: 10000});
 
-        const sections = await page.$$<HTMLDivElement>(selector);
+        const sections = await page.$$(selector) as ElementHandle<HTMLDivElement>[];
 
         for await (const sectionIndex of sections.slice(1).keys())
         {
@@ -30,7 +32,7 @@ describe('navigation', () =>
                 sectionElement.scrollIntoView({behavior: 'instant' as any, block: 'end'});
             }, sectionIndex, selector);
 
-            await page.waitForTimeout(domChangeTimeout);
+            await sleep(domChangeTimeout);
 
             const url = getUrlObject();
 
@@ -48,13 +50,13 @@ describe('navigation', () =>
 
         await page.waitForSelector(selector, {timeout: 10000});
 
-        const navbarLinks = await page.$$<HTMLDivElement>(selector);
+        const navbarLinks = await page.$$(selector) as ElementHandle<HTMLDivElement>[];
 
         for await (const navbarLink of navbarLinks.slice(1))
         {
             await navbarLink.click();
 
-            await page.waitForTimeout(domChangeTimeout);
+            await sleep(domChangeTimeout);
 
             const url = getUrlObject();
 
@@ -75,11 +77,11 @@ describe('navigation', () =>
 
         await otherLangButton.click();
 
-        await page.waitForTimeout(domChangeTimeout);
+        await sleep(domChangeTimeout);
 
         const otherLangButtonTextHandle = (await otherLangButton.getProperty('textContent'))!;
 
-        const otherLangButtonText = await otherLangButtonTextHandle.jsonValue<string>();
+        const otherLangButtonText = (await otherLangButtonTextHandle.jsonValue())!;
 
         expect(otherLangButtonText).toBe('SK');
 
