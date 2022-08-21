@@ -30,7 +30,7 @@ describe('store', () =>
 
     it('increments age correctly', async () =>
     {
-        jest.useFakeTimers('modern');
+        jest.useFakeTimers();
 
         await store.init();
 

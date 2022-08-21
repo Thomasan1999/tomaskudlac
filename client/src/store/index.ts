@@ -9,7 +9,7 @@ import {defineStore} from 'pinia';
 /** Global store of the application. */
 const useStore = defineStore('main', {
     actions: {
-        /** Initializes the store. Must be ran before the app is mounted. Must be ran only once. */
+        /** Initializes the store. Must be run before the app is mounted. Must be run only once. */
         async init(): Promise<void>
         {
             if (this.initState)

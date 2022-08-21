@@ -13,7 +13,7 @@ describe('Toast', () =>
         pinia = await mockInitStore();
         document.body.style.setProperty('--primary-red', 'red');
         document.body.style.setProperty('--primary-green', 'green');
-        jest.useFakeTimers('modern');
+        jest.useFakeTimers();
     });
 
     function createToastWrapper(props: MountingOptions<any>['props'] = {}): VueWrapper<ComponentPublicInstance>

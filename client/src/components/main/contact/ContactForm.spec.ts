@@ -2,11 +2,11 @@ import {Pinia} from 'pinia';
 import mockInitStore from '@/mocks/mockInitStore';
 import {DOMWrapper, mount, VueWrapper} from '@vue/test-utils';
 import {ComponentPublicInstance} from 'vue';
-import ContactFormType from '@/components/main/contact/ContactForm.vue';
+import ContactForm from '@/components/main/contact/ContactForm.vue';
 import ContactFormField from '@/components/main/contact/ContactFormField.vue';
 import Toast from '@/components/main/Toast.vue';
-
-let ContactForm: typeof ContactFormType;
+import contactFormFields from '@/components/main/contact/contactFormFields';
+import {cloneDeep, merge} from 'lodash';
 
 window.fetch = () => (
     new Promise(
@@ -23,6 +23,8 @@ window.fetch = () => (
 
 const fetchSpy = jest.spyOn(window, 'fetch');
 
+const defaultFormFields = cloneDeep(contactFormFields);
+
 describe('ContactForm', () =>
 {
     let pinia: Pinia;
@@ -36,10 +38,7 @@ describe('ContactForm', () =>
     {
         fetchSpy.mockClear();
 
-        jest.isolateModules(() =>
-        {
-            ContactForm = require('./ContactForm.vue').default;
-        });
+        merge(contactFormFields, defaultFormFields);
     });
 
     function createContactFormWrapper(): VueWrapper<ComponentPublicInstance>

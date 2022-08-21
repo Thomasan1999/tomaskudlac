@@ -9,6 +9,8 @@ import {SiteLanguage} from '@/store/types';
 import _ from 'lodash';
 import {ExistingDomWrapper} from '@/types/tests';
 
+jest.resetModules();
+
 jest.mock('lodash', () =>
 {
     return {
@@ -38,7 +40,7 @@ describe('HomeText', () =>
 
     beforeAll(async () =>
     {
-        jest.useFakeTimers('modern');
+        jest.useFakeTimers();
 
         const setTimeout = window.setTimeout;
 

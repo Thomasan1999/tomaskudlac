@@ -1,5 +1,5 @@
 import {InitialOptionsTsJest} from 'ts-jest/dist/types';
-import {pathsToModuleNameMapper} from 'ts-jest/utils';
+import {pathsToModuleNameMapper} from 'ts-jest';
 import {compilerOptions} from './tsconfig.json';
 
 const config = {
@@ -14,7 +14,7 @@ const config = {
         '**/src/tests/e2e/**/*.spec.ts'
     ],
     transform: {
-        '.*\\.(vue)$': 'vue-jest'
+        '.*\\.(vue)$': '@vue/vue3-jest'
     }
 } as InitialOptionsTsJest;
 
