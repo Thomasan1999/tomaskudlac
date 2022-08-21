@@ -4,8 +4,8 @@
         <NavbarLink
             class="navbar-left-link navbar-logo"
             data-testid="logo"
-            :routerLink="true"
-            :replace="true"
+            routerLink
+            replace
             title="Tomáš Kudláč"
             to="home"
             @click="$emit('linkClick', 'home')"
@@ -18,8 +18,8 @@
             :key="name"
             :active="name === activeSection"
             data-testid="sectionLink"
-            :routerLink="true"
-            :replace="true"
+            routerLink
+            replace
             :title="section.title"
             :to="name"
             @click="onLinkClick(name)"
@@ -30,7 +30,7 @@
             <NavbarLink
                 class="navbar-other-lang"
                 data-testid="navbarOtherLang"
-                :routerLink="true"
+                routerLink
                 :text="locales.otherLangCode"
                 :title="locales.otherLangLinkTitle"
                 :to="locales.otherLangHref"

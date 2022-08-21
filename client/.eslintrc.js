@@ -65,6 +65,7 @@ module.exports = {
         'vue/attribute-hyphenation': ['error', 'never'],
         'vue/component-name-in-template-casing': ['error', 'PascalCase', {registeredComponentsOnly: false}],
         'vue/experimental-script-setup-vars': 'off',
+        'vue/prefer-true-attribute-shorthand': ['error', 'always'],
         'vue/script-indent': ['off', 4, {
             baseIndent: 1
         }]
