@@ -1,7 +1,6 @@
 import {Pinia} from 'pinia';
 import mockInitStore from '@/mocks/mockInitStore';
 import {DOMWrapper, mount, VueWrapper} from '@vue/test-utils';
-import {ComponentPublicInstance} from 'vue';
 import ContactForm from '@/components/main/contact/ContactForm.vue';
 import ContactFormField from '@/components/main/contact/ContactFormField.vue';
 import Toast from '@/components/main/Toast.vue';
@@ -41,7 +40,7 @@ describe('ContactForm', () =>
         merge(contactFormFields, defaultFormFields);
     });
 
-    function createContactFormWrapper(): VueWrapper<ComponentPublicInstance>
+    function createContactFormWrapper(): VueWrapper
     {
         return mount(ContactForm, {
             global: {

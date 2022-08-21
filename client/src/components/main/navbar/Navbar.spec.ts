@@ -1,7 +1,7 @@
 import Navbar from '@/components/main/navbar/Navbar.vue';
 import {mount, VueWrapper} from '@vue/test-utils';
 import {Pinia} from 'pinia';
-import {ComponentPublicInstance, nextTick, reactive} from 'vue';
+import {nextTick, reactive} from 'vue';
 import MainSectionObject from '@/components/main/MainSectionObject';
 import NavbarLink from '@/components/main/navbar/NavbarLink.vue';
 import mockWindowResizeBy from '@/mocks/mockWindowResizeBy';
@@ -28,7 +28,7 @@ describe('Navbar', () =>
         ]
     ];
 
-    function createNavbarWrapper(sectionsLength: number = Infinity): VueWrapper<ComponentPublicInstance>
+    function createNavbarWrapper(sectionsLength: number = Infinity): VueWrapper
     {
         return mount(Navbar, {
             global: {
@@ -45,7 +45,7 @@ describe('Navbar', () =>
         });
     }
 
-    function getSectionLinks(navbarWrapper: VueWrapper<ComponentPublicInstance>): VueWrapper<ComponentPublicInstance>[]
+    function getSectionLinks(navbarWrapper: VueWrapper): VueWrapper[]
     {
         const navbarLinks = navbarWrapper.findAllComponents(NavbarLink);
 

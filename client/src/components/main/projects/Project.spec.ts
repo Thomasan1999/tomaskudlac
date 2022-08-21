@@ -1,5 +1,4 @@
 import {mount, MountingOptions, VueWrapper} from '@vue/test-utils';
-import {ComponentPublicInstance} from 'vue';
 import Project from '@/components/main/projects/Project.vue';
 import useStore from '@/store';
 import mockInitStore from '@/mocks/mockInitStore';
@@ -14,9 +13,7 @@ describe('Project', () =>
         pinia = await mockInitStore();
     });
 
-    function createProjectWrapper(
-        props: MountingOptions<any>['props'] = {}
-    ): VueWrapper<ComponentPublicInstance>
+    function createProjectWrapper(props: MountingOptions<any>['props'] = {}): VueWrapper
     {
         const defaultProps = {
             name: 'fifaManiaci'

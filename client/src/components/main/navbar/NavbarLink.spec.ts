@@ -1,6 +1,5 @@
 import {mount, MountingOptions, VueWrapper} from '@vue/test-utils';
 import NavbarLink from '@/components/main/navbar/NavbarLink.vue';
-import {ComponentPublicInstance} from 'vue';
 import {RouterLink} from 'vue-router';
 
 describe('NavbarLink', () =>
@@ -8,7 +7,7 @@ describe('NavbarLink', () =>
     function createNavbarLink(
         props: MountingOptions<any>['props'] = {},
         slots?: MountingOptions<any>['slots']
-    ): VueWrapper<ComponentPublicInstance>
+    ): VueWrapper
     {
         const defaultProps = {
             title: 'Link',

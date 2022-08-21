@@ -1,7 +1,7 @@
 import {Pinia} from 'pinia';
 import mockInitStore from '@/mocks/mockInitStore';
 import {mount, VueWrapper} from '@vue/test-utils';
-import {ComponentPublicInstance, nextTick} from 'vue';
+import {nextTick} from 'vue';
 import HomeText from '@/components/main/home/HomeText.vue';
 import useStore from '@/store';
 import {ProgrammingLanguage} from '@/store/ProgrammingLanguage';
@@ -86,7 +86,7 @@ describe('HomeText', () =>
         window.setTimeout = timeout;
     });
 
-    function createHomeTextWrapper(): VueWrapper<ComponentPublicInstance>
+    function createHomeTextWrapper(): VueWrapper
     {
         return mount(HomeText, {
             global: {
@@ -95,12 +95,12 @@ describe('HomeText', () =>
         });
     }
 
-    function getMarkedTextElement(wrapper: VueWrapper<ComponentPublicInstance>)
+    function getMarkedTextElement(wrapper: VueWrapper)
     {
         return wrapper.get<HTMLDivElement>('[data-testid="markedText"]');
     }
 
-    function getNonMarkedTextElement(wrapper: VueWrapper<ComponentPublicInstance>)
+    function getNonMarkedTextElement(wrapper: VueWrapper)
     {
         return wrapper.get<HTMLDivElement>('[data-testid="nonMarkedText"]');
     }
@@ -224,7 +224,7 @@ describe('HomeText', () =>
 
     describe('cursor', () =>
     {
-        function getCursorElement(wrapper: VueWrapper<ComponentPublicInstance>)
+        function getCursorElement(wrapper: VueWrapper)
         {
             return wrapper.get<HTMLSpanElement>('[data-testid="cursor"]');
         }

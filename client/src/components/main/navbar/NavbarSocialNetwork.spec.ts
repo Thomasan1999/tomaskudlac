@@ -1,6 +1,5 @@
 import {mount, MountingOptions, VueWrapper} from '@vue/test-utils';
 import NavbarSocialNetwork from '@/components/main/navbar/NavbarSocialNetwork.vue';
-import {ComponentPublicInstance} from 'vue';
 import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome';
 import {library} from '@fortawesome/fontawesome-svg-core';
 import {faEnvelope, faTimes} from '@fortawesome/free-solid-svg-icons';
@@ -12,7 +11,7 @@ describe('NavbarSocialNetwork', () =>
         library.add(faEnvelope, faTimes);
     });
 
-    function createNavbarSocialNetwork(props: MountingOptions<any>['props'] = {}): VueWrapper<ComponentPublicInstance>
+    function createNavbarSocialNetwork(props: MountingOptions<any>['props'] = {}): VueWrapper
     {
         const defaultProps = {
             icon: [],

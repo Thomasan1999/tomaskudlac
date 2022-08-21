@@ -1,5 +1,4 @@
 import {mount, VueWrapper} from '@vue/test-utils';
-import {ComponentPublicInstance} from 'vue';
 import {Pinia} from 'pinia';
 import mockInitStore from '@/mocks/mockInitStore';
 import Contact from '@/components/main/contact/Contact.vue';
@@ -13,7 +12,7 @@ describe('Contact', () =>
         pinia = await mockInitStore();
     });
 
-    function createContactWrapper(): VueWrapper<ComponentPublicInstance>
+    function createContactWrapper(): VueWrapper
     {
         return mount(Contact, {
             global: {

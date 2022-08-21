@@ -1,6 +1,6 @@
 import {MountingOptions, shallowMount, VueWrapper} from '@vue/test-utils';
 import Toast from '@/components/main/Toast.vue';
-import {ComponentPublicInstance, nextTick} from 'vue';
+import {nextTick} from 'vue';
 import mockInitStore from '@/mocks/mockInitStore';
 import {Pinia} from 'pinia';
 
@@ -16,7 +16,7 @@ describe('Toast', () =>
         jest.useFakeTimers();
     });
 
-    function createToastWrapper(props: MountingOptions<any>['props'] = {}): VueWrapper<ComponentPublicInstance>
+    function createToastWrapper(props: MountingOptions<any>['props'] = {}): VueWrapper
     {
         const defaultProps = {
             message: '',

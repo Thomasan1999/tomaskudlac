@@ -1,5 +1,4 @@
 import {mount, VueWrapper} from '@vue/test-utils';
-import {ComponentPublicInstance} from 'vue';
 import Projects from '@/components/main/projects/Projects.vue';
 import {Pinia} from 'pinia';
 import mockInitStore from '@/mocks/mockInitStore';
@@ -13,7 +12,7 @@ describe('Projects', () =>
         pinia = await mockInitStore();
     });
 
-    function createProjectsWrapper(): VueWrapper<ComponentPublicInstance>
+    function createProjectsWrapper(): VueWrapper
     {
         return mount(Projects, {
             global: {

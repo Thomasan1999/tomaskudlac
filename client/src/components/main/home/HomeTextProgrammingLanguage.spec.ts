@@ -1,12 +1,9 @@
 import {mount, MountingOptions, VueWrapper} from '@vue/test-utils';
-import {ComponentPublicInstance} from 'vue';
 import HomeTextProgrammingLanguage from '@/components/main/home/HomeTextProgrammingLanguage.vue';
 
 describe('HomeTextProgrammingLanguage', () =>
 {
-    function createHomeTextProgrammingLanguageWrapper(
-        props: MountingOptions<any>['props'] = {}
-    ): VueWrapper<ComponentPublicInstance>
+    function createHomeTextProgrammingLanguageWrapper(props: MountingOptions<any>['props'] = {}): VueWrapper
     {
         const defaultProps = {
             programmingLanguage: ''

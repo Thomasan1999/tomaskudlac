@@ -1,5 +1,4 @@
 import {mount, VueWrapper} from '@vue/test-utils';
-import {ComponentPublicInstance} from 'vue';
 import {Pinia} from 'pinia';
 import mockInitStore from '@/mocks/mockInitStore';
 import Home from '@/components/main/home/Home.vue';
@@ -13,7 +12,7 @@ describe('Home', () =>
         pinia = await mockInitStore();
     });
 
-    function createHomeWrapper(): VueWrapper<ComponentPublicInstance>
+    function createHomeWrapper(): VueWrapper
     {
         return mount(Home, {
             global: {

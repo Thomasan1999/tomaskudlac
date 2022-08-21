@@ -1,7 +1,7 @@
 import {Pinia} from 'pinia';
 import mockInitStore from '@/mocks/mockInitStore';
 import {mount, VueWrapper} from '@vue/test-utils';
-import {ComponentPublicInstance, nextTick} from 'vue';
+import {nextTick} from 'vue';
 import FooterComponent from '@/components/main/footer/FooterComponent.vue';
 import useStore from '@/store';
 import ExternalLink from '@/components/ExternalLink.vue';
@@ -18,7 +18,7 @@ describe('FooterComponent', () =>
         });
     });
 
-    function createFooterComponentWrapper(): VueWrapper<ComponentPublicInstance>
+    function createFooterComponentWrapper(): VueWrapper
     {
         return mount(FooterComponent, {
             global: {

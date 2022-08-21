@@ -4,7 +4,7 @@ import mockInitStore from '@/mocks/mockInitStore';
 import {Pinia} from 'pinia';
 import MainSection from '@/components/main/MainSection.vue';
 import mainSections from '@/components/main/mainSections';
-import {ComponentPublicInstance, nextTick} from 'vue';
+import {nextTick} from 'vue';
 
 let routerReplaceCallTimes = 0;
 
@@ -36,7 +36,7 @@ describe('Main', () =>
         };
     });
 
-    function createMainWrapper(): VueWrapper<ComponentPublicInstance>
+    function createMainWrapper(): VueWrapper
     {
         return mount(Main, {
             global: {

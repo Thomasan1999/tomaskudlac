@@ -2,7 +2,6 @@ import CookiesModal from '@/components/main/footer/CookiesModal.vue';
 import {shallowMount, VueWrapper} from '@vue/test-utils';
 import mockInitStore from '@/mocks/mockInitStore';
 import {Pinia} from 'pinia';
-import {ComponentPublicInstance} from 'vue';
 
 describe('CookiesModal', () =>
 {
@@ -13,7 +12,7 @@ describe('CookiesModal', () =>
         pinia = await mockInitStore();
     });
 
-    function createCookiesModalWrapper(): VueWrapper<ComponentPublicInstance>
+    function createCookiesModalWrapper(): VueWrapper
     {
         return shallowMount(CookiesModal, {
             global: {

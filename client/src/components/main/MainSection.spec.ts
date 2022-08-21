@@ -1,6 +1,5 @@
 import {mount, MountingOptions, VueWrapper} from '@vue/test-utils';
 import MainSection from '@/components/main/MainSection.vue';
-import {ComponentPublicInstance} from 'vue';
 import mockInitStore from '@/mocks/mockInitStore';
 import {Pinia} from 'pinia';
 
@@ -15,7 +14,7 @@ describe('MainSection', () =>
         pinia = await mockInitStore();
     });
 
-    function createMainSectionWrapper(props: MountingOptions<any>['props'] = {}): VueWrapper<ComponentPublicInstance>
+    function createMainSectionWrapper(props: MountingOptions<any>['props'] = {}): VueWrapper
     {
         const defaultProps = {
             name: 'home'

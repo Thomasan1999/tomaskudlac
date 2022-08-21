@@ -1,7 +1,6 @@
 import {Pinia} from 'pinia';
 import mockInitStore from '@/mocks/mockInitStore';
 import {mount, MountingOptions, VueWrapper} from '@vue/test-utils';
-import {ComponentPublicInstance} from 'vue';
 import ContactFormFieldError from '@/components/main/contact/ContactFormFieldError.vue';
 
 describe('ContactFormFieldError', () =>
@@ -13,9 +12,7 @@ describe('ContactFormFieldError', () =>
         pinia = await mockInitStore();
     });
 
-    function createContactFormFieldErrorWrapper(
-        props: MountingOptions<any>['props'] = {}
-    ): VueWrapper<ComponentPublicInstance>
+    function createContactFormFieldErrorWrapper(props: MountingOptions<any>['props'] = {}): VueWrapper
     {
         const defaultProps = {
             error: ''

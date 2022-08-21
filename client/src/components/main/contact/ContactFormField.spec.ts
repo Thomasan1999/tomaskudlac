@@ -1,7 +1,6 @@
 import {Pinia} from 'pinia';
 import mockInitStore from '@/mocks/mockInitStore';
 import {mount, MountingOptions, VueWrapper} from '@vue/test-utils';
-import {ComponentPublicInstance} from 'vue';
 import ContactFormField from '@/components/main/contact/ContactFormField.vue';
 import ContactFormFieldError from '@/components/main/contact/ContactFormFieldError.vue';
 
@@ -17,7 +16,7 @@ describe('ContactFormField', () =>
     function createContactFormFieldWrapper(
         props: MountingOptions<any>['props'] = {},
         shouldStub: boolean = true
-    ): VueWrapper<ComponentPublicInstance>
+    ): VueWrapper
     {
         const defaultProps = {
             label: '',

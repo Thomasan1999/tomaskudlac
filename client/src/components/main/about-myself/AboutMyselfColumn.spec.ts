@@ -1,5 +1,4 @@
 import {mount, MountingOptions, VueWrapper} from '@vue/test-utils';
-import {ComponentPublicInstance} from 'vue';
 import {Pinia} from 'pinia';
 import mockInitStore from '@/mocks/mockInitStore';
 import AboutMyselfColumn from '@/components/main/about-myself/AboutMyselfColumn.vue';
@@ -14,9 +13,7 @@ describe('AboutMyselfColumn', () =>
         pinia = await mockInitStore();
     });
 
-    function createAboutMyselfColumnWrapper(
-        props: MountingOptions<any>['props'] = {}
-    ): VueWrapper<ComponentPublicInstance>
+    function createAboutMyselfColumnWrapper(props: MountingOptions<any>['props'] = {}): VueWrapper
     {
         const defaultProps = {
             title: '',
