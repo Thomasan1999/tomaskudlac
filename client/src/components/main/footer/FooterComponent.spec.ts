@@ -5,7 +5,6 @@ import {ComponentPublicInstance, nextTick} from 'vue';
 import FooterComponent from '@/components/main/footer/FooterComponent.vue';
 import useStore from '@/store';
 import ExternalLink from '@/components/ExternalLink.vue';
-import CookiesModal from '@/components/main/footer/CookiesModal.vue';
 
 describe('FooterComponent', () =>
 {
@@ -39,7 +38,7 @@ describe('FooterComponent', () =>
 
         await nextTick();
 
-        let cookiesModal = footerComponentWrapper.findComponent(CookiesModal);
+        let cookiesModal = footerComponentWrapper.findComponent({name: 'CookiesModal'});
 
         expect(cookiesModal.exists()).toBe(false);
 
@@ -47,7 +46,7 @@ describe('FooterComponent', () =>
 
         await copyrightLink.trigger('click');
 
-        cookiesModal = footerComponentWrapper.findComponent(CookiesModal);
+        cookiesModal = footerComponentWrapper.findComponent({name: 'CookiesModal'});
 
         expect(cookiesModal.exists()).toBe(true);
     });
