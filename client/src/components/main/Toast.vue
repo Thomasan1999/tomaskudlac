@@ -1,14 +1,19 @@
-<template lang="pug">
-teleport(to="#modal-container")
-    transition(name="fade" @after-leave="$emit('close')")
-        div.toast(v-if="opened" :class="[`type-${type}`]")
-            div.toast-message {{message}}
-            button.toast-close-button(
+<template>
+<teleport to="#modal-container">
+    <transition name="fade" @after-leave="$emit('close')">
+        <div v-if="opened" class="toast" :class="[`type-${type}`]">
+            <div class="toast-message">{{ message }}</div>
+            <button
+                class="toast-close-button"
                 data-testid="closeButton"
                 :title="locales.closeButtonTitle"
                 @click="opened = false"
-            )
-                close-icon.toast-close-button-icon
+            >
+                <close-icon class="toast-close-button-icon"/>
+            </button>
+        </div>
+    </transition>
+</teleport>
 </template>
 
 <script lang="ts" setup>

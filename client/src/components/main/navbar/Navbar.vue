@@ -1,16 +1,19 @@
-<template lang="pug">
-nav.navbar(:class="{opened}" ref="root" :style="`--navbar-max-height: ${maxHeight}`")
-    div.navbar-part.navbar-left-part.navbar-outer-part
-        navbar-link.navbar-left-link.navbar-logo(
+<template>
+<nav class="navbar" :class="{opened}" ref="root" :style="`--navbar-max-height: ${maxHeight}`">
+    <div class="navbar-part navbar-left-part navbar-outer-part">
+        <navbar-link
+            class="navbar-left-link navbar-logo"
             data-testid="logo"
             :router-link="true"
             :replace="true"
             title="Tomáš Kudláč"
             to="home"
             @click="$emit('linkClick', 'home')"
-        )
-    div.navbar-part.navbar-middle-part
-        navbar-link.navbar-middle-link(
+        />
+    </div>
+    <div class="navbar-part navbar-middle-part">
+        <navbar-link
+            class="navbar-middle-link"
             v-for="[name, section] in sections"
             :key="name"
             :active="name === activeSection"
@@ -20,20 +23,26 @@ nav.navbar(:class="{opened}" ref="root" :style="`--navbar-max-height: ${maxHeigh
             :title="section.title"
             :to="name"
             @click="onLinkClick(name)"
-        )
-    div.navbar-part.navbar-right-part.navbar-outer-part
-        div.navbar-other-lang-container
-            navbar-link.navbar-other-lang(
+        />
+    </div>
+    <div class="navbar-part navbar-right-part navbar-outer-part">
+        <div class="navbar-other-lang-container">
+            <navbar-link
+                class="navbar-other-lang"
                 data-testid="navbarOtherLang"
                 :router-link="true"
                 :text="locales.otherLangCode"
                 :title="locales.otherLangLinkTitle"
                 :to="locales.otherLangHref"
                 @click="$emit('languageToggle')"
-            )
-            navbar-icon(v-if="touchscreen" :mode="opened ? 'cross' : 'bars'" @click="opened = !opened")
-        div.navbar-social-network-container
-            navbar-social-network(v-for="socialNetwork in socialNetworks" v-bind="socialNetwork")
+            />
+            <navbar-icon v-if="touchscreen" :mode="opened ? 'cross' : 'bars'" @click="opened = !opened"/>
+        </div>
+        <div class="navbar-social-network-container">
+            <navbar-social-network v-for="socialNetwork in socialNetworks" v-bind="socialNetwork"/>
+        </div>
+    </div>
+</nav>
 </template>
 
 <script lang="ts" setup>

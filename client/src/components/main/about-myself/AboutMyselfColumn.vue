@@ -1,7 +1,8 @@
-<template lang="pug">
-div.about-myself-column
-    h3.about-myself-column-title(data-testid="title") {{title}}
-    p.about-myself-column-text(data-testid="text" v-html="text")
+<template>
+<div class="about-myself-column">
+    <h3 class="about-myself-column-title" data-testid="title">{{ title }}</h3>
+    <p class="about-myself-column-text" data-testid="text" v-html="text"/>
+</div>
 </template>
 
 <script lang="ts" setup>

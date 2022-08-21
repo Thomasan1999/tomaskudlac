@@ -6,12 +6,7 @@ const config = {
     displayName: 'e2e',
     globals: {
         'jest-puppeteer': {},
-        'ts-jest': {},
-        'vue-jest': {
-            pug: {
-                doctype: 'html'
-            }
-        }
+        'ts-jest': {}
     },
     moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {prefix: '<rootDir>'}),
     preset: './jestE2EPreset.ts',

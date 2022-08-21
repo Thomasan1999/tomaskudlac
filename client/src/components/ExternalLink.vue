@@ -1,10 +1,12 @@
-<template lang="pug">
-a.external-link(
+<template>
+<a
+    class="external-link"
     rel="noopener noreferrer"
     target="_blank"
     v-bind="$attrs"
-)
-    slot
+>
+    <slot/>
+</a>
 </template>
 
 <script lang="ts" setup>

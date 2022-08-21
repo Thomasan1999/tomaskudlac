@@ -1,14 +1,18 @@
-<template lang="pug">
-p.home-text
-    span {{locales.welcome}}
-    span.home-programming-language(data-testid="programmingLanguage")
-        span.home-programming-language-non-marked(data-testid="nonMarkedText")
-            home-text-programming-language(:programming-language="nonMarkedText")
-        mark.home-programming-language-marked(data-testid="markedText")
-            home-text-programming-language(:programming-language="markedText")
-    span.home-text-cursor(:class="{blinking: cursorIsBlinking}" data-testid="cursor")
-    span {{' '}}
-    span {{locales.developer}}.
+<template>
+<p class="home-text">
+    <span>{{ locales.welcome }}</span>
+    <span class="home-programming-language" data-testid="programmingLanguage">
+        <span class="home-programming-language-non-marked" data-testid="nonMarkedText">
+            <home-text-programming-language :programming-language="nonMarkedText"/>
+        </span>
+        <mark class="home-programming-language-marked" data-testid="markedText">
+            <home-text-programming-language :programming-language="markedText"/>
+        </mark>
+    </span>
+    <span class="home-text-cursor" :class="{blinking: cursorIsBlinking}" data-testid="cursor"/>
+    <span>{{ ' ' }}</span>
+    <span>{{ locales.developer }}.</span>
+</p>
 </template>
 
 <script lang="ts" setup>

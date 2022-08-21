@@ -1,18 +1,22 @@
-<template lang="pug">
-div.navbar-icon(
+<template>
+<div
+    class="navbar-icon"
     :class="[mode]"
     :title="mode === 'bars' ? locales.show : locales.hide"
     @click="onClick"
-)
-    div.line-container
-        svg(
+>
+    <div class="line-container">
+        <svg
             v-for="index in 3"
             class="line"
             :class="`line-${index}`"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 25 3"
-        )
-            rect.line-rect(height="3" width="25")
+        >
+            <rect class="line-rect" height="3" width="25"/>
+        </svg>
+    </div>
+</div>
 </template>
 
 <script lang="ts" setup>

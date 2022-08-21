@@ -1,12 +1,14 @@
-<template lang="pug">
-component.navbar-link(
+<template>
+<component
     :is="routerLink ? 'router-link' : ExternalLink"
+    class="navbar-link"
     :class="[$attrs.class, {active}]"
     :title="title"
     v-bind="dynamicProps"
     @click="onClick"
-)
-    slot {{text ?? title}}
+>
+    <slot>{{ text ?? title }}</slot>
+</component>
 </template>
 
 <script lang="ts" setup>

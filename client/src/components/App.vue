@@ -1,5 +1,5 @@
-<template lang="pug">
-router-view(v-if="initialized" :style="`--scrollbar-width: ${scrollbarWidth}px; --vh: ${windowHeight / 100}px`")
+<template>
+<router-view v-if="initialized" :style="`--scrollbar-width: ${scrollbarWidth}px; --vh: ${windowHeight / 100}px`"/>
 </template>
 
 <script lang="ts" setup>

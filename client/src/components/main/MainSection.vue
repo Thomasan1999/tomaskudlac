@@ -1,8 +1,10 @@
-<template lang="pug">
-section.main-section(:id="id" ref="root")
-    div.text-content
-        h2.main-section-name(v-if="heading") {{title}}
-    slot
+<template>
+<section class="main-section" :id="id" ref="root">
+    <div class="text-content">
+        <h2 class="main-section-name" v-if="heading">{{ title }}</h2>
+    </div>
+    <slot/>
+</section>
 </template>
 
 <script lang="ts" setup>

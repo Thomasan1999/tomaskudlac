@@ -1,10 +1,13 @@
-<template lang="pug">
-main-section.projects(
+<template>
+<main-section
+    class="projects"
     heading
     name="projects"
-)
-    div.project-container
-        project(v-for="project in projects" :name="project")
+>
+    <div class="project-container">
+        <project v-for="project in projects" :name="project"/>
+    </div>
+</main-section>
 </template>
 
 <script lang="ts" setup>

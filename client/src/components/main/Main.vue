@@ -1,21 +1,23 @@
-<template lang="pug">
-div.main(ref="root" :style="`--navbar-height: ${navbarHeight}px`")
-    navbar(
+<template>
+<div class="main" ref="root" :style="`--navbar-height: ${navbarHeight}px`">
+    <navbar
         v-if="activeSection"
         :active-section="activeSection"
         :sections="sections"
         @linkClick="onLinkClick"
-    )
-    div.main-section-container
-        component(
+    />
+    <div class="main-section-container">
+        <component
             v-for="([sectionName, sectionData]) in sections"
             :key="sectionName"
             :is="components[sectionData.componentName]"
             :name="sectionName"
             :ref="(component) => sectionElements[sectionName] = component.$el"
-        )
-    footer-component
-    div#modal-container
+        />
+    </div>
+    <footer-component/>
+    <div id="modal-container"/>
+</div>
 </template>
 
 <script lang="ts" setup>

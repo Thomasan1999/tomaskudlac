@@ -1,6 +1,7 @@
-<template lang="pug">
-div.contact-form-field-error(v-if="error")
-    div.contact-form-field-error-message {{message}}
+<template>
+<div class="contact-form-field-error" v-if="error">
+    <div class="contact-form-field-error-message">{{ message }}</div>
+</div>
 </template>
 
 <script lang="ts" setup>

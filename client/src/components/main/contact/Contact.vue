@@ -1,11 +1,14 @@
-<template lang="pug">
-main-section.contact(
-    :heading="true"
+<template>
+<main-section
+    class="contact"
+    heading
     name="contact"
-)
-    div.text-content
-        div.contact-brief-text(data-testid="briefText" v-html="briefText")
-        contact-form
+>
+    <div class="text-content">
+        <div class="contact-brief-text" data-testid="briefText" v-html="briefText"/>
+        <contact-form/>
+    </div>
+</main-section>
 </template>
 
 <script lang="ts" setup>

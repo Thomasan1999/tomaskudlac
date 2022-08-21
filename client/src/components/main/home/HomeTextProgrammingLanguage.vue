@@ -1,6 +1,6 @@
-<template lang="pug">
-span.home-programming-language-an-prefix {{anPrefix}}
-span.home-programming-language-base {{base}}
+<template>
+<span class="home-programming-language-an-prefix">{{ anPrefix }}</span>
+<span class="home-programming-language-base">{{ base }}</span>
 </template>
 
 <script lang="ts" setup>

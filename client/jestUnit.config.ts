@@ -5,12 +5,7 @@ import {compilerOptions} from './tsconfig.json';
 const config = {
     displayName: 'unit',
     globals: {
-        'ts-jest': {},
-        'vue-jest': {
-            pug: {
-                doctype: 'html'
-            }
-        }
+        'ts-jest': {}
     },
     moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {prefix: '<rootDir>'}),
     preset: 'ts-jest',

@@ -1,6 +1,7 @@
-<template lang="pug">
-navbar-link(position="right" :title="title" :to="to")
-    font-awesome-icon.navbar-social-network(:icon="icon")
+<template>
+<navbar-link position="right" :title="title" :to="to">
+    <font-awesome-icon class="navbar-social-network" :icon="icon"/>
+</navbar-link>
 </template>
 
 <script lang="ts" setup>

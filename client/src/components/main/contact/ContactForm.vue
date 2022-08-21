@@ -1,28 +1,33 @@
-<template lang="pug">
-form.contact-form(
+<template>
+<form
+    class="contact-form"
     action="/contact-form/send-mail"
     method="post"
     ref="root"
     @submit.prevent="onSubmit"
-)
-    contact-form-field(
+>
+    <contact-form-field
         v-for="field in fields"
         :label="locales[field.name]"
         v-bind="field"
         v-model="field.value"
         @blur="field.touched = true"
         @validSet="(newValue) => onValidSet(field, newValue)"
-    )
-    input(hidden name="lang" :value="language")
-    div.contact-form-bottom-part
-        p.contact-form-required-legend {{locales.requiredLegend}}
-        button.contact-form-submit(:disabled="disabled" :title="submitTitle" @click="touch") {{locales.submitLabel}}
-toast(
+    />
+    <input hidden name="lang" :value="language"/>
+    <div class="contact-form-bottom-part">
+        <p class="contact-form-required-legend">{{ locales.requiredLegend }}</p>
+        <button class="contact-form-submit" :disabled="disabled" :title="submitTitle" @click="touch">
+            {{ locales.submitLabel }}
+        </button>
+    </div>
+</form>
+<toast
     v-for="(toast, toastIndex) in toasts"
     :message="locales.apiMessages[toast.messageType] ?? 'Unable to send the mail'"
     :type="toast.type"
     @close="toasts.splice(toastIndex, 1)"
-)
+/>
 </template>
 
 <script lang="ts" setup>

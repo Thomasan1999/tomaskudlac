@@ -1,10 +1,13 @@
-<template lang="pug">
-main-section.home.has-curtain(
+<template>
+<main-section
+    class="home has-curtain"
     :class="`image-format-${imageFormat}`"
     name="home"
-)
-    div.text-content
-        home-text
+>
+    <div class="text-content">
+        <home-text/>
+    </div>
+</main-section>
 </template>
 
 <script lang="ts" setup>

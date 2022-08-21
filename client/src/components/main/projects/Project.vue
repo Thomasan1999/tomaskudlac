@@ -1,18 +1,26 @@
-<template lang="pug">
-external-link.project.cover-background.has-curtain(
+<template>
+<external-link
+    class="project cover-background has-curtain"
     :href="projectLocales.href"
     :style="{backgroundImage}"
     :title="`${generalLocales.showProject} ${[projectLocales.title]}`"
-)
-    div.text-content
-        div.project-content
-            h3.project-title(data-testid="title") {{projectLocales.title}}
-            div.project-text(:style="`--hover-height: ${textHoverHeight}px`")
-                div.project-text-content(data-testid="textContent" ref="textContent")
-                    h4.project-what-ive-done {{generalLocales.whatIveDone}}:
-                    p.project-text-design {{generalLocales.designLabel}}: {{projectLocales.designDesc}}
-                    p.project-text-front-end {{generalLocales.frontEndLabel}}: {{projectLocales.frontEndDesc}}
-                    p.project-text-back-end {{generalLocales.backEndLabel}}: {{projectLocales.backEndDesc}}
+>
+    <div class="text-content">
+        <div class="project-content">
+            <h3 class="project-title" data-testid="title">{{ projectLocales.title }}</h3>
+            <div class="project-text" :style="`--hover-height: ${textHoverHeight}px`">
+                <div class="project-text-content" data-testid="textContent" ref="textContent">
+                    <h4 class="project-what-ive-done">{{ generalLocales.whatIveDone }}:</h4>
+                    <p class="project-text-design">{{ generalLocales.designLabel }}: {{ projectLocales.designDesc }}</p>
+                    <p class="project-text-front-end">{{ generalLocales.frontEndLabel }}:
+                        {{ projectLocales.frontEndDesc }}</p>
+                    <p class="project-text-back-end">{{ generalLocales.backEndLabel }}:
+                        {{ projectLocales.backEndDesc }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</external-link>
 </template>
 
 <script lang="ts" setup>

@@ -1,23 +1,30 @@
-<template lang="pug">
-section.footer-component
-    footer.footer
-        div.text-content
-            p.footer-text
-                | {{locales.copyrightText}}
-                | {{' '}}
-                external-link.footer-copyright-link(
+<template>
+<section class="footer-component">
+    <footer class="footer">
+        <div class="text-content">
+            <p class="footer-text">
+                {{ locales.copyrightText }}
+                {{ ' ' }}
+                <external-link
                     v-if="language === 'en'"
+                    class="footer-copyright-link"
                     data-testid="copyrightLink"
                     href="http://www.whatarecookies.com"
                     :title="locales.copyrightLinkTitle"
-                ) {{locales.copyrightLinkText}}.
-                span.footer-copyright-link(
+                >{{ locales.copyrightLinkText }}.
+                </external-link>
+                <span
                     v-else
+                    class="footer-copyright-link"
                     data-testid="copyrightLink"
                     :title="locales.copyrightLinkTitle"
                     @click="showCookies = true"
-                ) {{locales.copyrightLinkText}}.
-    cookies-modal(v-if="showCookies" @close="showCookies = false")
+                >{{ locales.copyrightLinkText }}.</span>
+            </p>
+        </div>
+    </footer>
+    <cookies-modal v-if="showCookies" @close="showCookies = false"/>
+</section>
 </template>
 
 <script lang="ts" setup>

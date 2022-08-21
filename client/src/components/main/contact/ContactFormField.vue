@@ -1,14 +1,17 @@
-<template lang="pug">
-label.contact-form-field(:class="{'has-error': error}")
-    span.contact-form-label(data-testid="label")
-        | {{label}}:
-        span.contact-form-required(
+<template>
+<label class="contact-form-field" :class="{'has-error': error}">
+    <span class="contact-form-label" data-testid="label">
+        {{ label }}:
+        <span
+            class="contact-form-required"
             data-testid="required"
             :style="{visibility: required ? 'visible' : 'hidden'}"
             :title="locales.required"
-        ) *
-    component.contact-form-data(
+        >*</span>
+    </span>
+    <component
         :is="element"
+        class="contact-form-data"
         :class="[`contact-form-${element}`]"
         :minlength="minlength"
         :maxlength="maxlength"
@@ -18,8 +21,9 @@ label.contact-form-field(:class="{'has-error': error}")
         v-bind="dynamicProps"
         @blur="onBlur"
         @input="onInput"
-    )
-    contact-form-field-error(:error="error")
+    />
+    <contact-form-field-error :error="error"/>
+</label>
 </template>
 
 <script lang="ts" setup>
