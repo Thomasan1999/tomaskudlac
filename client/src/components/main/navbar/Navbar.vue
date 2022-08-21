@@ -4,7 +4,7 @@
         <NavbarLink
             class="navbar-left-link navbar-logo"
             data-testid="logo"
-            :router-link="true"
+            :routerLink="true"
             :replace="true"
             title="Tomáš Kudláč"
             to="home"
@@ -18,7 +18,7 @@
             :key="name"
             :active="name === activeSection"
             data-testid="sectionLink"
-            :router-link="true"
+            :routerLink="true"
             :replace="true"
             :title="section.title"
             :to="name"
@@ -30,7 +30,7 @@
             <NavbarLink
                 class="navbar-other-lang"
                 data-testid="navbarOtherLang"
-                :router-link="true"
+                :routerLink="true"
                 :text="locales.otherLangCode"
                 :title="locales.otherLangLinkTitle"
                 :to="locales.otherLangHref"

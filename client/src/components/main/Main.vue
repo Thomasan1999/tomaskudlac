@@ -2,7 +2,7 @@
 <div class="main" ref="root" :style="`--navbar-height: ${navbarHeight}px`">
     <Navbar
         v-if="activeSection"
-        :active-section="activeSection"
+        :activeSection="activeSection"
         :sections="sections"
         @linkClick="onLinkClick"
     />

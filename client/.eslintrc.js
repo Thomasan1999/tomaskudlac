@@ -62,6 +62,7 @@ module.exports = {
             asyncArrow: 'always',
             named: 'never'
         }],
+        'vue/attribute-hyphenation': ['error', 'never'],
         'vue/component-name-in-template-casing': ['error', 'PascalCase', {registeredComponentsOnly: false}],
         'vue/experimental-script-setup-vars': 'off',
         'vue/script-indent': ['off', 4, {
