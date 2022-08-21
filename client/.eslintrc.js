@@ -10,6 +10,7 @@ module.exports = {
         {
             files: '*.vue',
             rules: {
+                'indent': 'off',
                 'max-len': 'off'
             }
         }
@@ -65,8 +66,11 @@ module.exports = {
         'vue/attribute-hyphenation': ['error', 'never'],
         'vue/component-name-in-template-casing': ['error', 'PascalCase', {registeredComponentsOnly: false}],
         'vue/experimental-script-setup-vars': 'off',
+        'vue/html-indent': ['error', 4, {
+            baseIndent: 1
+        }],
         'vue/prefer-true-attribute-shorthand': ['error', 'always'],
-        'vue/script-indent': ['off', 4, {
+        'vue/script-indent': ['error', 4, {
             baseIndent: 1
         }]
     },
