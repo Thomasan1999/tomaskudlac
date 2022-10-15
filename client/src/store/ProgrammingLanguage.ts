@@ -11,7 +11,7 @@ export class ProgrammingLanguage
      * */
     readonly an: boolean;
     /**
-     * All languages which are a sub-languages of this language for example SCSS is a sub-language of CSS or TypeScript
+     * All languages which are sub-languages of this language for example SCSS is a sub-language of CSS or TypeScript
      * is a sub-language of JavaScript because both compile to their parent languages and are considered extensions of
      * their parents.
      * */
