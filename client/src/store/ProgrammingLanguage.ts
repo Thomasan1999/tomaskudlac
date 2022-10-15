@@ -1,4 +1,4 @@
-import {DeepPartial, DeepReadonly} from 'ts-essentials';
+import {DeepPartial} from 'ts-essentials';
 
 /**
  * Data of a programming language which are used in home section in dynamic text and in about myself text in the
@@ -15,7 +15,7 @@ export class ProgrammingLanguage
      * is a sub-language of JavaScript because both compile to their parent languages and are considered extensions of
      * their parents.
      * */
-    readonly children: DeepReadonly<ProgrammingLanguage[]> = [];
+    readonly children: ProgrammingLanguage[] = [];
     /** Determines whether the language might appear in the home section text. */
     readonly home: boolean;
     /** The name of the language. This property determines how the language is displayed in texts. */
