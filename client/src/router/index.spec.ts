@@ -6,6 +6,7 @@ import useStore from '@/store';
 import mockImageSrc from '@/mocks/mockImageSrc';
 import routes from '@/router/routes';
 import getManifestElement from '@/utils/getManifestElement';
+import {SiteLanguage} from '@/store/types';
 
 jest.mock('@/router/routes', () =>
 {
@@ -15,7 +16,7 @@ jest.mock('@/router/routes', () =>
             component: {},
             meta: {
                 description: 'The description of the site.',
-                language: 'en',
+                language: SiteLanguage.EN,
                 title: 'The site'
             }
         },
@@ -24,7 +25,7 @@ jest.mock('@/router/routes', () =>
             component: {},
             meta: {
                 description: 'Popis stránky.',
-                language: 'sk',
+                language: SiteLanguage.SK,
                 title: 'Stránka'
             }
         }

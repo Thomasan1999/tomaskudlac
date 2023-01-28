@@ -1,7 +1,7 @@
 import {DeepReadonly} from 'ts-essentials';
 import skLocales from '@/locales/sk';
 import enLocales from '@/locales/en';
-import {ImageFormat, SiteLanguage} from '@/store/types';
+import {ImageFormat, InitializingState, SiteLanguage} from '@/store/types';
 import {ProgrammingLanguage} from '@/store/ProgrammingLanguage';
 import dayjs from 'dayjs';
 import {defineStore} from 'pinia';
@@ -12,18 +12,18 @@ const useStore = defineStore('main', {
         /** Initializes the store. Must be run before the app is mounted. Must be run only once. */
         async init(): Promise<void>
         {
-            if (this.initState)
+            if (this.initState !== InitializingState.NOT_INITIALIZED)
             {
                 return;
             }
 
-            this.initState = 'initializing';
+            this.initState = InitializingState.INITIALIZING;
 
             await this.initListeners();
             await this.updateAge();
             await this.initImageFormat();
 
-            this.initState = 'initialized';
+            this.initState = InitializingState.INITIALIZED;
         },
         /** Determines the preferred image format of all images. Checks if WebP is supported, if not, JPEG is used. */
         async getImageFormat(): Promise<ImageFormat>
@@ -33,7 +33,7 @@ const useStore = defineStore('main', {
                 const webP = new Image();
                 webP.onload = webP.onerror = function ()
                 {
-                    resolve(webP.height === 2 ? 'webp' : 'jpg');
+                    resolve(webP.height === 2 ? ImageFormat.WEBP : ImageFormat.JPG);
                 };
                 // eslint-disable-next-line max-len
                 webP.src = 'data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA';
@@ -90,7 +90,7 @@ const useStore = defineStore('main', {
     getters: {
         initialized(): boolean
         {
-            return this.initState === 'initialized';
+            return this.initState === InitializingState.INITIALIZED;
         },
         isTouchscreen(): boolean
         {
@@ -112,8 +112,8 @@ const useStore = defineStore('main', {
             /** The current age of Tomáš Kudláč. */
             age: null as any as number,
             /** The preferred image format of images. */
-            imageFormat: 'webp' as ImageFormat,
-            initState: '' as ('' | 'initializing' | 'initialized'),
+            imageFormat: ImageFormat.WEBP,
+            initState: InitializingState.NOT_INITIALIZED,
             language: 'sk' as SiteLanguage,
             locales: null as any as (typeof skLocales | typeof enLocales),
             navbarHeight: 60,

@@ -24,6 +24,7 @@
     import sleep from '@/utils/sleep';
     import HomeTextProgrammingLanguage from '@/components/main/home/HomeTextProgrammingLanguage.vue';
     import {ProgrammingLanguage} from '@/store/ProgrammingLanguage';
+    import {SiteLanguage} from '@/store/types';
 
     const store = useStore();
 
@@ -90,7 +91,7 @@
     };
 
     const languageHasAnPrefix = (programmingLanguage: ProgrammingLanguage) => (
-        programmingLanguage.an && store.language === 'en'
+        programmingLanguage.an && store.language === SiteLanguage.EN
     );
 
     const markProgrammingLanguage = async () =>

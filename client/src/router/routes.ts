@@ -1,5 +1,6 @@
 import Main from '@/components/main/Main.vue';
 import {RouteRecordRaw} from 'vue-router';
+import {SiteLanguage} from '@/store/types';
 
 /** List of routes used in the Vue Router. */
 const routes = [
@@ -23,7 +24,7 @@ const routes = [
         meta: {
             // eslint-disable-next-line max-len
             description: `I'm {{age}}} years old and I'm self-employed (freelancer). I work as a web developer. I know {{programmingLanguagesString}}. I like to learn new technologies and watch how do they turn out. It helps me to keep track with them and use every new opportunity to be a better developer.`,
-            language: 'en',
+            language: SiteLanguage.EN,
             title: 'Tomáš Kudláč - Website and web application development'
         },
         path: '/en/'

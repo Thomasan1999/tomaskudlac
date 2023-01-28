@@ -6,7 +6,7 @@
                     {{ locales.copyrightText }}
                     {{ ' ' }}
                     <ExternalLink
-                        v-if="language === 'en'"
+                        v-if="language === SiteLanguage.EN"
                         class="footer-copyright-link"
                         data-testid="copyrightLink"
                         href="http://www.whatarecookies.com"
@@ -31,6 +31,7 @@
     import {computed, defineAsyncComponent, ref} from 'vue';
     import useStore from '@/store';
     import ExternalLink from '@/components/ExternalLink.vue';
+    import {SiteLanguage} from '@/store/types';
 
     const CookiesModal = defineAsyncComponent({loader: () => import('./CookiesModal.vue')});
 

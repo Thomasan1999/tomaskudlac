@@ -168,13 +168,13 @@ describe('HomeText', () =>
 
             expectLanguageToBePrefixed(languageElement, false);
 
-            await changeStoreLanguage(store, 'en');
+            await changeStoreLanguage(store, SiteLanguage.EN);
 
             await nextTick();
 
             expectLanguageToBePrefixed(languageElement, true);
 
-            await changeStoreLanguage(store, 'sk');
+            await changeStoreLanguage(store, SiteLanguage.SK);
 
             await nextTick();
 
