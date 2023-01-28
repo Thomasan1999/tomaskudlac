@@ -24,7 +24,7 @@
     </form>
     <Toast
         v-for="(toast, toastIndex) in toasts"
-        :message="locales.apiMessages[toast.messageType] ?? 'Unable to send the mail'"
+        :message="locales.apiMessages[toast.messageType] ?? locales.apiMessages['Unable to send the email']"
         :type="toast.type"
         @close="toasts.splice(toastIndex, 1)"
     />
@@ -37,10 +37,26 @@
     import Toast from '@/components/main/Toast.vue';
     import contactFormFields from '@/components/main/contact/contactFormFields';
     import type {ContactFormFieldData} from '@/components/main/contact/types';
+    import {load} from 'recaptcha-v3';
 
     const store = useStore();
 
-    const onSubmit = async () =>
+    const getFormBody = async (): Promise<FormData> =>
+    {
+        const form = root.value!;
+
+        const formData = new FormData(form);
+
+        const recaptcha = await load('72276f962a1e0b9c43baf039ac3e1f7bb3445433');
+
+        const token = await recaptcha.execute('submit');
+
+        formData.append('g-recaptcha-response', token);
+
+        return formData;
+    };
+
+    const onSubmit = async (): Promise<void> =>
     {
         const form = root.value!;
 
@@ -51,7 +67,17 @@
             return;
         }
 
-        return fetch(form.action, {body: new FormData(form), method: form.method})
+        const formBody = await getFormBody().catch(() =>
+        {
+            toasts.push({messageType: 'Unable to send the email', type: 'fail'});
+        });
+
+        if (!formBody)
+        {
+            return;
+        }
+
+        return fetch(form.action, {body: formBody, method: form.method})
             .then(async (res) =>
             {
                 if (res.status >= 400)
@@ -68,13 +94,13 @@
             });
     };
 
-    const onValidSet = (field: ContactFormFieldData, newValue) =>
+    const onValidSet = (field: ContactFormFieldData, newValue): void =>
     {
         field.touched = true;
         field.valid = newValue;
     };
 
-    const touch = () =>
+    const touch = (): void =>
     {
         fields.forEach((field) =>
         {
