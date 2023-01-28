@@ -45,7 +45,7 @@
 
     const store = useStore();
 
-    const baseLifetime = ref(10000000);
+    const baseLifetime = ref(10000);
 
     const opened = ref(false);
 
