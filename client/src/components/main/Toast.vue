@@ -1,7 +1,12 @@
 <template>
     <Teleport to="#modal-container">
         <Transition name="fade" @after-leave="$emit('close')">
-            <div v-if="opened" class="toast" :class="[`type-${type}`]">
+            <div
+                v-if="opened"
+                class="toast"
+                :class="[`type-${type}`]"
+                :style="`--relative-margin-top: ${relativeMarginTop}`"
+            >
                 <div class="toast-message">{{ message }}</div>
                 <button
                     class="toast-close-button"
@@ -24,11 +29,27 @@
     defineProps<{message: string, type: 'fail' | 'success'}>();
     defineEmits<{(event: 'close'): void}>();
 
+    const getRelativeMarginTop = (): string =>
+    {
+        const toasts = Array.from(document.querySelectorAll<HTMLDivElement>('.toast'));
+
+        const lastToast = toasts.at(-1);
+
+        if (!lastToast)
+        {
+            return '';
+        }
+
+        return `${lastToast.offsetTop + lastToast.offsetHeight + 20}px`;
+    };
+
     const store = useStore();
 
-    const baseLifetime = ref(10000);
+    const baseLifetime = ref(10000000);
 
     const opened = ref(false);
+
+    const relativeMarginTop = ref('');
 
     const lifetime = computed(() => store.isTouchscreen ? baseLifetime.value / 2 : baseLifetime.value);
 
@@ -37,6 +58,7 @@
     onMounted(() =>
     {
         opened.value = true;
+        relativeMarginTop.value = getRelativeMarginTop();
 
         setTimeout(() =>
         {
@@ -48,13 +70,15 @@
 <style lang="scss" scoped>
     .toast
     {
+        --default-margin-top: calc(var(--content-padding-horizontal) + var(--navbar-height));
+
         box-sizing: border-box;
         max-width: 360px;
         padding: 10px 30px;
         position: absolute;
         right: calc(-100vw + var(--content-padding-horizontal) + var(--scrollbar-width));
         text-align: left;
-        top: calc(var(--content-padding-horizontal) + var(--navbar-height));
+        top: var(--relative-margin-top, var(--default-margin-top));
         width: calc(100vw - var(--content-padding-horizontal) * 2);
         z-index: 1;
 
