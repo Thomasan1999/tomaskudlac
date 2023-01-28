@@ -3,7 +3,7 @@ export default {
     footer: {
         copyrightLinkTitle: 'Show explanation of what web cookies are',
         copyrightLinkText: 'cookies',
-        copyrightText: '© 2017 - 2022 All rights reserved. This site uses'
+        copyrightText: '© 2017 - 2023 All rights reserved. This site uses'
     },
     navbar: {
         hide: 'Hide navigation bar',
