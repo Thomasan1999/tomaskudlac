@@ -33,7 +33,7 @@ module.exports = {
         'newline-per-chained-call': 'off',
         'import/no-cycle': 'off',
         'import/no-extraneous-dependencies': 'off',
-        'linebreak-style': ['error', 'windows'],
+        'linebreak-style': ['error', 'unix'],
         'lines-between-class-members': 'off',
         'max-len': ['error', 120],
         'new-cap': 'off',
