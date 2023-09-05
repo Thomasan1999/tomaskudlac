@@ -5,6 +5,7 @@ import {nextTick} from 'vue';
 import FooterComponent from '@/components/main/footer/FooterComponent.vue';
 import useStore from '@/store';
 import ExternalLink from '@/components/ExternalLink.vue';
+import {SiteLanguage} from '@/store/types';
 
 describe('FooterComponent', () =>
 {
@@ -34,7 +35,7 @@ describe('FooterComponent', () =>
 
         const footerComponentWrapper = createFooterComponentWrapper();
 
-        store.language = 'sk';
+        store.language = SiteLanguage.SK;
 
         await nextTick();
 
@@ -57,7 +58,7 @@ describe('FooterComponent', () =>
 
         const footerComponentWrapper = createFooterComponentWrapper();
 
-        store.language = 'en';
+        store.language = SiteLanguage.EN;
 
         await nextTick();
 

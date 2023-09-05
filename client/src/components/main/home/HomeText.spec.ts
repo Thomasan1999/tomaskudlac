@@ -76,7 +76,7 @@ describe('HomeText', () =>
             })
         ];
 
-        await changeStoreLanguage(store, 'sk');
+        await changeStoreLanguage(store, SiteLanguage.SK);
 
         await nextTick();
     });
