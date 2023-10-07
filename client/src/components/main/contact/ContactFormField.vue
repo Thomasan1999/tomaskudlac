@@ -56,8 +56,6 @@
 
     const store = useStore();
 
-    const convertRegexToValidHtml = (regex: RegExp) => regex.toString().replace(/^\/|\/[^/]*$/g, '');
-
     const onBlur = () =>
     {
         inputting.value = false;
@@ -77,7 +75,6 @@
     const dynamicProps = computed(() =>
         props.element === 'input'
             ? {
-                ...(props.pattern && {pattern: convertRegexToValidHtml(props.pattern)}),
                 type: props.type
             }
             : undefined
