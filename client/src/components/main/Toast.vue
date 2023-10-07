@@ -5,6 +5,7 @@
                 v-if="opened"
                 class="toast"
                 :class="[`type-${type}`]"
+                data-testid="toast"
                 :style="`--relative-margin-top: ${relativeMarginTop}`"
             >
                 <div class="toast-message">{{ message }}</div>

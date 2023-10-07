@@ -21,9 +21,7 @@ describe('NavbarSocialNetwork', () =>
 
         return mount(NavbarSocialNetwork, {
             global: {
-                components: {
-                    FontAwesomeIcon: props.icon ? FontAwesomeIcon : {template: '<div></div>'}
-                }
+                stubs: {FontAwesomeIcon: !props.icon}
             },
             props: {
                 ...defaultProps,
@@ -49,21 +47,21 @@ describe('NavbarSocialNetwork', () =>
     {
         const navbarSocialNetworkWrapper = createNavbarSocialNetwork({title: 'Some Title'});
 
-        expect(navbarSocialNetworkWrapper.attributes().title).toBe('Some Title');
+        expect(navbarSocialNetworkWrapper.attributes('title')).toBe('Some Title');
 
         await navbarSocialNetworkWrapper.setProps({title: 'Another Title'});
 
-        expect(navbarSocialNetworkWrapper.attributes().title).toBe('Another Title');
+        expect(navbarSocialNetworkWrapper.attributes('title')).toBe('Another Title');
     });
 
     it('uses \'to\' property as href', async () =>
     {
         const navbarSocialNetworkWrapper = createNavbarSocialNetwork({to: '/'});
 
-        expect(navbarSocialNetworkWrapper.attributes().href).toBe('/');
+        expect(navbarSocialNetworkWrapper.attributes('href')).toBe('/');
 
         await navbarSocialNetworkWrapper.setProps({to: '/route'});
 
-        expect(navbarSocialNetworkWrapper.attributes().href).toBe('/route');
+        expect(navbarSocialNetworkWrapper.attributes('href')).toBe('/route');
     });
 });

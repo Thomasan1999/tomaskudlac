@@ -1,10 +1,12 @@
 import getUrlObject from '@/tests/e2e/utils/getUrlObject';
-import {ElementHandle} from 'puppeteer';
+import {default as puppeteer, ElementHandle} from 'puppeteer';
 import sleep from '@/utils/sleep';
 
-describe('navigation', () =>
+describe('navigation', async () =>
 {
     const domChangeTimeout = 30;
+    const browser = await puppeteer.launch({headless: 'new'});
+    const page = await browser.newPage();
 
     beforeEach(async () =>
     {
@@ -34,7 +36,7 @@ describe('navigation', () =>
 
             await sleep(domChangeTimeout);
 
-            const url = getUrlObject();
+            const url = getUrlObject(page);
 
             expect(url.hash).not.toBe(previousHash);
 
@@ -58,7 +60,7 @@ describe('navigation', () =>
 
             await sleep(domChangeTimeout);
 
-            const url = getUrlObject();
+            const url = getUrlObject(page);
 
             expect(url.hash).not.toBe(previousHash);
 
@@ -69,7 +71,7 @@ describe('navigation', () =>
 
     it('changes href on language change', async () =>
     {
-        const initialHref = getUrlObject().href;
+        const initialHref = getUrlObject(page).href;
 
         const otherLangButtonSelector = '[data-testid="navbarOtherLang"]';
 
@@ -85,7 +87,7 @@ describe('navigation', () =>
 
         expect(otherLangButtonText).toBe('SK');
 
-        const newHref = getUrlObject().href;
+        const newHref = getUrlObject(page).href;
 
         expect(newHref).not.toBe(initialHref);
     });

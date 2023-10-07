@@ -1,4 +1,4 @@
-import {MountingOptions, shallowMount, VueWrapper} from '@vue/test-utils';
+import {mount, MountingOptions, VueWrapper} from '@vue/test-utils';
 import Toast from '@/components/main/Toast.vue';
 import {nextTick} from 'vue';
 import mockInitStore from '@/mocks/mockInitStore';
@@ -13,7 +13,7 @@ describe('Toast', () =>
         pinia = await mockInitStore();
         document.body.style.setProperty('--primary-red', 'red');
         document.body.style.setProperty('--primary-green', 'green');
-        jest.useFakeTimers();
+        vi.useFakeTimers();
     });
 
     function createToastWrapper(props: MountingOptions<any>['props'] = {}): VueWrapper
@@ -23,12 +23,13 @@ describe('Toast', () =>
             type: 'fail'
         };
 
-        return shallowMount(Toast, {
+        return mount(Toast, {
             global: {
                 plugins: [pinia],
                 renderStubDefaultSlot: true,
                 stubs: {
-                    transition: false
+                    Teleport: true,
+                    Transition: true
                 }
             },
             props: {
@@ -63,11 +64,6 @@ describe('Toast', () =>
 
         await nextTick();
 
-        /*
-            List of classes is used instead of checking styles, might later refactor the test to Cypress to directly
-            check the rendered styles.
-         */
-
         const failStyles = toastWrapper.classes();
 
         await toastWrapper.setProps({type: 'success'});
@@ -77,36 +73,33 @@ describe('Toast', () =>
         expect(failStyles).not.toBe(successStyles);
     });
 
-    /*
-       //TODO Fix tests when stubbing transition or some alternative approach will be available
-    it('emits \'close\' event on close button click', async () =>
-       {
-           const toastWrapper = createToastWrapper();
+    it('hides toast on close button click', async () =>
+    {
+        const toastWrapper = createToastWrapper();
 
-           await nextTick();
+        await nextTick();
 
-           expect(toastWrapper.emitted().close).toBeUndefined();
+        expect(toastWrapper.find('[data-testid="toast"]').exists()).toBe(true);
 
-           await toastWrapper.get<HTMLElement>('[data-testid="closeButton"]').trigger('click');
+        await toastWrapper.get<HTMLElement>('[data-testid="closeButton"]').trigger('click');
 
-           await nextTick();
+        await nextTick();
 
-           expect(toastWrapper.emitted().close).toHaveLength(1);
-       });
+        expect(toastWrapper.find('[data-testid="toast"]').exists()).toBe(false);
+    });
 
-       it('emits \'close\' after certain time', async () =>
-       {
-           const toastWrapper = createToastWrapper();
+    it('hides toast after certain time', async () =>
+    {
+        const toastWrapper = createToastWrapper();
 
-           await nextTick();
+        await nextTick();
 
-           expect(toastWrapper.emitted().close).toBeUndefined();
+        expect(toastWrapper.find('[data-testid="toast"]').exists()).toBe(true);
 
-           jest.runAllTimers();
+        vi.runAllTimers();
 
-           await nextTick();
+        await nextTick();
 
-           expect(toastWrapper.emitted().close).toHaveLength(1);
-       });
-       */
+        expect(toastWrapper.find('[data-testid="toast"]').exists()).toBe(false);
+    });
 });

@@ -8,17 +8,19 @@ import {nextTick} from 'vue';
 
 let routerReplaceCallTimes = 0;
 
-jest.mock('@/router', () =>
+vi.mock('@/router', () =>
 {
     return {
-        currentRoute: {
-            value: {
-                hash: ''
+        default: {
+            currentRoute: {
+                value: {
+                    hash: ''
+                }
+            },
+            replace: () =>
+            {
+                routerReplaceCallTimes++;
             }
-        },
-        replace: () =>
-        {
-            routerReplaceCallTimes++;
         }
     };
 });

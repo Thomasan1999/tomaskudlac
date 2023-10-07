@@ -5,11 +5,11 @@ describe('sleep', () =>
 {
     it('resolves after timeout has passed', async () =>
     {
-        jest.useFakeTimers();
+        vi.useFakeTimers();
 
-        const setTimeoutSpy = jest.spyOn(window, 'setTimeout');
+        const setTimeoutSpy = vi.spyOn(window, 'setTimeout');
 
-        const resolvedCallback = jest.fn();
+        const resolvedCallback = vi.fn();
 
         expect(resolvedCallback).not.toHaveBeenCalled();
         expect(setTimeoutSpy).not.toHaveBeenCalled();
@@ -18,13 +18,13 @@ describe('sleep', () =>
 
         expect(setTimeoutSpy).toHaveBeenCalled();
 
-        jest.advanceTimersByTime(50);
+        vi.advanceTimersByTime(50);
 
         expect(resolvedCallback).not.toHaveBeenCalled();
 
         await flushPromises();
 
-        jest.advanceTimersByTime(50);
+        vi.advanceTimersByTime(50);
 
         await flushPromises();
 

@@ -62,13 +62,9 @@ describe('FooterComponent', () =>
 
         await nextTick();
 
-        const externalLinks = footerComponentWrapper.findAllComponents(ExternalLink);
+        const copyrightLink = footerComponentWrapper.findComponent<typeof ExternalLink>('[data-testid=copyrightLink]');
 
-        const copyrightLink = externalLinks.find((externalLink) => (
-            externalLink.attributes()['data-testid'] === 'copyrightLink'
-        ))!;
-
-        const copyrightLinkUrl = new URL((copyrightLink.element as any).href);
+        const copyrightLinkUrl = new URL((copyrightLink.element as HTMLAnchorElement).href);
 
         expect(location.hostname).toBe('tomaskudlac.sk');
         expect(copyrightLinkUrl.hostname).not.toEqual(location.hostname);

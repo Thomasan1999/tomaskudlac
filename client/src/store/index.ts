@@ -75,11 +75,15 @@ const useStore = defineStore('main', {
 
             this.age = now.diff(birthDate, 'y');
 
-            const nextYear = now.year() + 1;
-
-            const nextBirthday = dayjs(birthDate).year(nextYear);
+            const nextBirthday = dayjs(birthDate).add(this.age + 1, 'y');
 
             const timeUntilNextBirthday = nextBirthday.diff(now);
+
+            // prevent using higher value than allowed by Node.js
+            if (timeUntilNextBirthday > 2 ** 32) 
+            {
+                return;
+            }
 
             setTimeout(() =>
             {

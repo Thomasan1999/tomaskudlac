@@ -30,28 +30,28 @@ describe('store', () =>
 
     it('increments age correctly', async () =>
     {
-        jest.useFakeTimers();
-
-        await store.init();
-
-        const currentAge = store.age;
+        vi.useFakeTimers();
 
         const dates = [
-            [new Date(`${2000 + currentAge}-06-30`), currentAge],
-            [new Date(`${2000 + currentAge}-07-01`), currentAge + 1],
-            [new Date(`${2001 + currentAge}-07-01`), currentAge + 2]
+            [new Date('2023-06-29'), 24],
+            [new Date('2024-06-20'), 25],
+            [new Date('2025-06-25'), 26]
         ];
 
-        dates.forEach(([date, age]) =>
+        for await (const [date, age] of dates) 
         {
-            jest.setSystemTime(date);
+            vi.setSystemTime(date);
 
-            jest.advanceTimersToNextTimer();
+            await store.init();
+
+            await vi.runOnlyPendingTimersAsync();
 
             expect(store.age).toBe(age);
-        });
 
-        jest.useRealTimers();
+            store.$reset();
+        }
+
+        vi.useRealTimers();
     });
 
     it('windowHeight and windowWidth props are equal to window size', async () =>

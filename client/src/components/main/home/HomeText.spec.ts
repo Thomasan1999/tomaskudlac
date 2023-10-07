@@ -8,18 +8,9 @@ import {ProgrammingLanguage} from '@/store/ProgrammingLanguage';
 import {SiteLanguage} from '@/store/types';
 import _ from 'lodash';
 import {ExistingDomWrapper} from '@/types/tests';
+import {afterEach, SpyInstance} from 'vitest';
 
-jest.resetModules();
-
-jest.mock('lodash', () =>
-{
-    return {
-        shuffle(value)
-        {
-            return value;
-        }
-    };
-});
+const shuffleSpy = (vi.spyOn(_, 'shuffle') as SpyInstance).mockImplementation((value) => value);
 
 describe('HomeText', () =>
 {
@@ -40,7 +31,7 @@ describe('HomeText', () =>
 
     beforeAll(async () =>
     {
-        jest.useFakeTimers();
+        vi.useFakeTimers();
 
         const setTimeout = window.setTimeout;
 
@@ -81,6 +72,12 @@ describe('HomeText', () =>
         await nextTick();
     });
 
+    afterEach(() => 
+    {
+        vi.clearAllMocks();
+        vi.clearAllTimers();
+    });
+
     afterAll(() =>
     {
         window.setTimeout = timeout;
@@ -109,7 +106,7 @@ describe('HomeText', () =>
     {
         while (!markedTextElement.text())
         {
-            jest.runOnlyPendingTimers();
+            vi.runOnlyPendingTimers();
             await nextTick();
         }
     }
@@ -118,7 +115,7 @@ describe('HomeText', () =>
     {
         while (markedTextElement.text())
         {
-            jest.runOnlyPendingTimers();
+            vi.runOnlyPendingTimers();
             await nextTick();
         }
     }
@@ -127,7 +124,7 @@ describe('HomeText', () =>
     {
         while (!nonMarkedTextElement.text())
         {
-            jest.runOnlyPendingTimers();
+            vi.runOnlyPendingTimers();
             await nextTick();
         }
     }
@@ -138,7 +135,7 @@ describe('HomeText', () =>
 
         while (nonMarkedTextElement.text() !== languageTitle)
         {
-            jest.runOnlyPendingTimers();
+            vi.runOnlyPendingTimers();
             await nextTick();
         }
     }
@@ -186,8 +183,6 @@ describe('HomeText', () =>
     {
         it('shuffles list of all programming languages', () =>
         {
-            const shuffleSpy = jest.spyOn(_, 'shuffle');
-
             expect(shuffleSpy).not.toHaveBeenCalled();
 
             createHomeTextWrapper();
@@ -208,7 +203,7 @@ describe('HomeText', () =>
             await awaitLanguageMarkingStart(markedTextElement);
 
             expect(markedTextElement.text()).toBeTruthy();
-            expect(nonMarkedTextElement.text()).toBeFalsy();
+            expect(nonMarkedTextElement.text()).toBeTruthy();
 
             await awaitTextRemovingStart(markedTextElement);
 

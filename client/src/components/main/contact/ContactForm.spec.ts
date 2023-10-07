@@ -1,11 +1,24 @@
 import {Pinia} from 'pinia';
 import mockInitStore from '@/mocks/mockInitStore';
-import {DOMWrapper, mount, VueWrapper} from '@vue/test-utils';
+import {DOMWrapper, flushPromises, mount, VueWrapper} from '@vue/test-utils';
 import ContactForm from '@/components/main/contact/ContactForm.vue';
 import ContactFormField from '@/components/main/contact/ContactFormField.vue';
 import Toast from '@/components/main/Toast.vue';
 import contactFormFields from '@/components/main/contact/contactFormFields';
 import {cloneDeep, merge} from 'lodash';
+import * as grecaptcha from 'recaptcha-v3';
+
+async function awaitSubmit(wrapper: Omit<DOMWrapper<HTMLFormElement>, 'exists'>): Promise<void>
+{
+    wrapper.trigger('submit');
+    await flushPromises();
+}
+
+vi.spyOn(grecaptcha, 'load').mockImplementation(() => ({
+    execute: () =>
+    {
+    }
+} as never));
 
 window.fetch = () => (
     new Promise(
@@ -20,7 +33,7 @@ window.fetch = () => (
     )
 );
 
-const fetchSpy = jest.spyOn(window, 'fetch');
+const fetchSpy = vi.spyOn(window, 'fetch');
 
 const defaultFormFields = cloneDeep(contactFormFields);
 
@@ -136,7 +149,7 @@ describe('ContactForm', () =>
 
             const formWrapper = wrapper.get('form');
 
-            await formWrapper.trigger('submit');
+            await awaitSubmit(formWrapper);
 
             expect(classNameBeforeSubmit).toBeTruthy();
             expect(classNameBeforeSubmit).not.toBe(requiredField.element.className);
@@ -156,13 +169,13 @@ describe('ContactForm', () =>
 
             const formWrapper = wrapper.get('form');
 
-            await formWrapper.trigger('submit');
+            await awaitSubmit(formWrapper);
 
             expect(fetchSpy).not.toHaveBeenCalled();
 
             await makeFormSubmittable(formWrapper);
 
-            await formWrapper.trigger('submit');
+            await awaitSubmit(formWrapper);
 
             expect(fetchSpy).toHaveBeenCalled();
         });
@@ -188,15 +201,13 @@ describe('ContactForm', () =>
 
             await makeFormSubmittable(formWrapper);
 
-            await formWrapper.trigger('submit');
+            await awaitSubmit(formWrapper);
 
             expect(wrapper.findComponent(Toast).exists()).toBe(true);
         });
 
         it('resets form after successful submit', async () =>
         {
-            const defaultFetch = window.fetch;
-
             const wrapper = createContactFormWrapper();
 
             const formWrapper = wrapper.get('form');
@@ -205,20 +216,26 @@ describe('ContactForm', () =>
 
             await nameFieldWrapper.setValue('Aaa');
 
-            window.fetch = () =>
-            {
-                throw new Error();
-            };
+            await makeFormSubmittable(formWrapper);
 
-            await formWrapper.trigger('submit');
+            fetchSpy.mockRejectedValueOnce(new Error());
+
+            await awaitSubmit(formWrapper);
 
             expect(nameFieldWrapper.element.value).toBe('Aaa');
 
-            await makeFormSubmittable(formWrapper);
+            fetchSpy.mockResolvedValueOnce(new Promise(
+                (resolve) => resolve({
+                    json: async () =>
+                    {
+                        return {};
+                    },
+                    ok: true,
+                    status: 200
+                } as any)
+            ) as never);
 
-            window.fetch = defaultFetch;
-
-            await formWrapper.trigger('submit');
+            await awaitSubmit(formWrapper);
 
             expect(nameFieldWrapper.element.value).toBe('');
         });

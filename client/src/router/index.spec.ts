@@ -1,37 +1,35 @@
 import router from '@/router/index';
-import {RouteRecordRaw} from 'vue-router';
 import getMetaElement from '@/utils/getMetaElement';
 import {createPinia, setActivePinia} from 'pinia';
 import useStore from '@/store';
 import mockImageSrc from '@/mocks/mockImageSrc';
 import routes from '@/router/routes';
 import getManifestElement from '@/utils/getManifestElement';
-import {SiteLanguage} from '@/store/types';
 
-jest.mock('@/router/routes', () =>
+vi.mock('@/router/routes', () =>
 {
-    const routes: RouteRecordRaw[] = [
-        {
-            path: '/',
-            component: {},
-            meta: {
-                description: 'The description of the site.',
-                language: SiteLanguage.EN,
-                title: 'The site'
+    return {
+        default: [
+            {
+                path: '/',
+                component: {},
+                meta: {
+                    description: 'The description of the site.',
+                    language: 'en',
+                    title: 'The site'
+                }
+            },
+            {
+                path: '/sk',
+                component: {},
+                meta: {
+                    description: 'Popis stránky.',
+                    language: 'sk',
+                    title: 'Stránka'
+                }
             }
-        },
-        {
-            path: '/sk',
-            component: {},
-            meta: {
-                description: 'Popis stránky.',
-                language: SiteLanguage.SK,
-                title: 'Stránka'
-            }
-        }
-    ];
-
-    return routes;
+        ]
+    };
 });
 
 describe('router', () =>
