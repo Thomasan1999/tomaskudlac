@@ -19,7 +19,6 @@ The project is built in Vue 3, is written in TypeScript and uses the new Composi
     ├── src                         # Part of the application which has to be built before using in the browser, it contains all of the application logic and most of the application code.
     |   ├── components                  # Vue components.
     |   ├── locales                     # Locales of each supported language in a JSON-like format.
-    |   ├── polyfills                   # Polyfills used to enhance cross-browser compatibility.
     |   ├── store                       # Data and logic related to the module and all children modules.
     |   ├── utils                       # Helper functions.
     |   ├── views                       # Route views.
@@ -36,7 +35,8 @@ The project is built in Vue 3, is written in TypeScript and uses the new Composi
     ├── package-lock.json           # Project metadata.
     ├── README.md                   # Project description.
     ├── tsconfig.json               # Config of the TypeScript compiler.
-    └── vite.config.ts              # Config of Vite.
+    └── vite.config.mts             # Config of Vite.
+    └── vitest.config.mts           # Config of Vitest.
     
     
 ## Project setup
