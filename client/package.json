@@ -26,7 +26,6 @@
         "dayjs": "1.11.12",
         "lodash": "4.17.21",
         "pinia": "2.2.2",
-        "recaptcha-v3": "1.10.0",
         "vue": "3.4.38",
         "vue-gtag": "2.0.1",
         "vue-router": "4.4.3"

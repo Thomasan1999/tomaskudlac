@@ -6,7 +6,6 @@ import ContactFormField from '@/components/main/contact/ContactFormField.vue';
 import Toast from '@/components/main/Toast.vue';
 import contactFormFields from '@/components/main/contact/contactFormFields';
 import {cloneDeep, merge} from 'lodash';
-import * as grecaptcha from 'recaptcha-v3';
 import {getTestingSelector} from "@/utils/test";
 import {nextTick} from "vue";
 import {afterEach} from "vitest";
@@ -16,12 +15,6 @@ async function awaitSubmit(wrapper: Omit<DOMWrapper<HTMLFormElement>, 'exists'>)
     wrapper.trigger('submit');
     await flushPromises();
 }
-
-vi.spyOn(grecaptcha, 'load').mockImplementation(() => ({
-    execute: () =>
-    {
-    }
-} as never));
 
 window.fetch = () => (
     new Promise(
