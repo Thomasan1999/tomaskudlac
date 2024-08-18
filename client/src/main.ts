@@ -1,7 +1,6 @@
 import VueGtag from 'vue-gtag';
 import {createPinia} from 'pinia';
 
-import '@/polyfills';
 import './register-service-worker';
 import router from '@/router';
 import app from '@/app';

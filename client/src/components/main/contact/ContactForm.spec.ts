@@ -7,6 +7,9 @@ import Toast from '@/components/main/Toast.vue';
 import contactFormFields from '@/components/main/contact/contactFormFields';
 import {cloneDeep, merge} from 'lodash';
 import * as grecaptcha from 'recaptcha-v3';
+import {getTestingSelector} from "@/utils/test";
+import {nextTick} from "vue";
+import {afterEach} from "vitest";
 
 async function awaitSubmit(wrapper: Omit<DOMWrapper<HTMLFormElement>, 'exists'>): Promise<void>
 {
@@ -34,6 +37,7 @@ window.fetch = () => (
 );
 
 const fetchSpy = vi.spyOn(window, 'fetch');
+const resetSpy = vi.spyOn(HTMLFormElement.prototype, 'reset');
 
 const defaultFormFields = cloneDeep(contactFormFields);
 
@@ -53,6 +57,10 @@ describe('ContactForm', () =>
         merge(contactFormFields, defaultFormFields);
     });
 
+    afterEach(() => {
+        vi.clearAllMocks();
+    });
+
     function createContactFormWrapper(): VueWrapper
     {
         return mount(ContactForm, {
@@ -63,73 +71,77 @@ describe('ContactForm', () =>
         });
     }
 
+    function getFieldTestingSelector(name: string): string
+    {
+        return getTestingSelector(`field-${name}`);
+    }
+
     describe('validation', () =>
     {
         async function expectInputToHaveValidity(
-            input: Omit<DOMWrapper<HTMLInputElement | HTMLTextAreaElement>, 'exists'>,
-            valueToSet: string,
-            validity: boolean
+            fieldName: string,
+            testCases: { value: string, validity: boolean }[],
         ): Promise<void>
         {
-            await input.setValue(valueToSet);
+            const wrapper = createContactFormWrapper();
 
-            expect(input.element.validity.valid).toBe(validity);
+            const field = wrapper.getComponent<typeof ContactFormField>(getFieldTestingSelector(fieldName));
+
+            for (const {value, validity} of testCases)
+            {
+                await field.find(`[name=${fieldName}]`).setValue(value);
+                await nextTick();
+
+                expect(contactFormFields.find((field) => field.name === fieldName)!.valid).toBe(validity);
+            }
         }
 
         it('validates email', async () =>
         {
-            const wrapper = createContactFormWrapper();
-
-            const emailInput = wrapper.get<HTMLInputElement>('input[type=email]');
-
-            await expectInputToHaveValidity(emailInput, '', false);
-            await expectInputToHaveValidity(emailInput, 'email', false);
-            await expectInputToHaveValidity(emailInput, 'name.surname@email.com', true);
-            await expectInputToHaveValidity(emailInput, 'name.surname@emailcom', false);
-            await expectInputToHaveValidity(emailInput, 'name.surnameemailcom@', false);
-            await expectInputToHaveValidity(emailInput, 'namesurname123@email.com', true);
-            await expectInputToHaveValidity(emailInput, 'namesurname123@email.com'.repeat(100), false);
+            await expectInputToHaveValidity('email', [
+                {value: '', validity: false},
+                {value: 'email', validity: false},
+                {value: 'name.surname@email.com', validity: true},
+                {value: 'name.surname@emailcom', validity: false},
+                {value: 'name.surnameemailcom@', validity: false},
+                {value: 'namesurname123@email.com', validity: true},
+                {value: 'namesurname123@email.com'.repeat(100), validity: false},
+            ]);
         });
 
         it('validates message', async () =>
         {
-            const wrapper = createContactFormWrapper();
-
-            const messageInput = wrapper.get('textarea');
-
-            await expectInputToHaveValidity(messageInput, '', false);
-            await expectInputToHaveValidity(messageInput, 'Random text', true);
-            await expectInputToHaveValidity(messageInput, 'A', true);
-            await expectInputToHaveValidity(messageInput, 'Another text', true);
-            await expectInputToHaveValidity(messageInput, '#@3456736', true);
+            await expectInputToHaveValidity('message', [
+                {value: '', validity: false},
+                {value: 'Random text', validity: true},
+                {value: 'A', validity: true},
+                {value: 'Another text', validity: true},
+                {value: '#@3456736', validity: true},
+            ]);
         });
 
         it('validates phone number', async () =>
         {
-            const wrapper = createContactFormWrapper();
-
-            const phoneInput = wrapper.get<HTMLInputElement>('input[type=tel]');
-
-            await expectInputToHaveValidity(phoneInput, '', true);
-            await expectInputToHaveValidity(phoneInput, 'Phone Number', false);
-            await expectInputToHaveValidity(phoneInput, '0123456789', true);
-            await expectInputToHaveValidity(phoneInput, '0123 456 789', true);
-            await expectInputToHaveValidity(phoneInput, '+0123456789', true);
+            await expectInputToHaveValidity('phone', [
+                {value: '', validity: true},
+                {value: 'Phone Number', validity: false},
+                {value: '0123456789', validity: true},
+                {value: '0123 456 789', validity: true},
+                {value: '+0123456789', validity: true},
+            ]);
         });
 
         it('validates name', async () =>
         {
-            const wrapper = createContactFormWrapper();
-
-            const nameInput = wrapper.get<HTMLInputElement>('input[name=name]');
-
-            await expectInputToHaveValidity(nameInput, '', true);
-            await expectInputToHaveValidity(nameInput, 'Name Surname', true);
-            await expectInputToHaveValidity(nameInput, 'Name# Surname', false);
-            await expectInputToHaveValidity(nameInput, 'Name__Surname', false);
-            await expectInputToHaveValidity(nameInput, 'NameSurname', true);
-            await expectInputToHaveValidity(nameInput, '$$$$$$', false);
-            await expectInputToHaveValidity(nameInput, 'Ňámě Śúřňämě', true);
+            await expectInputToHaveValidity('name', [
+                {value: '', validity: true},
+                {value: 'Name Surname', validity: true},
+                {value: 'Name# Surname', validity: false},
+                {value: 'Name__Surname', validity: false},
+                {value: 'NameSurname', validity: true},
+                {value: '$$$$$$', validity: false},
+                {value: 'Ňámě Śúřňämě', validity: true},
+            ]);
         });
     });
 
@@ -222,7 +234,7 @@ describe('ContactForm', () =>
 
             await awaitSubmit(formWrapper);
 
-            expect(nameFieldWrapper.element.value).toBe('Aaa');
+            expect(resetSpy).not.toHaveBeenCalled();
 
             fetchSpy.mockResolvedValueOnce(new Promise(
                 (resolve) => resolve({
@@ -237,7 +249,7 @@ describe('ContactForm', () =>
 
             await awaitSubmit(formWrapper);
 
-            expect(nameFieldWrapper.element.value).toBe('');
+            expect(resetSpy).toHaveBeenCalledTimes(1);
         });
     });
 });

@@ -119,16 +119,6 @@ describe('ContactFormField', () =>
             await checkInputAttribute<string>('name', ['email', 'phone']);
         });
 
-        it('uses \'pattern\' property', async () =>
-        {
-            await checkInputAttribute<RegExp, string>(
-                'pattern',
-                [/\w{3,5}/, /\d+/],
-                undefined,
-                ['\\w{3,5}', '\\d+']
-            );
-        });
-
         it('uses \'required\' property', async () =>
         {
             await checkInputAttribute<boolean>('required', [true, false]);

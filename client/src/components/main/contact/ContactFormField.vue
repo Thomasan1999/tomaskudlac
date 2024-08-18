@@ -1,5 +1,5 @@
 <template>
-    <label class="contact-form-field" :class="{'has-error': error}">
+    <label :data-testid="`field-${name}`" class="contact-form-field" :class="{'has-error': error}">
         <span class="contact-form-label" data-testid="label">
             {{ label }}:
             <span

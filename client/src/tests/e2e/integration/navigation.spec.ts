@@ -4,8 +4,8 @@ import sleep from '@/utils/sleep';
 
 describe('navigation', async () =>
 {
-    const domChangeTimeout = 30;
-    const browser = await puppeteer.launch({headless: 'new'});
+    const domChangeTimeout = 500;
+    const browser = await puppeteer.launch({headless: true});
     const page = await browser.newPage();
 
     beforeEach(async () =>

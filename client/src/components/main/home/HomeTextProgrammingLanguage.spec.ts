@@ -23,12 +23,13 @@ describe('HomeTextProgrammingLanguage', () =>
 
         const wrapper = createHomeTextProgrammingLanguageWrapper({programmingLanguage});
 
-        expect(wrapper.text()).toBe(programmingLanguage);
+        // use 'textContent' instead of 'text' to include spaces
+        expect(wrapper.element.textContent).toBe(programmingLanguage);
 
         programmingLanguage = 'PostgreSQL';
 
         await wrapper.setProps({programmingLanguage});
 
-        expect(wrapper.text()).toBe(programmingLanguage);
+        expect(wrapper.element.textContent).toBe(programmingLanguage);
     });
 });
