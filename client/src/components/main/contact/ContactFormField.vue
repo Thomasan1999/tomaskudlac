@@ -25,7 +25,7 @@
             :maxlength="maxlength"
             :name="name"
             :required="required"
-            :value="modelValue"
+            :value="model"
             v-bind="dynamicProps"
             @blur="onBlur"
             @input="onInput"
@@ -46,7 +46,6 @@
             label: string;
             maxlength?: number;
             minlength?: number;
-            modelValue: string;
             name: string;
             pattern?: RegExp;
             required?: boolean;
@@ -58,9 +57,11 @@
     );
     const emit = defineEmits<{
         (event: 'blur'): void;
-        (event: 'update:modelValue', value: string): void;
         (event: 'validSet', value: boolean): void;
     }>();
+    const model = defineModel<string>({
+        required: true,
+    });
 
     const store = useStore();
 
@@ -73,7 +74,7 @@
         const $event: Merge<KeyboardEvent, { target: HTMLInputElement | HTMLTextAreaElement }> = e;
 
         inputting.value = true;
-        emit('update:modelValue', $event.target.value);
+        model.value = $event.target.value;
     };
 
     const inputting = ref(false);
@@ -96,18 +97,15 @@
 
     const locales = computed(() => store.locales.sections.contact.form);
 
-    const missingValue = computed(() => props.required && !props.modelValue);
+    const missingValue = computed(() => props.required && !model.value);
 
-    const validFormat = computed(() => Boolean(props.modelValue.match(props.pattern)));
+    const validFormat = computed(() => Boolean(model.value.match(props.pattern)));
 
-    watch(
-        () => props.modelValue,
-        () => {
-            const newValidValue = validFormat.value && !missingValue.value;
+    watch(model, () => {
+        const newValidValue = validFormat.value && !missingValue.value;
 
-            emit('validSet', newValidValue);
-        },
-    );
+        emit('validSet', newValidValue);
+    });
 
     watch(
         () => props.maxlength,
