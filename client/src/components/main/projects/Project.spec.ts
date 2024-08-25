@@ -1,42 +1,38 @@
-import {mount, MountingOptions, VueWrapper} from '@vue/test-utils';
+import { mount, MountingOptions, VueWrapper } from '@vue/test-utils';
 import Project from '@/components/main/projects/Project.vue';
 import useStore from '@/store';
 import mockInitStore from '@/mocks/mockInitStore';
-import {Pinia} from 'pinia';
+import { Pinia } from 'pinia';
 
-describe('Project', () =>
-{
+describe('Project', () => {
     let pinia: Pinia;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         pinia = await mockInitStore();
     });
 
-    function createProjectWrapper(props: MountingOptions<any>['props'] = {}): VueWrapper
-    {
+    function createProjectWrapper(props: MountingOptions<any>['props'] = {}): VueWrapper {
         const defaultProps = {
-            name: 'fifaManiaci'
+            name: 'fifaManiaci',
         };
 
         return mount(Project, {
             global: {
-                plugins: [pinia]
+                plugins: [pinia],
             },
             props: {
                 ...defaultProps,
-                ...props
-            }
+                ...props,
+            },
         });
     }
 
-    it('is wrapped in project link', () =>
-    {
+    it('is wrapped in project link', () => {
         const store = useStore();
 
         const projectName = 'fifaManiaci';
 
-        const projectWrapper = createProjectWrapper({name: projectName});
+        const projectWrapper = createProjectWrapper({ name: projectName });
 
         const locales = store.locales.sections.projects.projects[projectName];
 
@@ -48,13 +44,12 @@ describe('Project', () =>
         expect(localesUrl.toString()).toBe(projectWrapperElementUrl.toString());
     });
 
-    it('renders project description', () =>
-    {
+    it('renders project description', () => {
         const store = useStore();
 
         const projectName = 'fifaManiaci';
 
-        const projectWrapper = createProjectWrapper({name: projectName});
+        const projectWrapper = createProjectWrapper({ name: projectName });
 
         const locales = store.locales.sections.projects.projects[projectName];
 
@@ -66,13 +61,12 @@ describe('Project', () =>
         expect(textContentElement.text()).toContain(locales.designDesc);
     });
 
-    it('renders project title', () =>
-    {
+    it('renders project title', () => {
         const store = useStore();
 
         const projectName = 'fifaManiaci';
 
-        const projectWrapper = createProjectWrapper({name: projectName});
+        const projectWrapper = createProjectWrapper({ name: projectName });
 
         const locales = store.locales.sections.projects.projects[projectName];
 

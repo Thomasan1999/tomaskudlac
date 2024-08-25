@@ -1,18 +1,15 @@
-export enum ImageFormat
-{
+export enum ImageFormat {
     JPG = 'jpg',
-    WEBP = 'webp'
+    WEBP = 'webp',
 }
 
-export enum InitializingState
-{
+export enum InitializingState {
     NOT_INITIALIZED,
     INITIALIZING,
-    INITIALIZED
+    INITIALIZED,
 }
 
-export enum SiteLanguage
-{
+export enum SiteLanguage {
     EN = 'en',
-    SK = 'sk'
+    SK = 'sk',
 }

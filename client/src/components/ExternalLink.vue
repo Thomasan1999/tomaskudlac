@@ -5,9 +5,8 @@
         target="_blank"
         v-bind="$attrs"
     >
-        <slot/>
+        <slot />
     </a>
 </template>
 
-<script lang="ts" setup>
-</script>
+<script lang="ts" setup></script>

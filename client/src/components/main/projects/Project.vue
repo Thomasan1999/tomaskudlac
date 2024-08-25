@@ -2,22 +2,36 @@
     <ExternalLink
         class="project cover-background has-curtain"
         :href="projectLocales.href"
-        :style="{backgroundImage}"
+        :style="{ backgroundImage }"
         :title="`${generalLocales.showProject} ${[projectLocales.title]}`"
     >
         <div class="text-content">
             <div class="project-content">
-                <h3 class="project-title" data-testid="title">{{ projectLocales.title }}</h3>
-                <div class="project-text" :style="`--hover-height: ${textHoverHeight}px`">
-                    <div class="project-text-content" data-testid="textContent" ref="textContent">
+                <h3
+                    class="project-title"
+                    data-testid="title"
+                >
+                    {{ projectLocales.title }}
+                </h3>
+                <div
+                    class="project-text"
+                    :style="`--hover-height: ${textHoverHeight}px`"
+                >
+                    <div
+                        class="project-text-content"
+                        data-testid="textContent"
+                        ref="textContent"
+                    >
                         <h4 class="project-what-ive-done">{{ generalLocales.whatIveDone }}:</h4>
-                        <p class="project-text-design">{{ generalLocales.designLabel }}: {{
-                            projectLocales.designDesc
-                        }}</p>
-                        <p class="project-text-front-end">{{ generalLocales.frontEndLabel }}:
-                            {{ projectLocales.frontEndDesc }}</p>
-                        <p class="project-text-back-end">{{ generalLocales.backEndLabel }}:
-                            {{ projectLocales.backEndDesc }}</p>
+                        <p class="project-text-design">
+                            {{ generalLocales.designLabel }}: {{ projectLocales.designDesc }}
+                        </p>
+                        <p class="project-text-front-end">
+                            {{ generalLocales.frontEndLabel }}: {{ projectLocales.frontEndDesc }}
+                        </p>
+                        <p class="project-text-back-end">
+                            {{ generalLocales.backEndLabel }}: {{ projectLocales.backEndDesc }}
+                        </p>
                     </div>
                 </div>
             </div>
@@ -26,19 +40,17 @@
 </template>
 
 <script lang="ts" setup>
-    import {computed, onBeforeUnmount, onMounted, ref, watch} from 'vue';
+    import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
     import useStore from '@/store';
-    import {kebabCase} from 'lodash';
+    import { kebabCase } from 'lodash';
     import ExternalLink from '@/components/ExternalLink.vue';
 
-    const props = defineProps<{name: string}>();
+    const props = defineProps<{ name: string }>();
 
     const store = useStore();
 
-    const setTextHoverHeight = async () =>
-    {
-        if (!textContent.value)
-        {
+    const setTextHoverHeight = async () => {
+        if (!textContent.value) {
             return;
         }
 
@@ -53,8 +65,7 @@
 
     const generalLocales = computed(() => store.locales.sections.projects);
 
-    const projectLocales = computed(() =>
-    {
+    const projectLocales = computed(() => {
         const root = store.locales.sections.projects.projects;
 
         return root[props.name as keyof typeof root];
@@ -62,88 +73,75 @@
 
     watch(() => store.language, setTextHoverHeight);
 
-    onMounted(() =>
-    {
+    onMounted(() => {
         setTextHoverHeight();
         window.addEventListener('resize', setTextHoverHeight);
     });
 
-    onBeforeUnmount(() =>
-    {
+    onBeforeUnmount(() => {
         window.removeEventListener('resize', setTextHoverHeight);
     });
 </script>
 
 <style lang="scss" scoped>
-    .project
-    {
+    .project {
         align-items: center;
         display: flex;
         justify-content: center;
         position: relative;
 
-        &:before
-        {
-            background-color: rgba(0, 0, 0, .55);
+        &:before {
+            background-color: rgba(0, 0, 0, 0.55);
             transition: background-color var(--base-transition-duration);
 
-            @media (max-width: 1023px)
-            {
-                background-color: rgba(0, 0, 0, .75);
+            @media (max-width: 1023px) {
+                background-color: rgba(0, 0, 0, 0.75);
             }
         }
 
-        &:after
-        {
+        &:after {
             content: '';
             display: block;
             padding-top: 56.25%;
         }
 
-        &:hover
-        {
-            &:before
-            {
-                @media (min-width: 1024px)
-                {
-                    background-color: rgba(14, 33, 175, .55);
+        &:hover {
+            &:before {
+                @media (min-width: 1024px) {
+                    background-color: rgba(14, 33, 175, 0.55);
                     opacity: 1;
                 }
             }
 
-            .project-text
-            {
+            .project-text {
                 height: var(--hover-height);
                 opacity: 1;
             }
         }
     }
 
-    .project-content
-    {
+    .project-content {
         position: relative;
     }
 
-    .project-what-ive-done
-    {
+    .project-what-ive-done {
         font-weight: 700;
     }
 
-    .project-title
-    {
+    .project-title {
         font-size: var(--project-title-font-size);
     }
 
-    .project-text
-    {
+    .project-text {
         font-size: var(--big-text-font-size);
         height: 0;
         line-height: 1.2;
         opacity: 0;
-        transition: height var(--base-transition-duration), opacity var(--base-transition-duration);
+        transition:
+            height var(--base-transition-duration),
+            opacity var(--base-transition-duration);
 
-        @media (max-width: 1023px)
-        {
+        @media (max-width: 1023px) {
             height: auto;
             opacity: 1;
             transition: none;

@@ -1,34 +1,31 @@
-import {mount, MountingOptions, VueWrapper} from '@vue/test-utils';
+import { mount, MountingOptions, VueWrapper } from '@vue/test-utils';
 import HomeTextProgrammingLanguage from '@/components/main/home/HomeTextProgrammingLanguage.vue';
 
-describe('HomeTextProgrammingLanguage', () =>
-{
-    function createHomeTextProgrammingLanguageWrapper(props: MountingOptions<any>['props'] = {}): VueWrapper
-    {
+describe('HomeTextProgrammingLanguage', () => {
+    function createHomeTextProgrammingLanguageWrapper(props: MountingOptions<any>['props'] = {}): VueWrapper {
         const defaultProps = {
-            programmingLanguage: ''
+            programmingLanguage: '',
         };
 
         return mount(HomeTextProgrammingLanguage, {
             props: {
                 ...defaultProps,
-                ...props
-            }
+                ...props,
+            },
         });
     }
 
-    it('shows whole programming language', async () =>
-    {
+    it('shows whole programming language', async () => {
         let programmingLanguage = 'n HTML';
 
-        const wrapper = createHomeTextProgrammingLanguageWrapper({programmingLanguage});
+        const wrapper = createHomeTextProgrammingLanguageWrapper({ programmingLanguage });
 
         // use 'textContent' instead of 'text' to include spaces
         expect(wrapper.element.textContent).toBe(programmingLanguage);
 
         programmingLanguage = 'PostgreSQL';
 
-        await wrapper.setProps({programmingLanguage});
+        await wrapper.setProps({ programmingLanguage });
 
         expect(wrapper.element.textContent).toBe(programmingLanguage);
     });

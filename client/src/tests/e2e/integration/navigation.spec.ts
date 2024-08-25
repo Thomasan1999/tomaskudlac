@@ -1,38 +1,37 @@
 import getUrlObject from '@/tests/e2e/utils/getUrlObject';
-import {default as puppeteer, ElementHandle} from 'puppeteer';
+import { default as puppeteer, ElementHandle } from 'puppeteer';
 import sleep from '@/utils/sleep';
 
-describe('navigation', async () =>
-{
+describe('navigation', async () => {
     const domChangeTimeout = 500;
-    const browser = await puppeteer.launch({headless: true});
+    const browser = await puppeteer.launch({ headless: true });
     const page = await browser.newPage();
 
-    beforeEach(async () =>
-    {
+    beforeEach(async () => {
         await page.goto('http://localhost:8082');
     });
 
-    it('changes hash on scroll', async () =>
-    {
+    it('changes hash on scroll', async () => {
         let previousHash: string = '';
 
         const selector = '.main-section';
 
-        await page.waitForSelector(selector, {timeout: 10000});
+        await page.waitForSelector(selector, { timeout: 10000 });
 
-        const sections = await page.$$(selector) as ElementHandle<HTMLDivElement>[];
+        const sections = (await page.$$(selector)) as ElementHandle<HTMLDivElement>[];
 
-        for await (const sectionIndex of sections.slice(1).keys())
-        {
-            await page.evaluate(async (sectionIndex, selector) =>
-            {
-                const sectionElements = document.querySelectorAll<HTMLDivElement>(selector);
+        for await (const sectionIndex of sections.slice(1).keys()) {
+            await page.evaluate(
+                async (sectionIndex, selector) => {
+                    const sectionElements = document.querySelectorAll<HTMLDivElement>(selector);
 
-                const sectionElement = sectionElements[sectionIndex];
+                    const sectionElement = sectionElements[sectionIndex];
 
-                sectionElement.scrollIntoView({behavior: 'instant' as any, block: 'end'});
-            }, sectionIndex, selector);
+                    sectionElement.scrollIntoView({ behavior: 'instant' as any, block: 'end' });
+                },
+                sectionIndex,
+                selector,
+            );
 
             await sleep(domChangeTimeout);
 
@@ -44,18 +43,16 @@ describe('navigation', async () =>
         }
     });
 
-    it('changes hash on nav item click', async () =>
-    {
+    it('changes hash on nav item click', async () => {
         let previousHash: string = '';
 
         const selector = '.navbar-middle-link';
 
-        await page.waitForSelector(selector, {timeout: 10000});
+        await page.waitForSelector(selector, { timeout: 10000 });
 
-        const navbarLinks = await page.$$(selector) as ElementHandle<HTMLDivElement>[];
+        const navbarLinks = (await page.$$(selector)) as ElementHandle<HTMLDivElement>[];
 
-        for await (const navbarLink of navbarLinks.slice(1))
-        {
+        for await (const navbarLink of navbarLinks.slice(1)) {
             await navbarLink.click();
 
             await sleep(domChangeTimeout);
@@ -68,9 +65,7 @@ describe('navigation', async () =>
         }
     });
 
-
-    it('changes href on language change', async () =>
-    {
+    it('changes href on language change', async () => {
         const initialHref = getUrlObject(page).href;
 
         const otherLangButtonSelector = '[data-testid="navbarOtherLang"]';

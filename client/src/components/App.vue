@@ -1,17 +1,19 @@
 <template>
-    <RouterView v-if="initialized" :style="`--scrollbar-width: ${scrollbarWidth}px; --vh: ${windowHeight / 100}px`"/>
+    <RouterView
+        v-if="initialized"
+        :style="`--scrollbar-width: ${scrollbarWidth}px; --vh: ${windowHeight / 100}px`"
+    />
 </template>
 
 <script lang="ts" setup>
     import useStore from '@/store';
-    import {computed, ref} from 'vue';
+    import { computed, ref } from 'vue';
 
     const store = useStore();
 
     const initialized = ref(false);
 
-    store.init().then(() =>
-    {
+    store.init().then(() => {
         initialized.value = true;
     });
 
@@ -24,11 +26,10 @@
     @import url('https://fonts.googleapis.com/css?family=Raleway:300,400,500,700|Montserrat&display=swap');
     @import 'reset';
 
-    #app
-    {
+    #app {
         --base-line-height: 1.6;
 
-        --base-transition-duration: .25s;
+        --base-transition-duration: 0.25s;
 
         --content-padding-horizontal: 30px;
 
@@ -67,13 +68,11 @@
         scrollbar-color: var(--scrollbar-thumb-color) var(--scrollbar-color);
         text-align: center;
 
-        @media (max-width: 1023px)
-        {
+        @media (max-width: 1023px) {
             --content-padding-horizontal: 15px;
         }
 
-        @media (max-width: 549px)
-        {
+        @media (max-width: 549px) {
             --about-myself-column-title-font-size: 25px;
             --big-text-font-size: 16px;
             --main-section-name-font-size: 45px;
@@ -82,38 +81,32 @@
         }
     }
 
-    ::-webkit-scrollbar
-    {
+    ::-webkit-scrollbar {
         background: var(--scrollbar-color);
     }
 
-    ::-webkit-scrollbar-thumb
-    {
+    ::-webkit-scrollbar-thumb {
         background: var(--scrollbar-thumb-color);
 
-        &:hover
-        {
+        &:hover {
             background: var(--scrollbar-thumb-hover-color);
         }
 
-        &:active
-        {
+        &:active {
             background: var(--scrollbar-thumb-active-color);
         }
     }
 
-    ::selection, mark
-    {
+    ::selection,
+    mark {
         background-color: var(--selection-color);
         color: currentColor;
     }
 
-    .has-curtain
-    {
+    .has-curtain {
         position: relative;
 
-        &:before
-        {
+        &:before {
             content: '';
             display: block;
             height: 100%;
@@ -125,14 +118,12 @@
         }
     }
 
-    .cover-background
-    {
+    .cover-background {
         background-size: cover;
         background-repeat: no-repeat;
     }
 
-    .text-content
-    {
+    .text-content {
         align-items: center;
         display: flex;
         flex-direction: column;
@@ -141,14 +132,12 @@
         row-gap: var(--main-row-gap);
     }
 
-    a
-    {
+    a {
         color: currentColor;
         text-decoration: none;
     }
 
-    button
-    {
+    button {
         appearance: none;
         background-color: transparent;
         border: 0;
@@ -157,20 +146,19 @@
         font: inherit;
         padding: 0;
 
-        &:focus
-        {
+        &:focus {
             outline: none;
         }
     }
 
-    h1, h2, h3
-    {
+    h1,
+    h2,
+    h3 {
         font-family: var(--title-font-family);
         font-weight: 400;
     }
 
-    strong
-    {
+    strong {
         color: var(--text-highlight-color);
         font-weight: 600;
     }

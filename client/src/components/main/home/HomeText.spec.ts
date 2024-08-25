@@ -1,19 +1,18 @@
-import {Pinia} from 'pinia';
+import { Pinia } from 'pinia';
 import mockInitStore from '@/mocks/mockInitStore';
-import {mount, VueWrapper} from '@vue/test-utils';
-import {nextTick} from 'vue';
+import { mount, VueWrapper } from '@vue/test-utils';
+import { nextTick } from 'vue';
 import HomeText from '@/components/main/home/HomeText.vue';
 import useStore from '@/store';
-import {ProgrammingLanguage} from '@/store/ProgrammingLanguage';
-import {SiteLanguage} from '@/store/types';
+import { ProgrammingLanguage } from '@/store/ProgrammingLanguage';
+import { SiteLanguage } from '@/store/types';
 import _ from 'lodash';
-import {ExistingDomWrapper} from '@/types/tests';
-import {afterEach, SpyInstance} from 'vitest';
+import { ExistingDomWrapper } from '@/types/tests';
+import { afterEach, SpyInstance } from 'vitest';
 
 const shuffleSpy = (vi.spyOn(_, 'shuffle') as SpyInstance).mockImplementation((value) => value);
 
-describe('HomeText', () =>
-{
+describe('HomeText', () => {
     let pinia: Pinia;
 
     let currentLanguageIndex: number;
@@ -23,23 +22,19 @@ describe('HomeText', () =>
 
     const timeout = window.setTimeout;
 
-    async function changeStoreLanguage(store: ReturnType<typeof useStore>, value: SiteLanguage): Promise<void>
-    {
+    async function changeStoreLanguage(store: ReturnType<typeof useStore>, value: SiteLanguage): Promise<void> {
         store.language = value;
         store.locales = (await import(`@/locales/${store.language}.ts`)).default;
     }
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         vi.useFakeTimers();
 
         const setTimeout = window.setTimeout;
 
         // @ts-ignore
-        window.setTimeout = function (callback, timeout)
-        {
-            if (callback.name === 'changeProgrammingLanguage')
-            {
+        window.setTimeout = function (callback, timeout) {
+            if (callback.name === 'changeProgrammingLanguage') {
                 currentLanguageIndex += 1;
             }
 
@@ -49,8 +44,7 @@ describe('HomeText', () =>
         pinia = await mockInitStore();
     });
 
-    beforeEach(async () =>
-    {
+    beforeEach(async () => {
         currentLanguageIndex = -1;
 
         const store = useStore();
@@ -59,12 +53,12 @@ describe('HomeText', () =>
             new ProgrammingLanguage({
                 an: true,
                 home: true,
-                title: languageTitle
+                title: languageTitle,
             }),
             new ProgrammingLanguage({
                 home: true,
-                title: languageTitle
-            })
+                title: languageTitle,
+            }),
         ];
 
         await changeStoreLanguage(store, SiteLanguage.SK);
@@ -72,86 +66,69 @@ describe('HomeText', () =>
         await nextTick();
     });
 
-    afterEach(() => 
-    {
+    afterEach(() => {
         vi.clearAllMocks();
         vi.clearAllTimers();
     });
 
-    afterAll(() =>
-    {
+    afterAll(() => {
         window.setTimeout = timeout;
     });
 
-    function createHomeTextWrapper(): VueWrapper
-    {
+    function createHomeTextWrapper(): VueWrapper {
         return mount(HomeText, {
             global: {
-                plugins: [pinia]
-            }
+                plugins: [pinia],
+            },
         });
     }
 
-    function getMarkedTextElement(wrapper: VueWrapper)
-    {
+    function getMarkedTextElement(wrapper: VueWrapper) {
         return wrapper.get<HTMLDivElement>('[data-testid="markedText"]');
     }
 
-    function getNonMarkedTextElement(wrapper: VueWrapper)
-    {
+    function getNonMarkedTextElement(wrapper: VueWrapper) {
         return wrapper.get<HTMLDivElement>('[data-testid="nonMarkedText"]');
     }
 
-    async function awaitLanguageMarkingStart(markedTextElement: ExistingDomWrapper<HTMLDivElement>): Promise<void>
-    {
-        while (!markedTextElement.text())
-        {
+    async function awaitLanguageMarkingStart(markedTextElement: ExistingDomWrapper<HTMLDivElement>): Promise<void> {
+        while (!markedTextElement.text()) {
             vi.runOnlyPendingTimers();
             await nextTick();
         }
     }
 
-    async function awaitTextRemovingStart(markedTextElement: ExistingDomWrapper<HTMLDivElement>): Promise<void>
-    {
-        while (markedTextElement.text())
-        {
+    async function awaitTextRemovingStart(markedTextElement: ExistingDomWrapper<HTMLDivElement>): Promise<void> {
+        while (markedTextElement.text()) {
             vi.runOnlyPendingTimers();
             await nextTick();
         }
     }
 
-    async function awaitNewLanguageWritingStart(nonMarkedTextElement: ExistingDomWrapper<HTMLDivElement>): Promise<void>
-    {
-        while (!nonMarkedTextElement.text())
-        {
+    async function awaitNewLanguageWritingStart(
+        nonMarkedTextElement: ExistingDomWrapper<HTMLDivElement>,
+    ): Promise<void> {
+        while (!nonMarkedTextElement.text()) {
             vi.runOnlyPendingTimers();
             await nextTick();
         }
     }
 
-    async function awaitNewLanguageWritingEnd(nonMarkedTextElement: ExistingDomWrapper<HTMLDivElement>): Promise<void>
-    {
+    async function awaitNewLanguageWritingEnd(nonMarkedTextElement: ExistingDomWrapper<HTMLDivElement>): Promise<void> {
         await awaitNewLanguageWritingStart(nonMarkedTextElement);
 
-        while (nonMarkedTextElement.text() !== languageTitle)
-        {
+        while (nonMarkedTextElement.text() !== languageTitle) {
             vi.runOnlyPendingTimers();
             await nextTick();
         }
     }
 
-    describe('site language change', () =>
-    {
-        it('instantly toggles \'an\' prefix', async () =>
-        {
-            function expectLanguageToBePrefixed(languageElement: ExistingDomWrapper<Element>, value: boolean): void
-            {
-                if (value)
-                {
+    describe('site language change', () => {
+        it("instantly toggles 'an' prefix", async () => {
+            function expectLanguageToBePrefixed(languageElement: ExistingDomWrapper<Element>, value: boolean): void {
+                if (value) {
                     expect(languageElement.text()).toContain(languageTitleWithPrefix);
-                }
-                else
-                {
+                } else {
                     expect(languageElement.text()).not.toContain(languageTitleWithPrefix);
                     expect(languageElement.text()).toContain(languageTitle);
                 }
@@ -179,10 +156,8 @@ describe('HomeText', () =>
         });
     });
 
-    describe('programming language change', () =>
-    {
-        it('shuffles list of all programming languages', () =>
-        {
+    describe('programming language change', () => {
+        it('shuffles list of all programming languages', () => {
             expect(shuffleSpy).not.toHaveBeenCalled();
 
             createHomeTextWrapper();
@@ -190,8 +165,7 @@ describe('HomeText', () =>
             expect(shuffleSpy).toHaveBeenCalledTimes(1);
         });
 
-        it('starts with marking language, removing and then writing new language', async () =>
-        {
+        it('starts with marking language, removing and then writing new language', async () => {
             const wrapper = createHomeTextWrapper();
 
             const markedTextElement = getMarkedTextElement(wrapper);
@@ -217,15 +191,12 @@ describe('HomeText', () =>
         });
     });
 
-    describe('cursor', () =>
-    {
-        function getCursorElement(wrapper: VueWrapper)
-        {
+    describe('cursor', () => {
+        function getCursorElement(wrapper: VueWrapper) {
             return wrapper.get<HTMLSpanElement>('[data-testid="cursor"]');
         }
 
-        it('stops blinking on text removing', async () =>
-        {
+        it('stops blinking on text removing', async () => {
             const wrapper = createHomeTextWrapper();
 
             const markedTextElement = getMarkedTextElement(wrapper);
@@ -238,8 +209,7 @@ describe('HomeText', () =>
             expect(cursorElement.classes()).not.toContain('blinking');
         });
 
-        it('stops blinking on text writing', async () =>
-        {
+        it('stops blinking on text writing', async () => {
             const wrapper = createHomeTextWrapper();
 
             const markedTextElement = getMarkedTextElement(wrapper);
@@ -253,8 +223,7 @@ describe('HomeText', () =>
             expect(cursorElement.classes()).not.toContain('blinking');
         });
 
-        it('stops blinking on text marking', async () =>
-        {
+        it('stops blinking on text marking', async () => {
             const wrapper = createHomeTextWrapper();
 
             const markedTextElement = getMarkedTextElement(wrapper);
@@ -266,8 +235,7 @@ describe('HomeText', () =>
             expect(cursorElement.classes()).not.toContain('blinking');
         });
 
-        it('starts blinking on written text idle', async () =>
-        {
+        it('starts blinking on written text idle', async () => {
             const wrapper = createHomeTextWrapper();
 
             const markedTextElement = getMarkedTextElement(wrapper);

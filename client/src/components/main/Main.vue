@@ -1,5 +1,9 @@
 <template>
-    <div class="main" ref="root" :style="`--navbar-height: ${navbarHeight}px`">
+    <div
+        class="main"
+        ref="root"
+        :style="`--navbar-height: ${navbarHeight}px`"
+    >
         <Navbar
             v-if="activeSection"
             :activeSection="activeSection"
@@ -8,22 +12,22 @@
         />
         <div class="main-section-container">
             <Component
-                v-for="([sectionName, sectionData]) in sections"
+                v-for="[sectionName, sectionData] in sections"
                 :key="sectionName"
                 :is="components[sectionData.componentName]"
                 :name="sectionName"
-                :ref="(component) => sectionElements[sectionName] = component.$el"
+                :ref="(component) => (sectionElements[sectionName] = component.$el)"
             />
         </div>
-        <FooterComponent/>
-        <div id="modal-container"/>
+        <FooterComponent />
+        <div id="modal-container" />
     </div>
 </template>
 
 <script lang="ts" setup>
     import Navbar from '@/components/main/navbar/Navbar.vue';
     import mainSections from '@/components/main/mainSections';
-    import {computed, onBeforeUnmount, onMounted, ref, watch} from 'vue';
+    import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
     import router from '@/router';
     import AboutMyself from '@/components/main/about-myself/AboutMyself.vue';
     import Projects from '@/components/main/projects/Projects.vue';
@@ -36,15 +40,13 @@
         AboutMyself,
         Contact,
         Home,
-        Projects
+        Projects,
     };
 
     const store = useStore();
 
-    const onLinkClick = (linkName: string) =>
-    {
-        if (!linkName)
-        {
+    const onLinkClick = (linkName: string) => {
+        if (!linkName) {
             return;
         }
 
@@ -52,28 +54,22 @@
         scrollToSection(linkName);
     };
 
-    const onScroll = () =>
-    {
-        store.activeSection = [...sections.value]
-            .reverse()
-            .find(([sectionName]) =>
-            {
-                const sectionElement = sectionElements.value[sectionName];
+    const onScroll = () => {
+        store.activeSection = [...sections.value].reverse().find(([sectionName]) => {
+            const sectionElement = sectionElements.value[sectionName];
 
-                return root.value!.scrollTop >= (sectionElement.offsetTop - (window.innerHeight / 2));
-            })![0];
+            return root.value!.scrollTop >= sectionElement.offsetTop - window.innerHeight / 2;
+        })![0];
     };
 
-    const putSectionNameToUrl = (sectionName: string) =>
-    {
-        router.replace({hash: mainSections[sectionName].url});
+    const putSectionNameToUrl = (sectionName: string) => {
+        router.replace({ hash: mainSections[sectionName].url });
     };
 
-    const scrollToSection = (sectionName: string, behavior: ScrollBehavior = 'smooth') =>
-    {
+    const scrollToSection = (sectionName: string, behavior: ScrollBehavior = 'smooth') => {
         const newTop = sectionElements.value[sectionName].offsetTop - navbarHeight.value;
 
-        root.value!.scroll({behavior, top: newTop});
+        root.value!.scroll({ behavior, top: newTop });
         putSectionNameToUrl(sectionName);
     };
 
@@ -87,31 +83,32 @@
 
     const navbarHeight = computed(() => store.navbarHeight);
 
-    const sections = computed(() => (
-        Object.entries(mainSections)
-            .sort(([, sectionDataA], [, sectionDataB]) => sectionDataA.order - sectionDataB.order)
-    ));
+    const sections = computed(() =>
+        Object.entries(mainSections).sort(
+            ([, sectionDataA], [, sectionDataB]) => sectionDataA.order - sectionDataB.order,
+        ),
+    );
 
-    watch(() => store.activeSection, () =>
-    {
-        if (navigatingTo.value)
-        {
-            if (store.activeSection === navigatingTo.value)
-            {
-                navigatingTo.value = '';
+    watch(
+        () => store.activeSection,
+        () => {
+            if (navigatingTo.value) {
+                if (store.activeSection === navigatingTo.value) {
+                    navigatingTo.value = '';
+                }
+                return;
             }
-            return;
-        }
 
-        putSectionNameToUrl(store.activeSection!);
-    });
+            putSectionNameToUrl(store.activeSection!);
+        },
+    );
 
-    onMounted(() =>
-    {
+    onMounted(() => {
         const currentHash = router.currentRoute.value.hash;
 
-        const newActiveSection = Object.entries(mainSections)
-            .find(([, sectionData]) => sectionData.url === currentHash)?.[0];
+        const newActiveSection = Object.entries(mainSections).find(
+            ([, sectionData]) => sectionData.url === currentHash,
+        )?.[0];
 
         store.activeSection = newActiveSection ?? 'home';
 
@@ -121,15 +118,13 @@
         store.scrollbarWidth = root.value!.offsetWidth - root.value!.clientWidth;
     });
 
-    onBeforeUnmount(() =>
-    {
+    onBeforeUnmount(() => {
         root.value!.removeEventListener('scroll', onScroll);
     });
 </script>
 
 <style lang="scss" scoped>
-    .main
-    {
+    .main {
         --main-row-gap: 50px;
 
         box-sizing: border-box;
@@ -138,8 +133,7 @@
         position: relative;
     }
 
-    #modal-container
-    {
+    #modal-container {
         height: 0;
         left: 0;
         position: fixed;

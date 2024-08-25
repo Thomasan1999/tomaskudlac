@@ -1,17 +1,26 @@
 <template>
-    <section class="main-section" :id="id" ref="root">
+    <section
+        class="main-section"
+        :id="id"
+        ref="root"
+    >
         <div class="text-content">
-            <h2 class="main-section-name" v-if="heading">{{ title }}</h2>
+            <h2
+                class="main-section-name"
+                v-if="heading"
+            >
+                {{ title }}
+            </h2>
         </div>
-        <slot/>
+        <slot />
     </section>
 </template>
 
 <script lang="ts" setup>
-    import {computed, ref} from 'vue';
+    import { computed, ref } from 'vue';
     import mainSections from '@/components/main/mainSections';
 
-    const props = withDefaults(defineProps<{heading?: boolean, name: string}>(), {heading: false});
+    const props = withDefaults(defineProps<{ heading?: boolean; name: string }>(), { heading: false });
 
     const root = ref<HTMLDivElement | null>(null);
 
@@ -23,8 +32,7 @@
 </script>
 
 <style lang="scss" scoped>
-    .main-section
-    {
+    .main-section {
         align-items: center;
         display: flex;
         flex-direction: column;
@@ -32,8 +40,7 @@
         z-index: 1;
     }
 
-    .main-section-name
-    {
-        font-size: var(--main-section-name-font-size)
+    .main-section-name {
+        font-size: var(--main-section-name-font-size);
     }
 </style>

@@ -1,45 +1,39 @@
 import useStore from '@/store/index';
-import {createPinia, setActivePinia} from 'pinia';
+import { createPinia, setActivePinia } from 'pinia';
 import mockWindowResizeBy from '@/mocks/mockWindowResizeBy';
 import mockImageSrc from '@/mocks/mockImageSrc';
 
-describe('store', () =>
-{
+describe('store', () => {
     mockImageSrc();
 
     setActivePinia(createPinia());
 
     let store: ReturnType<typeof useStore> = useStore();
 
-    afterEach(() =>
-    {
+    afterEach(() => {
         store.$reset();
     });
 
-    it('computes data on init', async () =>
-    {
+    it('computes data on init', async () => {
         const propertiesToInit: (keyof typeof store)[] = ['age', 'imageFormat'];
 
         await store.init();
 
-        propertiesToInit.forEach((propertyName) =>
-        {
+        propertiesToInit.forEach((propertyName) => {
             expect(store[propertyName]).toBeTruthy();
         });
     });
 
-    it('increments age correctly', async () =>
-    {
+    it('increments age correctly', async () => {
         vi.useFakeTimers();
 
         const dates = [
             [new Date('2023-06-29'), 24],
             [new Date('2024-06-20'), 25],
-            [new Date('2025-06-25'), 26]
+            [new Date('2025-06-25'), 26],
         ];
 
-        for await (const [date, age] of dates) 
-        {
+        for await (const [date, age] of dates) {
             vi.setSystemTime(date);
 
             await store.init();
@@ -54,12 +48,10 @@ describe('store', () =>
         vi.useRealTimers();
     });
 
-    it('windowHeight and windowWidth props are equal to window size', async () =>
-    {
+    it('windowHeight and windowWidth props are equal to window size', async () => {
         mockWindowResizeBy();
 
-        function expectPropsToBeEqual(): void
-        {
+        function expectPropsToBeEqual(): void {
             expect(store.windowHeight).toBe(window.innerHeight);
             expect(store.windowWidth).toBe(window.innerWidth);
         }

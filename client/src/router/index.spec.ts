@@ -1,13 +1,12 @@
 import router from '@/router/index';
 import getMetaElement from '@/utils/getMetaElement';
-import {createPinia, setActivePinia} from 'pinia';
+import { createPinia, setActivePinia } from 'pinia';
 import useStore from '@/store';
 import mockImageSrc from '@/mocks/mockImageSrc';
 import routes from '@/router/routes';
 import getManifestElement from '@/utils/getManifestElement';
 
-vi.mock('@/router/routes', () =>
-{
+vi.mock('@/router/routes', () => {
     return {
         default: [
             {
@@ -16,8 +15,8 @@ vi.mock('@/router/routes', () =>
                 meta: {
                     description: 'The description of the site.',
                     language: 'en',
-                    title: 'The site'
-                }
+                    title: 'The site',
+                },
             },
             {
                 path: '/sk',
@@ -25,17 +24,15 @@ vi.mock('@/router/routes', () =>
                 meta: {
                     description: 'Popis stránky.',
                     language: 'sk',
-                    title: 'Stránka'
-                }
-            }
-        ]
+                    title: 'Stránka',
+                },
+            },
+        ],
     };
 });
 
-describe('router', () =>
-{
-    beforeAll(async () =>
-    {
+describe('router', () => {
+    beforeAll(async () => {
         mockImageSrc();
 
         document.head.innerHTML += '<link rel="manifest">';
@@ -47,10 +44,8 @@ describe('router', () =>
         await store.init();
     });
 
-    it('syncs DOM with route metadata', async () =>
-    {
-        for await (const route of routes)
-        {
+    it('syncs DOM with route metadata', async () => {
+        for await (const route of routes) {
             await router.push(route.path);
 
             expect(document.title).toBe(route.meta!.title!);

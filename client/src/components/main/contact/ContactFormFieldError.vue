@@ -1,14 +1,17 @@
 <template>
-    <div class="contact-form-field-error" v-if="error">
+    <div
+        class="contact-form-field-error"
+        v-if="error"
+    >
         <div class="contact-form-field-error-message">{{ message }}</div>
     </div>
 </template>
 
 <script lang="ts" setup>
-    import {computed} from 'vue';
+    import { computed } from 'vue';
     import useStore from '@/store';
 
-    const props = defineProps<{error?: string}>();
+    const props = defineProps<{ error?: string }>();
 
     const store = useStore();
 
@@ -18,8 +21,7 @@
 </script>
 
 <style lang="scss" scoped>
-    .contact-form-field-error
-    {
+    .contact-form-field-error {
         --contact-form-field-error-arrow-width: 10px;
 
         align-items: center;
@@ -36,8 +38,7 @@
         position: absolute;
         white-space: nowrap;
 
-        @media (max-width: 1023px)
-        {
+        @media (max-width: 1023px) {
             left: 0;
             margin: 0;
             position: relative;
@@ -45,8 +46,7 @@
             top: var(--contact-form-field-error-arrow-width);
         }
 
-        &:after
-        {
+        &:after {
             border-color: transparent;
             border-style: solid;
             border-width: var(--contact-form-field-error-arrow-width);
@@ -61,8 +61,7 @@
             top: 0;
             width: 0;
 
-            @media (max-width: 1023px)
-            {
+            @media (max-width: 1023px) {
                 border-bottom-color: var(--primary-red);
                 border-right-color: transparent;
                 bottom: auto;

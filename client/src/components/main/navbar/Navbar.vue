@@ -1,5 +1,10 @@
 <template>
-    <nav class="navbar" :class="{opened}" ref="root" :style="`--navbar-max-height: ${maxHeight}`">
+    <nav
+        class="navbar"
+        :class="{ opened }"
+        ref="root"
+        :style="`--navbar-max-height: ${maxHeight}`"
+    >
         <div class="navbar-part navbar-left-part navbar-outer-part">
             <NavbarLink
                 class="navbar-left-link navbar-logo"
@@ -36,10 +41,17 @@
                     :to="locales.otherLangHref"
                     @click="$emit('languageToggle')"
                 />
-                <NavbarIcon v-if="touchscreen" :mode="opened ? 'cross' : 'bars'" @click="opened = !opened"/>
+                <NavbarIcon
+                    v-if="touchscreen"
+                    :mode="opened ? 'cross' : 'bars'"
+                    @click="opened = !opened"
+                />
             </div>
             <div class="navbar-social-network-container">
-                <NavbarSocialNetwork v-for="socialNetwork in socialNetworks" v-bind="socialNetwork"/>
+                <NavbarSocialNetwork
+                    v-for="socialNetwork in socialNetworks"
+                    v-bind="socialNetwork"
+                />
             </div>
         </div>
     </nav>
@@ -47,33 +59,30 @@
 
 <script lang="ts" setup>
     import NavbarLink from '@/components/main/navbar/NavbarLink.vue';
-    import {computed, onBeforeUnmount, onMounted, ref} from 'vue';
+    import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
     import useStore from '@/store';
     import NavbarSocialNetwork from '@/components/main/navbar/NavbarSocialNetwork.vue';
     import NavbarIcon from '@/components/main/navbar/NavbarIcon.vue';
     import MainSectionObject from '@/components/main/MainSectionObject';
 
-    const props = defineProps<{activeSection: string, sections: [string, MainSectionObject][]}>();
+    const props = defineProps<{ activeSection: string; sections: [string, MainSectionObject][] }>();
     const emit = defineEmits<{
-        (event: 'languageToggle'): void,
-        (event: 'linkClick', sectionName: string): void
+        (event: 'languageToggle'): void;
+        (event: 'linkClick', sectionName: string): void;
     }>();
 
     const store = useStore();
 
-    const onLinkClick = (sectionName: string) =>
-    {
+    const onLinkClick = (sectionName: string) => {
         opened.value = false;
         emit('linkClick', sectionName);
     };
 
-    const onResize = () =>
-    {
+    const onResize = () => {
         setHeight();
     };
 
-    const setHeight = () =>
-    {
+    const setHeight = () => {
         maxHeight.value = `${root.value!.scrollHeight}px`;
     };
 
@@ -87,45 +96,42 @@
         {
             icon: ['fab', 'facebook-f'],
             title: 'Facebook',
-            to: 'https://facebook.com/TomasKudlac99'
+            to: 'https://facebook.com/TomasKudlac99',
         },
         {
             icon: ['fas', 'envelope'],
             title: 'Email',
-            to: 'mailto:ahoj@tomaskudlac.sk'
+            to: 'mailto:ahoj@tomaskudlac.sk',
         },
         {
             icon: ['fab', 'linkedin-in'],
             title: 'LinkedIn',
-            to: 'https://linkedin.com/in/kudlac/'
+            to: 'https://linkedin.com/in/kudlac/',
         },
         {
             icon: ['fab', 'github'],
             title: 'GitHub',
-            to: 'https://github.com/Thomasan1999'
-        }
+            to: 'https://github.com/Thomasan1999',
+        },
     ];
 
     const locales = computed(() => store.locales.navbar);
 
     const touchscreen = computed(() => store.isTouchscreen);
 
-    onMounted(() =>
-    {
+    onMounted(() => {
         setHeight();
         window.addEventListener('resize', onResize);
     });
 
-    onBeforeUnmount(() =>
-    {
+    onBeforeUnmount(() => {
         window.removeEventListener('resize', onResize);
     });
 </script>
 
 <style lang="scss" scoped>
-    .navbar
-    {
-        --navbar-transition-duration: .8s;
+    .navbar {
+        --navbar-transition-duration: 0.8s;
         --navbar-link-active-color: #2c2c2c;
         --navbar-outer-padding-horizontal: var(--content-padding-horizontal);
 
@@ -143,62 +149,51 @@
         width: 100%;
         z-index: 2;
 
-        @media (max-width: 1023px)
-        {
+        @media (max-width: 1023px) {
             flex-wrap: wrap;
             justify-content: space-between;
             transition: height var(--navbar-transition-duration);
         }
 
-        &.opened
-        {
-            @media (max-width: 1023px)
-            {
+        &.opened {
+            @media (max-width: 1023px) {
                 height: var(--navbar-max-height);
             }
         }
     }
 
-    .navbar-logo
-    {
+    .navbar-logo {
         padding-left: var(--navbar-outer-padding-horizontal);
         padding-right: var(--navbar-outer-padding-horizontal);
     }
 
-    .navbar-part
-    {
+    .navbar-part {
         align-items: center;
         display: flex;
         height: var(--navbar-height);
     }
 
-    .navbar-outer-part
-    {
+    .navbar-outer-part {
         position: absolute;
         top: 0;
 
-        @media (max-width: 1023px)
-        {
+        @media (max-width: 1023px) {
             position: relative;
         }
     }
 
-    .navbar-left-part
-    {
+    .navbar-left-part {
         left: 0;
     }
 
-    .navbar-left-link
-    {
+    .navbar-left-link {
         --navbar-link-padding-horizontal: 30px;
     }
 
-    .navbar-middle-part
-    {
+    .navbar-middle-part {
         align-self: center;
 
-        @media (max-width: 1023px)
-        {
+        @media (max-width: 1023px) {
             flex-direction: column;
             height: auto;
             order: 1;
@@ -206,53 +201,44 @@
         }
     }
 
-    .navbar-middle-link
-    {
+    .navbar-middle-link {
         --navbar-link-padding-horizontal: 60px;
 
-        @media (max-width: 1250px)
-        {
+        @media (max-width: 1250px) {
             --navbar-link-padding-horizontal: 30px;
         }
 
-        @media (max-width: 1023px)
-        {
+        @media (max-width: 1023px) {
             width: 100%;
         }
     }
 
-    .navbar-right-part
-    {
+    .navbar-right-part {
         display: flex;
         gap: 20px;
         right: 0;
 
-        @media (max-width: 1023px)
-        {
+        @media (max-width: 1023px) {
             display: contents;
         }
     }
 
-    .navbar-other-lang-container
-    {
+    .navbar-other-lang-container {
         align-items: center;
         display: flex;
     }
 
-    .navbar-other-lang
-    {
+    .navbar-other-lang {
         font-family: 'Raleway', sans-serif;
         font-weight: 300;
         width: 50px;
     }
 
-    .navbar-social-network-container
-    {
+    .navbar-social-network-container {
         display: flex;
         height: var(--navbar-height);
 
-        @media (max-width: 1023px)
-        {
+        @media (max-width: 1023px) {
             align-items: center;
             justify-content: center;
             order: 2;

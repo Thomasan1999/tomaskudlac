@@ -1,9 +1,7 @@
 import getManifestElement from '@/utils/getManifestElement';
 
-describe('getManifestElement', () =>
-{
-    it('returns the right HTML element', () =>
-    {
+describe('getManifestElement', () => {
+    it('returns the right HTML element', () => {
         let manifest = getManifestElement();
 
         document.head.innerHTML = `

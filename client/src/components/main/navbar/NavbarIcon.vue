@@ -13,23 +13,26 @@
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 25 3"
             >
-                <rect class="line-rect" height="3" width="25"/>
+                <rect
+                    class="line-rect"
+                    height="3"
+                    width="25"
+                />
             </svg>
         </div>
     </div>
 </template>
 
 <script lang="ts" setup>
-    import {computed} from 'vue';
+    import { computed } from 'vue';
     import useStore from '@/store';
 
-    const props = defineProps<{mode: 'bars' | 'cross'}>();
-    const emit = defineEmits<{(event: 'click'): void}>();
+    const props = defineProps<{ mode: 'bars' | 'cross' }>();
+    const emit = defineEmits<{ (event: 'click'): void }>();
 
     const store = useStore();
 
-    const onClick = () =>
-    {
+    const onClick = () => {
         emit('click');
     };
 
@@ -37,8 +40,7 @@
 </script>
 
 <style lang="scss" scoped>
-    .navbar-icon
-    {
+    .navbar-icon {
         --half-transition: calc(var(--navbar-transition-duration) / 2);
 
         align-items: center;
@@ -52,75 +54,65 @@
         width: 31.25px;
         z-index: 3;
 
-        @media (max-width 1023px)
-        {
+        @media (max-width 1023px) {
             display: block;
         }
 
-        &.cross
-        {
-            .line
-            {
+        &.cross {
+            .line {
                 top: 40%;
-                transition: top var(--half-transition) 0s, transform var(--half-transition) var(--half-transition);
+                transition:
+                    top var(--half-transition) 0s,
+                    transform var(--half-transition) var(--half-transition);
             }
 
-            .line-1
-            {
+            .line-1 {
                 transform: rotate(-45deg);
             }
 
-            .line-2
-            {
+            .line-2 {
                 transform: rotate(-45deg);
             }
 
-            .line-3
-            {
+            .line-3 {
                 transform: rotate(45deg);
             }
         }
 
-        &.bars
-        {
-            .line
-            {
+        &.bars {
+            .line {
                 transform: rotate(0deg);
-                transition: top var(--half-transition) var(--half-transition), transform var(--half-transition) 0s;
+                transition:
+                    top var(--half-transition) var(--half-transition),
+                    transform var(--half-transition) 0s;
             }
 
-            .line-1
-            {
+            .line-1 {
                 top: 0;
             }
 
-            .line-2
-            {
+            .line-2 {
                 top: calc(50% - 1.5px);
             }
 
-            .line-3
-            {
+            .line-3 {
                 top: calc(100% - 3px);
             }
         }
     }
 
-    .line-container
-    {
+    .line-container {
         height: 25px;
         position: relative;
         width: 100%;
     }
 
-    .line
-    {
+    .line {
         left: 0;
         position: absolute;
     }
 
-    .line-rect
-    {
+    .line-rect {
         fill: #ffffff;
         transform-origin: 50% 50%;
     }

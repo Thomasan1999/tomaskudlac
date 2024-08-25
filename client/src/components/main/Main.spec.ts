@@ -1,61 +1,52 @@
-import {mount, VueWrapper} from '@vue/test-utils';
+import { mount, VueWrapper } from '@vue/test-utils';
 import Main from '@/components/main/Main.vue';
 import mockInitStore from '@/mocks/mockInitStore';
-import {Pinia} from 'pinia';
+import { Pinia } from 'pinia';
 import MainSection from '@/components/main/MainSection.vue';
 import mainSections from '@/components/main/mainSections';
-import {nextTick} from 'vue';
+import { nextTick } from 'vue';
 
 let routerReplaceCallTimes = 0;
 
-vi.mock('@/router', () =>
-{
+vi.mock('@/router', () => {
     return {
         default: {
             currentRoute: {
                 value: {
-                    hash: ''
-                }
+                    hash: '',
+                },
             },
-            replace: () =>
-            {
+            replace: () => {
                 routerReplaceCallTimes++;
-            }
-        }
+            },
+        },
     };
 });
 
-describe('Main', () =>
-{
+describe('Main', () => {
     let pinia: Pinia;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         pinia = await mockInitStore();
 
-        Element.prototype.scroll = function ()
-        {
-        };
+        Element.prototype.scroll = function () {};
     });
 
-    function createMainWrapper(): VueWrapper
-    {
+    function createMainWrapper(): VueWrapper {
         return mount(Main, {
             global: {
                 plugins: [pinia],
-                stubs: ['font-awesome-icon', 'footer-component']
-            }
+                stubs: ['font-awesome-icon', 'footer-component'],
+            },
         });
     }
 
-    it('renders sections in the right order', () =>
-    {
+    it('renders sections in the right order', () => {
         const mainWrapper = createMainWrapper();
 
         const mainSectionComponents = mainWrapper.findAllComponents(MainSection);
 
-        mainSectionComponents.forEach((mainSection, mainSectionIndex) =>
-        {
+        mainSectionComponents.forEach((mainSection, mainSectionIndex) => {
             const name = mainSection.props().name;
 
             const order = mainSections[name].order;
@@ -64,8 +55,7 @@ describe('Main', () =>
         });
     });
 
-    it('replaces route on link click', async () =>
-    {
+    it('replaces route on link click', async () => {
         const mainWrapper = createMainWrapper();
 
         let callTimesBeforeClick = routerReplaceCallTimes;

@@ -1,6 +1,6 @@
-import {createRouter, createWebHistory, RouteLocationRaw} from 'vue-router';
+import { createRouter, createWebHistory, RouteLocationRaw } from 'vue-router';
 import useStore from '@/store';
-import {SiteLanguage} from '@/store/types';
+import { SiteLanguage } from '@/store/types';
 import mainSections from '@/components/main/mainSections';
 import routes from '@/router/routes';
 import getManifestElement from '@/utils/getManifestElement';
@@ -8,22 +8,20 @@ import getMetaElement from '@/utils/getMetaElement';
 
 const router = createRouter({
     history: createWebHistory(),
-    routes
+    routes,
 });
 
 /** The language of the previous route. */
 let lastLanguage: SiteLanguage | undefined;
 
-router.beforeEach(async (to, from, next) =>
-{
+router.beforeEach(async (to, from, next) => {
     const store = useStore();
 
     const language = to.meta.language;
 
     const languageUnchanged = lastLanguage === language;
 
-    if (languageUnchanged)
-    {
+    if (languageUnchanged) {
         next();
         return;
     }
@@ -50,8 +48,8 @@ router.beforeEach(async (to, from, next) =>
     const hashChanged = newRouteHash && newRouteHash !== to.hash;
 
     const newRoute = hashChanged
-        ? {hash: newRouteHash, path: to.path, replace: true} as RouteLocationRaw
-        : undefined as any;
+        ? ({ hash: newRouteHash, path: to.path, replace: true } as RouteLocationRaw)
+        : (undefined as any);
 
     next(newRoute);
 });

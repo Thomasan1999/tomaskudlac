@@ -1,10 +1,8 @@
 import sleep from '@/utils/sleep';
-import {flushPromises} from '@vue/test-utils';
+import { flushPromises } from '@vue/test-utils';
 
-describe('sleep', () =>
-{
-    it('resolves after timeout has passed', async () =>
-    {
+describe('sleep', () => {
+    it('resolves after timeout has passed', async () => {
         vi.useFakeTimers();
 
         const setTimeoutSpy = vi.spyOn(window, 'setTimeout');

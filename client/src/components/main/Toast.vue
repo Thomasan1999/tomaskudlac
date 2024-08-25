@@ -1,6 +1,9 @@
 <template>
     <Teleport to="#modal-container">
-        <Transition name="fade" @after-leave="$emit('close')">
+        <Transition
+            name="fade"
+            @after-leave="$emit('close')"
+        >
             <div
                 v-if="opened"
                 class="toast"
@@ -15,7 +18,7 @@
                     :title="locales.closeButtonTitle"
                     @click="opened = false"
                 >
-                    <CloseIcon class="toast-close-button-icon"/>
+                    <CloseIcon class="toast-close-button-icon" />
                 </button>
             </div>
         </Transition>
@@ -24,20 +27,18 @@
 
 <script lang="ts" setup>
     import useStore from '@/store';
-    import {computed, onMounted, ref} from 'vue';
+    import { computed, onMounted, ref } from 'vue';
     import CloseIcon from '@/components/main/CloseIcon.vue';
 
-    defineProps<{message: string, type: 'fail' | 'success'}>();
-    defineEmits<{(event: 'close'): void}>();
+    defineProps<{ message: string; type: 'fail' | 'success' }>();
+    defineEmits<{ (event: 'close'): void }>();
 
-    const getRelativeMarginTop = (): string =>
-    {
+    const getRelativeMarginTop = (): string => {
         const toasts = Array.from(document.querySelectorAll<HTMLDivElement>('.toast'));
 
         const lastToast = toasts.at(-1);
 
-        if (!lastToast)
-        {
+        if (!lastToast) {
             return '';
         }
 
@@ -52,25 +53,22 @@
 
     const relativeMarginTop = ref('');
 
-    const lifetime = computed(() => store.isTouchscreen ? baseLifetime.value / 2 : baseLifetime.value);
+    const lifetime = computed(() => (store.isTouchscreen ? baseLifetime.value / 2 : baseLifetime.value));
 
     const locales = computed(() => store.locales.toasts);
 
-    onMounted(() =>
-    {
+    onMounted(() => {
         opened.value = true;
         relativeMarginTop.value = getRelativeMarginTop();
 
-        setTimeout(() =>
-        {
+        setTimeout(() => {
             opened.value = false;
         }, lifetime.value);
     });
 </script>
 
 <style lang="scss" scoped>
-    .toast
-    {
+    .toast {
         --default-margin-top: calc(var(--content-padding-horizontal) + var(--navbar-height));
 
         box-sizing: border-box;
@@ -83,48 +81,40 @@
         width: calc(100vw - var(--content-padding-horizontal) * 2);
         z-index: 1;
 
-        &.type-success
-        {
+        &.type-success {
             background-color: var(--primary-green);
         }
 
-        &.type-fail
-        {
+        &.type-fail {
             background-color: var(--primary-red);
         }
     }
 
-    .toast-close-button
-    {
+    .toast-close-button {
         line-height: 0;
         padding: 9px;
         position: absolute;
         right: 0;
         top: 0;
 
-        &:hover
-        {
-            .toast-close-button-icon
-            {
+        &:hover {
+            .toast-close-button-icon {
                 fill: #dda373;
             }
         }
     }
 
-    .toast-close-button-icon
-    {
+    .toast-close-button-icon {
         height: 12px;
     }
 
     .fade-enter-active,
-    .fade-leave-active
-    {
+    .fade-leave-active {
         transition: opacity var(--base-transition-duration) ease;
     }
 
     .fade-enter-from,
-    .fade-leave-to
-    {
+    .fade-leave-to {
         opacity: 0;
     }
 </style>

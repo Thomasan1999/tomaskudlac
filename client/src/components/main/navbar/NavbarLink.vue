@@ -2,7 +2,7 @@
     <Component
         :is="routerLink ? 'router-link' : ExternalLink"
         class="navbar-link"
-        :class="[$attrs.class, {active}]"
+        :class="[$attrs.class, { active }]"
         :title="title"
         v-bind="dynamicProps"
         @click="onClick"
@@ -13,19 +13,24 @@
 
 <script lang="ts" setup>
     import mainSections from '@/components/main/mainSections';
-    import {computed} from 'vue';
+    import { computed } from 'vue';
     import ExternalLink from '@/components/ExternalLink.vue';
 
     const props = withDefaults(
-        defineProps<{active?: boolean, replace?: boolean, routerLink?: boolean, text?: string, title: string, to: string}>(),
-        {replace: false, routerLink: false}
+        defineProps<{
+            active?: boolean;
+            replace?: boolean;
+            routerLink?: boolean;
+            text?: string;
+            title: string;
+            to: string;
+        }>(),
+        { replace: false, routerLink: false },
     );
-    const emit = defineEmits<{(event: 'click'): void}>();
+    const emit = defineEmits<{ (event: 'click'): void }>();
 
-    const onClick = ($event: MouseEvent) =>
-    {
-        if (!props.routerLink)
-        {
+    const onClick = ($event: MouseEvent) => {
+        if (!props.routerLink) {
             return;
         }
 
@@ -33,11 +38,10 @@
         emit('click');
     };
 
-    const dynamicProps = computed(() =>
-    {
+    const dynamicProps = computed(() => {
         return {
             [props.routerLink ? 'to' : 'href']: to.value,
-            ...(props.replace && {replace: props.replace})
+            ...(props.replace && { replace: props.replace }),
         };
     });
 
@@ -45,8 +49,7 @@
 </script>
 
 <style lang="scss" scoped>
-    .navbar-link
-    {
+    .navbar-link {
         align-items: center;
         display: flex;
         font-family: var(--title-font-family);
@@ -57,13 +60,11 @@
         padding-right: var(--navbar-link-padding-horizontal, 0);
         transition: background-color var(--base-transition-duration);
 
-        &:hover
-        {
+        &:hover {
             background-color: var(--primary-color-light);
         }
 
-        &.active
-        {
+        &.active {
             background-color: var(--navbar-link-active-color);
             cursor: default;
         }

@@ -1,11 +1,10 @@
-import {DeepPartial} from 'ts-essentials';
+import { DeepPartial } from 'ts-essentials';
 
 /**
  * Data of a programming language which are used in home section in dynamic text and in about myself text in the
  * list of languages.
  * */
-export class ProgrammingLanguage
-{
+export class ProgrammingLanguage {
     /**
      * Determines whether the language is preceded by 'an' indefinite article in home section in the English version.
      * */
@@ -21,13 +20,11 @@ export class ProgrammingLanguage
     /** The name of the language. This property determines how the language is displayed in texts. */
     readonly title: string;
 
-    constructor(args: DeepPartial<ProgrammingLanguage>)
-    {
+    constructor(args: DeepPartial<ProgrammingLanguage>) {
         this.an = args.an ?? false;
         this.home = args.home ?? false;
 
-        if (args.children)
-        {
+        if (args.children) {
             this.children = args.children.map((value) => new ProgrammingLanguage(value!));
         }
 
@@ -38,16 +35,12 @@ export class ProgrammingLanguage
      * Returns a string representation of a programming language and its children, might be found in about myself
      * text and meta description.
      * */
-    toString(): string
-    {
-        if (!this.children.length)
-        {
+    toString(): string {
+        if (!this.children.length) {
             return this.title;
         }
 
-        const childrenString = this.children
-            .map((language) => language.toString())
-            .join(', ');
+        const childrenString = this.children.map((language) => language.toString()).join(', ');
 
         return `${this.title} (${childrenString})`;
     }

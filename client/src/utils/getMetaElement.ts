@@ -3,12 +3,10 @@
  * @param name Name property of the element.
  * @returns The HTML meta element.
  * */
-export default function getMetaElement(name: string): HTMLMetaElement
-{
+export default function getMetaElement(name: string): HTMLMetaElement {
     const existingTag = document.head.querySelector<HTMLMetaElement>(`meta[name=${name}]`);
 
-    if (existingTag)
-    {
+    if (existingTag) {
         return existingTag;
     }
 
@@ -19,4 +17,4 @@ export default function getMetaElement(name: string): HTMLMetaElement
     document.head.appendChild(newTag);
 
     return newTag;
-};
+}

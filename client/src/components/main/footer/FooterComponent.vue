@@ -11,7 +11,7 @@
                         data-testid="copyrightLink"
                         href="http://www.whatarecookies.com"
                         :title="locales.copyrightLinkTitle"
-                    >{{ locales.copyrightLinkText }}.
+                        >{{ locales.copyrightLinkText }}.
                     </ExternalLink>
                     <span
                         v-else
@@ -19,21 +19,25 @@
                         data-testid="copyrightLink"
                         :title="locales.copyrightLinkTitle"
                         @click="showCookies = true"
-                    >{{ locales.copyrightLinkText }}.</span>
+                        >{{ locales.copyrightLinkText }}.</span
+                    >
                 </p>
             </div>
         </footer>
-        <CookiesModal v-if="showCookies" @close="showCookies = false"/>
+        <CookiesModal
+            v-if="showCookies"
+            @close="showCookies = false"
+        />
     </section>
 </template>
 
 <script lang="ts" setup>
-    import {computed, defineAsyncComponent, ref} from 'vue';
+    import { computed, defineAsyncComponent, ref } from 'vue';
     import useStore from '@/store';
     import ExternalLink from '@/components/ExternalLink.vue';
-    import {SiteLanguage} from '@/store/types';
+    import { SiteLanguage } from '@/store/types';
 
-    const CookiesModal = defineAsyncComponent({loader: () => import('./CookiesModal.vue')});
+    const CookiesModal = defineAsyncComponent({ loader: () => import('./CookiesModal.vue') });
 
     const store = useStore();
 
@@ -45,29 +49,26 @@
 </script>
 
 <style lang="scss" scoped>
-    .footer-component
-    {
+    .footer-component {
         --footer-height: 40px;
 
         background-color: var(--primary-color);
         line-height: var(--footer-height);
     }
 
-    .footer, .footer-text
-    {
+    .footer,
+    .footer-text {
         font-weight: 500;
         line-height: var(--footer-height);
     }
 
-    .footer-copyright-link
-    {
+    .footer-copyright-link {
         cursor: pointer;
         text-decoration: underline;
         transition: color var(--base-transition-duration);
 
-        &:hover
-        {
-            color: var(--text-highlight-color)
+        &:hover {
+            color: var(--text-highlight-color);
         }
     }
 </style>

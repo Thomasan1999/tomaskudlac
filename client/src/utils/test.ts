@@ -1,8 +1,5 @@
-function getTestingSelector(id: string): string
-{
+function getTestingSelector(id: string): string {
     return `[data-testid="${id}"]`;
 }
 
-export {
-    getTestingSelector,
-}
+export { getTestingSelector };

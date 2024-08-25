@@ -1,6 +1,5 @@
-import {Page} from 'puppeteer';
+import { Page } from 'puppeteer';
 
-export default function getUrlObject(page: Page): URL
-{
+export default function getUrlObject(page: Page): URL {
     return new URL(page.url());
 }

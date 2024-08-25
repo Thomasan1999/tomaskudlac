@@ -6,12 +6,26 @@
     >
         <div class="text-content">
             <picture class="about-myself-photo-container">
-                <source type="image/webp" srcset="/images/myself.webp"/>
-                <source type="image/jpeg" srcset="/images/myself.jpg"/>
-                <img class="about-myself-photo" :alt="locales.photoAlt" data-testid="photo" src="/images/myself.jpg">
+                <source
+                    type="image/webp"
+                    srcset="/images/myself.webp"
+                />
+                <source
+                    type="image/jpeg"
+                    srcset="/images/myself.jpg"
+                />
+                <img
+                    class="about-myself-photo"
+                    :alt="locales.photoAlt"
+                    data-testid="photo"
+                    src="/images/myself.jpg"
+                />
             </picture>
             <div class="about-myself-column-container">
-                <AboutMyselfColumn v-for="column in locales.columns" v-bind="column"/>
+                <AboutMyselfColumn
+                    v-for="column in locales.columns"
+                    v-bind="column"
+                />
             </div>
         </div>
     </MainSection>
@@ -20,7 +34,7 @@
 <script lang="ts" setup>
     import MainSection from '@/components/main/MainSection.vue';
     import AboutMyselfColumn from '@/components/main/about-myself/AboutMyselfColumn.vue';
-    import {computed} from 'vue';
+    import { computed } from 'vue';
     import useStore from '@/store';
 
     const store = useStore();
@@ -29,26 +43,22 @@
 </script>
 
 <style lang="scss" scoped>
-    .about-myself
-    {
+    .about-myself {
         padding-bottom: var(--main-row-gap);
         padding-top: var(--main-row-gap);
     }
 
-    .about-myself-photo-container
-    {
+    .about-myself-photo-container {
         display: flex;
         justify-content: center;
     }
 
-    .about-myself-photo
-    {
+    .about-myself-photo {
         border-radius: 50%;
         max-width: 100%;
     }
 
-    .about-myself-column-container
-    {
+    .about-myself-column-container {
         column-gap: 80px;
         display: flex;
         flex-wrap: wrap;

@@ -1,40 +1,36 @@
-import {Pinia} from 'pinia';
+import { Pinia } from 'pinia';
 import mockInitStore from '@/mocks/mockInitStore';
-import {mount, MountingOptions, VueWrapper} from '@vue/test-utils';
+import { mount, MountingOptions, VueWrapper } from '@vue/test-utils';
 import AboutMyself from '@/components/main/about-myself/AboutMyself.vue';
 import useStore from '@/store';
 import AboutMyselfColumn from '@/components/main/about-myself/AboutMyselfColumn.vue';
 
-describe('AboutMyself', () =>
-{
+describe('AboutMyself', () => {
     let pinia: Pinia;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         pinia = await mockInitStore();
     });
 
-    function createAboutMyselfWrapper(props: MountingOptions<any>['props'] = {}): VueWrapper
-    {
+    function createAboutMyselfWrapper(props: MountingOptions<any>['props'] = {}): VueWrapper {
         const defaultProps = {
             title: '',
-            text: ''
+            text: '',
         };
 
         return mount(AboutMyself, {
             global: {
                 plugins: [pinia],
-                stubs: ['AboutMyselfColumn']
+                stubs: ['AboutMyselfColumn'],
             },
             props: {
                 ...defaultProps,
-                ...props
-            }
+                ...props,
+            },
         });
     }
 
-    it('has heading', () =>
-    {
+    it('has heading', () => {
         const aboutMyselfWrapper = createAboutMyselfWrapper();
 
         const headingElement = aboutMyselfWrapper.find('h1, h2, h3, h4, h5, h6');
@@ -42,8 +38,7 @@ describe('AboutMyself', () =>
         expect(headingElement.exists()).toBe(true);
     });
 
-    it('renders photo of Tomáš Kudláč', () =>
-    {
+    it('renders photo of Tomáš Kudláč', () => {
         const aboutMyselfWrapper = createAboutMyselfWrapper();
 
         const photoElement = aboutMyselfWrapper.find('[data-testid="photo"]');
@@ -51,8 +46,7 @@ describe('AboutMyself', () =>
         expect(photoElement.exists()).toBe(true);
     });
 
-    it('renders all columns', () =>
-    {
+    it('renders all columns', () => {
         const store = useStore();
 
         const aboutMyselfWrapper = createAboutMyselfWrapper();

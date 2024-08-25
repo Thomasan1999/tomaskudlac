@@ -1,41 +1,37 @@
-import {Pinia} from 'pinia';
+import { Pinia } from 'pinia';
 import mockInitStore from '@/mocks/mockInitStore';
-import {mount, MountingOptions, VueWrapper} from '@vue/test-utils';
+import { mount, MountingOptions, VueWrapper } from '@vue/test-utils';
 import ContactFormFieldError from '@/components/main/contact/ContactFormFieldError.vue';
 
-describe('ContactFormFieldError', () =>
-{
+describe('ContactFormFieldError', () => {
     let pinia: Pinia;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         pinia = await mockInitStore();
     });
 
-    function createContactFormFieldErrorWrapper(props: MountingOptions<any>['props'] = {}): VueWrapper
-    {
+    function createContactFormFieldErrorWrapper(props: MountingOptions<any>['props'] = {}): VueWrapper {
         const defaultProps = {
-            error: ''
+            error: '',
         };
 
         return mount(ContactFormFieldError, {
             global: {
-                plugins: [pinia]
+                plugins: [pinia],
             },
             props: {
                 ...defaultProps,
-                ...props
-            }
+                ...props,
+            },
         });
     }
 
-    it('does display message only if \'error\' property is not empty', async () =>
-    {
-        const wrapper = createContactFormFieldErrorWrapper({error: ''});
+    it("does display message only if 'error' property is not empty", async () => {
+        const wrapper = createContactFormFieldErrorWrapper({ error: '' });
 
         expect(wrapper.find('div').exists()).toBe(false);
 
-        await wrapper.setProps({error: 'empty'});
+        await wrapper.setProps({ error: 'empty' });
 
         expect(wrapper.find('div').exists()).toBe(true);
     });

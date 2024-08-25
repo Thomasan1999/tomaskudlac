@@ -1,5 +1,4 @@
-body
-{
+body {
     font-family: sans-serif;
     line-height: 1.6;
     margin: auto;
@@ -10,8 +9,7 @@ body
     width: 100%;
 }
 
-a
-{
+a {
     display: inline-block;
     margin-top: 15px;
     padding-left: 10px;

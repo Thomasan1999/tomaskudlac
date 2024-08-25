@@ -1,19 +1,17 @@
-import {DeepReadonly} from 'ts-essentials';
+import { DeepReadonly } from 'ts-essentials';
 import skLocales from '@/locales/sk';
 import enLocales from '@/locales/en';
-import {ImageFormat, InitializingState, SiteLanguage} from '@/store/types';
-import {ProgrammingLanguage} from '@/store/ProgrammingLanguage';
+import { ImageFormat, InitializingState, SiteLanguage } from '@/store/types';
+import { ProgrammingLanguage } from '@/store/ProgrammingLanguage';
 import dayjs from 'dayjs';
-import {defineStore} from 'pinia';
+import { defineStore } from 'pinia';
 
 /** Global store of the application. */
 const useStore = defineStore('main', {
     actions: {
         /** Initializes the store. Must be run before the app is mounted. Must be run only once. */
-        async init(): Promise<void>
-        {
-            if (this.initState !== InitializingState.NOT_INITIALIZED)
-            {
+        async init(): Promise<void> {
+            if (this.initState !== InitializingState.NOT_INITIALIZED) {
                 return;
             }
 
@@ -26,26 +24,22 @@ const useStore = defineStore('main', {
             this.initState = InitializingState.INITIALIZED;
         },
         /** Determines the preferred image format of all images. Checks if WebP is supported, if not, JPEG is used. */
-        async getImageFormat(): Promise<ImageFormat>
-        {
-            return new Promise((resolve) =>
-            {
+        async getImageFormat(): Promise<ImageFormat> {
+            return new Promise((resolve) => {
                 const webP = new Image();
-                webP.onload = webP.onerror = function ()
-                {
+                webP.onload = webP.onerror = function () {
                     resolve(webP.height === 2 ? ImageFormat.WEBP : ImageFormat.JPG);
                 };
                 // eslint-disable-next-line max-len
-                webP.src = 'data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA';
+                webP.src =
+                    'data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA';
             });
         },
         /** Initializes the function which checks for the preferred image format. */
-        async initImageFormat(): Promise<void>
-        {
+        async initImageFormat(): Promise<void> {
             let imageFormat = localStorage.getItem('imageFormat') as ImageFormat | null;
 
-            if (!imageFormat)
-            {
+            if (!imageFormat) {
                 imageFormat = await this.getImageFormat();
                 localStorage.setItem('imageFormat', imageFormat);
             }
@@ -53,20 +47,17 @@ const useStore = defineStore('main', {
             this.imageFormat = imageFormat;
         },
         /** Initializes global event listeners. */
-        async initListeners(): Promise<void>
-        {
+        async initListeners(): Promise<void> {
             this.onWindowResize = this.onWindowResize.bind(this);
 
             window.addEventListener('resize', this.onWindowResize);
         },
-        async onWindowResize(): Promise<void>
-        {
+        async onWindowResize(): Promise<void> {
             this.windowHeight = window.innerHeight;
             this.windowWidth = window.innerWidth;
         },
         /** Updates the current age. Fired on store initialization and birthday. */
-        async updateAge(): Promise<void>
-        {
+        async updateAge(): Promise<void> {
             /** @description Birth date of Tomáš Kudláč. */
             const birthDate: string = '1999-06-30T08:30:00+02:00';
 
@@ -80,114 +71,106 @@ const useStore = defineStore('main', {
             const timeUntilNextBirthday = nextBirthday.diff(now);
 
             // prevent using higher value than allowed by Node.js
-            if (timeUntilNextBirthday > 2 ** 32) 
-            {
+            if (timeUntilNextBirthday > 2 ** 32) {
                 return;
             }
 
-            setTimeout(() =>
-            {
+            setTimeout(() => {
                 this.updateAge();
             }, timeUntilNextBirthday);
-        }
+        },
     },
     getters: {
-        initialized(): boolean
-        {
+        initialized(): boolean {
             return this.initState === InitializingState.INITIALIZED;
         },
-        isTouchscreen(): boolean
-        {
+        isTouchscreen(): boolean {
             return this.windowWidth < 1024;
         },
         /** List of programming languages joined by commas. */
-        programmingLanguagesString(): string
-        {
-            return this.programmingLanguages
-                .map((language) => language.toString())
-                .join(', ');
-        }
+        programmingLanguagesString(): string {
+            return this.programmingLanguages.map((language) => language.toString()).join(', ');
+        },
     },
-    state()
-    {
+    state() {
         return {
             /** The scrolled page section. */
-            activeSection: undefined as (string | undefined),
+            activeSection: undefined as string | undefined,
             /** The current age of Tomáš Kudláč. */
             age: null as any as number,
             /** The preferred image format of images. */
             imageFormat: ImageFormat.WEBP,
             initState: InitializingState.NOT_INITIALIZED,
             language: 'sk' as SiteLanguage,
-            locales: null as any as (typeof skLocales | typeof enLocales),
+            locales: null as any as typeof skLocales | typeof enLocales,
             navbarHeight: 60,
             programmingLanguages: [
                 {
                     children: [
                         {
                             home: true,
-                            title: 'Vue.js'
+                            title: 'Vue.js',
                         },
                         {
                             home: true,
-                            title: 'TypeScript'
+                            title: 'TypeScript',
                         },
                         {
                             home: true,
-                            title: 'Node.js'
-                        }
+                            title: 'Node.js',
+                        },
                     ],
                     home: true,
-                    title: 'JS'
+                    title: 'JS',
                 },
                 {
                     an: true,
                     home: true,
-                    title: 'HTML'
+                    title: 'HTML',
                 },
                 {
                     children: [
                         {
-                            title: 'Stylus'
+                            title: 'Stylus',
                         },
                         {
-                            title: 'SCSS'
+                            title: 'SCSS',
                         },
                         {
-                            title: 'Less'
-                        }
+                            title: 'Less',
+                        },
                     ],
                     home: true,
-                    title: 'CSS'
+                    title: 'CSS',
                 },
                 {
                     children: [
                         {
                             home: true,
-                            title: 'PostgreSQL'
-                        }
+                            title: 'PostgreSQL',
+                        },
                     ],
-                    title: 'SQL'
+                    title: 'SQL',
                 },
                 {
                     children: [
                         {
                             home: true,
-                            title: 'MongoDB'
-                        }
+                            title: 'MongoDB',
+                        },
                     ],
-                    title: 'NoSQL'
+                    title: 'NoSQL',
                 },
                 {
                     home: true,
-                    title: 'PHP'
-                }
+                    title: 'PHP',
+                },
             ].map((language) => new ProgrammingLanguage(language)) as DeepReadonly<ProgrammingLanguage[]>,
             scrollbarWidth: window.innerWidth > 1023 ? 17 : 0,
             windowHeight: window.innerHeight,
-            windowWidth: window.innerWidth
+            windowWidth: window.innerWidth,
         };
-    }
+    },
 });
 
 export default useStore;

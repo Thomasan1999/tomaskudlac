@@ -1,50 +1,44 @@
-import {Pinia} from 'pinia';
+import { Pinia } from 'pinia';
 import mockInitStore from '@/mocks/mockInitStore';
-import {DOMWrapper, flushPromises, mount, VueWrapper} from '@vue/test-utils';
+import { DOMWrapper, flushPromises, mount, VueWrapper } from '@vue/test-utils';
 import ContactForm from '@/components/main/contact/ContactForm.vue';
 import ContactFormField from '@/components/main/contact/ContactFormField.vue';
 import Toast from '@/components/main/Toast.vue';
 import contactFormFields from '@/components/main/contact/contactFormFields';
-import {cloneDeep, merge} from 'lodash';
-import {getTestingSelector} from "@/utils/test";
-import {nextTick} from "vue";
-import {afterEach} from "vitest";
+import { cloneDeep, merge } from 'lodash';
+import { getTestingSelector } from '@/utils/test';
+import { nextTick } from 'vue';
+import { afterEach } from 'vitest';
 
-async function awaitSubmit(wrapper: Omit<DOMWrapper<HTMLFormElement>, 'exists'>): Promise<void>
-{
+async function awaitSubmit(wrapper: Omit<DOMWrapper<HTMLFormElement>, 'exists'>): Promise<void> {
     wrapper.trigger('submit');
     await flushPromises();
 }
 
-window.fetch = () => (
-    new Promise(
-        (resolve) => resolve({
-            json: async () =>
-            {
+window.fetch = () =>
+    new Promise((resolve) =>
+        resolve({
+            json: async () => {
                 return {};
             },
             ok: true,
-            status: 200
-        } as any)
-    )
-);
+            status: 200,
+        } as any),
+    );
 
 const fetchSpy = vi.spyOn(window, 'fetch');
 const resetSpy = vi.spyOn(HTMLFormElement.prototype, 'reset');
 
 const defaultFormFields = cloneDeep(contactFormFields);
 
-describe('ContactForm', () =>
-{
+describe('ContactForm', () => {
     let pinia: Pinia;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         pinia = await mockInitStore();
     });
 
-    beforeEach(() =>
-    {
+    beforeEach(() => {
         fetchSpy.mockClear();
 
         merge(contactFormFields, defaultFormFields);
@@ -54,34 +48,29 @@ describe('ContactForm', () =>
         vi.clearAllMocks();
     });
 
-    function createContactFormWrapper(): VueWrapper
-    {
+    function createContactFormWrapper(): VueWrapper {
         return mount(ContactForm, {
             global: {
                 plugins: [pinia],
-                stubs: ['Toast']
-            }
+                stubs: ['Toast'],
+            },
         });
     }
 
-    function getFieldTestingSelector(name: string): string
-    {
+    function getFieldTestingSelector(name: string): string {
         return getTestingSelector(`field-${name}`);
     }
 
-    describe('validation', () =>
-    {
+    describe('validation', () => {
         async function expectInputToHaveValidity(
             fieldName: string,
-            testCases: { value: string, validity: boolean }[],
-        ): Promise<void>
-        {
+            testCases: { value: string; validity: boolean }[],
+        ): Promise<void> {
             const wrapper = createContactFormWrapper();
 
             const field = wrapper.getComponent<typeof ContactFormField>(getFieldTestingSelector(fieldName));
 
-            for (const {value, validity} of testCases)
-            {
+            for (const { value, validity } of testCases) {
                 await field.find(`[name=${fieldName}]`).setValue(value);
                 await nextTick();
 
@@ -89,66 +78,58 @@ describe('ContactForm', () =>
             }
         }
 
-        it('validates email', async () =>
-        {
+        it('validates email', async () => {
             await expectInputToHaveValidity('email', [
-                {value: '', validity: false},
-                {value: 'email', validity: false},
-                {value: 'name.surname@email.com', validity: true},
-                {value: 'name.surname@emailcom', validity: false},
-                {value: 'name.surnameemailcom@', validity: false},
-                {value: 'namesurname123@email.com', validity: true},
-                {value: 'namesurname123@email.com'.repeat(100), validity: false},
+                { value: '', validity: false },
+                { value: 'email', validity: false },
+                { value: 'name.surname@email.com', validity: true },
+                { value: 'name.surname@emailcom', validity: false },
+                { value: 'name.surnameemailcom@', validity: false },
+                { value: 'namesurname123@email.com', validity: true },
+                { value: 'namesurname123@email.com'.repeat(100), validity: false },
             ]);
         });
 
-        it('validates message', async () =>
-        {
+        it('validates message', async () => {
             await expectInputToHaveValidity('message', [
-                {value: '', validity: false},
-                {value: 'Random text', validity: true},
-                {value: 'A', validity: true},
-                {value: 'Another text', validity: true},
-                {value: '#@3456736', validity: true},
+                { value: '', validity: false },
+                { value: 'Random text', validity: true },
+                { value: 'A', validity: true },
+                { value: 'Another text', validity: true },
+                { value: '#@3456736', validity: true },
             ]);
         });
 
-        it('validates phone number', async () =>
-        {
+        it('validates phone number', async () => {
             await expectInputToHaveValidity('phone', [
-                {value: '', validity: true},
-                {value: 'Phone Number', validity: false},
-                {value: '0123456789', validity: true},
-                {value: '0123 456 789', validity: true},
-                {value: '+0123456789', validity: true},
+                { value: '', validity: true },
+                { value: 'Phone Number', validity: false },
+                { value: '0123456789', validity: true },
+                { value: '0123 456 789', validity: true },
+                { value: '+0123456789', validity: true },
             ]);
         });
 
-        it('validates name', async () =>
-        {
+        it('validates name', async () => {
             await expectInputToHaveValidity('name', [
-                {value: '', validity: true},
-                {value: 'Name Surname', validity: true},
-                {value: 'Name# Surname', validity: false},
-                {value: 'Name__Surname', validity: false},
-                {value: 'NameSurname', validity: true},
-                {value: '$$$$$$', validity: false},
-                {value: 'Ňámě Śúřňämě', validity: true},
+                { value: '', validity: true },
+                { value: 'Name Surname', validity: true },
+                { value: 'Name# Surname', validity: false },
+                { value: 'Name__Surname', validity: false },
+                { value: 'NameSurname', validity: true },
+                { value: '$$$$$$', validity: false },
+                { value: 'Ňámě Śúřňämě', validity: true },
             ]);
         });
     });
 
-    describe('submit', () =>
-    {
-        it('touches fields on submit', async () =>
-        {
+    describe('submit', () => {
+        it('touches fields on submit', async () => {
             const wrapper = createContactFormWrapper();
 
             const fields = wrapper.findAllComponents(ContactFormField);
 
-            const requiredField = fields.find((field) => (
-                field.get('input').element.required
-            ))!;
+            const requiredField = fields.find((field) => field.get('input').element.required)!;
 
             const classNameBeforeSubmit = requiredField.element.className;
 
@@ -160,14 +141,12 @@ describe('ContactForm', () =>
             expect(classNameBeforeSubmit).not.toBe(requiredField.element.className);
         });
 
-        async function makeFormSubmittable(formWrapper: Omit<DOMWrapper<HTMLFormElement>, 'exists'>): Promise<void>
-        {
+        async function makeFormSubmittable(formWrapper: Omit<DOMWrapper<HTMLFormElement>, 'exists'>): Promise<void> {
             await formWrapper.get('input[type=email]').setValue('name.surname@email.com');
             await formWrapper.get('textarea').setValue('Random message');
         }
 
-        it('does not submit if fields are invalid', async () =>
-        {
+        it('does not submit if fields are invalid', async () => {
             const wrapper = createContactFormWrapper();
 
             expect(fetchSpy).not.toHaveBeenCalled();
@@ -185,8 +164,7 @@ describe('ContactForm', () =>
             expect(fetchSpy).toHaveBeenCalled();
         });
 
-        it('submits site language', async () =>
-        {
+        it('submits site language', async () => {
             const wrapper = createContactFormWrapper();
 
             expect(fetchSpy).not.toHaveBeenCalled();
@@ -196,8 +174,7 @@ describe('ContactForm', () =>
             expect(formWrapper.find('input[name=lang]').exists()).toBe(true);
         });
 
-        it('displays toast message on form submit', async () =>
-        {
+        it('displays toast message on form submit', async () => {
             const wrapper = createContactFormWrapper();
 
             expect(wrapper.findComponent(Toast).exists()).toBe(false);
@@ -211,8 +188,7 @@ describe('ContactForm', () =>
             expect(wrapper.findComponent(Toast).exists()).toBe(true);
         });
 
-        it('resets form after successful submit', async () =>
-        {
+        it('resets form after successful submit', async () => {
             const wrapper = createContactFormWrapper();
 
             const formWrapper = wrapper.get('form');
@@ -229,16 +205,17 @@ describe('ContactForm', () =>
 
             expect(resetSpy).not.toHaveBeenCalled();
 
-            fetchSpy.mockResolvedValueOnce(new Promise(
-                (resolve) => resolve({
-                    json: async () =>
-                    {
-                        return {};
-                    },
-                    ok: true,
-                    status: 200
-                } as any)
-            ) as never);
+            fetchSpy.mockResolvedValueOnce(
+                new Promise((resolve) =>
+                    resolve({
+                        json: async () => {
+                            return {};
+                        },
+                        ok: true,
+                        status: 200,
+                    } as any),
+                ) as never,
+            );
 
             await awaitSubmit(formWrapper);
 

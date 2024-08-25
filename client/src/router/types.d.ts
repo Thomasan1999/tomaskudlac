@@ -1,14 +1,12 @@
-import {SiteLanguage} from '@/store/types';
+import { SiteLanguage } from '@/store/types';
 
-declare module 'vue-router'
-{
-    interface RouteMeta
-    {
+declare module 'vue-router' {
+    interface RouteMeta {
         /** Content of meta[name=description] */
-        description: string,
+        description: string;
         /** The site language. */
-        language: SiteLanguage,
+        language: SiteLanguage;
         /** The document title. */
-        title: string
+        title: string;
     }
 }

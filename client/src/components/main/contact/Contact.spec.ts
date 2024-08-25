@@ -1,29 +1,25 @@
-import {mount, VueWrapper} from '@vue/test-utils';
-import {Pinia} from 'pinia';
+import { mount, VueWrapper } from '@vue/test-utils';
+import { Pinia } from 'pinia';
 import mockInitStore from '@/mocks/mockInitStore';
 import Contact from '@/components/main/contact/Contact.vue';
 
-describe('Contact', () =>
-{
+describe('Contact', () => {
     let pinia: Pinia;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         pinia = await mockInitStore();
     });
 
-    function createContactWrapper(): VueWrapper
-    {
+    function createContactWrapper(): VueWrapper {
         return mount(Contact, {
             global: {
                 plugins: [pinia],
-                stubs: ['ContactForm']
-            }
+                stubs: ['ContactForm'],
+            },
         });
     }
 
-    it('has heading', () =>
-    {
+    it('has heading', () => {
         const contactWrapper = createContactWrapper();
 
         const headingElement = contactWrapper.find('h1, h2, h3, h4, h5, h6');
@@ -31,8 +27,7 @@ describe('Contact', () =>
         expect(headingElement.exists()).toBe(true);
     });
 
-    it('renders brief text', () =>
-    {
+    it('renders brief text', () => {
         const contactWrapper = createContactWrapper();
 
         const briefTextElement = contactWrapper.find('[data-testid="briefText"]');

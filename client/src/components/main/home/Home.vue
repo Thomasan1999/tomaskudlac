@@ -5,7 +5,7 @@
         name="home"
     >
         <div class="text-content">
-            <HomeText/>
+            <HomeText />
         </div>
     </MainSection>
 </template>
@@ -13,7 +13,7 @@
 <script lang="ts" setup>
     import MainSection from '@/components/main/MainSection.vue';
     import HomeText from '@/components/main/home/HomeText.vue';
-    import {computed} from 'vue';
+    import { computed } from 'vue';
     import useStore from '@/store';
 
     const store = useStore();
@@ -22,8 +22,7 @@
 </script>
 
 <style lang="scss" scoped>
-    .home
-    {
+    .home {
         --navbar-height: 60px;
 
         align-items: center;
@@ -34,30 +33,24 @@
         padding-top: var(--navbar-height);
         position: relative;
 
-        &.image-format-webp
-        {
-            &:after
-            {
+        &.image-format-webp {
+            &:after {
                 background-image: url('/images/background-home.webp');
             }
         }
 
-        &.image-format-jpg
-        {
-            &:after
-            {
+        &.image-format-jpg {
+            &:after {
                 background-image: url('/images/background-home.jpg');
             }
         }
 
-        &:before
-        {
-            background-color: rgba(14, 33, 175, .55);
+        &:before {
+            background-color: rgba(14, 33, 175, 0.55);
             z-index: 0;
         }
 
-        &:after
-        {
+        &:after {
             background-attachment: fixed;
             background-position: 50%;
             background-size: cover;

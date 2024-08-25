@@ -1,9 +1,7 @@
 import getMetaElement from '@/utils/getMetaElement';
 
-describe('getMetaElement', () =>
-{
-    beforeAll(() =>
-    {
+describe('getMetaElement', () => {
+    beforeAll(() => {
         document.head.innerHTML = `
         <meta name="random" content="Aaa">
         <link rel="stylesheet" href="main.css">
@@ -11,8 +9,7 @@ describe('getMetaElement', () =>
        `;
     });
 
-    it('creates element if does not exist', () =>
-    {
+    it('creates element if does not exist', () => {
         let metaTag = document.querySelector<HTMLMetaElement>('meta[name="description"]');
 
         expect(metaTag).toBeNull();
@@ -23,8 +20,7 @@ describe('getMetaElement', () =>
         expect(metaTag.name).toBe('description');
     });
 
-    it('returns the right HTML element', () =>
-    {
+    it('returns the right HTML element', () => {
         document.head.innerHTML = `${document.head.innerHTML}<meta name="robots" content="noindex">`;
 
         const metaTag = getMetaElement('robots');

@@ -1,3 +1,3 @@
-import {DOMWrapper} from '@vue/test-utils';
+import { DOMWrapper } from '@vue/test-utils';
 
-export type ExistingDomWrapper<ElementType = typeof Element> = Omit<DOMWrapper<ElementType>, 'exists'>
+export type ExistingDomWrapper<ElementType = typeof Element> = Omit<DOMWrapper<ElementType>, 'exists'>;
