@@ -26,6 +26,10 @@
     @import url('https://fonts.googleapis.com/css?family=Raleway:300,400,500,700|Montserrat&display=swap');
     @import 'reset';
 
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
+
     #app {
         --base-line-height: 1.6;
 
