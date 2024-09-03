@@ -1,8 +1,13 @@
 {
     "version": "0.0.0",
     "scripts": {
-        "serve": "vite",
+        "serve": "run-p serve:vite build:vue-dts:watch",
+        "serve:vite": "vite",
         "build": "vite build --emptyOutDir",
+        "build:vue-dts": "run-s -c build:vue-dts:base build:vue-dts:filter",
+        "build:vue-dts:base": "vue-tsc -p tsconfig.build-vue-dts.json",
+        "build:vue-dts:filter": "node --loader ts-node/esm scripts/filterDtsFiles.ts",
+        "build:vue-dts:watch": "npm run build:vue-dts:base -- --watch",
         "test:run": "vitest --run",
         "test:watch": "vitest -w",
         "lint": "eslint",
@@ -45,7 +50,9 @@
         "eslint-import-resolver-typescript": "3.6.1",
         "eslint-plugin-import": "2.29.1",
         "eslint-plugin-vue": "9.27.0",
+        "glob": "11.0.0",
         "lint-staged": "15.2.9",
+        "npm-run-all": "4.1.5",
         "puppeteer": "23.1.0",
         "sass": "1.77.8",
         "tailwindcss": "3.4.10",
@@ -58,6 +65,7 @@
         "vite-plugin-html": "3.2.2",
         "vite-plugin-pwa": "0.20.1",
         "vitest": "2.0.5",
-        "vue-tsc": "2.0.29"
-    }
+        "vue-tsc": "2.1.4"
+    },
+    "type": "module"
 }

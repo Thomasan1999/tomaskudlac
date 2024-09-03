@@ -26,7 +26,6 @@ format for compatibility reasons. The project is modularized, which means the co
     |   ├── main.ts                     # Entry file of the application.
     |   ├── register-service-worker.ts  # Registers a service worker.
     |   ├── router.ts                   # Routes.
-    |   └── shims-vue.d.ts              # TS definition for .vue files.
     |   └── vite-env.d.ts               # TS definition for custom env variables.
     ├── .editorconfig               # Config of an IDE.
     ├── .gitignore                  # List of files to be ignored by Git.
@@ -35,6 +34,7 @@ format for compatibility reasons. The project is modularized, which means the co
     ├── package-lock.json           # Project metadata.
     ├── README.md                   # Project description.
     ├── tsconfig.json               # Config of the TypeScript compiler.
+    ├── tsconfig.build-vue-dts.json # Config of the TypeScript compiler when building Vue TS definition files.
     └── vite.config.mts             # Config of Vite.
     └── vitest.config.mts           # Config of Vitest.
 

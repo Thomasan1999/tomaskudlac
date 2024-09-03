@@ -17,7 +17,7 @@
 
     const locales = computed(() => store.locales.sections.contact.form.errors);
 
-    const message = computed(() => locales.value[props.error!]);
+    const message = computed(() => locales.value[props.error]);
 </script>
 
 <style lang="scss" scoped>
