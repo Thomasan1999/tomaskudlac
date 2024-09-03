@@ -6,6 +6,7 @@
         "test:run": "vitest --run",
         "test:watch": "vitest -w",
         "lint": "eslint",
+        "lint:fix": "eslint --fix",
         "format": "prettier . -write",
         "pre-commit": "lint-staged"
     },
