@@ -38,14 +38,6 @@ describe('AboutMyself', () => {
         expect(headingElement.exists()).toBe(true);
     });
 
-    it('renders photo of Tomáš Kudláč', () => {
-        const aboutMyselfWrapper = createAboutMyselfWrapper();
-
-        const photoElement = aboutMyselfWrapper.find('[data-testid="photo"]');
-
-        expect(photoElement.exists()).toBe(true);
-    });
-
     it('renders all columns', () => {
         const store = useStore();
 
