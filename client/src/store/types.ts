@@ -13,3 +13,13 @@ export enum SiteLanguage {
     EN = 'en',
     SK = 'sk',
 }
+
+export enum ToastType {
+    FAIL = 'fail',
+    SUCCESS = 'success',
+}
+
+export interface ToastData {
+    message: string;
+    type: ToastType;
+}

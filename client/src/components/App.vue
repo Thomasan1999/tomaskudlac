@@ -3,11 +3,13 @@
         v-if="initialized"
         :style="`--scrollbar-width: ${scrollbarWidth}px; --vh: ${windowHeight / 100}px`"
     />
+    <ToastContainer />
 </template>
 
 <script lang="ts" setup>
     import useStore from '@/store';
     import { computed, ref } from 'vue';
+    import ToastContainer from '@/components/main/ToastContainer.vue';
 
     const store = useStore();
 

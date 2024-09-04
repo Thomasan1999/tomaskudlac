@@ -1,6 +1,7 @@
 import { mount, VueWrapper } from '@vue/test-utils';
 import { DeepPartial } from 'ts-essentials';
 import { merge } from 'lodash';
+import { nextTick } from 'vue';
 
 function getTestingSelector(id: string): string {
     return `[data-testid="${id}"]`;
@@ -28,4 +29,9 @@ function buildCreateWrapper<
         });
 }
 
-export { getTestingSelector, buildSetProps, buildCreateWrapper };
+async function emitComponentEvent(wrapper: VueWrapper, eventName: string): Promise<void> {
+    wrapper.vm.$emit(eventName);
+    await nextTick();
+}
+
+export { getTestingSelector, buildSetProps, buildCreateWrapper, emitComponentEvent };

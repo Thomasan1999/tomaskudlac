@@ -3,12 +3,12 @@ import mockInitStore from '@/mocks/mockInitStore';
 import { DOMWrapper, flushPromises, mount, VueWrapper } from '@vue/test-utils';
 import ContactForm from '@/components/main/contact/ContactForm.vue';
 import ContactFormField from '@/components/main/contact/ContactFormField.vue';
-import Toast from '@/components/main/Toast.vue';
 import contactFormFields from '@/components/main/contact/contactFormFields';
 import { cloneDeep, merge } from 'lodash';
 import { getTestingSelector } from '@/utils/test';
 import { nextTick } from 'vue';
 import { afterEach } from 'vitest';
+import useStore from '@/store';
 
 async function awaitSubmit(wrapper: Omit<DOMWrapper<HTMLFormElement>, 'exists'>): Promise<void> {
     wrapper.trigger('submit');
@@ -33,9 +33,11 @@ const defaultFormFields = cloneDeep(contactFormFields);
 
 describe('ContactForm', () => {
     let pinia: Pinia;
+    let store: ReturnType<typeof useStore>;
 
     beforeAll(async () => {
         pinia = await mockInitStore();
+        store = useStore();
     });
 
     beforeEach(() => {
@@ -52,7 +54,6 @@ describe('ContactForm', () => {
         return mount(ContactForm, {
             global: {
                 plugins: [pinia],
-                stubs: ['Toast'],
             },
         });
     }
@@ -175,9 +176,11 @@ describe('ContactForm', () => {
         });
 
         it('displays toast message on form submit', async () => {
+            const addToastSpy = vi.spyOn(store, 'addToast');
+
             const wrapper = createContactFormWrapper();
 
-            expect(wrapper.findComponent(Toast).exists()).toBe(false);
+            expect(addToastSpy).not.toHaveBeenCalled();
 
             const formWrapper = wrapper.get('form');
 
@@ -185,7 +188,7 @@ describe('ContactForm', () => {
 
             await awaitSubmit(formWrapper);
 
-            expect(wrapper.findComponent(Toast).exists()).toBe(true);
+            expect(addToastSpy).toHaveBeenCalledTimes(1);
         });
 
         it('resets form after successful submit', async () => {

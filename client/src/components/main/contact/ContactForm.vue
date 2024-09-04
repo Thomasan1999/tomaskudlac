@@ -31,21 +31,15 @@
             </button>
         </div>
     </form>
-    <Toast
-        v-for="(toast, toastIndex) in toasts"
-        :message="locales.apiMessages[toast.messageType] ?? locales.apiMessages['Unable to send the email']"
-        :type="toast.type"
-        @close="toasts.splice(toastIndex, 1)"
-    />
 </template>
 
 <script lang="ts" setup>
-    import { computed, reactive, ref } from 'vue';
+    import { computed, ref } from 'vue';
     import useStore from '@/store';
     import ContactFormField from '@/components/main/contact/ContactFormField.vue';
-    import Toast from '@/components/main/Toast.vue';
     import contactFormFields from '@/components/main/contact/contactFormFields';
     import type { ContactFormFieldData } from '@/components/main/contact/types';
+    import { ToastType } from '@/store/types';
 
     const store = useStore();
 
@@ -58,17 +52,25 @@
             return;
         }
 
+        const { apiMessages } = locales.value;
+
         return fetch(form.action, { body: new FormData(form), method: form.method })
             .then(async (res) => {
                 if (res.status >= 400) {
                     throw new Error(await res.text());
                 }
 
-                toasts.push({ messageType: 'success', type: 'success' });
+                store.addToast({
+                    message: apiMessages.success,
+                    type: ToastType.SUCCESS,
+                });
                 form.reset();
             })
             .catch((err: Error) => {
-                toasts.push({ messageType: err.message, type: 'fail' });
+                store.addToast({
+                    message: apiMessages[err.message] ?? apiMessages['Unable to send the email'],
+                    type: ToastType.FAIL,
+                });
             });
     };
 
@@ -86,8 +88,6 @@
     const fields = contactFormFields;
 
     const root = ref<HTMLFormElement>();
-
-    const toasts = reactive<{ messageType: string; type: 'fail' | 'success' }[]>([]);
 
     const disabled = computed(() => touched.value && !valid.value);
 

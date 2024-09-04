@@ -1,7 +1,7 @@
 import { DeepReadonly } from 'ts-essentials';
 import skLocales from '@/locales/sk';
 import enLocales from '@/locales/en';
-import { ImageFormat, InitializingState, SiteLanguage } from '@/store/types';
+import { ImageFormat, InitializingState, SiteLanguage, ToastData } from '@/store/types';
 import { ProgrammingLanguage } from '@/store/ProgrammingLanguage';
 import dayjs from 'dayjs';
 import { defineStore } from 'pinia';
@@ -22,6 +22,9 @@ const useStore = defineStore('main', {
             await this.initImageFormat();
 
             this.initState = InitializingState.INITIALIZED;
+        },
+        addToast(toast: ToastData): void {
+            this.toasts.push(toast);
         },
         /** Determines the preferred image format of all images. Checks if WebP is supported, if not, JPEG is used. */
         async getImageFormat(): Promise<ImageFormat> {
@@ -51,6 +54,9 @@ const useStore = defineStore('main', {
             this.onWindowResize = this.onWindowResize.bind(this);
 
             window.addEventListener('resize', this.onWindowResize);
+        },
+        removeToast(toastIndex: number): void {
+            this.toasts.splice(toastIndex, 1);
         },
         async onWindowResize(): Promise<void> {
             this.windowHeight = window.innerHeight;
@@ -167,6 +173,7 @@ const useStore = defineStore('main', {
                 },
             ].map((language) => new ProgrammingLanguage(language)) as DeepReadonly<ProgrammingLanguage[]>,
             scrollbarWidth: window.innerWidth > 1023 ? 17 : 0,
+            toasts: [] as ToastData[],
             windowHeight: window.innerHeight,
             windowWidth: window.innerWidth,
         };
