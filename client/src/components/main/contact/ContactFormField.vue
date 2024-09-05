@@ -5,7 +5,7 @@
         :class="{ 'has-error': error }"
     >
         <span
-            class="contact-form-label"
+            class="contact-form-label w-label"
             data-testid="label"
         >
             {{ label }}:
@@ -19,7 +19,7 @@
         </span>
         <Component
             :is="element"
-            class="contact-form-data"
+            class="contact-form-data flex-grow"
             :class="[`contact-form-${element}`]"
             :minlength="minlength"
             :maxlength="maxlength"
@@ -148,7 +148,6 @@
     .contact-form-label {
         line-height: var(--contact-form-input-height);
         text-align: right;
-        width: var(--contact-form-label-width);
 
         @media (max-width: 1023px) {
             text-align: left;
@@ -175,17 +174,14 @@
         box-sizing: border-box;
         color: currentColor;
         display: flex;
-        flex-grow: 1;
         font: inherit;
         line-height: var(--contact-form-line-height);
-        max-width: calc(var(--contact-form-max-width) - var(--contact-form-label-width));
         outline: none;
         overflow: auto;
         padding-bottom: var(--contact-form-data-padding-vertical);
         padding-left: 15px;
         padding-top: var(--contact-form-data-padding-vertical);
         resize: none;
-        width: calc(100% - var(--contact-form-label-width));
 
         @media (max-width: 1023px) {
             max-width: 100%;

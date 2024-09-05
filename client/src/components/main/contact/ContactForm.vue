@@ -1,6 +1,6 @@
 <template>
     <form
-        class="contact-form"
+        class="contact-form -ml-label"
         action="/contact-form/send-mail"
         method="post"
         ref="root"
@@ -19,17 +19,10 @@
             name="lang"
             :value="language"
         />
-        <div class="contact-form-bottom-part">
-            <p class="contact-form-required-legend">{{ locales.requiredLegend }}</p>
-            <button
-                class="contact-form-submit"
-                :disabled="disabled"
-                :title="submitTitle"
-                @click="touch"
-            >
-                {{ locales.submitLabel }}
-            </button>
-        </div>
+        <ContactFormBottomPart
+            :formValid="valid"
+            :submitDisabled="submitDisabled"
+        />
     </form>
 </template>
 
@@ -40,6 +33,7 @@
     import contactFormFields from '@/components/main/contact/contactFormFields';
     import type { ContactFormFieldData } from '@/components/main/contact/types';
     import { ToastType } from '@/store/types';
+    import ContactFormBottomPart from '@/components/main/contact/ContactFormBottomPart.vue';
 
     const store = useStore();
 
@@ -89,13 +83,11 @@
 
     const root = ref<HTMLFormElement>();
 
-    const disabled = computed(() => touched.value && !valid.value);
+    const submitDisabled = computed(() => touched.value && !valid.value);
 
     const language = computed(() => store.language);
 
     const locales = computed(() => store.locales.sections.contact.form);
-
-    const submitTitle = computed(() => (valid.value ? locales.value.submitTitle : locales.value.submitTitleDisabled));
 
     const touched = computed(() => fields.some((field) => field.touched));
 
@@ -114,47 +106,12 @@
         font-family: var(--contact-form-font-family);
         flex-direction: column;
         gap: 20px;
-        margin-left: calc(var(--contact-form-label-width) * -1);
         max-width: var(--contact-form-max-width);
         width: 100%;
 
         @media (max-width: 1023px) {
             margin-left: 0;
             max-width: none;
-        }
-    }
-
-    .contact-form-submit {
-        background-color: var(--primary-color);
-        font-size: var(--big-text-font-size);
-        height: 50px;
-        max-width: 200px;
-        transition:
-            background-color var(--base-transition-duration),
-            color var(--base-transition-duration);
-        width: 100%;
-
-        &:hover:not([disabled]) {
-            background-color: var(--primary-color-light);
-        }
-
-        &[disabled] {
-            background-color: #cccccc;
-            color: #666666;
-            cursor: not-allowed;
-        }
-    }
-
-    .contact-form-bottom-part {
-        align-items: center;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        gap: 25px;
-        margin-left: var(--contact-form-label-width);
-
-        @media (max-width: 1023px) {
-            margin-left: 0;
         }
     }
 </style>

@@ -10,3 +10,8 @@ export type ContactFormFieldData = {
     valid: boolean;
     value: string;
 };
+
+export interface ContactFormBottomPartProps {
+    formValid: boolean;
+    submitDisabled: boolean;
+}
