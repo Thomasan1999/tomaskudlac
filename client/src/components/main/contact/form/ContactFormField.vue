@@ -30,24 +30,19 @@
     import useStore from '@/store';
     import { Merge } from 'ts-essentials';
     import ContactFormFieldError from '@/components/main/contact/form/ContactFormFieldError.vue';
-    import { ContactFormFieldElement, ContactFormFieldType } from '@/components/main/contact/form/types';
+    import {
+        ContactFormFieldElement,
+        ContactFormFieldProps,
+        ContactFormFieldType,
+    } from '@/components/main/contact/form/types';
     import ContactFormLabelText from '@/components/main/contact/form/ContactFormLabelText.vue';
 
-    const props = withDefaults(
-        defineProps<{
-            element?: ContactFormFieldElement;
-            label: string;
-            maxlength?: number;
-            minlength?: number;
-            name: string;
-            pattern?: RegExp;
-            required?: boolean;
-            touched: boolean;
-            type?: ContactFormFieldType;
-            valid: boolean;
-        }>(),
-        { element: ContactFormFieldElement.INPUT, minlength: 0, required: false, type: ContactFormFieldType.TEXT },
-    );
+    const props = withDefaults(defineProps<ContactFormFieldProps>(), {
+        element: ContactFormFieldElement.INPUT,
+        minlength: 0,
+        required: false,
+        type: ContactFormFieldType.TEXT,
+    });
     const emit = defineEmits<{
         (event: 'blur'): void;
         (event: 'validSet', value: boolean): void;

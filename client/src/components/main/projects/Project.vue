@@ -44,8 +44,9 @@
     import useStore from '@/store';
     import { kebabCase } from 'lodash';
     import ExternalLink from '@/components/ExternalLink.vue';
+    import { ProjectProps } from '@/components/main/projects/types';
 
-    const props = defineProps<{ name: string }>();
+    const props = defineProps<ProjectProps>();
 
     const store = useStore();
 

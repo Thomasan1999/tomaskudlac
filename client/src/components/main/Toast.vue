@@ -29,8 +29,9 @@
     import useStore from '@/store';
     import { computed, onMounted, ref } from 'vue';
     import CloseIcon from '@/components/main/CloseIcon.vue';
+    import { ToastProps } from '@/components/main/types';
 
-    defineProps<{ message: string; type: 'fail' | 'success' }>();
+    defineProps<ToastProps>();
     defineEmits<{ (event: 'close'): void }>();
 
     const getRelativeMarginTop = (): string => {

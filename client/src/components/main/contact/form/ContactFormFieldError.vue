@@ -10,8 +10,9 @@
 <script lang="ts" setup>
     import { computed } from 'vue';
     import useStore from '@/store';
+    import { ContactFormFieldErrorProps } from '@/components/main/contact/form/types';
 
-    const props = defineProps<{ error?: string }>();
+    const props = defineProps<ContactFormFieldErrorProps>();
 
     const store = useStore();
 

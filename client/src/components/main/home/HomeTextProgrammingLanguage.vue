@@ -5,8 +5,9 @@
 
 <script lang="ts" setup>
     import { computed } from 'vue';
+    import { HomeTextProgrammingLanguageProps } from '@/components/main/home/types';
 
-    const props = defineProps<{ programmingLanguage: string }>();
+    const props = defineProps<HomeTextProgrammingLanguageProps>();
 
     const anPrefix = computed(() => {
         const programmingLanguage = props.programmingLanguage;

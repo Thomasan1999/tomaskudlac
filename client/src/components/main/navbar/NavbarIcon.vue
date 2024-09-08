@@ -26,8 +26,9 @@
 <script lang="ts" setup>
     import { computed } from 'vue';
     import useStore from '@/store';
+    import { NavbarIconProps } from '@/components/main/navbar/types';
 
-    const props = defineProps<{ mode: 'bars' | 'cross' }>();
+    const props = defineProps<NavbarIconProps>();
     const emit = defineEmits<{ (event: 'click'): void }>();
 
     const store = useStore();

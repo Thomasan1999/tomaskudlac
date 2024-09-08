@@ -19,8 +19,9 @@
 <script lang="ts" setup>
     import { computed, ref } from 'vue';
     import mainSections from '@/components/main/mainSections';
+    import { MainSectionProps } from '@/components/main/types';
 
-    const props = withDefaults(defineProps<{ heading?: boolean; name: string }>(), { heading: false });
+    const props = withDefaults(defineProps<MainSectionProps>(), { heading: false });
 
     const root = ref<HTMLDivElement | null>(null);
 

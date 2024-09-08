@@ -64,8 +64,9 @@
     import NavbarSocialNetwork from '@/components/main/navbar/NavbarSocialNetwork.vue';
     import NavbarIcon from '@/components/main/navbar/NavbarIcon.vue';
     import MainSectionObject from '@/components/main/MainSectionObject';
+    import { NavbarProps } from '@/components/main/navbar/types';
 
-    const props = defineProps<{ activeSection: string; sections: [string, MainSectionObject][] }>();
+    const props = defineProps<NavbarProps>();
     const emit = defineEmits<{
         (event: 'languageToggle'): void;
         (event: 'linkClick', sectionName: string): void;

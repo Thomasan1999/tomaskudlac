@@ -15,18 +15,9 @@
     import mainSections from '@/components/main/mainSections';
     import { computed } from 'vue';
     import ExternalLink from '@/components/ExternalLink.vue';
+    import { NavbarLinkProps } from '@/components/main/navbar/types';
 
-    const props = withDefaults(
-        defineProps<{
-            active?: boolean;
-            replace?: boolean;
-            routerLink?: boolean;
-            text?: string;
-            title: string;
-            to: string;
-        }>(),
-        { replace: false, routerLink: false },
-    );
+    const props = withDefaults(defineProps<NavbarLinkProps>(), { replace: false, routerLink: false });
     const emit = defineEmits<{ (event: 'click'): void }>();
 
     const onClick = ($event: MouseEvent) => {

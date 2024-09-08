@@ -19,13 +19,14 @@
     import NavbarLink from '@/components/main/navbar/NavbarLink.vue';
     import app from '@/app';
     import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+    import { NavbarSocialNetworkProps } from '@/components/main/navbar/types';
 
     if (!app.component('font-awesome-icon')) {
         app.component('font-awesome-icon', FontAwesomeIcon);
         library.add(faFacebookF, faGithub, faLinkedinIn, faEnvelope, faSmile, faTimes);
     }
 
-    defineProps<{ icon: [string, string]; title: string; to: string }>();
+    defineProps<NavbarSocialNetworkProps>();
 </script>
 
 <style lang="scss" scoped>

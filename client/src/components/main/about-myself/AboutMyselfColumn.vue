@@ -17,8 +17,9 @@
 <script lang="ts" setup>
     import { computed } from 'vue';
     import useStore from '@/store';
+    import { AboutMyselfColumnProps } from '@/components/main/about-myself/types';
 
-    const props = defineProps<{ title: string; text: string }>();
+    const props = defineProps<AboutMyselfColumnProps>();
 
     const store = useStore();
 
