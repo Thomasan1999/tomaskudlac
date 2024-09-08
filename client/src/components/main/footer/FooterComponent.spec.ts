@@ -4,7 +4,9 @@ import FooterComponent from '@/components/main/footer/FooterComponent.vue';
 import useStore from '@/store';
 import ExternalLink from '@/components/ExternalLink.vue';
 import { SiteLanguage } from '@/store/types';
-import { buildCreateWrapper } from '@/utils/test';
+import { buildCreateWrapper, getTestingSelector } from '@/utils/test';
+
+const COPYRIGHT_LINK_SELECTOR = getTestingSelector('copyrightLink');
 
 describe('FooterComponent', () => {
     beforeAll(async () => {
@@ -33,7 +35,7 @@ describe('FooterComponent', () => {
 
         expect(cookiesModal.exists()).toBe(false);
 
-        const copyrightLink = footerComponentWrapper.get('[data-testid="copyrightLink"]');
+        const copyrightLink = footerComponentWrapper.get(COPYRIGHT_LINK_SELECTOR);
 
         await copyrightLink.trigger('click');
 
@@ -51,7 +53,7 @@ describe('FooterComponent', () => {
 
         await nextTick();
 
-        const copyrightLink = footerComponentWrapper.findComponent<typeof ExternalLink>('[data-testid=copyrightLink]');
+        const copyrightLink = footerComponentWrapper.findComponent<typeof ExternalLink>(COPYRIGHT_LINK_SELECTOR);
 
         const copyrightLinkUrl = new URL((copyrightLink.element as HTMLAnchorElement).href);
 

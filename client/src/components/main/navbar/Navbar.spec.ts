@@ -5,8 +5,12 @@ import MainSectionObject from '@/components/main/MainSectionObject';
 import NavbarLink from '@/components/main/navbar/NavbarLink.vue';
 import mockWindowResizeBy from '@/mocks/mockWindowResizeBy';
 import mockInitStore from '@/mocks/mockInitStore';
-import { buildCreateWrapper, buildSetProps } from '@/utils/test';
+import { buildCreateWrapper, buildSetProps, getTestingSelector } from '@/utils/test';
 import { NavbarProps } from '@/components/main/navbar/types';
+
+const LOGO_SELECTOR = getTestingSelector('logo');
+const NAVBAR_OTHER_LANG_SELECTOR = getTestingSelector('navbarOtherLang');
+const SECTION_LINK_SELECTOR = getTestingSelector('sectionLink');
 
 describe('Navbar', () => {
     const sections: [string, MainSectionObject][] = [
@@ -112,11 +116,11 @@ describe('Navbar', () => {
 
         expect(navbarWrapper.emitted().linkClick).toBeUndefined();
 
-        await navbarWrapper.get('[data-testid="logo"]').trigger('click');
+        await navbarWrapper.get(LOGO_SELECTOR).trigger('click');
 
         expect(navbarWrapper.emitted().linkClick).toHaveLength(1);
 
-        await navbarWrapper.get('[data-testid="sectionLink"]').trigger('click');
+        await navbarWrapper.get(SECTION_LINK_SELECTOR).trigger('click');
 
         expect(navbarWrapper.emitted().linkClick).toHaveLength(2);
     });
@@ -126,7 +130,7 @@ describe('Navbar', () => {
 
         expect(navbarWrapper.emitted().languageToggle).toBeUndefined();
 
-        await navbarWrapper.get('[data-testid="navbarOtherLang"]').trigger('click');
+        await navbarWrapper.get(NAVBAR_OTHER_LANG_SELECTOR).trigger('click');
 
         expect(navbarWrapper.emitted().languageToggle).toHaveLength(1);
     });

@@ -1,9 +1,12 @@
 import Toast from '@/components/main/Toast.vue';
 import { nextTick } from 'vue';
 import mockInitStore from '@/mocks/mockInitStore';
-import { buildCreateWrapper, buildSetProps } from '@/utils/test';
+import { buildCreateWrapper, buildSetProps, getTestingSelector } from '@/utils/test';
 import { ToastProps } from '@/components/main/types';
 import { ToastType } from '@/store/types';
+
+const CLOSE_BUTTON_SELECTOR = getTestingSelector('closeButton');
+const TOAST_SELECTOR = getTestingSelector('toast');
 
 describe('Toast', () => {
     beforeAll(async () => {
@@ -68,13 +71,13 @@ describe('Toast', () => {
 
         await nextTick();
 
-        expect(toastWrapper.find('[data-testid="toast"]').exists()).toBe(true);
+        expect(toastWrapper.find(TOAST_SELECTOR).exists()).toBe(true);
 
-        await toastWrapper.get<HTMLElement>('[data-testid="closeButton"]').trigger('click');
+        await toastWrapper.get<HTMLElement>(CLOSE_BUTTON_SELECTOR).trigger('click');
 
         await nextTick();
 
-        expect(toastWrapper.find('[data-testid="toast"]').exists()).toBe(false);
+        expect(toastWrapper.find(TOAST_SELECTOR).exists()).toBe(false);
     });
 
     it('hides toast after certain time', async () => {
@@ -82,12 +85,12 @@ describe('Toast', () => {
 
         await nextTick();
 
-        expect(toastWrapper.find('[data-testid="toast"]').exists()).toBe(true);
+        expect(toastWrapper.find(TOAST_SELECTOR).exists()).toBe(true);
 
         vi.runAllTimers();
 
         await nextTick();
 
-        expect(toastWrapper.find('[data-testid="toast"]').exists()).toBe(false);
+        expect(toastWrapper.find(TOAST_SELECTOR).exists()).toBe(false);
     });
 });

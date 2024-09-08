@@ -7,8 +7,13 @@ import { ProgrammingLanguage } from '@/store/ProgrammingLanguage';
 import { SiteLanguage } from '@/store/types';
 import _ from 'lodash';
 import { ExistingDomWrapper } from '@/types/tests';
-import { buildCreateWrapper } from '@/utils/test';
+import { buildCreateWrapper, getTestingSelector } from '@/utils/test';
 import { MockInstance } from 'vitest';
+
+const CURSOR_SELECTOR = getTestingSelector('cursor');
+const MARKED_TEXT_SELECTOR = getTestingSelector('markedText');
+const NON_MARKED_TEXT_SELECTOR = getTestingSelector('nonMarkedText');
+const PROGRAMMING_LANGUAGE_SELECTOR = getTestingSelector('programmingLanguage');
 
 const shuffleSpy = (vi.spyOn(_, 'shuffle') as MockInstance).mockImplementation((value) => value);
 
@@ -67,11 +72,11 @@ describe('HomeText', () => {
     const createHomeTextWrapper = buildCreateWrapper(HomeText);
 
     function getMarkedTextElement(wrapper: VueWrapper) {
-        return wrapper.get<HTMLDivElement>('[data-testid="markedText"]');
+        return wrapper.get<HTMLDivElement>(MARKED_TEXT_SELECTOR);
     }
 
     function getNonMarkedTextElement(wrapper: VueWrapper) {
-        return wrapper.get<HTMLDivElement>('[data-testid="nonMarkedText"]');
+        return wrapper.get<HTMLDivElement>(NON_MARKED_TEXT_SELECTOR);
     }
 
     async function awaitLanguageMarkingStart(markedTextElement: ExistingDomWrapper<HTMLDivElement>): Promise<void> {
@@ -121,7 +126,7 @@ describe('HomeText', () => {
 
             const wrapper = createHomeTextWrapper();
 
-            const languageElement = wrapper.get('[data-testid="programmingLanguage"]');
+            const languageElement = wrapper.get(PROGRAMMING_LANGUAGE_SELECTOR);
 
             expectLanguageToBePrefixed(languageElement, false);
 
@@ -176,7 +181,7 @@ describe('HomeText', () => {
 
     describe('cursor', () => {
         function getCursorElement(wrapper: VueWrapper) {
-            return wrapper.get<HTMLSpanElement>('[data-testid="cursor"]');
+            return wrapper.get<HTMLSpanElement>(CURSOR_SELECTOR);
         }
 
         it('stops blinking on text removing', async () => {

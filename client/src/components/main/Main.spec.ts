@@ -3,7 +3,9 @@ import mockInitStore from '@/mocks/mockInitStore';
 import MainSection from '@/components/main/MainSection.vue';
 import mainSections from '@/components/main/mainSections';
 import { nextTick } from 'vue';
-import { buildCreateWrapper } from '@/utils/test';
+import { buildCreateWrapper, getTestingSelector } from '@/utils/test';
+
+const SECTION_LINK_SELECTOR = getTestingSelector('sectionLink');
 
 let routerReplaceCallTimes = 0;
 
@@ -54,7 +56,7 @@ describe('Main', () => {
 
         const callTimesBeforeClick = routerReplaceCallTimes;
 
-        await mainWrapper.get('[data-testid="sectionLink"]').trigger('click');
+        await mainWrapper.get(SECTION_LINK_SELECTOR).trigger('click');
 
         await nextTick();
 

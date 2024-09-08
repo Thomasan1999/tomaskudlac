@@ -1,8 +1,11 @@
 import mockInitStore from '@/mocks/mockInitStore';
 import AboutMyselfColumn from '@/components/main/about-myself/AboutMyselfColumn.vue';
 import useStore from '@/store';
-import { buildCreateWrapper, buildSetProps } from '@/utils/test';
+import { buildCreateWrapper, buildSetProps, getTestingSelector } from '@/utils/test';
 import { AboutMyselfColumnProps } from '@/components/main/about-myself/types';
+
+const TEXT_SELECTOR = getTestingSelector('text');
+const TITLE_SELECTOR = getTestingSelector('title');
 
 describe('AboutMyselfColumn', () => {
     beforeAll(async () => {
@@ -20,7 +23,7 @@ describe('AboutMyselfColumn', () => {
 
         const aboutMyselfColumnWrapper = createAboutMyselfColumnWrapper({ text });
 
-        const textElement = aboutMyselfColumnWrapper.get('[data-testid="text"]');
+        const textElement = aboutMyselfColumnWrapper.get(TEXT_SELECTOR);
 
         expect(textElement.text()).toBe(text);
 
@@ -42,7 +45,7 @@ describe('AboutMyselfColumn', () => {
 
         const aboutMyselfColumnWrapper = createAboutMyselfColumnWrapper({ text: rawText });
 
-        const textElement = aboutMyselfColumnWrapper.get('[data-testid="text"]');
+        const textElement = aboutMyselfColumnWrapper.get(TEXT_SELECTOR);
 
         expect(textElement.html()).toContain(parsedText);
 
@@ -62,7 +65,7 @@ describe('AboutMyselfColumn', () => {
 
         const aboutMyselfColumnWrapper = createAboutMyselfColumnWrapper({ title });
 
-        const titleElement = aboutMyselfColumnWrapper.get('[data-testid="title"]');
+        const titleElement = aboutMyselfColumnWrapper.get(TITLE_SELECTOR);
 
         expect(titleElement.text()).toBe(title);
 

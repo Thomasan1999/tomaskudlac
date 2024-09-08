@@ -1,6 +1,8 @@
 import mockInitStore from '@/mocks/mockInitStore';
 import Contact from '@/components/main/contact/Contact.vue';
-import { buildCreateWrapper } from '@/utils/test';
+import { buildCreateWrapper, getTestingSelector } from '@/utils/test';
+
+const BRIEF_TEXT_SELECTOR = getTestingSelector('briefText');
 
 describe('Contact', () => {
     beforeAll(async () => {
@@ -24,7 +26,7 @@ describe('Contact', () => {
     it('renders brief text', () => {
         const contactWrapper = createContactWrapper();
 
-        const briefTextElement = contactWrapper.find('[data-testid="briefText"]');
+        const briefTextElement = contactWrapper.find(BRIEF_TEXT_SELECTOR);
 
         expect(briefTextElement.exists()).toBe(true);
     });

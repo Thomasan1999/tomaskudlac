@@ -1,6 +1,9 @@
 import getUrlObject from '@/tests/e2e/utils/getUrlObject';
 import { default as puppeteer, ElementHandle } from 'puppeteer';
 import sleep from '@/utils/sleep';
+import { getTestingSelector } from '@/utils/test';
+
+const NAVBAR_OTHER_LANG_SELCTOR = getTestingSelector('navbarOtherLang');
 
 describe('navigation', async () => {
     const domChangeTimeout = 500;
@@ -68,9 +71,7 @@ describe('navigation', async () => {
     it('changes href on language change', async () => {
         const initialHref = getUrlObject(page).href;
 
-        const otherLangButtonSelector = '[data-testid="navbarOtherLang"]';
-
-        const otherLangButton = (await page.$(otherLangButtonSelector))!;
+        const otherLangButton = (await page.$(NAVBAR_OTHER_LANG_SELCTOR))!;
 
         await otherLangButton.click();
 

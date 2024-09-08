@@ -1,6 +1,9 @@
 import CookiesModal from '@/components/main/footer/CookiesModal.vue';
 import mockInitStore from '@/mocks/mockInitStore';
-import { buildCreateWrapper } from '@/utils/test';
+import { buildCreateWrapper, getTestingSelector } from '@/utils/test';
+
+const CLOSE_BUTTON_SELECTOR = getTestingSelector('closeButton');
+const OVERLAY_SELECTOR = getTestingSelector('overlay');
 
 describe('CookiesModal', () => {
     beforeAll(async () => {
@@ -19,7 +22,7 @@ describe('CookiesModal', () => {
 
         expect(cookiesModalWrapper.emitted().close).toBeUndefined();
 
-        await cookiesModalWrapper.get('[data-testid="closeButton"]').trigger('click');
+        await cookiesModalWrapper.get(CLOSE_BUTTON_SELECTOR).trigger('click');
 
         expect(cookiesModalWrapper.emitted().close).toHaveLength(1);
     });
@@ -29,7 +32,7 @@ describe('CookiesModal', () => {
 
         expect(cookiesModalWrapper.emitted().close).toBeUndefined();
 
-        await cookiesModalWrapper.get('[data-testid="overlay"]').trigger('click');
+        await cookiesModalWrapper.get(OVERLAY_SELECTOR).trigger('click');
 
         expect(cookiesModalWrapper.emitted().close).toHaveLength(1);
     });

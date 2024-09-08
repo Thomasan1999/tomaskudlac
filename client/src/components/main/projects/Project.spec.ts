@@ -1,8 +1,11 @@
 import Project from '@/components/main/projects/Project.vue';
 import useStore from '@/store';
 import mockInitStore from '@/mocks/mockInitStore';
-import { buildCreateWrapper } from '@/utils/test';
+import { buildCreateWrapper, getTestingSelector } from '@/utils/test';
 import { ProjectProps } from '@/components/main/projects/types';
+
+const TEXT_CONTENT_SELECTOR = getTestingSelector('textContent');
+const TITLE_SELECTOR = getTestingSelector('title');
 
 describe('Project', () => {
     beforeAll(async () => {
@@ -39,7 +42,7 @@ describe('Project', () => {
 
         const locales = store.locales.sections.projects.projects[projectName];
 
-        const textContentElement = projectWrapper.get('[data-testid="textContent"]');
+        const textContentElement = projectWrapper.get(TEXT_CONTENT_SELECTOR);
 
         expect(textContentElement.text()).not.toBeFalsy();
         expect(textContentElement.text()).toContain(locales.frontEndDesc);
@@ -56,7 +59,7 @@ describe('Project', () => {
 
         const locales = store.locales.sections.projects.projects[projectName];
 
-        const textContentElement = projectWrapper.get('[data-testid="title"]');
+        const textContentElement = projectWrapper.get(TITLE_SELECTOR);
 
         expect(textContentElement.text()).not.toBeFalsy();
         expect(textContentElement.text()).toContain(locales.title);
