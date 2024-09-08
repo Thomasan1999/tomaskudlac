@@ -3,6 +3,12 @@ export enum ContactFormFieldElement {
     TEXTAREA = 'textarea',
 }
 
+export enum ContactFormFieldType {
+    EMAIL = 'email',
+    TEL = 'tel',
+    TEXT = 'text',
+}
+
 export type ContactFormFieldData = {
     element?: ContactFormFieldElement;
     maxlength?: number;
@@ -11,7 +17,7 @@ export type ContactFormFieldData = {
     pattern?: RegExp;
     required?: boolean;
     touched: boolean;
-    type?: 'email' | 'tel' | 'text';
+    type?: ContactFormFieldType;
     valid: boolean;
     value: string;
 };

@@ -1,5 +1,9 @@
 import { reactive } from 'vue';
-import { ContactFormFieldData, ContactFormFieldElement } from '@/components/main/contact/form/types';
+import {
+    ContactFormFieldData,
+    ContactFormFieldElement,
+    ContactFormFieldType,
+} from '@/components/main/contact/form/types';
 
 const contactFormFields = reactive<ContactFormFieldData[]>([
     {
@@ -20,7 +24,7 @@ const contactFormFields = reactive<ContactFormFieldData[]>([
             /^(([^<>()\\.,;:\s@"]+(\.[^<>()\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
         required: true,
         touched: false,
-        type: 'email',
+        type: ContactFormFieldType.EMAIL,
         valid: false,
         value: '',
     },
@@ -30,7 +34,7 @@ const contactFormFields = reactive<ContactFormFieldData[]>([
         name: 'phone',
         pattern: /^(?:[+\d].*\d|\d)$/,
         touched: false,
-        type: 'tel',
+        type: ContactFormFieldType.TEL,
         valid: true,
         value: '',
     },

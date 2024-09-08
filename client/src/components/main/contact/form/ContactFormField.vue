@@ -39,7 +39,7 @@
     import useStore from '@/store';
     import { Merge } from 'ts-essentials';
     import ContactFormFieldError from '@/components/main/contact/form/ContactFormFieldError.vue';
-    import { ContactFormFieldElement } from '@/components/main/contact/form/types';
+    import { ContactFormFieldElement, ContactFormFieldType } from '@/components/main/contact/form/types';
 
     const props = withDefaults(
         defineProps<{
@@ -51,10 +51,10 @@
             pattern?: RegExp;
             required?: boolean;
             touched: boolean;
-            type?: string;
+            type?: ContactFormFieldType;
             valid: boolean;
         }>(),
-        { element: ContactFormFieldElement.INPUT, minlength: 0, required: false, type: 'text' },
+        { element: ContactFormFieldElement.INPUT, minlength: 0, required: false, type: ContactFormFieldType.TEXT },
     );
     const emit = defineEmits<{
         (event: 'blur'): void;
