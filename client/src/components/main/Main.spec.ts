@@ -1,6 +1,5 @@
 import Main from '@/components/main/Main.vue';
 import mockInitStore from '@/mocks/mockInitStore';
-import { Pinia } from 'pinia';
 import MainSection from '@/components/main/MainSection.vue';
 import mainSections from '@/components/main/mainSections';
 import { nextTick } from 'vue';
@@ -24,10 +23,8 @@ vi.mock('@/router', () => {
 });
 
 describe('Main', () => {
-    let pinia: Pinia;
-
     beforeAll(async () => {
-        pinia = await mockInitStore();
+        await mockInitStore();
 
         Element.prototype.scroll = function () {};
     });

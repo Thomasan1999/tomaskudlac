@@ -1,23 +1,18 @@
 import CookiesModal from '@/components/main/footer/CookiesModal.vue';
-import { shallowMount, VueWrapper } from '@vue/test-utils';
 import mockInitStore from '@/mocks/mockInitStore';
-import { Pinia } from 'pinia';
+import { buildCreateWrapper } from '@/utils/test';
 
 describe('CookiesModal', () => {
-    let pinia: Pinia;
-
     beforeAll(async () => {
-        pinia = await mockInitStore();
+        await mockInitStore();
     });
 
-    function createCookiesModalWrapper(): VueWrapper {
-        return shallowMount(CookiesModal, {
-            global: {
-                plugins: [pinia],
-                renderStubDefaultSlot: true,
-            },
-        });
-    }
+    const createCookiesModalWrapper = buildCreateWrapper(CookiesModal, undefined, {
+        global: {
+            renderStubDefaultSlot: true,
+        },
+        shallow: true,
+    });
 
     it("emits 'close' event on close button click", async () => {
         const cookiesModalWrapper = createCookiesModalWrapper();

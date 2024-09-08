@@ -1,6 +1,4 @@
-import { Pinia } from 'pinia';
 import mockInitStore from '@/mocks/mockInitStore';
-import { mount, VueWrapper } from '@vue/test-utils';
 import { nextTick } from 'vue';
 import FooterComponent from '@/components/main/footer/FooterComponent.vue';
 import useStore from '@/store';
@@ -9,10 +7,8 @@ import { SiteLanguage } from '@/store/types';
 import { buildCreateWrapper } from '@/utils/test';
 
 describe('FooterComponent', () => {
-    let pinia: Pinia;
-
     beforeAll(async () => {
-        pinia = await mockInitStore();
+        await mockInitStore();
         Object.defineProperty(window, 'location', {
             value: new URL('https://tomaskudlac.sk'),
         });
