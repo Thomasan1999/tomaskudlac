@@ -1,11 +1,10 @@
-import { Pinia } from 'pinia';
 import mockInitStore from '@/mocks/mockInitStore';
-import { DOMWrapper, flushPromises, mount, VueWrapper } from '@vue/test-utils';
+import { DOMWrapper, flushPromises } from '@vue/test-utils';
 import ContactForm from '@/components/main/contact/form/ContactForm.vue';
 import ContactFormField from '@/components/main/contact/form/ContactFormField.vue';
 import contactFormFields from '@/components/main/contact/form/contactFormFields';
 import { cloneDeep, merge } from 'lodash';
-import { getTestingSelector } from '@/utils/test';
+import { buildCreateWrapper, getTestingSelector } from '@/utils/test';
 import { nextTick } from 'vue';
 import { afterEach } from 'vitest';
 import useStore from '@/store';
@@ -32,11 +31,10 @@ const resetSpy = vi.spyOn(HTMLFormElement.prototype, 'reset');
 const defaultFormFields = cloneDeep(contactFormFields);
 
 describe('ContactForm', () => {
-    let pinia: Pinia;
     let store: ReturnType<typeof useStore>;
 
     beforeAll(async () => {
-        pinia = await mockInitStore();
+        await mockInitStore();
         store = useStore();
     });
 
@@ -50,13 +48,7 @@ describe('ContactForm', () => {
         vi.clearAllMocks();
     });
 
-    function createContactFormWrapper(): VueWrapper {
-        return mount(ContactForm, {
-            global: {
-                plugins: [pinia],
-            },
-        });
-    }
+    const createContactFormWrapper = buildCreateWrapper(ContactForm);
 
     function getFieldTestingSelector(name: string): string {
         return getTestingSelector(`field-${name}`);

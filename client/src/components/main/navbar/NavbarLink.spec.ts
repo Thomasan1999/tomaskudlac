@@ -1,34 +1,31 @@
-import { mount, MountingOptions, VueWrapper } from '@vue/test-utils';
 import NavbarLink from '@/components/main/navbar/NavbarLink.vue';
 import { RouterLink } from 'vue-router';
+import { buildCreateWrapper, buildSetProps } from '@/utils/test';
+import { NavbarLinkProps } from '@/components/main/navbar/types';
 
 describe('NavbarLink', () => {
-    function createNavbarLink(
-        props: MountingOptions<any>['props'] = {},
-        slots?: MountingOptions<any>['slots'],
-    ): VueWrapper {
-        const defaultProps = {
+    const createNavbarLink = buildCreateWrapper<NavbarLinkProps>(
+        NavbarLink,
+        {
             title: 'Link',
             to: '/',
-        };
-
-        return mount(NavbarLink, {
+        },
+        {
             global: {
                 stubs: {
                     RouterLink: { name: 'RouterLink', props: ['to'], template: '<a :href="to"></a>' },
                 },
             },
-            props: { ...defaultProps, ...props },
-            slots,
-        });
-    }
+        },
+    );
+    const setProps = buildSetProps<NavbarLinkProps>();
 
     it("has 'active' class based on 'active' property", async () => {
         const navbarLinkWrapper = createNavbarLink({ active: false });
 
         expect(navbarLinkWrapper.classes()).not.toContain('active');
 
-        await navbarLinkWrapper.setProps({ active: true });
+        await setProps(navbarLinkWrapper, { active: true });
 
         expect(navbarLinkWrapper.classes()).toContain('active');
     });
@@ -38,7 +35,7 @@ describe('NavbarLink', () => {
 
         expect(navbarLinkWrapper.findComponent(RouterLink).exists()).toBe(false);
 
-        await navbarLinkWrapper.setProps({ routerLink: true });
+        await setProps(navbarLinkWrapper, { routerLink: true });
 
         expect(navbarLinkWrapper.findComponent(RouterLink).exists()).toBe(true);
     });
@@ -48,7 +45,7 @@ describe('NavbarLink', () => {
 
         expect(navbarLinkWrapper.text()).toContain('Hello World');
 
-        await navbarLinkWrapper.setProps({ text: 'Link Text' });
+        await setProps(navbarLinkWrapper, { text: 'Link Text' });
 
         expect(navbarLinkWrapper.text()).toContain('Link Text');
     });
@@ -58,7 +55,7 @@ describe('NavbarLink', () => {
 
         expect(navbarLinkWrapper.text()).toContain('Random Title');
 
-        await navbarLinkWrapper.setProps({ text: 'Another Name' });
+        await setProps(navbarLinkWrapper, { text: 'Another Name' });
 
         expect(navbarLinkWrapper.text()).toContain('Another Name');
     });
@@ -72,11 +69,11 @@ describe('NavbarLink', () => {
 
         expectHrefToBe('/');
 
-        await navbarLinkWrapper.setProps({ to: '/route' });
+        await setProps(navbarLinkWrapper, { to: '/route' });
 
         expectHrefToBe('/route');
 
-        await navbarLinkWrapper.setProps({ routerLink: true });
+        await setProps(navbarLinkWrapper, { routerLink: true });
 
         expectHrefToBe('/route');
     });
@@ -85,7 +82,7 @@ describe('NavbarLink', () => {
         function expectSlotTextToBe(text: string): void {
             const navbarLinkWrapper = createNavbarLink(
                 { title: 'Title', text: 'Text' },
-                { default: `<p class="slot">${text}</p>` },
+                { slots: { default: `<p class="slot">${text}</p>` } },
             );
 
             expect(navbarLinkWrapper.get('.slot').text()).toBe(text);

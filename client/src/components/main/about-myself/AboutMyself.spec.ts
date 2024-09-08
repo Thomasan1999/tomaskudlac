@@ -1,34 +1,17 @@
-import { Pinia } from 'pinia';
 import mockInitStore from '@/mocks/mockInitStore';
-import { mount, MountingOptions, VueWrapper } from '@vue/test-utils';
 import AboutMyself from '@/components/main/about-myself/AboutMyself.vue';
 import useStore from '@/store';
 import AboutMyselfColumn from '@/components/main/about-myself/AboutMyselfColumn.vue';
+import { buildCreateWrapper } from '@/utils/test';
 
 describe('AboutMyself', () => {
-    let pinia: Pinia;
-
     beforeAll(async () => {
-        pinia = await mockInitStore();
+        await mockInitStore();
     });
 
-    function createAboutMyselfWrapper(props: MountingOptions<any>['props'] = {}): VueWrapper {
-        const defaultProps = {
-            title: '',
-            text: '',
-        };
-
-        return mount(AboutMyself, {
-            global: {
-                plugins: [pinia],
-                stubs: ['AboutMyselfColumn'],
-            },
-            props: {
-                ...defaultProps,
-                ...props,
-            },
-        });
-    }
+    const createAboutMyselfWrapper = buildCreateWrapper(AboutMyself, undefined, {
+        global: { stubs: ['AboutMyselfColumn'] },
+    });
 
     it('has heading', () => {
         const aboutMyselfWrapper = createAboutMyselfWrapper();

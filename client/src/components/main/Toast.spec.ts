@@ -1,45 +1,40 @@
-import { mount, MountingOptions, VueWrapper } from '@vue/test-utils';
 import Toast from '@/components/main/Toast.vue';
 import { nextTick } from 'vue';
 import mockInitStore from '@/mocks/mockInitStore';
-import { Pinia } from 'pinia';
+import { buildCreateWrapper, buildSetProps } from '@/utils/test';
+import { ToastProps } from '@/components/main/types';
+import { ToastType } from '@/store/types';
 
 describe('Toast', () => {
-    let pinia: Pinia;
-
     beforeAll(async () => {
-        pinia = await mockInitStore();
+        await mockInitStore();
         document.body.style.setProperty('--primary-red', 'red');
         document.body.style.setProperty('--primary-green', 'green');
         vi.useFakeTimers();
     });
 
-    function createToastWrapper(props: MountingOptions<any>['props'] = {}): VueWrapper {
-        const defaultProps = {
+    const createToastWrapper = buildCreateWrapper<ToastProps>(
+        Toast,
+        {
             message: '',
-            type: 'fail',
-        };
-
-        return mount(Toast, {
+            type: ToastType.FAIL,
+        },
+        {
             global: {
-                plugins: [pinia],
                 renderStubDefaultSlot: true,
                 stubs: {
                     Teleport: true,
                     Transition: true,
                 },
             },
-            props: {
-                ...defaultProps,
-                ...props,
-            },
-        });
-    }
+        },
+    );
+    const setProps = buildSetProps<ToastProps>();
 
     it('renders message', async () => {
         const toastWrapper = createToastWrapper({
             message: 'This is a toast message.',
-            type: 'fail',
+            type: ToastType.FAIL,
         });
 
         // Await rendering of HTML which is triggered only after 'mounted' lifecycle-hook
@@ -47,21 +42,21 @@ describe('Toast', () => {
 
         expect(toastWrapper.text()).toContain('This is a toast message.');
 
-        await toastWrapper.setProps({ message: 'Another message in the toast.' });
+        await setProps(toastWrapper, { message: 'Another message in the toast.' });
 
         expect(toastWrapper.text()).toContain('Another message in the toast.');
     });
 
     it('has different styles for each type', async () => {
         const toastWrapper = createToastWrapper({
-            type: 'fail',
+            type: ToastType.FAIL,
         });
 
         await nextTick();
 
         const failStyles = toastWrapper.classes();
 
-        await toastWrapper.setProps({ type: 'success' });
+        await setProps(toastWrapper, { type: ToastType.SUCCESS });
 
         const successStyles = toastWrapper.classes();
 

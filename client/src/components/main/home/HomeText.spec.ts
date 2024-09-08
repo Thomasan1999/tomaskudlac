@@ -1,6 +1,5 @@
-import { Pinia } from 'pinia';
 import mockInitStore from '@/mocks/mockInitStore';
-import { mount, VueWrapper } from '@vue/test-utils';
+import { VueWrapper } from '@vue/test-utils';
 import { nextTick } from 'vue';
 import HomeText from '@/components/main/home/HomeText.vue';
 import useStore from '@/store';
@@ -8,13 +7,12 @@ import { ProgrammingLanguage } from '@/store/ProgrammingLanguage';
 import { SiteLanguage } from '@/store/types';
 import _ from 'lodash';
 import { ExistingDomWrapper } from '@/types/tests';
-import { afterEach, SpyInstance } from 'vitest';
+import { buildCreateWrapper } from '@/utils/test';
+import { MockInstance } from 'vitest';
 
-const shuffleSpy = (vi.spyOn(_, 'shuffle') as SpyInstance).mockImplementation((value) => value);
+const shuffleSpy = (vi.spyOn(_, 'shuffle') as MockInstance).mockImplementation((value) => value);
 
 describe('HomeText', () => {
-    let pinia: Pinia;
-
     let currentLanguageIndex: number;
 
     const languageTitle = 'HTML';
@@ -41,7 +39,7 @@ describe('HomeText', () => {
             setTimeout(callback, timeout);
         };
 
-        pinia = await mockInitStore();
+        await mockInitStore();
     });
 
     beforeEach(async () => {
@@ -75,13 +73,7 @@ describe('HomeText', () => {
         window.setTimeout = timeout;
     });
 
-    function createHomeTextWrapper(): VueWrapper {
-        return mount(HomeText, {
-            global: {
-                plugins: [pinia],
-            },
-        });
-    }
+    const createHomeTextWrapper = buildCreateWrapper(HomeText);
 
     function getMarkedTextElement(wrapper: VueWrapper) {
         return wrapper.get<HTMLDivElement>('[data-testid="markedText"]');

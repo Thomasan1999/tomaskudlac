@@ -1,31 +1,17 @@
-import { mount, MountingOptions, VueWrapper } from '@vue/test-utils';
 import Project from '@/components/main/projects/Project.vue';
 import useStore from '@/store';
 import mockInitStore from '@/mocks/mockInitStore';
-import { Pinia } from 'pinia';
+import { buildCreateWrapper } from '@/utils/test';
+import { ProjectProps } from '@/components/main/projects/types';
 
 describe('Project', () => {
-    let pinia: Pinia;
-
     beforeAll(async () => {
-        pinia = await mockInitStore();
+        await mockInitStore();
     });
 
-    function createProjectWrapper(props: MountingOptions<any>['props'] = {}): VueWrapper {
-        const defaultProps = {
-            name: 'fifaManiaci',
-        };
-
-        return mount(Project, {
-            global: {
-                plugins: [pinia],
-            },
-            props: {
-                ...defaultProps,
-                ...props,
-            },
-        });
-    }
+    const createProjectWrapper = buildCreateWrapper<ProjectProps>(Project, {
+        name: 'fifaManiaci',
+    });
 
     it('is wrapped in project link', () => {
         const store = useStore();

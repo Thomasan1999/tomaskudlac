@@ -10,18 +10,12 @@ import { nextTick } from 'vue';
 const TOAST_SELECTOR = getTestingSelector('toast');
 
 describe('ToastContainer', () => {
-    let pinia: Pinia;
     let store: ReturnType<typeof useStore>;
-    let createWrapper: ReturnType<typeof buildCreateWrapper<never, typeof ToastContainer>>;
+    const createWrapper = buildCreateWrapper(ToastContainer);
 
     beforeAll(async () => {
-        pinia = await mockInitStore();
+        await mockInitStore();
         store = useStore();
-        createWrapper = buildCreateWrapper(ToastContainer, undefined, {
-            global: {
-                plugins: [pinia],
-            },
-        });
         document.body.innerHTML = '<div id="modal-container"></div>';
     });
 

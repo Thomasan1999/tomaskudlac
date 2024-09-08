@@ -1,41 +1,34 @@
-import { Pinia } from 'pinia';
 import mockInitStore from '@/mocks/mockInitStore';
-import { mount, MountingOptions, VueWrapper } from '@vue/test-utils';
 import ContactFormField from '@/components/main/contact/form/ContactFormField.vue';
 import ContactFormFieldError from '@/components/main/contact/form/ContactFormFieldError.vue';
-import { ContactFormFieldElement } from '@/components/main/contact/form/types';
+import { ContactFormFieldElement, ContactFormFieldProps } from '@/components/main/contact/form/types';
 import ContactFormLabelText from '@/components/main/contact/form/ContactFormLabelText.vue';
+import { buildCreateWrapper, buildSetProps } from '@/utils/test';
+import { ComponentPropsWithModelValue } from '@/utils/types';
 
 describe('ContactFormField', () => {
-    let pinia: Pinia;
-
     beforeAll(async () => {
-        pinia = await mockInitStore();
+        await mockInitStore();
     });
 
-    function createContactFormFieldWrapper(
-        props: MountingOptions<any>['props'] = {},
-        shouldStub: boolean = true,
-    ): VueWrapper {
-        const defaultProps = {
+    const createContactFormFieldWrapper = buildCreateWrapper<
+        ComponentPropsWithModelValue<ContactFormFieldProps, string>
+    >(
+        ContactFormField,
+        {
             label: '',
             modelValue: '',
             name: '',
             touched: false,
             valid: true,
-        };
-
-        return mount(ContactFormField, {
+        },
+        {
             global: {
-                plugins: [pinia],
-                ...(shouldStub && { stubs: ['ContactFormFieldError'] }),
+                stubs: { ContactFormFieldError: true },
             },
-            props: {
-                ...defaultProps,
-                ...props,
-            },
-        });
-    }
+        },
+    );
+    const setProps = buildSetProps<ComponentPropsWithModelValue<ContactFormFieldProps, string>>();
 
     describe('HTML attributes', () => {
         it('renders label text', async () => {
@@ -54,7 +47,7 @@ describe('ContactFormField', () => {
 
             element = ContactFormFieldElement.TEXTAREA;
 
-            await wrapper.setProps({ element });
+            await setProps(wrapper, { element });
 
             expect(wrapper.find(element).exists()).toBe(true);
             expect(wrapper.find('input').exists()).toBe(false);
@@ -81,7 +74,7 @@ describe('ContactFormField', () => {
             const inputElement = wrapper.get('input');
 
             for await (const attributeValue of htmlAttributeValues) {
-                await wrapper.setProps({ [attributeName]: attributeValue });
+                await setProps(wrapper, { [attributeName]: attributeValue });
 
                 expect(inputElement.element[htmlAttributeName]).toBe(attributeValue);
             }
@@ -110,11 +103,16 @@ describe('ContactFormField', () => {
 
     describe('error', () => {
         it('uses different styles for wrapper element when error is shown', async () => {
-            const wrapper = createContactFormFieldWrapper({ required: true, touched: false, valid: false, value: '' });
+            const wrapper = createContactFormFieldWrapper({
+                modelValue: '',
+                required: true,
+                touched: false,
+                valid: false,
+            });
 
             const classNameWithoutError = wrapper.element.className;
 
-            await wrapper.setProps({ touched: true });
+            await setProps(wrapper, { touched: true });
 
             expect(classNameWithoutError).toBeTruthy();
             expect(classNameWithoutError).not.toBe(wrapper.element.className);
@@ -127,15 +125,22 @@ describe('ContactFormField', () => {
                 expect(errorComponent.find('*').exists()).toBe(value);
             }
 
-            const wrapper = createContactFormFieldWrapper({ required: true, touched: false, valid: true }, false);
+            const wrapper = createContactFormFieldWrapper(
+                { required: true, touched: false, valid: true },
+                {
+                    global: {
+                        stubs: { ContactFormFieldError: false },
+                    },
+                },
+            );
 
             expectErrorToBeShown(false);
 
-            await wrapper.setProps({ touched: true });
+            await setProps(wrapper, { touched: true });
 
             expectErrorToBeShown(false);
 
-            await wrapper.setProps({ valid: false });
+            await setProps(wrapper, { valid: false });
 
             expectErrorToBeShown(true);
         });
@@ -153,7 +158,7 @@ describe('ContactFormField', () => {
         });
 
         it("emits 'update:modelValue' on input", async () => {
-            const wrapper = createContactFormFieldWrapper({ element: ContactFormFieldElement.INPUT, value: '' });
+            const wrapper = createContactFormFieldWrapper({ element: ContactFormFieldElement.INPUT, modelValue: '' });
 
             expect(wrapper.emitted()['update:modelValue']).toBeUndefined();
 
@@ -164,11 +169,11 @@ describe('ContactFormField', () => {
         });
 
         it("emits 'validSet' on model value change", async () => {
-            const wrapper = createContactFormFieldWrapper({ element: ContactFormFieldElement.INPUT, value: '' });
+            const wrapper = createContactFormFieldWrapper({ element: ContactFormFieldElement.INPUT, modelValue: '' });
 
             expect(wrapper.emitted().validSet).toBeUndefined();
 
-            await wrapper.setProps({ modelValue: 'Input value' });
+            await setProps(wrapper, { modelValue: 'Input value' });
 
             expect(wrapper.emitted().validSet).toHaveLength(1);
         });

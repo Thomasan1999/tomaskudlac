@@ -1,23 +1,17 @@
-import { mount, VueWrapper } from '@vue/test-utils';
 import Projects from '@/components/main/projects/Projects.vue';
-import { Pinia } from 'pinia';
 import mockInitStore from '@/mocks/mockInitStore';
+import { buildCreateWrapper } from '@/utils/test';
 
 describe('Projects', () => {
-    let pinia: Pinia;
-
     beforeAll(async () => {
-        pinia = await mockInitStore();
+        await mockInitStore();
     });
 
-    function createProjectsWrapper(): VueWrapper {
-        return mount(Projects, {
-            global: {
-                plugins: [pinia],
-                stubs: ['Project'],
-            },
-        });
-    }
+    const createProjectsWrapper = buildCreateWrapper(Projects, undefined, {
+        global: {
+            stubs: ['Project'],
+        },
+    });
 
     it('has heading', () => {
         const projectsWrapper = createProjectsWrapper();

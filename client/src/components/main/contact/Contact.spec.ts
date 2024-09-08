@@ -1,23 +1,17 @@
-import { mount, VueWrapper } from '@vue/test-utils';
-import { Pinia } from 'pinia';
 import mockInitStore from '@/mocks/mockInitStore';
 import Contact from '@/components/main/contact/Contact.vue';
+import { buildCreateWrapper } from '@/utils/test';
 
 describe('Contact', () => {
-    let pinia: Pinia;
-
     beforeAll(async () => {
-        pinia = await mockInitStore();
+        await mockInitStore();
     });
 
-    function createContactWrapper(): VueWrapper {
-        return mount(Contact, {
-            global: {
-                plugins: [pinia],
-                stubs: ['ContactForm'],
-            },
-        });
-    }
+    const createContactWrapper = buildCreateWrapper(Contact, undefined, {
+        global: {
+            stubs: ['ContactForm'],
+        },
+    });
 
     it('has heading', () => {
         const contactWrapper = createContactWrapper();

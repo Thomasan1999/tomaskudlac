@@ -1,23 +1,17 @@
-import { mount, VueWrapper } from '@vue/test-utils';
-import { Pinia } from 'pinia';
 import mockInitStore from '@/mocks/mockInitStore';
 import Home from '@/components/main/home/Home.vue';
+import { buildCreateWrapper } from '@/utils/test';
 
 describe('Home', () => {
-    let pinia: Pinia;
-
     beforeAll(async () => {
-        pinia = await mockInitStore();
+        await mockInitStore();
     });
 
-    function createHomeWrapper(): VueWrapper {
-        return mount(Home, {
-            global: {
-                plugins: [pinia],
-                stubs: ['HomeText'],
-            },
-        });
-    }
+    const createHomeWrapper = buildCreateWrapper(Home, undefined, {
+        global: {
+            stubs: ['HomeText'],
+        },
+    });
 
     it('does not have heading', () => {
         const homeWrapper = createHomeWrapper();

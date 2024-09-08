@@ -1,32 +1,19 @@
-import { mount, MountingOptions, VueWrapper } from '@vue/test-utils';
-import { Pinia } from 'pinia';
 import mockInitStore from '@/mocks/mockInitStore';
 import AboutMyselfColumn from '@/components/main/about-myself/AboutMyselfColumn.vue';
 import useStore from '@/store';
+import { buildCreateWrapper, buildSetProps } from '@/utils/test';
+import { AboutMyselfColumnProps } from '@/components/main/about-myself/types';
 
 describe('AboutMyselfColumn', () => {
-    let pinia: Pinia;
-
     beforeAll(async () => {
-        pinia = await mockInitStore();
+        await mockInitStore();
     });
 
-    function createAboutMyselfColumnWrapper(props: MountingOptions<any>['props'] = {}): VueWrapper {
-        const defaultProps = {
-            title: '',
-            text: '',
-        };
-
-        return mount(AboutMyselfColumn, {
-            global: {
-                plugins: [pinia],
-            },
-            props: {
-                ...defaultProps,
-                ...props,
-            },
-        });
-    }
+    const createAboutMyselfColumnWrapper = buildCreateWrapper<AboutMyselfColumnProps>(AboutMyselfColumn, {
+        title: '',
+        text: '',
+    });
+    const setProps = buildSetProps<AboutMyselfColumnProps>();
 
     it("renders 'text' property", async () => {
         let text = 'this is a random text';
@@ -39,7 +26,7 @@ describe('AboutMyselfColumn', () => {
 
         text = 'this is another text';
 
-        await aboutMyselfColumnWrapper.setProps({ text });
+        await setProps(aboutMyselfColumnWrapper, { text });
 
         expect(textElement.text()).toBe(text);
     });
@@ -65,7 +52,7 @@ describe('AboutMyselfColumn', () => {
 <strong>I</strong>'m ${store.age} years old. These programming languages ${store.programmingLanguagesString} are older.
 `.trim();
 
-        await aboutMyselfColumnWrapper.setProps({ text: rawText });
+        await setProps(aboutMyselfColumnWrapper, { text: rawText });
 
         expect(textElement.html()).toContain(parsedText);
     });
@@ -81,7 +68,7 @@ describe('AboutMyselfColumn', () => {
 
         title = 'New Title';
 
-        await aboutMyselfColumnWrapper.setProps({ title });
+        await setProps(aboutMyselfColumnWrapper, { title });
 
         expect(titleElement.text()).toBe(title);
     });

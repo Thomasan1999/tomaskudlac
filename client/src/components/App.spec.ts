@@ -1,18 +1,23 @@
-import { flushPromises, mount } from '@vue/test-utils';
+import { flushPromises } from '@vue/test-utils';
 import App from '@/components/App.vue';
-import { createPinia } from 'pinia';
 import mockImageSrc from '@/mocks/mockImageSrc';
+import { buildCreateWrapper, initPinia } from '@/utils/test';
+
+const createWrapper = buildCreateWrapper(App, undefined, {
+    global: {
+        stubs: ['RouterView'],
+    },
+});
 
 describe('App', () => {
+    beforeAll(() => {
+        initPinia();
+    });
+
     it('renders router view after component is initialized', async () => {
         mockImageSrc();
 
-        const wrapper = mount(App, {
-            global: {
-                plugins: [createPinia()],
-                stubs: ['RouterView'],
-            },
-        });
+        const wrapper = createWrapper();
 
         expect(wrapper.findComponent({ name: 'RouterView' }).exists()).toBe(false);
 

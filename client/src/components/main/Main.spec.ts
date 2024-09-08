@@ -1,10 +1,10 @@
-import { mount, VueWrapper } from '@vue/test-utils';
 import Main from '@/components/main/Main.vue';
 import mockInitStore from '@/mocks/mockInitStore';
 import { Pinia } from 'pinia';
 import MainSection from '@/components/main/MainSection.vue';
 import mainSections from '@/components/main/mainSections';
 import { nextTick } from 'vue';
+import { buildCreateWrapper } from '@/utils/test';
 
 let routerReplaceCallTimes = 0;
 
@@ -32,14 +32,11 @@ describe('Main', () => {
         Element.prototype.scroll = function () {};
     });
 
-    function createMainWrapper(): VueWrapper {
-        return mount(Main, {
-            global: {
-                plugins: [pinia],
-                stubs: ['font-awesome-icon', 'footer-component'],
-            },
-        });
-    }
+    const createMainWrapper = buildCreateWrapper(Main, undefined, {
+        global: {
+            stubs: ['font-awesome-icon', 'footer-component'],
+        },
+    });
 
     it('renders sections in the right order', () => {
         const mainWrapper = createMainWrapper();

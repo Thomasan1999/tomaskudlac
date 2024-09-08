@@ -1,19 +1,11 @@
-import { mount, MountingOptions, VueWrapper } from '@vue/test-utils';
 import HomeTextProgrammingLanguage from '@/components/main/home/HomeTextProgrammingLanguage.vue';
+import { buildCreateWrapper, buildSetProps } from '@/utils/test';
+import { HomeTextProgrammingLanguageProps } from '@/components/main/home/types';
 
 describe('HomeTextProgrammingLanguage', () => {
-    function createHomeTextProgrammingLanguageWrapper(props: MountingOptions<any>['props'] = {}): VueWrapper {
-        const defaultProps = {
-            programmingLanguage: '',
-        };
-
-        return mount(HomeTextProgrammingLanguage, {
-            props: {
-                ...defaultProps,
-                ...props,
-            },
-        });
-    }
+    const createHomeTextProgrammingLanguageWrapper =
+        buildCreateWrapper<HomeTextProgrammingLanguageProps>(HomeTextProgrammingLanguage);
+    const setProps = buildSetProps<HomeTextProgrammingLanguageProps>();
 
     it('shows whole programming language', async () => {
         let programmingLanguage = 'n HTML';
@@ -25,7 +17,7 @@ describe('HomeTextProgrammingLanguage', () => {
 
         programmingLanguage = 'PostgreSQL';
 
-        await wrapper.setProps({ programmingLanguage });
+        await setProps(wrapper, { programmingLanguage });
 
         expect(wrapper.element.textContent).toBe(programmingLanguage);
     });

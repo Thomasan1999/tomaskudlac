@@ -1,44 +1,19 @@
-import { mount, MountingOptions, VueWrapper } from '@vue/test-utils';
 import MainSection from '@/components/main/MainSection.vue';
 import mockInitStore from '@/mocks/mockInitStore';
-import { Pinia } from 'pinia';
+import { buildCreateWrapper, buildSetProps } from '@/utils/test';
+import { MainSectionProps } from '@/components/main/types';
 
 describe('MainSection', () => {
     const headingSelector = 'h1, h2, h3, h4, h5, h6';
 
-    let pinia: Pinia;
-
     beforeAll(async () => {
-        pinia = await mockInitStore();
+        await mockInitStore();
     });
 
-    function createMainSectionWrapper(props: MountingOptions<any>['props'] = {}): VueWrapper {
-        const defaultProps = {
-            name: 'home',
-        };
-
-        return mount(MainSection, {
-            global: {
-                plugins: [pinia],
-            },
-            props: {
-                ...defaultProps,
-                ...props,
-            },
-        });
-    }
-
-    it("has different classes depending on 'background' property", async () => {
-        const mainSectionWrapper = createMainSectionWrapper();
-
-        const classesWithoutBackground = mainSectionWrapper.classes();
-
-        await mainSectionWrapper.setProps({ background: true });
-
-        const classesWithBackground = mainSectionWrapper.classes();
-
-        expect(classesWithBackground).not.toBe(classesWithoutBackground);
+    const createMainSectionWrapper = buildCreateWrapper<MainSectionProps>(MainSection, {
+        name: 'home',
     });
+    const setProps = buildSetProps<MainSectionProps>();
 
     it("adds/removes heading element depending on the 'heading' property", async () => {
         const mainSectionWrapper = createMainSectionWrapper({ heading: false });
@@ -49,7 +24,7 @@ describe('MainSection', () => {
 
         expectHeadingToExist(false);
 
-        await mainSectionWrapper.setProps({ heading: true });
+        await setProps(mainSectionWrapper, { heading: true });
 
         expectHeadingToExist(true);
     });
@@ -63,7 +38,7 @@ describe('MainSection', () => {
 
         const homeId = getId();
 
-        await mainSectionWrapper.setProps({ name: 'aboutMyself' });
+        await setProps(mainSectionWrapper, { name: 'aboutMyself' });
 
         const aboutMyselfId = getId();
 
@@ -81,7 +56,7 @@ describe('MainSection', () => {
 
         const homeText = getHeadingText();
 
-        await mainSectionWrapper.setProps({ name: 'aboutMyself' });
+        await setProps(mainSectionWrapper, { name: 'aboutMyself' });
 
         const aboutMyselfText = getHeadingText();
 

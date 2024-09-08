@@ -1,15 +1,14 @@
 import Navbar from '@/components/main/navbar/Navbar.vue';
-import { mount, VueWrapper } from '@vue/test-utils';
-import { Pinia } from 'pinia';
+import { VueWrapper } from '@vue/test-utils';
 import { nextTick, reactive } from 'vue';
 import MainSectionObject from '@/components/main/MainSectionObject';
 import NavbarLink from '@/components/main/navbar/NavbarLink.vue';
 import mockWindowResizeBy from '@/mocks/mockWindowResizeBy';
 import mockInitStore from '@/mocks/mockInitStore';
+import { buildCreateWrapper, buildSetProps } from '@/utils/test';
+import { NavbarProps } from '@/components/main/navbar/types';
 
 describe('Navbar', () => {
-    let pinia: Pinia;
-
     const sections: [string, MainSectionObject][] = [
         [
             'home',
@@ -31,21 +30,22 @@ describe('Navbar', () => {
         ],
     ];
 
-    function createNavbarWrapper(sectionsLength: number = Infinity): VueWrapper {
-        return mount(Navbar, {
+    const createNavbarWrapper = buildCreateWrapper<NavbarProps>(
+        Navbar,
+        {
+            activeSection: sections[0][0],
+            sections,
+        },
+        {
             global: {
-                plugins: [pinia],
                 stubs: {
                     FontAwesomeIcon: true,
                     RouterLink: { template: '<div></div>' },
                 },
             },
-            props: {
-                activeSection: sections[0]?.[0] ?? '',
-                sections: sections.slice(0, sectionsLength),
-            },
-        });
-    }
+        },
+    );
+    const setProps = buildSetProps<NavbarProps>();
 
     function getSectionLinks(navbarWrapper: VueWrapper): VueWrapper[] {
         const navbarLinks = navbarWrapper.findAllComponents(NavbarLink);
@@ -54,7 +54,7 @@ describe('Navbar', () => {
     }
 
     beforeAll(async () => {
-        pinia = await mockInitStore();
+        await mockInitStore();
     });
 
     it("assigns 'active' property to active section", async () => {
@@ -64,11 +64,11 @@ describe('Navbar', () => {
 
         expect(sectionLinks[0].props().active).toBeTruthy();
 
-        await navbarWrapper.setProps({ activeSection: sections[1][0] });
+        await setProps(navbarWrapper, { activeSection: sections[1][0] });
 
         expect(sectionLinks[1].props().active).toBeTruthy();
 
-        await navbarWrapper.setProps({ activeSection: 'randomSection' });
+        await setProps(navbarWrapper, { activeSection: 'randomSection' });
 
         const noLinkHasActiveClass = sectionLinks.every((sectionLink) => !sectionLink.props().active);
 
@@ -97,7 +97,9 @@ describe('Navbar', () => {
         for await (const length of [2, 1, 0]) {
             // navbarWrapper has to be initialized every iteration because 'setProps' didn't change template
 
-            const navbarWrapper = createNavbarWrapper(length);
+            const navbarWrapper = createNavbarWrapper({
+                sections: sections.slice(0, length),
+            });
 
             const sectionLinks = getSectionLinks(navbarWrapper);
 

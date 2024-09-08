@@ -6,6 +6,7 @@ import FooterComponent from '@/components/main/footer/FooterComponent.vue';
 import useStore from '@/store';
 import ExternalLink from '@/components/ExternalLink.vue';
 import { SiteLanguage } from '@/store/types';
+import { buildCreateWrapper } from '@/utils/test';
 
 describe('FooterComponent', () => {
     let pinia: Pinia;
@@ -17,14 +18,11 @@ describe('FooterComponent', () => {
         });
     });
 
-    function createFooterComponentWrapper(): VueWrapper {
-        return mount(FooterComponent, {
-            global: {
-                plugins: [pinia],
-                stubs: ['CookiesModal'],
-            },
-        });
-    }
+    const createFooterComponentWrapper = buildCreateWrapper(FooterComponent, undefined, {
+        global: {
+            stubs: ['CookiesModal'],
+        },
+    });
 
     it('opens cookies modal on copyright link click in the Slovak version', async () => {
         const store = useStore();

@@ -1,4 +1,3 @@
-import { Pinia } from 'pinia';
 import mockInitStore from '@/mocks/mockInitStore';
 import { getTestingSelector, buildCreateWrapper, buildSetProps } from '@/utils/test';
 import AboutMyselfPhotoContainer from '@/components/main/about-myself/AboutMyselfPhotoContainer.vue';
@@ -9,28 +8,15 @@ const PHOTO_SELECTOR = getTestingSelector('photo');
 const WEBP_SRC_SELECTOR = getTestingSelector('webp-src');
 
 describe('AboutMyselfPhotoContainer', () => {
-    let pinia: Pinia;
-    let createWrapper: ReturnType<
-        typeof buildCreateWrapper<AboutMyselfPhotoContainerProps, typeof AboutMyselfPhotoContainer>
-    >;
+    const createWrapper = buildCreateWrapper<AboutMyselfPhotoContainerProps>(AboutMyselfPhotoContainer, {
+        alt: '',
+        jpgSrc: '',
+        webpSrc: '',
+    });
     const setProps = buildSetProps<AboutMyselfPhotoContainerProps>();
 
     beforeAll(async () => {
-        pinia = await mockInitStore();
-
-        createWrapper = buildCreateWrapper<AboutMyselfPhotoContainerProps>(
-            AboutMyselfPhotoContainer,
-            {
-                alt: '',
-                jpgSrc: '',
-                webpSrc: '',
-            },
-            {
-                global: {
-                    plugins: [pinia],
-                },
-            },
-        );
+        await mockInitStore();
     });
 
     it('uses JPG source', async () => {

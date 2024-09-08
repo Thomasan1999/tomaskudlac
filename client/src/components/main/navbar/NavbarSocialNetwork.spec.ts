@@ -1,38 +1,35 @@
-import { mount, MountingOptions, VueWrapper } from '@vue/test-utils';
 import NavbarSocialNetwork from '@/components/main/navbar/NavbarSocialNetwork.vue';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faEnvelope, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { buildCreateWrapper, buildSetProps } from '@/utils/test';
+import { NavbarSocialNetworkProps } from '@/components/main/navbar/types';
 
 describe('NavbarSocialNetwork', () => {
     beforeAll(() => {
         library.add(faEnvelope, faTimes);
     });
 
-    function createNavbarSocialNetwork(props: MountingOptions<any>['props'] = {}): VueWrapper {
-        const defaultProps = {
-            icon: [],
+    const createNavbarSocialNetwork = buildCreateWrapper<NavbarSocialNetworkProps>(
+        NavbarSocialNetwork,
+        {
+            icon: ['', ''],
             title: 'Title',
             to: '/',
-        };
-
-        return mount(NavbarSocialNetwork, {
+        },
+        {
             global: {
-                stubs: { FontAwesomeIcon: !props.icon },
+                stubs: ['FontAwesomeIcon'],
             },
-            props: {
-                ...defaultProps,
-                ...props,
-            },
-        });
-    }
+        },
+    );
+    const setProps = buildSetProps<NavbarSocialNetworkProps>();
 
     it("renders different icons for different 'icon' property value", async () => {
         const navbarSocialNetworkWrapper = createNavbarSocialNetwork({ icon: ['fas', 'times'] });
 
         const fasTimesHtml = navbarSocialNetworkWrapper.html();
 
-        await navbarSocialNetworkWrapper.setProps({ icon: ['fas', 'envelope'] });
+        await setProps(navbarSocialNetworkWrapper, { icon: ['fas', 'envelope'] });
 
         const fasEnvelopeHtml = navbarSocialNetworkWrapper.html();
 
@@ -44,7 +41,7 @@ describe('NavbarSocialNetwork', () => {
 
         expect(navbarSocialNetworkWrapper.attributes('title')).toBe('Some Title');
 
-        await navbarSocialNetworkWrapper.setProps({ title: 'Another Title' });
+        await setProps(navbarSocialNetworkWrapper, { title: 'Another Title' });
 
         expect(navbarSocialNetworkWrapper.attributes('title')).toBe('Another Title');
     });
@@ -54,7 +51,7 @@ describe('NavbarSocialNetwork', () => {
 
         expect(navbarSocialNetworkWrapper.attributes('href')).toBe('/');
 
-        await navbarSocialNetworkWrapper.setProps({ to: '/route' });
+        await setProps(navbarSocialNetworkWrapper, { to: '/route' });
 
         expect(navbarSocialNetworkWrapper.attributes('href')).toBe('/route');
     });
