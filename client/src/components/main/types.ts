@@ -1,3 +1,5 @@
+import { ToastType } from '@/store/types';
+
 export interface MainSectionProps {
     heading?: boolean;
     name: string;
@@ -5,5 +7,5 @@ export interface MainSectionProps {
 
 export interface ToastProps {
     message: string;
-    type: 'fail' | 'success';
+    type: ToastType;
 }
