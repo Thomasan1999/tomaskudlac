@@ -22,7 +22,7 @@
 <script lang="ts" setup>
     import { computed } from 'vue';
     import useStore from '@/store';
-    import { ContactFormBottomPartProps } from '@/components/main/contact/types';
+    import { ContactFormBottomPartProps } from '@/components/main/contact/form/types';
 
     const store = useStore();
 

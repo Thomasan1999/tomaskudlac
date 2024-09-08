@@ -19,7 +19,7 @@
     import MainSection from '@/components/main/MainSection.vue';
     import useStore from '@/store';
     import { computed } from 'vue';
-    import ContactForm from '@/components/main/contact/ContactForm.vue';
+    import ContactForm from '@/components/main/contact/form/ContactForm.vue';
 
     const store = useStore();
 

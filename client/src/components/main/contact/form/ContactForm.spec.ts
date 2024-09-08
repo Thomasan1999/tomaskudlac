@@ -1,9 +1,9 @@
 import { Pinia } from 'pinia';
 import mockInitStore from '@/mocks/mockInitStore';
 import { DOMWrapper, flushPromises, mount, VueWrapper } from '@vue/test-utils';
-import ContactForm from '@/components/main/contact/ContactForm.vue';
-import ContactFormField from '@/components/main/contact/ContactFormField.vue';
-import contactFormFields from '@/components/main/contact/contactFormFields';
+import ContactForm from '@/components/main/contact/form/ContactForm.vue';
+import ContactFormField from '@/components/main/contact/form/ContactFormField.vue';
+import contactFormFields from '@/components/main/contact/form/contactFormFields';
 import { cloneDeep, merge } from 'lodash';
 import { getTestingSelector } from '@/utils/test';
 import { nextTick } from 'vue';

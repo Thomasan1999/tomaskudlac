@@ -38,7 +38,7 @@
     import { computed, ref, watch } from 'vue';
     import useStore from '@/store';
     import { Merge } from 'ts-essentials';
-    import ContactFormFieldError from '@/components/main/contact/ContactFormFieldError.vue';
+    import ContactFormFieldError from '@/components/main/contact/form/ContactFormFieldError.vue';
 
     const props = withDefaults(
         defineProps<{

@@ -1,7 +1,7 @@
 import { Pinia } from 'pinia';
 import mockInitStore from '@/mocks/mockInitStore';
 import { mount, MountingOptions, VueWrapper } from '@vue/test-utils';
-import ContactFormFieldError from '@/components/main/contact/ContactFormFieldError.vue';
+import ContactFormFieldError from '@/components/main/contact/form/ContactFormFieldError.vue';
 
 describe('ContactFormFieldError', () => {
     let pinia: Pinia;

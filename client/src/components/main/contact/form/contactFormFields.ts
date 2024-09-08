@@ -1,5 +1,5 @@
 import { reactive } from 'vue';
-import { ContactFormFieldData } from '@/components/main/contact/types';
+import { ContactFormFieldData } from '@/components/main/contact/form/types';
 
 const contactFormFields = reactive<ContactFormFieldData[]>([
     {

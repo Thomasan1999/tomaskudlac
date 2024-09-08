@@ -1,7 +1,7 @@
 import mockInitStore from '@/mocks/mockInitStore';
 import { buildCreateWrapper, buildSetProps, getTestingSelector } from '@/utils/test';
-import ContactFormBottomPart from '@/components/main/contact/ContactFormBottomPart.vue';
-import { ContactFormBottomPartProps } from '@/components/main/contact/types';
+import ContactFormBottomPart from '@/components/main/contact/form/ContactFormBottomPart.vue';
+import { ContactFormBottomPartProps } from '@/components/main/contact/form/types';
 
 const REQUIRED_LEGEND_SELECTOR = getTestingSelector('required-legend');
 const SUBMIT_BUTTON_SELECTOR = getTestingSelector('submit-button');

@@ -29,11 +29,11 @@
 <script lang="ts" setup>
     import { computed, ref } from 'vue';
     import useStore from '@/store';
-    import ContactFormField from '@/components/main/contact/ContactFormField.vue';
-    import contactFormFields from '@/components/main/contact/contactFormFields';
-    import type { ContactFormFieldData } from '@/components/main/contact/types';
+    import ContactFormField from '@/components/main/contact/form/ContactFormField.vue';
+    import contactFormFields from '@/components/main/contact/form/contactFormFields';
+    import type { ContactFormFieldData } from '@/components/main/contact/form/types';
     import { ToastType } from '@/store/types';
-    import ContactFormBottomPart from '@/components/main/contact/ContactFormBottomPart.vue';
+    import ContactFormBottomPart from '@/components/main/contact/form/ContactFormBottomPart.vue';
 
     const store = useStore();
 
