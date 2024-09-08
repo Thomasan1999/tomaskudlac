@@ -1,5 +1,10 @@
+export enum ContactFormFieldElement {
+    INPUT = 'input',
+    TEXTAREA = 'textarea',
+}
+
 export type ContactFormFieldData = {
-    element?: 'input' | 'textarea';
+    element?: ContactFormFieldElement;
     maxlength?: number;
     minlength?: number;
     name: string;

@@ -39,10 +39,11 @@
     import useStore from '@/store';
     import { Merge } from 'ts-essentials';
     import ContactFormFieldError from '@/components/main/contact/form/ContactFormFieldError.vue';
+    import { ContactFormFieldElement } from '@/components/main/contact/form/types';
 
     const props = withDefaults(
         defineProps<{
-            element?: string;
+            element?: ContactFormFieldElement;
             label: string;
             maxlength?: number;
             minlength?: number;
@@ -53,7 +54,7 @@
             type?: string;
             valid: boolean;
         }>(),
-        { element: 'input', minlength: 0, required: false, type: 'text' },
+        { element: ContactFormFieldElement.INPUT, minlength: 0, required: false, type: 'text' },
     );
     const emit = defineEmits<{
         (event: 'blur'): void;
@@ -79,7 +80,9 @@
 
     const inputting = ref(false);
 
-    const dynamicProps = computed(() => (props.element === 'input' ? { type: props.type } : undefined));
+    const dynamicProps = computed(() =>
+        props.element === ContactFormFieldElement.INPUT ? { type: props.type } : undefined,
+    );
 
     const error = computed(() => {
         if (props.valid || !props.touched || inputting.value) {

@@ -3,6 +3,7 @@ import mockInitStore from '@/mocks/mockInitStore';
 import { mount, MountingOptions, VueWrapper } from '@vue/test-utils';
 import ContactFormField from '@/components/main/contact/form/ContactFormField.vue';
 import ContactFormFieldError from '@/components/main/contact/form/ContactFormFieldError.vue';
+import { ContactFormFieldElement } from '@/components/main/contact/form/types';
 
 describe('ContactFormField', () => {
     let pinia: Pinia;
@@ -53,14 +54,14 @@ describe('ContactFormField', () => {
         });
 
         it("renders HTML element used in 'element' property", async () => {
-            let element = 'input';
+            let element = ContactFormFieldElement.INPUT;
 
             const wrapper = createContactFormFieldWrapper({ element });
 
             expect(wrapper.find(element).exists()).toBe(true);
             expect(wrapper.find('textarea').exists()).toBe(false);
 
-            element = 'textarea';
+            element = ContactFormFieldElement.TEXTAREA;
 
             await wrapper.setProps({ element });
 
@@ -71,7 +72,7 @@ describe('ContactFormField', () => {
         it("uses 'modelValue' property as input value", () => {
             const modelValue = 'Some model value';
 
-            const wrapper = createContactFormFieldWrapper({ element: 'input', modelValue });
+            const wrapper = createContactFormFieldWrapper({ element: ContactFormFieldElement.INPUT, modelValue });
 
             const inputElement = wrapper.get('input');
 
@@ -84,7 +85,7 @@ describe('ContactFormField', () => {
             htmlAttributeName: string = attributeName,
             htmlAttributeValues: HtmlAttributeType[] = attributeValues as any,
         ): Promise<void> {
-            const wrapper = createContactFormFieldWrapper({ element: 'input' });
+            const wrapper = createContactFormFieldWrapper({ element: ContactFormFieldElement.INPUT });
 
             const inputElement = wrapper.get('input');
 
@@ -151,7 +152,7 @@ describe('ContactFormField', () => {
 
     describe('events', () => {
         it("emits 'blur' event on input blur", async () => {
-            const wrapper = createContactFormFieldWrapper({ element: 'input' });
+            const wrapper = createContactFormFieldWrapper({ element: ContactFormFieldElement.INPUT });
 
             expect(wrapper.emitted().blur).toBeUndefined();
 
@@ -161,7 +162,7 @@ describe('ContactFormField', () => {
         });
 
         it("emits 'update:modelValue' on input", async () => {
-            const wrapper = createContactFormFieldWrapper({ element: 'input', value: '' });
+            const wrapper = createContactFormFieldWrapper({ element: ContactFormFieldElement.INPUT, value: '' });
 
             expect(wrapper.emitted()['update:modelValue']).toBeUndefined();
 
@@ -172,7 +173,7 @@ describe('ContactFormField', () => {
         });
 
         it("emits 'validSet' on model value change", async () => {
-            const wrapper = createContactFormFieldWrapper({ element: 'input', value: '' });
+            const wrapper = createContactFormFieldWrapper({ element: ContactFormFieldElement.INPUT, value: '' });
 
             expect(wrapper.emitted().validSet).toBeUndefined();
 
