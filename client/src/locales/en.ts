@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 export default {
     footer: {
         copyrightLinkTitle: 'Show explanation of what web cookies are',

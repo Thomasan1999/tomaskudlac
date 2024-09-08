@@ -27,7 +27,6 @@
 
 <script lang="ts" setup>
     import { computed, ref, watch } from 'vue';
-    import useStore from '@/store';
     import { Merge } from 'ts-essentials';
     import ContactFormFieldError from '@/components/main/contact/form/ContactFormFieldError.vue';
     import {
@@ -51,16 +50,12 @@
         required: true,
     });
 
-    const store = useStore();
-
     const onBlur = () => {
         inputting.value = false;
         emit('blur');
     };
 
-    const onInput = (e: any) => {
-        const $event: Merge<KeyboardEvent, { target: HTMLInputElement | HTMLTextAreaElement }> = e;
-
+    const onInput = ($event: Merge<KeyboardEvent, { target: HTMLInputElement | HTMLTextAreaElement }>) => {
         inputting.value = true;
         model.value = $event.target.value;
     };
@@ -84,8 +79,6 @@
             return 'invalidFormat';
         }
     });
-
-    const locales = computed(() => store.locales.sections.contact.form);
 
     const missingValue = computed(() => props.required && !model.value);
 

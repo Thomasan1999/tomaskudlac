@@ -22,7 +22,7 @@ window.fetch = () =>
             },
             ok: true,
             status: 200,
-        } as any),
+        } as never),
     );
 
 const fetchSpy = vi.spyOn(window, 'fetch');
@@ -208,7 +208,7 @@ describe('ContactForm', () => {
                         },
                         ok: true,
                         status: 200,
-                    } as any),
+                    } as never),
                 ) as never,
             );
 

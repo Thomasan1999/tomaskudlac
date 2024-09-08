@@ -27,7 +27,7 @@ describe('navigation', async () => {
 
                     const sectionElement = sectionElements[sectionIndex];
 
-                    sectionElement.scrollIntoView({ behavior: 'instant' as any, block: 'end' });
+                    sectionElement.scrollIntoView({ behavior: 'instant', block: 'end' });
                 },
                 sectionIndex,
                 selector,

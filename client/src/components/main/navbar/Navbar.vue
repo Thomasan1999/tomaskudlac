@@ -63,10 +63,9 @@
     import useStore from '@/store';
     import NavbarSocialNetwork from '@/components/main/navbar/NavbarSocialNetwork.vue';
     import NavbarIcon from '@/components/main/navbar/NavbarIcon.vue';
-    import MainSectionObject from '@/components/main/MainSectionObject';
     import { NavbarProps } from '@/components/main/navbar/types';
 
-    const props = defineProps<NavbarProps>();
+    defineProps<NavbarProps>();
     const emit = defineEmits<{
         (event: 'languageToggle'): void;
         (event: 'linkClick', sectionName: string): void;

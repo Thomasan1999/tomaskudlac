@@ -8,7 +8,7 @@ describe('store', () => {
 
     setActivePinia(createPinia());
 
-    let store: ReturnType<typeof useStore> = useStore();
+    const store: ReturnType<typeof useStore> = useStore();
 
     afterEach(() => {
         store.$reset();

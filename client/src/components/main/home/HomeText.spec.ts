@@ -13,8 +13,6 @@ import { MockInstance } from 'vitest';
 const shuffleSpy = (vi.spyOn(_, 'shuffle') as MockInstance).mockImplementation((value) => value);
 
 describe('HomeText', () => {
-    let currentLanguageIndex: number;
-
     const languageTitle = 'HTML';
     const languageTitleWithPrefix = 'n HTML';
 
@@ -30,21 +28,14 @@ describe('HomeText', () => {
 
         const setTimeout = window.setTimeout;
 
-        // @ts-ignore
         window.setTimeout = function (callback, timeout) {
-            if (callback.name === 'changeProgrammingLanguage') {
-                currentLanguageIndex += 1;
-            }
-
-            setTimeout(callback, timeout);
-        };
+            return setTimeout(callback, timeout);
+        } as never;
 
         await mockInitStore();
     });
 
     beforeEach(async () => {
-        currentLanguageIndex = -1;
-
         const store = useStore();
 
         store.programmingLanguages = [

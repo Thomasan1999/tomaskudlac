@@ -49,7 +49,7 @@ router.beforeEach(async (to, from, next) => {
 
     const newRoute = hashChanged
         ? ({ hash: newRouteHash, path: to.path, replace: true } as RouteLocationRaw)
-        : (undefined as any);
+        : (undefined as never);
 
     next(newRoute);
 });

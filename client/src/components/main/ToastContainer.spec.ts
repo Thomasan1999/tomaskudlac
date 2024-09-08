@@ -1,5 +1,4 @@
 import mockInitStore from '@/mocks/mockInitStore';
-import type { Pinia } from 'pinia';
 import useStore from '@/store';
 import { ToastType } from '@/store/types';
 import { buildCreateWrapper, emitComponentEvent, getTestingSelector } from '@/utils/test';

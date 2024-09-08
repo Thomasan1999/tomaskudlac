@@ -9,24 +9,23 @@ function getTestingSelector(id: string): string {
     return `[data-testid="${id}"]`;
 }
 
-function buildSetProps<PropsType extends Record<string, any>>(): (
-    wrapper: VueWrapper,
-    props: Partial<PropsType>,
-) => Promise<void> {
+function buildSetProps<PropsType extends object>(): (wrapper: VueWrapper, props: Partial<PropsType>) => Promise<void> {
     return (wrapper: VueWrapper, props: Partial<PropsType>) => wrapper.setProps(props);
 }
 
 function buildCreateWrapper<
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     PropsType extends undefined,
     ComponentType extends Parameters<typeof mount>[0] = Parameters<typeof mount>[0],
     OptionsType extends ComponentMountingOptions<ComponentType> = ComponentMountingOptions<ComponentType>,
 >(component: ComponentType): (options?: OptionsType) => CreateWrapperBuiltComponent<ComponentType>;
 function buildCreateWrapper<
-    PropsType extends Record<string, any>,
+    PropsType extends object,
     ComponentType extends Parameters<typeof mount>[0] = Parameters<typeof mount>[0],
     OptionsType extends ComponentMountingOptions<ComponentType> = ComponentMountingOptions<ComponentType>,
 >(component: ComponentType): (props: PropsType, options?: OptionsType) => CreateWrapperBuiltComponent<ComponentType>;
 function buildCreateWrapper<
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     PropsType extends undefined,
     ComponentType extends Parameters<typeof mount>[0] = Parameters<typeof mount>[0],
     OptionsType extends ComponentMountingOptions<ComponentType> = ComponentMountingOptions<ComponentType>,
@@ -36,7 +35,7 @@ function buildCreateWrapper<
     defaultOptions?: OptionsType,
 ): (options?: OptionsType) => CreateWrapperBuiltComponent<ComponentType>;
 function buildCreateWrapper<
-    PropsType extends Record<string, any>,
+    PropsType extends object,
     ComponentType extends Parameters<typeof mount>[0] = Parameters<typeof mount>[0],
     OptionsType extends ComponentMountingOptions<ComponentType> = ComponentMountingOptions<ComponentType>,
 >(
@@ -45,7 +44,7 @@ function buildCreateWrapper<
     defaultOptions?: OptionsType,
 ): (props: PropsType, options?: OptionsType) => CreateWrapperBuiltComponent<ComponentType>;
 function buildCreateWrapper<
-    PropsType extends Record<string, any>,
+    PropsType extends object,
     ComponentType extends Parameters<typeof mount>[0] = Parameters<typeof mount>[0],
     OptionsType extends ComponentMountingOptions<ComponentType> = ComponentMountingOptions<ComponentType>,
 >(
@@ -54,7 +53,7 @@ function buildCreateWrapper<
     defaultOptions?: OptionsType,
 ): (props?: DeepPartial<PropsType>, options?: OptionsType) => CreateWrapperBuiltComponent<ComponentType>;
 function buildCreateWrapper<
-    PropsType extends Record<string, any> | undefined = undefined,
+    PropsType extends object | undefined = undefined,
     ComponentType extends Parameters<typeof mount>[0] = Parameters<typeof mount>[0],
     OptionsType extends ComponentMountingOptions<ComponentType> = ComponentMountingOptions<ComponentType>,
 >(

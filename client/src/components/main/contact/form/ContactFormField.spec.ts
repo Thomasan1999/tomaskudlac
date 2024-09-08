@@ -63,11 +63,11 @@ describe('ContactFormField', () => {
             expect(inputElement.element.value).toBe(modelValue);
         });
 
-        async function checkInputAttribute<AttributeType, HtmlAttributeType = AttributeType>(
+        async function checkInputAttribute<AttributeType>(
             attributeName: string,
             attributeValues: AttributeType[],
             htmlAttributeName: string = attributeName,
-            htmlAttributeValues: HtmlAttributeType[] = attributeValues as any,
+            htmlAttributeValues: AttributeType[] = attributeValues,
         ): Promise<void> {
             const wrapper = createContactFormFieldWrapper({ element: ContactFormFieldElement.INPUT });
 

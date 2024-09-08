@@ -52,7 +52,7 @@ describe('Main', () => {
     it('replaces route on link click', async () => {
         const mainWrapper = createMainWrapper();
 
-        let callTimesBeforeClick = routerReplaceCallTimes;
+        const callTimesBeforeClick = routerReplaceCallTimes;
 
         await mainWrapper.get('[data-testid="sectionLink"]').trigger('click');
 

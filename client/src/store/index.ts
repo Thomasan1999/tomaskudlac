@@ -33,7 +33,6 @@ const useStore = defineStore('main', {
                 webP.onload = webP.onerror = function () {
                     resolve(webP.height === 2 ? ImageFormat.WEBP : ImageFormat.JPG);
                 };
-                // eslint-disable-next-line max-len
                 webP.src =
                     'data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA';
             });
@@ -103,12 +102,12 @@ const useStore = defineStore('main', {
             /** The scrolled page section. */
             activeSection: undefined as string | undefined,
             /** The current age of Tomáš Kudláč. */
-            age: null as any as number,
+            age: null as unknown as number,
             /** The preferred image format of images. */
             imageFormat: ImageFormat.WEBP,
             initState: InitializingState.NOT_INITIALIZED,
             language: 'sk' as SiteLanguage,
-            locales: null as any as typeof skLocales | typeof enLocales,
+            locales: null as unknown as typeof skLocales | typeof enLocales,
             navbarHeight: 60,
             programmingLanguages: [
                 {

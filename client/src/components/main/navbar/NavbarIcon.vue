@@ -28,7 +28,7 @@
     import useStore from '@/store';
     import { NavbarIconProps } from '@/components/main/navbar/types';
 
-    const props = defineProps<NavbarIconProps>();
+    defineProps<NavbarIconProps>();
     const emit = defineEmits<{ (event: 'click'): void }>();
 
     const store = useStore();

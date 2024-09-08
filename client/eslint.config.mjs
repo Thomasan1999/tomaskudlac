@@ -2,6 +2,7 @@ import tsEslint from 'typescript-eslint';
 import pluginVue from 'eslint-plugin-vue';
 
 export default tsEslint.config(
+    ...tsEslint.configs.recommended,
     ...pluginVue.configs['flat/base'],
     {
         languageOptions: {
@@ -14,7 +15,6 @@ export default tsEslint.config(
     },
     {
         rules: {
-            'arrow-body-style': ['error', 'as-needed', { requireReturnForObjectLiteral: true }],
             'arrow-parens': ['error', 'always'],
             'arrow-spacing': ['error', { after: true, before: true }],
             camelcase: 'off',
@@ -37,7 +37,6 @@ export default tsEslint.config(
             'no-multi-spaces': 'off',
             'no-param-reassign': ['error', { props: false }],
             'no-undef': 'off',
-            'no-unused-vars': 'off',
             'no-use-before-define': 'off',
             'no-restricted-globals': 'off',
             'no-template-curly-in-string': 'off',
@@ -48,7 +47,6 @@ export default tsEslint.config(
             'prefer-destructuring': 'off',
             'prefer-promise-reject-errors': 'off',
             'quote-props': 'off',
-            quotes: ['error', 'single', { allowTemplateLiterals: true }],
             semi: ['error', 'always'],
             'space-before-function-paren': [
                 'error',
@@ -58,6 +56,7 @@ export default tsEslint.config(
                     named: 'never',
                 },
             ],
+            '@typescript-eslint/no-unused-vars': ['error'],
         },
     },
     {

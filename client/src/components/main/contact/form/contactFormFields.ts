@@ -19,7 +19,6 @@ const contactFormFields = reactive<ContactFormFieldData[]>([
         maxlength: 64,
         minlength: 0,
         name: 'email',
-        // eslint-disable-next-line max-len
         pattern:
             /^(([^<>()\\.,;:\s@"]+(\.[^<>()\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
         required: true,
