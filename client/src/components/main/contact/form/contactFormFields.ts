@@ -1,5 +1,5 @@
 import { reactive } from 'vue';
-import { ContactFormFieldData } from '@/components/main/contact/form/types';
+import { ContactFormFieldData, ContactFormFieldElement } from '@/components/main/contact/form/types';
 
 const contactFormFields = reactive<ContactFormFieldData[]>([
     {
@@ -35,7 +35,7 @@ const contactFormFields = reactive<ContactFormFieldData[]>([
         value: '',
     },
     {
-        element: 'textarea',
+        element: ContactFormFieldElement.TEXTAREA,
         name: 'message',
         required: true,
         touched: false,
