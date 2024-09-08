@@ -26,3 +26,8 @@ export interface ContactFormBottomPartProps {
     formValid: boolean;
     submitDisabled: boolean;
 }
+
+export interface ContactFormLabelTextProps {
+    fieldRequired: boolean;
+    text: string;
+}

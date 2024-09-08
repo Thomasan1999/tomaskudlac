@@ -4,6 +4,7 @@ import { mount, MountingOptions, VueWrapper } from '@vue/test-utils';
 import ContactFormField from '@/components/main/contact/form/ContactFormField.vue';
 import ContactFormFieldError from '@/components/main/contact/form/ContactFormFieldError.vue';
 import { ContactFormFieldElement } from '@/components/main/contact/form/types';
+import ContactFormLabelText from '@/components/main/contact/form/ContactFormLabelText.vue';
 
 describe('ContactFormField', () => {
     let pinia: Pinia;
@@ -38,19 +39,9 @@ describe('ContactFormField', () => {
 
     describe('HTML attributes', () => {
         it('renders label text', async () => {
-            let label = 'Field label';
+            const wrapper = createContactFormFieldWrapper();
 
-            const wrapper = createContactFormFieldWrapper({ label });
-
-            const labelElement = wrapper.get('[data-testid="label"]');
-
-            expect(labelElement.text()).toContain(label);
-
-            label = 'Something different';
-
-            await wrapper.setProps({ label });
-
-            expect(labelElement.text()).toContain(label);
+            expect(wrapper.findComponent(ContactFormLabelText).exists()).toBe(true);
         });
 
         it("renders HTML element used in 'element' property", async () => {

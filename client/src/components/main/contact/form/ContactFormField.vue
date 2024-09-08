@@ -4,19 +4,10 @@
         class="contact-form-field"
         :class="{ 'has-error': error }"
     >
-        <span
-            class="contact-form-label w-label"
-            data-testid="label"
-        >
-            {{ label }}:
-            <span
-                class="contact-form-required"
-                data-testid="required"
-                :style="{ visibility: required ? 'visible' : 'hidden' }"
-                :title="locales.required"
-                >*</span
-            >
-        </span>
+        <ContactFormLabelText
+            :fieldRequired="required"
+            :text="label"
+        />
         <Component
             :is="element"
             class="contact-form-data flex-grow"
@@ -40,6 +31,7 @@
     import { Merge } from 'ts-essentials';
     import ContactFormFieldError from '@/components/main/contact/form/ContactFormFieldError.vue';
     import { ContactFormFieldElement, ContactFormFieldType } from '@/components/main/contact/form/types';
+    import ContactFormLabelText from '@/components/main/contact/form/ContactFormLabelText.vue';
 
     const props = withDefaults(
         defineProps<{
@@ -146,20 +138,6 @@
                 border-color: #cc0000;
             }
         }
-    }
-
-    .contact-form-label {
-        line-height: var(--contact-form-input-height);
-        text-align: right;
-
-        @media (max-width: 1023px) {
-            text-align: left;
-            width: 100%;
-        }
-    }
-
-    .contact-form-required {
-        padding-right: 5px;
     }
 
     input:-webkit-autofill,
