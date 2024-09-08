@@ -3,17 +3,17 @@
         <span>{{ locales.welcome }}</span>
         <span
             class="home-programming-language"
-            data-testid="programmingLanguage"
+            data-testid="programming-language"
         >
             <span
                 class="home-programming-language-non-marked"
-                data-testid="nonMarkedText"
+                data-testid="non-marked-text"
             >
                 <HomeTextProgrammingLanguage :programmingLanguage="nonMarkedText" />
             </span>
             <mark
                 class="home-programming-language-marked"
-                data-testid="markedText"
+                data-testid="marked-text"
             >
                 <HomeTextProgrammingLanguage :programmingLanguage="markedText" />
             </mark>

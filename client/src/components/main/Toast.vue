@@ -14,7 +14,7 @@
                 <div class="toast-message">{{ message }}</div>
                 <button
                     class="toast-close-button"
-                    data-testid="closeButton"
+                    data-testid="close-button"
                     :title="locales.closeButtonTitle"
                     @click="opened = false"
                 >

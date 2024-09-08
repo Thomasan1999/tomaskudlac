@@ -7,7 +7,7 @@
         <div class="text-content">
             <div
                 class="contact-brief-text"
-                data-testid="briefText"
+                data-testid="brief-text"
                 v-html="briefText"
             />
             <ContactForm />

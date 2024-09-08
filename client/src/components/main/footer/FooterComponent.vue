@@ -8,7 +8,7 @@
                     <ExternalLink
                         v-if="language === SiteLanguage.EN"
                         class="footer-copyright-link"
-                        data-testid="copyrightLink"
+                        data-testid="copyright-link"
                         href="http://www.whatarecookies.com"
                         :title="locales.copyrightLinkTitle"
                         >{{ locales.copyrightLinkText }}.
@@ -16,7 +16,7 @@
                     <span
                         v-else
                         class="footer-copyright-link"
-                        data-testid="copyrightLink"
+                        data-testid="copyright-link"
                         :title="locales.copyrightLinkTitle"
                         @click="showCookies = true"
                         >{{ locales.copyrightLinkText }}.</span

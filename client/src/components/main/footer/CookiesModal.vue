@@ -9,7 +9,7 @@
             <div class="cookies-modal-content">
                 <button
                     class="cookies-modal-close-button"
-                    data-testid="closeButton"
+                    data-testid="close-button"
                     :title="locales.closeButtonTitle"
                     @click="$emit('close')"
                 >

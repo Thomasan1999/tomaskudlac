@@ -22,7 +22,7 @@
                 v-for="[name, section] in sections"
                 :key="name"
                 :active="name === activeSection"
-                data-testid="sectionLink"
+                data-testid="section-link"
                 routerLink
                 replace
                 :title="section.title"
@@ -34,7 +34,7 @@
             <div class="navbar-other-lang-container">
                 <NavbarLink
                     class="navbar-other-lang"
-                    data-testid="navbarOtherLang"
+                    data-testid="navbar-other-lang"
                     routerLink
                     :text="locales.otherLangCode"
                     :title="locales.otherLangLinkTitle"

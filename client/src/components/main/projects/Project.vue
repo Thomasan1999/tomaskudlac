@@ -19,7 +19,7 @@
                 >
                     <div
                         class="project-text-content"
-                        data-testid="textContent"
+                        data-testid="text-content"
                         ref="textContent"
                     >
                         <h4 class="project-what-ive-done">{{ generalLocales.whatIveDone }}:</h4>

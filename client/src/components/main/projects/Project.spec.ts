@@ -4,7 +4,7 @@ import mockInitStore from '@/mocks/mockInitStore';
 import { buildCreateWrapper, getTestingSelector } from '@/utils/test';
 import { ProjectProps } from '@/components/main/projects/types';
 
-const TEXT_CONTENT_SELECTOR = getTestingSelector('textContent');
+const TEXT_CONTENT_SELECTOR = getTestingSelector('text-content');
 const TITLE_SELECTOR = getTestingSelector('title');
 
 describe('Project', () => {

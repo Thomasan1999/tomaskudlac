@@ -9,8 +9,8 @@ import { buildCreateWrapper, buildSetProps, getTestingSelector } from '@/utils/t
 import { NavbarProps } from '@/components/main/navbar/types';
 
 const LOGO_SELECTOR = getTestingSelector('logo');
-const NAVBAR_OTHER_LANG_SELECTOR = getTestingSelector('navbarOtherLang');
-const SECTION_LINK_SELECTOR = getTestingSelector('sectionLink');
+const NAVBAR_OTHER_LANG_SELECTOR = getTestingSelector('navbar-other-lang');
+const SECTION_LINK_SELECTOR = getTestingSelector('section-link');
 
 describe('Navbar', () => {
     const sections: [string, MainSectionObject][] = [
@@ -54,7 +54,9 @@ describe('Navbar', () => {
     function getSectionLinks(navbarWrapper: VueWrapper): VueWrapper[] {
         const navbarLinks = navbarWrapper.findAllComponents(NavbarLink);
 
-        return navbarLinks.filter((navbarLink) => (navbarLink.element as HTMLElement).dataset.testid === 'sectionLink');
+        return navbarLinks.filter(
+            (navbarLink) => (navbarLink.element as HTMLElement).dataset.testid === 'section-link',
+        );
     }
 
     beforeAll(async () => {

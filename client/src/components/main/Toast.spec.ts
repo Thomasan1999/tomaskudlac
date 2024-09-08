@@ -5,7 +5,7 @@ import { buildCreateWrapper, buildSetProps, getTestingSelector } from '@/utils/t
 import { ToastProps } from '@/components/main/types';
 import { ToastType } from '@/store/types';
 
-const CLOSE_BUTTON_SELECTOR = getTestingSelector('closeButton');
+const CLOSE_BUTTON_SELECTOR = getTestingSelector('close-button');
 const TOAST_SELECTOR = getTestingSelector('toast');
 
 describe('Toast', () => {

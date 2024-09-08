@@ -6,7 +6,7 @@ import ExternalLink from '@/components/ExternalLink.vue';
 import { SiteLanguage } from '@/store/types';
 import { buildCreateWrapper, getTestingSelector } from '@/utils/test';
 
-const COPYRIGHT_LINK_SELECTOR = getTestingSelector('copyrightLink');
+const COPYRIGHT_LINK_SELECTOR = getTestingSelector('copyright-link');
 
 describe('FooterComponent', () => {
     beforeAll(async () => {

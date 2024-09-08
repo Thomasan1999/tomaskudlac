@@ -2,7 +2,7 @@ import mockInitStore from '@/mocks/mockInitStore';
 import Contact from '@/components/main/contact/Contact.vue';
 import { buildCreateWrapper, getTestingSelector } from '@/utils/test';
 
-const BRIEF_TEXT_SELECTOR = getTestingSelector('briefText');
+const BRIEF_TEXT_SELECTOR = getTestingSelector('brief-text');
 
 describe('Contact', () => {
     beforeAll(async () => {

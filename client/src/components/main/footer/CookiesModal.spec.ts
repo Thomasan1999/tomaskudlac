@@ -2,7 +2,7 @@ import CookiesModal from '@/components/main/footer/CookiesModal.vue';
 import mockInitStore from '@/mocks/mockInitStore';
 import { buildCreateWrapper, getTestingSelector } from '@/utils/test';
 
-const CLOSE_BUTTON_SELECTOR = getTestingSelector('closeButton');
+const CLOSE_BUTTON_SELECTOR = getTestingSelector('close-button');
 const OVERLAY_SELECTOR = getTestingSelector('overlay');
 
 describe('CookiesModal', () => {

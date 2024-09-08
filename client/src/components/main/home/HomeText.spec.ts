@@ -11,9 +11,9 @@ import { buildCreateWrapper, getTestingSelector } from '@/utils/test';
 import { MockInstance } from 'vitest';
 
 const CURSOR_SELECTOR = getTestingSelector('cursor');
-const MARKED_TEXT_SELECTOR = getTestingSelector('markedText');
-const NON_MARKED_TEXT_SELECTOR = getTestingSelector('nonMarkedText');
-const PROGRAMMING_LANGUAGE_SELECTOR = getTestingSelector('programmingLanguage');
+const MARKED_TEXT_SELECTOR = getTestingSelector('marked-text');
+const NON_MARKED_TEXT_SELECTOR = getTestingSelector('non-marked-text');
+const PROGRAMMING_LANGUAGE_SELECTOR = getTestingSelector('programming-language');
 
 const shuffleSpy = (vi.spyOn(_, 'shuffle') as MockInstance).mockImplementation((value) => value);
 

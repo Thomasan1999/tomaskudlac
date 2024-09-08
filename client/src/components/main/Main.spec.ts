@@ -5,7 +5,7 @@ import mainSections from '@/components/main/mainSections';
 import { nextTick } from 'vue';
 import { buildCreateWrapper, getTestingSelector } from '@/utils/test';
 
-const SECTION_LINK_SELECTOR = getTestingSelector('sectionLink');
+const SECTION_LINK_SELECTOR = getTestingSelector('section-link');
 
 let routerReplaceCallTimes = 0;
 

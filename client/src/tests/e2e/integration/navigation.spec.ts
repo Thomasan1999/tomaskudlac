@@ -3,7 +3,7 @@ import { default as puppeteer, ElementHandle } from 'puppeteer';
 import sleep from '@/utils/sleep';
 import { getTestingSelector } from '@/utils/test';
 
-const NAVBAR_OTHER_LANG_SELCTOR = getTestingSelector('navbarOtherLang');
+const NAVBAR_OTHER_LANG_SELCTOR = getTestingSelector('navbar-other-lang');
 
 describe('navigation', async () => {
     const domChangeTimeout = 500;
