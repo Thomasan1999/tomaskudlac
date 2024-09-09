@@ -1,5 +1,4 @@
-import { buildCreateWrapper, buildSetProps, getTestingSelector } from '@/utils/test';
-import { ContactFormLabelTextProps } from '@/components/main/contact/form/types';
+import { buildCreateWrapper, getTestingSelector } from '@/utils/test';
 import ContactFormLabelText from '@/components/main/contact/form/ContactFormLabelText.vue';
 import mockInitStore from '@/mocks/mockInitStore';
 
@@ -10,7 +9,6 @@ const createWrapper = buildCreateWrapper(ContactFormLabelText, {
     fieldRequired: false,
     text: '',
 });
-const setProps = buildSetProps<ContactFormLabelTextProps>();
 
 describe('ContactFormLabelText', () => {
     beforeAll(async () => {
@@ -28,7 +26,7 @@ describe('ContactFormLabelText', () => {
 
         text = 'Something different';
 
-        await setProps(wrapper, { text });
+        await wrapper.setProps({ text });
 
         expect(labelElement.text()).toContain(text);
     });
@@ -38,7 +36,7 @@ describe('ContactFormLabelText', () => {
 
         expect(wrapper.get(REQUIRED_SELECTOR).isVisible()).toBe(false);
 
-        await setProps(wrapper, { fieldRequired: true });
+        await wrapper.setProps({ fieldRequired: true });
 
         expect(wrapper.get(REQUIRED_SELECTOR).isVisible()).toBe(true);
     });

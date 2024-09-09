@@ -1,7 +1,6 @@
 import NavbarLink from '@/components/main/navbar/NavbarLink.vue';
 import { RouterLink } from 'vue-router';
-import { buildCreateWrapper, buildSetProps } from '@/utils/test';
-import { NavbarLinkProps } from '@/components/main/navbar/types';
+import { buildCreateWrapper } from '@/utils/test';
 
 describe('NavbarLink', () => {
     const createWrapper = buildCreateWrapper(
@@ -18,14 +17,13 @@ describe('NavbarLink', () => {
             },
         },
     );
-    const setProps = buildSetProps<NavbarLinkProps>();
 
     it("has 'active' class based on 'active' property", async () => {
         const wrapper = createWrapper({ active: false });
 
         expect(wrapper.classes()).not.toContain('active');
 
-        await setProps(wrapper, { active: true });
+        await wrapper.setProps({ active: true });
 
         expect(wrapper.classes()).toContain('active');
     });
@@ -35,7 +33,7 @@ describe('NavbarLink', () => {
 
         expect(wrapper.findComponent(RouterLink).exists()).toBe(false);
 
-        await setProps(wrapper, { routerLink: true });
+        await wrapper.setProps({ routerLink: true });
 
         expect(wrapper.findComponent(RouterLink).exists()).toBe(true);
     });
@@ -45,7 +43,7 @@ describe('NavbarLink', () => {
 
         expect(wrapper.text()).toContain('Hello World');
 
-        await setProps(wrapper, { text: 'Link Text' });
+        await wrapper.setProps({ text: 'Link Text' });
 
         expect(wrapper.text()).toContain('Link Text');
     });
@@ -55,7 +53,7 @@ describe('NavbarLink', () => {
 
         expect(wrapper.text()).toContain('Random Title');
 
-        await setProps(wrapper, { text: 'Another Name' });
+        await wrapper.setProps({ text: 'Another Name' });
 
         expect(wrapper.text()).toContain('Another Name');
     });
@@ -69,11 +67,11 @@ describe('NavbarLink', () => {
 
         expectHrefToBe('/');
 
-        await setProps(wrapper, { to: '/route' });
+        await wrapper.setProps({ to: '/route' });
 
         expectHrefToBe('/route');
 
-        await setProps(wrapper, { routerLink: true });
+        await wrapper.setProps({ routerLink: true });
 
         expectHrefToBe('/route');
     });

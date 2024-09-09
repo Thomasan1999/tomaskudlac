@@ -1,7 +1,6 @@
 import mockInitStore from '@/mocks/mockInitStore';
-import { getTestingSelector, buildCreateWrapper, buildSetProps } from '@/utils/test';
+import { getTestingSelector, buildCreateWrapper } from '@/utils/test';
 import AboutMyselfPhotoContainer from '@/components/main/about-myself/AboutMyselfPhotoContainer.vue';
-import type { AboutMyselfPhotoContainerProps } from '@/components/main/about-myself/types';
 
 const JPG_SRC_SELECTOR = getTestingSelector('jpg-src');
 const PHOTO_SELECTOR = getTestingSelector('photo');
@@ -13,7 +12,6 @@ describe('AboutMyselfPhotoContainer', () => {
         jpgSrc: '',
         webpSrc: '',
     });
-    const setProps = buildSetProps<AboutMyselfPhotoContainerProps>();
 
     beforeAll(async () => {
         await mockInitStore();
@@ -27,7 +25,7 @@ describe('AboutMyselfPhotoContainer', () => {
         expect(jpgSrcElement.exists()).toBe(true);
         expect(jpgSrcElement.attributes('srcset')).toBe('lorem.jpg');
 
-        await setProps(wrapper, { jpgSrc: 'ipsum.jpg' });
+        await wrapper.setProps({ jpgSrc: 'ipsum.jpg' });
 
         expect(jpgSrcElement.attributes('srcset')).toBe('ipsum.jpg');
     });
@@ -40,7 +38,7 @@ describe('AboutMyselfPhotoContainer', () => {
         expect(webpSrcElement.exists()).toBe(true);
         expect(webpSrcElement.attributes('srcset')).toBe('dolor.webp');
 
-        await setProps(wrapper, { webpSrc: 'sit.webp' });
+        await wrapper.setProps({ webpSrc: 'sit.webp' });
 
         expect(webpSrcElement.attributes('srcset')).toBe('sit.webp');
     });
@@ -60,7 +58,7 @@ describe('AboutMyselfPhotoContainer', () => {
 
         expect(photoElement.attributes('alt')).toBe('Some alt');
 
-        await setProps(wrapper, { alt: 'Anything else' });
+        await wrapper.setProps({ alt: 'Anything else' });
 
         expect(photoElement.attributes('alt')).toBe('Anything else');
     });

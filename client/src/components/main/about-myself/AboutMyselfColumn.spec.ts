@@ -1,8 +1,7 @@
 import mockInitStore from '@/mocks/mockInitStore';
 import AboutMyselfColumn from '@/components/main/about-myself/AboutMyselfColumn.vue';
 import useStore from '@/store';
-import { buildCreateWrapper, buildSetProps, getTestingSelector } from '@/utils/test';
-import { AboutMyselfColumnProps } from '@/components/main/about-myself/types';
+import { buildCreateWrapper, getTestingSelector } from '@/utils/test';
 
 const TEXT_SELECTOR = getTestingSelector('text');
 const TITLE_SELECTOR = getTestingSelector('title');
@@ -16,7 +15,6 @@ describe('AboutMyselfColumn', () => {
         title: '',
         text: '',
     });
-    const setProps = buildSetProps<AboutMyselfColumnProps>();
 
     it("renders 'text' property", async () => {
         let text = 'this is a random text';
@@ -29,7 +27,7 @@ describe('AboutMyselfColumn', () => {
 
         text = 'this is another text';
 
-        await setProps(wrapper, { text });
+        await wrapper.setProps({ text });
 
         expect(textElement.text()).toBe(text);
     });
@@ -55,7 +53,7 @@ describe('AboutMyselfColumn', () => {
 <strong>I</strong>'m ${store.age} years old. These programming languages ${store.programmingLanguagesString} are older.
 `.trim();
 
-        await setProps(wrapper, { text: rawText });
+        await wrapper.setProps({ text: rawText });
 
         expect(textElement.html()).toContain(parsedText);
     });
@@ -71,7 +69,7 @@ describe('AboutMyselfColumn', () => {
 
         title = 'New Title';
 
-        await setProps(wrapper, { title });
+        await wrapper.setProps({ title });
 
         expect(titleElement.text()).toBe(title);
     });

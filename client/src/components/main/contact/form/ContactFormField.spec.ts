@@ -1,10 +1,9 @@
 import mockInitStore from '@/mocks/mockInitStore';
 import ContactFormField from '@/components/main/contact/form/ContactFormField.vue';
 import ContactFormFieldError from '@/components/main/contact/form/ContactFormFieldError.vue';
-import { ContactFormFieldElement, ContactFormFieldProps } from '@/components/main/contact/form/types';
+import { ContactFormFieldElement } from '@/components/main/contact/form/types';
 import ContactFormLabelText from '@/components/main/contact/form/ContactFormLabelText.vue';
-import { buildCreateWrapper, buildSetProps } from '@/utils/test';
-import { ComponentPropsWithModelValue } from '@/utils/types';
+import { buildCreateWrapper } from '@/utils/test';
 
 describe('ContactFormField', () => {
     beforeAll(async () => {
@@ -26,7 +25,6 @@ describe('ContactFormField', () => {
             },
         },
     );
-    const setProps = buildSetProps<ComponentPropsWithModelValue<ContactFormFieldProps, string>>();
 
     describe('HTML attributes', () => {
         it('renders label text', async () => {
@@ -45,7 +43,7 @@ describe('ContactFormField', () => {
 
             element = ContactFormFieldElement.TEXTAREA;
 
-            await setProps(wrapper, { element });
+            await wrapper.setProps({ element });
 
             expect(wrapper.find(element).exists()).toBe(true);
             expect(wrapper.find('input').exists()).toBe(false);
@@ -72,7 +70,7 @@ describe('ContactFormField', () => {
             const inputElement = wrapper.get('input');
 
             for await (const attributeValue of htmlAttributeValues) {
-                await setProps(wrapper, { [attributeName]: attributeValue });
+                await wrapper.setProps({ [attributeName]: attributeValue });
 
                 expect(inputElement.element[htmlAttributeName]).toBe(attributeValue);
             }
@@ -110,7 +108,7 @@ describe('ContactFormField', () => {
 
             const classNameWithoutError = wrapper.element.className;
 
-            await setProps(wrapper, { touched: true });
+            await wrapper.setProps({ touched: true });
 
             expect(classNameWithoutError).toBeTruthy();
             expect(classNameWithoutError).not.toBe(wrapper.element.className);
@@ -134,11 +132,11 @@ describe('ContactFormField', () => {
 
             expectErrorToBeShown(false);
 
-            await setProps(wrapper, { touched: true });
+            await wrapper.setProps({ touched: true });
 
             expectErrorToBeShown(false);
 
-            await setProps(wrapper, { valid: false });
+            await wrapper.setProps({ valid: false });
 
             expectErrorToBeShown(true);
         });
@@ -171,7 +169,7 @@ describe('ContactFormField', () => {
 
             expect(wrapper.emitted().validSet).toBeUndefined();
 
-            await setProps(wrapper, { modelValue: 'Input value' });
+            await wrapper.setProps({ modelValue: 'Input value' });
 
             expect(wrapper.emitted().validSet).toHaveLength(1);
         });

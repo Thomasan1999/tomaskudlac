@@ -1,8 +1,7 @@
 import Toast from '@/components/main/Toast.vue';
 import { nextTick } from 'vue';
 import mockInitStore from '@/mocks/mockInitStore';
-import { buildCreateWrapper, buildSetProps, getTestingSelector } from '@/utils/test';
-import { ToastProps } from '@/components/main/types';
+import { buildCreateWrapper, getTestingSelector } from '@/utils/test';
 import { ToastType } from '@/store/types';
 
 const CLOSE_BUTTON_SELECTOR = getTestingSelector('close-button');
@@ -32,7 +31,6 @@ describe('Toast', () => {
             },
         },
     );
-    const setProps = buildSetProps<ToastProps>();
 
     it('renders message', async () => {
         const wrapper = createWrapper({
@@ -45,7 +43,7 @@ describe('Toast', () => {
 
         expect(wrapper.text()).toContain('This is a toast message.');
 
-        await setProps(wrapper, { message: 'Another message in the toast.' });
+        await wrapper.setProps({ message: 'Another message in the toast.' });
 
         expect(wrapper.text()).toContain('Another message in the toast.');
     });
@@ -59,7 +57,7 @@ describe('Toast', () => {
 
         const failStyles = wrapper.classes();
 
-        await setProps(wrapper, { type: ToastType.SUCCESS });
+        await wrapper.setProps({ type: ToastType.SUCCESS });
 
         const successStyles = wrapper.classes();
 

@@ -9,10 +9,6 @@ function getTestingSelector(id: string): string {
     return `[data-testid="${id}"]`;
 }
 
-function buildSetProps<PropsType extends object>(): (wrapper: VueWrapper, props: Partial<PropsType>) => Promise<void> {
-    return (wrapper: VueWrapper, props: Partial<PropsType>) => wrapper.setProps(props);
-}
-
 function buildCreateWrapper<ComponentType>(
     component: ComponentType,
 ): (options?: ComponentMountingOptions<ComponentType>) => CreateWrapperBuiltComponent<ComponentType>;
@@ -78,4 +74,4 @@ function initPinia(): void {
     setActivePinia(createPinia());
 }
 
-export { getTestingSelector, buildSetProps, buildCreateWrapper, emitComponentEvent, initPinia };
+export { getTestingSelector, buildCreateWrapper, emitComponentEvent, initPinia };

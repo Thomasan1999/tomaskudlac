@@ -1,7 +1,6 @@
 import MainSection from '@/components/main/MainSection.vue';
 import mockInitStore from '@/mocks/mockInitStore';
-import { buildCreateWrapper, buildSetProps } from '@/utils/test';
-import { MainSectionProps } from '@/components/main/types';
+import { buildCreateWrapper } from '@/utils/test';
 
 describe('MainSection', () => {
     const headingSelector = 'h1, h2, h3, h4, h5, h6';
@@ -13,7 +12,6 @@ describe('MainSection', () => {
     const createWrapper = buildCreateWrapper(MainSection, {
         name: 'home',
     });
-    const setProps = buildSetProps<MainSectionProps>();
 
     it("adds/removes heading element depending on the 'heading' property", async () => {
         const wrapper = createWrapper({ heading: false });
@@ -24,7 +22,7 @@ describe('MainSection', () => {
 
         expectHeadingToExist(false);
 
-        await setProps(wrapper, { heading: true });
+        await wrapper.setProps({ heading: true });
 
         expectHeadingToExist(true);
     });
@@ -38,7 +36,7 @@ describe('MainSection', () => {
 
         const homeId = getId();
 
-        await setProps(wrapper, { name: 'aboutMyself' });
+        await wrapper.setProps({ name: 'aboutMyself' });
 
         const aboutMyselfId = getId();
 
@@ -56,7 +54,7 @@ describe('MainSection', () => {
 
         const homeText = getHeadingText();
 
-        await setProps(wrapper, { name: 'aboutMyself' });
+        await wrapper.setProps({ name: 'aboutMyself' });
 
         const aboutMyselfText = getHeadingText();
 

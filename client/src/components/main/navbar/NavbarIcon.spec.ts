@@ -1,7 +1,6 @@
 import NavbarIcon from '@/components/main/navbar/NavbarIcon.vue';
 import mockInitStore from '@/mocks/mockInitStore';
-import { buildCreateWrapper, buildSetProps } from '@/utils/test';
-import { NavbarIconProps } from '@/components/main/navbar/types';
+import { buildCreateWrapper } from '@/utils/test';
 
 describe('NavbarIcon', () => {
     beforeAll(async () => {
@@ -9,7 +8,6 @@ describe('NavbarIcon', () => {
     });
 
     const createWrapper = buildCreateWrapper(NavbarIcon);
-    const setProps = buildSetProps<NavbarIconProps>();
 
     it("emits 'click' event on click", async () => {
         const wrapper = createWrapper({ mode: 'bars' });
@@ -26,7 +24,7 @@ describe('NavbarIcon', () => {
 
         expect(wrapper.classes()).toContain('bars');
 
-        await setProps(wrapper, { mode: 'cross' });
+        await wrapper.setProps({ mode: 'cross' });
 
         expect(wrapper.classes()).toContain('cross');
     });

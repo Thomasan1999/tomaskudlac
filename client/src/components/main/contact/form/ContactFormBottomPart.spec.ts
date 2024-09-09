@@ -1,7 +1,6 @@
 import mockInitStore from '@/mocks/mockInitStore';
-import { buildCreateWrapper, buildSetProps, getTestingSelector } from '@/utils/test';
+import { buildCreateWrapper, getTestingSelector } from '@/utils/test';
 import ContactFormBottomPart from '@/components/main/contact/form/ContactFormBottomPart.vue';
-import { ContactFormBottomPartProps } from '@/components/main/contact/form/types';
 
 const REQUIRED_LEGEND_SELECTOR = getTestingSelector('required-legend');
 const SUBMIT_BUTTON_SELECTOR = getTestingSelector('submit-button');
@@ -10,7 +9,6 @@ const createWrapper = buildCreateWrapper(ContactFormBottomPart, {
     formValid: false,
     submitDisabled: false,
 });
-const setProps = buildSetProps<ContactFormBottomPartProps>();
 
 describe('ContactFormBottomPart', () => {
     beforeAll(async () => {
@@ -28,7 +26,7 @@ describe('ContactFormBottomPart', () => {
 
         expect(wrapper.find(SUBMIT_BUTTON_SELECTOR).attributes('disabled')).toBeUndefined();
 
-        await setProps(wrapper, { submitDisabled: true });
+        await wrapper.setProps({ submitDisabled: true });
 
         expect(wrapper.find(SUBMIT_BUTTON_SELECTOR).attributes('disabled')).toBeDefined();
     });
@@ -38,7 +36,7 @@ describe('ContactFormBottomPart', () => {
 
         const formValidTitle = wrapper.find(SUBMIT_BUTTON_SELECTOR).attributes('title');
 
-        await setProps(wrapper, { formValid: true });
+        await wrapper.setProps({ formValid: true });
 
         expect(wrapper.find(SUBMIT_BUTTON_SELECTOR).attributes('title')).not.toBe(formValidTitle);
     });

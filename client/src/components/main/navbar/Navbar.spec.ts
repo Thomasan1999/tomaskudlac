@@ -5,8 +5,7 @@ import MainSectionObject from '@/components/main/MainSectionObject';
 import NavbarLink from '@/components/main/navbar/NavbarLink.vue';
 import mockWindowResizeBy from '@/mocks/mockWindowResizeBy';
 import mockInitStore from '@/mocks/mockInitStore';
-import { buildCreateWrapper, buildSetProps, getTestingSelector } from '@/utils/test';
-import { NavbarProps } from '@/components/main/navbar/types';
+import { buildCreateWrapper, getTestingSelector } from '@/utils/test';
 
 const LOGO_SELECTOR = getTestingSelector('logo');
 const NAVBAR_OTHER_LANG_SELECTOR = getTestingSelector('navbar-other-lang');
@@ -49,7 +48,6 @@ describe('Navbar', () => {
             },
         },
     );
-    const setProps = buildSetProps<NavbarProps>();
 
     function getSectionLinks(wrapper: VueWrapper): ReturnType<typeof mount<typeof NavbarLink>>[] {
         const navbarLinks = wrapper.findAllComponents(NavbarLink);
@@ -70,11 +68,11 @@ describe('Navbar', () => {
 
         expect(sectionLinks[0].props().active).toBeTruthy();
 
-        await setProps(wrapper, { activeSection: sections[1][0] });
+        await wrapper.setProps({ activeSection: sections[1][0] });
 
         expect(sectionLinks[1].props().active).toBeTruthy();
 
-        await setProps(wrapper, { activeSection: 'randomSection' });
+        await wrapper.setProps({ activeSection: 'randomSection' });
 
         const noLinkHasActiveClass = sectionLinks.every((sectionLink) => !sectionLink.props().active);
 
