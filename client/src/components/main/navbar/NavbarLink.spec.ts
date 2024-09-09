@@ -4,7 +4,7 @@ import { buildCreateWrapper, buildSetProps } from '@/utils/test';
 import { NavbarLinkProps } from '@/components/main/navbar/types';
 
 describe('NavbarLink', () => {
-    const createNavbarLink = buildCreateWrapper<NavbarLinkProps>(
+    const createNavbarLink = buildCreateWrapper(
         NavbarLink,
         {
             title: 'Link',

@@ -8,7 +8,7 @@ const PHOTO_SELECTOR = getTestingSelector('photo');
 const WEBP_SRC_SELECTOR = getTestingSelector('webp-src');
 
 describe('AboutMyselfPhotoContainer', () => {
-    const createWrapper = buildCreateWrapper<AboutMyselfPhotoContainerProps>(AboutMyselfPhotoContainer, {
+    const createWrapper = buildCreateWrapper(AboutMyselfPhotoContainer, {
         alt: '',
         jpgSrc: '',
         webpSrc: '',

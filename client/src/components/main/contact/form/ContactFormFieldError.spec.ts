@@ -8,7 +8,7 @@ describe('ContactFormFieldError', () => {
         await mockInitStore();
     });
 
-    const createContactFormFieldErrorWrapper = buildCreateWrapper<ContactFormFieldErrorProps>(ContactFormFieldError, {
+    const createContactFormFieldErrorWrapper = buildCreateWrapper(ContactFormFieldError, {
         error: '',
     });
     const setProps = buildSetProps<ContactFormFieldErrorProps>();

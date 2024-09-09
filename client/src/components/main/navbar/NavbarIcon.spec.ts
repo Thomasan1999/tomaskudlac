@@ -8,7 +8,7 @@ describe('NavbarIcon', () => {
         await mockInitStore();
     });
 
-    const createNavbarIconWrapper = buildCreateWrapper<NavbarIconProps>(NavbarIcon);
+    const createNavbarIconWrapper = buildCreateWrapper(NavbarIcon);
     const setProps = buildSetProps<NavbarIconProps>();
 
     it("emits 'click' event on click", async () => {

@@ -63,7 +63,7 @@
     import useStore from '@/store';
     import NavbarSocialNetwork from '@/components/main/navbar/NavbarSocialNetwork.vue';
     import NavbarIcon from '@/components/main/navbar/NavbarIcon.vue';
-    import { NavbarProps } from '@/components/main/navbar/types';
+    import { NavbarProps, NavbarSocialNetworkProps } from '@/components/main/navbar/types';
 
     defineProps<NavbarProps>();
     const emit = defineEmits<{
@@ -92,7 +92,7 @@
 
     const root = ref<HTMLDivElement | null>(null);
 
-    const socialNetworks = [
+    const socialNetworks: NavbarSocialNetworkProps[] = [
         {
             icon: ['fab', 'facebook-f'],
             title: 'Facebook',

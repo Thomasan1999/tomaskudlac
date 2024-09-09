@@ -82,7 +82,7 @@
 
     const missingValue = computed(() => props.required && !model.value);
 
-    const validFormat = computed(() => Boolean(model.value.match(props.pattern)));
+    const validFormat = computed(() => !props.pattern || Boolean(model.value.match(props.pattern)));
 
     watch(model, () => {
         const newValidValue = validFormat.value && !missingValue.value;
@@ -93,7 +93,7 @@
     watch(
         () => props.maxlength,
         (value) => {
-            if (value <= 0) {
+            if (typeof value !== 'number' || value <= 0) {
                 throw new Error('Max length must be larger than 0');
             }
         },

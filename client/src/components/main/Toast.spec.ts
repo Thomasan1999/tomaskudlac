@@ -16,7 +16,7 @@ describe('Toast', () => {
         vi.useFakeTimers();
     });
 
-    const createToastWrapper = buildCreateWrapper<ToastProps>(
+    const createToastWrapper = buildCreateWrapper(
         Toast,
         {
             message: '',

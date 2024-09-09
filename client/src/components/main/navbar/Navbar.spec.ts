@@ -1,5 +1,5 @@
 import Navbar from '@/components/main/navbar/Navbar.vue';
-import { VueWrapper } from '@vue/test-utils';
+import { mount, VueWrapper } from '@vue/test-utils';
 import { nextTick, reactive } from 'vue';
 import MainSectionObject from '@/components/main/MainSectionObject';
 import NavbarLink from '@/components/main/navbar/NavbarLink.vue';
@@ -34,7 +34,7 @@ describe('Navbar', () => {
         ],
     ];
 
-    const createNavbarWrapper = buildCreateWrapper<NavbarProps>(
+    const createNavbarWrapper = buildCreateWrapper(
         Navbar,
         {
             activeSection: sections[0][0],
@@ -51,7 +51,7 @@ describe('Navbar', () => {
     );
     const setProps = buildSetProps<NavbarProps>();
 
-    function getSectionLinks(navbarWrapper: VueWrapper): VueWrapper[] {
+    function getSectionLinks(navbarWrapper: VueWrapper): ReturnType<typeof mount<typeof NavbarLink>>[] {
         const navbarLinks = navbarWrapper.findAllComponents(NavbarLink);
 
         return navbarLinks.filter(

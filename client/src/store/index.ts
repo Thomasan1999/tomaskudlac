@@ -1,4 +1,3 @@
-import { DeepReadonly } from 'ts-essentials';
 import skLocales from '@/locales/sk';
 import enLocales from '@/locales/en';
 import { ImageFormat, InitializingState, SiteLanguage, ToastData } from '@/store/types';
@@ -170,7 +169,7 @@ const useStore = defineStore('main', {
                     home: true,
                     title: 'PHP',
                 },
-            ].map((language) => new ProgrammingLanguage(language)) as DeepReadonly<ProgrammingLanguage[]>,
+            ].map((language) => new ProgrammingLanguage(language)) as ProgrammingLanguage[],
             scrollbarWidth: window.innerWidth > 1023 ? 17 : 0,
             toasts: [] as ToastData[],
             windowHeight: window.innerHeight,

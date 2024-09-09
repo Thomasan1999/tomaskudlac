@@ -11,9 +11,7 @@ describe('ContactFormField', () => {
         await mockInitStore();
     });
 
-    const createContactFormFieldWrapper = buildCreateWrapper<
-        ComponentPropsWithModelValue<ContactFormFieldProps, string>
-    >(
+    const createContactFormFieldWrapper = buildCreateWrapper(
         ContactFormField,
         {
             label: '',

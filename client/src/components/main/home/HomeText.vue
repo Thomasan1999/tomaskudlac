@@ -32,7 +32,6 @@
     import { computed, ref, watch } from 'vue';
     import useStore from '@/store';
     import { shuffle } from 'lodash';
-    import { DeepReadonly } from 'ts-essentials';
     import Rand from '@/utils/Rand';
     import sleep from '@/utils/sleep';
     import HomeTextProgrammingLanguage from '@/components/main/home/HomeTextProgrammingLanguage.vue';
@@ -63,7 +62,7 @@
         markedText.value = '';
     };
 
-    function* createProgrammingLanguageGenerator() {
+    function* createProgrammingLanguageGenerator(): Generator<ProgrammingLanguage, ProgrammingLanguage> {
         let counter = -1;
 
         while (true) {
@@ -168,7 +167,7 @@
 
     const markedText = ref('');
 
-    const flattenedProgrammingLanguages = computed<DeepReadonly<ProgrammingLanguage[]>>(() =>
+    const flattenedProgrammingLanguages = computed<ProgrammingLanguage[]>(() =>
         programmingLanguages.value
             .flatMap(flattenProgrammingLanguage)
             .filter((programmingLanguage) => programmingLanguage.home),
@@ -182,9 +181,9 @@
 
     const programmingLanguageGenerator = createProgrammingLanguageGenerator();
 
-    const currentProgrammingLanguage = ref(programmingLanguageGenerator.next().value!);
+    const currentProgrammingLanguage = ref(programmingLanguageGenerator.next().value);
 
-    const nextProgrammingLanguage = ref(programmingLanguageGenerator.next().value!);
+    const nextProgrammingLanguage = ref(programmingLanguageGenerator.next().value);
 
     const nonMarkedText = ref(getNonMarkedText(currentProgrammingLanguage.value));
 

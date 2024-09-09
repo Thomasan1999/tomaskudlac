@@ -10,7 +10,7 @@ describe('MainSection', () => {
         await mockInitStore();
     });
 
-    const createMainSectionWrapper = buildCreateWrapper<MainSectionProps>(MainSection, {
+    const createMainSectionWrapper = buildCreateWrapper(MainSection, {
         name: 'home',
     });
     const setProps = buildSetProps<MainSectionProps>();

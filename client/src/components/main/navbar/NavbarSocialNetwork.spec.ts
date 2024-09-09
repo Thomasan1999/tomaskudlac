@@ -9,7 +9,7 @@ describe('NavbarSocialNetwork', () => {
         library.add(faEnvelope, faTimes);
     });
 
-    const createNavbarSocialNetwork = buildCreateWrapper<NavbarSocialNetworkProps>(
+    const createNavbarSocialNetwork = buildCreateWrapper(
         NavbarSocialNetwork,
         {
             icon: ['', ''],

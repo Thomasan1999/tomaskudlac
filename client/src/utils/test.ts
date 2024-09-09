@@ -13,54 +13,58 @@ function buildSetProps<PropsType extends object>(): (wrapper: VueWrapper, props:
     return (wrapper: VueWrapper, props: Partial<PropsType>) => wrapper.setProps(props);
 }
 
+function buildCreateWrapper<ComponentType>(
+    component: ComponentType,
+): (options?: ComponentMountingOptions<ComponentType>) => CreateWrapperBuiltComponent<ComponentType>;
+function buildCreateWrapper<ComponentType>(
+    component: ComponentType,
+): (
+    props: Parameters<ReturnType<typeof mount<ComponentType>>['setProps']>[0],
+    options?: ComponentMountingOptions<ComponentType>,
+) => CreateWrapperBuiltComponent<ComponentType>;
 function buildCreateWrapper<
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    PropsType extends undefined,
-    ComponentType extends Parameters<typeof mount>[0] = Parameters<typeof mount>[0],
-    OptionsType extends ComponentMountingOptions<ComponentType> = ComponentMountingOptions<ComponentType>,
->(component: ComponentType): (options?: OptionsType) => CreateWrapperBuiltComponent<ComponentType>;
-function buildCreateWrapper<
-    PropsType extends object,
-    ComponentType extends Parameters<typeof mount>[0] = Parameters<typeof mount>[0],
-    OptionsType extends ComponentMountingOptions<ComponentType> = ComponentMountingOptions<ComponentType>,
->(component: ComponentType): (props: PropsType, options?: OptionsType) => CreateWrapperBuiltComponent<ComponentType>;
-function buildCreateWrapper<
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    PropsType extends undefined,
-    ComponentType extends Parameters<typeof mount>[0] = Parameters<typeof mount>[0],
+    ComponentType,
     OptionsType extends ComponentMountingOptions<ComponentType> = ComponentMountingOptions<ComponentType>,
 >(
     component: ComponentType,
     defaultProps?: undefined,
     defaultOptions?: OptionsType,
-): (options?: OptionsType) => CreateWrapperBuiltComponent<ComponentType>;
+): (options?: ComponentMountingOptions<ComponentType>) => CreateWrapperBuiltComponent<ComponentType>;
 function buildCreateWrapper<
-    PropsType extends object,
-    ComponentType extends Parameters<typeof mount>[0] = Parameters<typeof mount>[0],
+    ComponentType,
     OptionsType extends ComponentMountingOptions<ComponentType> = ComponentMountingOptions<ComponentType>,
 >(
     component: ComponentType,
     defaultProps?: undefined,
     defaultOptions?: OptionsType,
-): (props: PropsType, options?: OptionsType) => CreateWrapperBuiltComponent<ComponentType>;
+): (
+    props: DeepPartial<Parameters<ReturnType<typeof mount<ComponentType>>['setProps']>[0]>,
+    options?: ComponentMountingOptions<ComponentType>,
+) => CreateWrapperBuiltComponent<ComponentType>;
 function buildCreateWrapper<
-    PropsType extends object,
-    ComponentType extends Parameters<typeof mount>[0] = Parameters<typeof mount>[0],
+    ComponentType,
+    PropsType extends Parameters<ReturnType<typeof mount<ComponentType>>['setProps']>[0],
     OptionsType extends ComponentMountingOptions<ComponentType> = ComponentMountingOptions<ComponentType>,
 >(
     component: ComponentType,
     defaultProps: PropsType,
     defaultOptions?: OptionsType,
-): (props?: DeepPartial<PropsType>, options?: OptionsType) => CreateWrapperBuiltComponent<ComponentType>;
+): (
+    props?: DeepPartial<Parameters<ReturnType<typeof mount<ComponentType>>['setProps']>[0]>,
+    options?: ComponentMountingOptions<ComponentType>,
+) => CreateWrapperBuiltComponent<ComponentType>;
 function buildCreateWrapper<
-    PropsType extends object | undefined = undefined,
-    ComponentType extends Parameters<typeof mount>[0] = Parameters<typeof mount>[0],
+    ComponentType,
+    PropsType extends Parameters<ReturnType<typeof mount<ComponentType>>['setProps']>[0],
     OptionsType extends ComponentMountingOptions<ComponentType> = ComponentMountingOptions<ComponentType>,
 >(
     component: ComponentType,
     defaultProps?: PropsType,
     defaultOptions?: OptionsType,
-): (props?: DeepPartial<PropsType>, options?: OptionsType) => CreateWrapperBuiltComponent<ComponentType> {
+): (
+    props?: DeepPartial<Parameters<ReturnType<typeof mount<ComponentType>>['setProps']>[0]>,
+    options?: ComponentMountingOptions<ComponentType>,
+) => CreateWrapperBuiltComponent<ComponentType> {
     return (props, options) =>
         mount(component, merge({}, defaultOptions, options, { props: { ...defaultProps, ...(props ?? {}) } } as never));
 }

@@ -2,7 +2,6 @@ import Project from '@/components/main/projects/Project.vue';
 import useStore from '@/store';
 import mockInitStore from '@/mocks/mockInitStore';
 import { buildCreateWrapper, getTestingSelector } from '@/utils/test';
-import { ProjectProps } from '@/components/main/projects/types';
 
 const TEXT_CONTENT_SELECTOR = getTestingSelector('text-content');
 const TITLE_SELECTOR = getTestingSelector('title');
@@ -12,7 +11,7 @@ describe('Project', () => {
         await mockInitStore();
     });
 
-    const createProjectWrapper = buildCreateWrapper<ProjectProps>(Project, {
+    const createProjectWrapper = buildCreateWrapper(Project, {
         name: 'fifaManiaci',
     });
 

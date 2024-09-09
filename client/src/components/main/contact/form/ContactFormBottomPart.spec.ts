@@ -6,7 +6,7 @@ import { ContactFormBottomPartProps } from '@/components/main/contact/form/types
 const REQUIRED_LEGEND_SELECTOR = getTestingSelector('required-legend');
 const SUBMIT_BUTTON_SELECTOR = getTestingSelector('submit-button');
 
-const createWrapper = buildCreateWrapper<ContactFormBottomPartProps>(ContactFormBottomPart, {
+const createWrapper = buildCreateWrapper(ContactFormBottomPart, {
     formValid: false,
     submitDisabled: false,
 });

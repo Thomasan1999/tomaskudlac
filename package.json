@@ -4,11 +4,6 @@
         "format": "prettier . -write",
         "prepare": "husky"
     },
-    "lint-staged": {
-        "*.*": [
-            "npm run format"
-        ]
-    },
     "devDependencies": {
         "@commitlint/cli": "19.4.0",
         "@commitlint/config-conventional": "19.2.2",

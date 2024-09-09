@@ -12,7 +12,7 @@ describe('AboutMyselfColumn', () => {
         await mockInitStore();
     });
 
-    const createAboutMyselfColumnWrapper = buildCreateWrapper<AboutMyselfColumnProps>(AboutMyselfColumn, {
+    const createAboutMyselfColumnWrapper = buildCreateWrapper(AboutMyselfColumn, {
         title: '',
         text: '',
     });
