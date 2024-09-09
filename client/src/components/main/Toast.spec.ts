@@ -16,7 +16,7 @@ describe('Toast', () => {
         vi.useFakeTimers();
     });
 
-    const createToastWrapper = buildCreateWrapper(
+    const createWrapper = buildCreateWrapper(
         Toast,
         {
             message: '',
@@ -35,7 +35,7 @@ describe('Toast', () => {
     const setProps = buildSetProps<ToastProps>();
 
     it('renders message', async () => {
-        const toastWrapper = createToastWrapper({
+        const wrapper = createWrapper({
             message: 'This is a toast message.',
             type: ToastType.FAIL,
         });
@@ -43,54 +43,54 @@ describe('Toast', () => {
         // Await rendering of HTML which is triggered only after 'mounted' lifecycle-hook
         await nextTick();
 
-        expect(toastWrapper.text()).toContain('This is a toast message.');
+        expect(wrapper.text()).toContain('This is a toast message.');
 
-        await setProps(toastWrapper, { message: 'Another message in the toast.' });
+        await setProps(wrapper, { message: 'Another message in the toast.' });
 
-        expect(toastWrapper.text()).toContain('Another message in the toast.');
+        expect(wrapper.text()).toContain('Another message in the toast.');
     });
 
     it('has different styles for each type', async () => {
-        const toastWrapper = createToastWrapper({
+        const wrapper = createWrapper({
             type: ToastType.FAIL,
         });
 
         await nextTick();
 
-        const failStyles = toastWrapper.classes();
+        const failStyles = wrapper.classes();
 
-        await setProps(toastWrapper, { type: ToastType.SUCCESS });
+        await setProps(wrapper, { type: ToastType.SUCCESS });
 
-        const successStyles = toastWrapper.classes();
+        const successStyles = wrapper.classes();
 
         expect(failStyles).not.toBe(successStyles);
     });
 
     it('hides toast on close button click', async () => {
-        const toastWrapper = createToastWrapper();
+        const wrapper = createWrapper();
 
         await nextTick();
 
-        expect(toastWrapper.find(TOAST_SELECTOR).exists()).toBe(true);
+        expect(wrapper.find(TOAST_SELECTOR).exists()).toBe(true);
 
-        await toastWrapper.get<HTMLElement>(CLOSE_BUTTON_SELECTOR).trigger('click');
+        await wrapper.get<HTMLElement>(CLOSE_BUTTON_SELECTOR).trigger('click');
 
         await nextTick();
 
-        expect(toastWrapper.find(TOAST_SELECTOR).exists()).toBe(false);
+        expect(wrapper.find(TOAST_SELECTOR).exists()).toBe(false);
     });
 
     it('hides toast after certain time', async () => {
-        const toastWrapper = createToastWrapper();
+        const wrapper = createWrapper();
 
         await nextTick();
 
-        expect(toastWrapper.find(TOAST_SELECTOR).exists()).toBe(true);
+        expect(wrapper.find(TOAST_SELECTOR).exists()).toBe(true);
 
         vi.runAllTimers();
 
         await nextTick();
 
-        expect(toastWrapper.find(TOAST_SELECTOR).exists()).toBe(false);
+        expect(wrapper.find(TOAST_SELECTOR).exists()).toBe(false);
     });
 });

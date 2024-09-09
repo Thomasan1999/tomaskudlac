@@ -9,24 +9,24 @@ describe('Contact', () => {
         await mockInitStore();
     });
 
-    const createContactWrapper = buildCreateWrapper(Contact, undefined, {
+    const createWrapper = buildCreateWrapper(Contact, undefined, {
         global: {
             stubs: ['ContactForm'],
         },
     });
 
     it('has heading', () => {
-        const contactWrapper = createContactWrapper();
+        const wrapper = createWrapper();
 
-        const headingElement = contactWrapper.find('h1, h2, h3, h4, h5, h6');
+        const headingElement = wrapper.find('h1, h2, h3, h4, h5, h6');
 
         expect(headingElement.exists()).toBe(true);
     });
 
     it('renders brief text', () => {
-        const contactWrapper = createContactWrapper();
+        const wrapper = createWrapper();
 
-        const briefTextElement = contactWrapper.find(BRIEF_TEXT_SELECTOR);
+        const briefTextElement = wrapper.find(BRIEF_TEXT_SELECTOR);
 
         expect(briefTextElement.exists()).toBe(true);
     });

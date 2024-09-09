@@ -31,16 +31,16 @@ describe('Main', () => {
         Element.prototype.scroll = function () {};
     });
 
-    const createMainWrapper = buildCreateWrapper(Main, undefined, {
+    const createWrapper = buildCreateWrapper(Main, undefined, {
         global: {
             stubs: ['font-awesome-icon', 'footer-component'],
         },
     });
 
     it('renders sections in the right order', () => {
-        const mainWrapper = createMainWrapper();
+        const wrapper = createWrapper();
 
-        const mainSectionComponents = mainWrapper.findAllComponents(MainSection);
+        const mainSectionComponents = wrapper.findAllComponents(MainSection);
 
         mainSectionComponents.forEach((mainSection, mainSectionIndex) => {
             const name = mainSection.props().name;
@@ -52,11 +52,11 @@ describe('Main', () => {
     });
 
     it('replaces route on link click', async () => {
-        const mainWrapper = createMainWrapper();
+        const wrapper = createWrapper();
 
         const callTimesBeforeClick = routerReplaceCallTimes;
 
-        await mainWrapper.get(SECTION_LINK_SELECTOR).trigger('click');
+        await wrapper.get(SECTION_LINK_SELECTOR).trigger('click');
 
         await nextTick();
 

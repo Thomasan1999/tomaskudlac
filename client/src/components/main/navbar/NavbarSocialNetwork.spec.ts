@@ -9,7 +9,7 @@ describe('NavbarSocialNetwork', () => {
         library.add(faEnvelope, faTimes);
     });
 
-    const createNavbarSocialNetwork = buildCreateWrapper(
+    const createWrapper = buildCreateWrapper(
         NavbarSocialNetwork,
         {
             icon: ['', ''],
@@ -25,34 +25,34 @@ describe('NavbarSocialNetwork', () => {
     const setProps = buildSetProps<NavbarSocialNetworkProps>();
 
     it("renders different icons for different 'icon' property value", async () => {
-        const navbarSocialNetworkWrapper = createNavbarSocialNetwork({ icon: ['fas', 'times'] });
+        const wrapper = createWrapper({ icon: ['fas', 'times'] });
 
-        const fasTimesHtml = navbarSocialNetworkWrapper.html();
+        const fasTimesHtml = wrapper.html();
 
-        await setProps(navbarSocialNetworkWrapper, { icon: ['fas', 'envelope'] });
+        await setProps(wrapper, { icon: ['fas', 'envelope'] });
 
-        const fasEnvelopeHtml = navbarSocialNetworkWrapper.html();
+        const fasEnvelopeHtml = wrapper.html();
 
         expect(fasTimesHtml).not.toBe(fasEnvelopeHtml);
     });
 
     it("renders 'title' property", async () => {
-        const navbarSocialNetworkWrapper = createNavbarSocialNetwork({ title: 'Some Title' });
+        const wrapper = createWrapper({ title: 'Some Title' });
 
-        expect(navbarSocialNetworkWrapper.attributes('title')).toBe('Some Title');
+        expect(wrapper.attributes('title')).toBe('Some Title');
 
-        await setProps(navbarSocialNetworkWrapper, { title: 'Another Title' });
+        await setProps(wrapper, { title: 'Another Title' });
 
-        expect(navbarSocialNetworkWrapper.attributes('title')).toBe('Another Title');
+        expect(wrapper.attributes('title')).toBe('Another Title');
     });
 
     it("uses 'to' property as href", async () => {
-        const navbarSocialNetworkWrapper = createNavbarSocialNetwork({ to: '/' });
+        const wrapper = createWrapper({ to: '/' });
 
-        expect(navbarSocialNetworkWrapper.attributes('href')).toBe('/');
+        expect(wrapper.attributes('href')).toBe('/');
 
-        await setProps(navbarSocialNetworkWrapper, { to: '/route' });
+        await setProps(wrapper, { to: '/route' });
 
-        expect(navbarSocialNetworkWrapper.attributes('href')).toBe('/route');
+        expect(wrapper.attributes('href')).toBe('/route');
     });
 });

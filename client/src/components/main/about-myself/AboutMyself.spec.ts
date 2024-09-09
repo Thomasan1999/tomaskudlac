@@ -9,14 +9,14 @@ describe('AboutMyself', () => {
         await mockInitStore();
     });
 
-    const createAboutMyselfWrapper = buildCreateWrapper(AboutMyself, undefined, {
+    const createWrapper = buildCreateWrapper(AboutMyself, undefined, {
         global: { stubs: ['AboutMyselfColumn'] },
     });
 
     it('has heading', () => {
-        const aboutMyselfWrapper = createAboutMyselfWrapper();
+        const wrapper = createWrapper();
 
-        const headingElement = aboutMyselfWrapper.find('h1, h2, h3, h4, h5, h6');
+        const headingElement = wrapper.find('h1, h2, h3, h4, h5, h6');
 
         expect(headingElement.exists()).toBe(true);
     });
@@ -24,11 +24,11 @@ describe('AboutMyself', () => {
     it('renders all columns', () => {
         const store = useStore();
 
-        const aboutMyselfWrapper = createAboutMyselfWrapper();
+        const wrapper = createWrapper();
 
         const columnLength = store.locales.sections.aboutMyself.columns.length;
 
-        const columnComponents = aboutMyselfWrapper.findAllComponents(AboutMyselfColumn);
+        const columnComponents = wrapper.findAllComponents(AboutMyselfColumn);
 
         expect(columnComponents.length).toBeGreaterThan(0);
         expect(columnComponents.length).toBe(columnLength);

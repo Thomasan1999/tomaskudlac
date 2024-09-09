@@ -11,7 +11,7 @@ describe('ContactFormField', () => {
         await mockInitStore();
     });
 
-    const createContactFormFieldWrapper = buildCreateWrapper(
+    const createWrapper = buildCreateWrapper(
         ContactFormField,
         {
             label: '',
@@ -30,7 +30,7 @@ describe('ContactFormField', () => {
 
     describe('HTML attributes', () => {
         it('renders label text', async () => {
-            const wrapper = createContactFormFieldWrapper();
+            const wrapper = createWrapper();
 
             expect(wrapper.findComponent(ContactFormLabelText).exists()).toBe(true);
         });
@@ -38,7 +38,7 @@ describe('ContactFormField', () => {
         it("renders HTML element used in 'element' property", async () => {
             let element = ContactFormFieldElement.INPUT;
 
-            const wrapper = createContactFormFieldWrapper({ element });
+            const wrapper = createWrapper({ element });
 
             expect(wrapper.find(element).exists()).toBe(true);
             expect(wrapper.find('textarea').exists()).toBe(false);
@@ -54,7 +54,7 @@ describe('ContactFormField', () => {
         it("uses 'modelValue' property as input value", () => {
             const modelValue = 'Some model value';
 
-            const wrapper = createContactFormFieldWrapper({ element: ContactFormFieldElement.INPUT, modelValue });
+            const wrapper = createWrapper({ element: ContactFormFieldElement.INPUT, modelValue });
 
             const inputElement = wrapper.get('input');
 
@@ -67,7 +67,7 @@ describe('ContactFormField', () => {
             htmlAttributeName: string = attributeName,
             htmlAttributeValues: AttributeType[] = attributeValues,
         ): Promise<void> {
-            const wrapper = createContactFormFieldWrapper({ element: ContactFormFieldElement.INPUT });
+            const wrapper = createWrapper({ element: ContactFormFieldElement.INPUT });
 
             const inputElement = wrapper.get('input');
 
@@ -101,7 +101,7 @@ describe('ContactFormField', () => {
 
     describe('error', () => {
         it('uses different styles for wrapper element when error is shown', async () => {
-            const wrapper = createContactFormFieldWrapper({
+            const wrapper = createWrapper({
                 modelValue: '',
                 required: true,
                 touched: false,
@@ -123,7 +123,7 @@ describe('ContactFormField', () => {
                 expect(errorComponent.find('*').exists()).toBe(value);
             }
 
-            const wrapper = createContactFormFieldWrapper(
+            const wrapper = createWrapper(
                 { required: true, touched: false, valid: true },
                 {
                     global: {
@@ -146,7 +146,7 @@ describe('ContactFormField', () => {
 
     describe('events', () => {
         it("emits 'blur' event on input blur", async () => {
-            const wrapper = createContactFormFieldWrapper({ element: ContactFormFieldElement.INPUT });
+            const wrapper = createWrapper({ element: ContactFormFieldElement.INPUT });
 
             expect(wrapper.emitted().blur).toBeUndefined();
 
@@ -156,7 +156,7 @@ describe('ContactFormField', () => {
         });
 
         it("emits 'update:modelValue' on input", async () => {
-            const wrapper = createContactFormFieldWrapper({ element: ContactFormFieldElement.INPUT, modelValue: '' });
+            const wrapper = createWrapper({ element: ContactFormFieldElement.INPUT, modelValue: '' });
 
             expect(wrapper.emitted()['update:modelValue']).toBeUndefined();
 
@@ -167,7 +167,7 @@ describe('ContactFormField', () => {
         });
 
         it("emits 'validSet' on model value change", async () => {
-            const wrapper = createContactFormFieldWrapper({ element: ContactFormFieldElement.INPUT, modelValue: '' });
+            const wrapper = createWrapper({ element: ContactFormFieldElement.INPUT, modelValue: '' });
 
             expect(wrapper.emitted().validSet).toBeUndefined();
 

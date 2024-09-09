@@ -10,35 +10,35 @@ describe('MainSection', () => {
         await mockInitStore();
     });
 
-    const createMainSectionWrapper = buildCreateWrapper(MainSection, {
+    const createWrapper = buildCreateWrapper(MainSection, {
         name: 'home',
     });
     const setProps = buildSetProps<MainSectionProps>();
 
     it("adds/removes heading element depending on the 'heading' property", async () => {
-        const mainSectionWrapper = createMainSectionWrapper({ heading: false });
+        const wrapper = createWrapper({ heading: false });
 
         function expectHeadingToExist(expected: boolean): void {
-            expect(mainSectionWrapper.find(headingSelector).exists()).toBe(expected);
+            expect(wrapper.find(headingSelector).exists()).toBe(expected);
         }
 
         expectHeadingToExist(false);
 
-        await setProps(mainSectionWrapper, { heading: true });
+        await setProps(wrapper, { heading: true });
 
         expectHeadingToExist(true);
     });
 
     it("derives 'id' from the 'name' property", async () => {
-        const mainSectionWrapper = createMainSectionWrapper({ name: 'home' });
+        const wrapper = createWrapper({ name: 'home' });
 
         function getId(): string {
-            return mainSectionWrapper.attributes().id;
+            return wrapper.attributes().id;
         }
 
         const homeId = getId();
 
-        await setProps(mainSectionWrapper, { name: 'aboutMyself' });
+        await setProps(wrapper, { name: 'aboutMyself' });
 
         const aboutMyselfId = getId();
 
@@ -48,15 +48,15 @@ describe('MainSection', () => {
     });
 
     it("derives heading text from the 'name' property", async () => {
-        const mainSectionWrapper = createMainSectionWrapper({ heading: true, name: 'home' });
+        const wrapper = createWrapper({ heading: true, name: 'home' });
 
         function getHeadingText(): string {
-            return mainSectionWrapper.get(headingSelector).text();
+            return wrapper.get(headingSelector).text();
         }
 
         const homeText = getHeadingText();
 
-        await setProps(mainSectionWrapper, { name: 'aboutMyself' });
+        await setProps(wrapper, { name: 'aboutMyself' });
 
         const aboutMyselfText = getHeadingText();
 

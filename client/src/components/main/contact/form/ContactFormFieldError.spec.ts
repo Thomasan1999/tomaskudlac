@@ -8,13 +8,13 @@ describe('ContactFormFieldError', () => {
         await mockInitStore();
     });
 
-    const createContactFormFieldErrorWrapper = buildCreateWrapper(ContactFormFieldError, {
+    const createWrapper = buildCreateWrapper(ContactFormFieldError, {
         error: '',
     });
     const setProps = buildSetProps<ContactFormFieldErrorProps>();
 
     it("does display message only if 'error' property is not empty", async () => {
-        const wrapper = createContactFormFieldErrorWrapper({ error: '' });
+        const wrapper = createWrapper({ error: '' });
 
         expect(wrapper.find('div').exists()).toBe(false);
 

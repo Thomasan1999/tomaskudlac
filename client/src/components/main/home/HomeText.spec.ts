@@ -69,7 +69,7 @@ describe('HomeText', () => {
         window.setTimeout = timeout;
     });
 
-    const createHomeTextWrapper = buildCreateWrapper(HomeText);
+    const createWrapper = buildCreateWrapper(HomeText);
 
     function getMarkedTextElement(wrapper: VueWrapper) {
         return wrapper.get<HTMLDivElement>(MARKED_TEXT_SELECTOR);
@@ -124,7 +124,7 @@ describe('HomeText', () => {
 
             const store = useStore();
 
-            const wrapper = createHomeTextWrapper();
+            const wrapper = createWrapper();
 
             const languageElement = wrapper.get(PROGRAMMING_LANGUAGE_SELECTOR);
 
@@ -148,13 +148,13 @@ describe('HomeText', () => {
         it('shuffles list of all programming languages', () => {
             expect(shuffleSpy).not.toHaveBeenCalled();
 
-            createHomeTextWrapper();
+            createWrapper();
 
             expect(shuffleSpy).toHaveBeenCalledTimes(1);
         });
 
         it('starts with marking language, removing and then writing new language', async () => {
-            const wrapper = createHomeTextWrapper();
+            const wrapper = createWrapper();
 
             const markedTextElement = getMarkedTextElement(wrapper);
             const nonMarkedTextElement = getNonMarkedTextElement(wrapper);
@@ -185,7 +185,7 @@ describe('HomeText', () => {
         }
 
         it('stops blinking on text removing', async () => {
-            const wrapper = createHomeTextWrapper();
+            const wrapper = createWrapper();
 
             const markedTextElement = getMarkedTextElement(wrapper);
 
@@ -198,7 +198,7 @@ describe('HomeText', () => {
         });
 
         it('stops blinking on text writing', async () => {
-            const wrapper = createHomeTextWrapper();
+            const wrapper = createWrapper();
 
             const markedTextElement = getMarkedTextElement(wrapper);
 
@@ -212,7 +212,7 @@ describe('HomeText', () => {
         });
 
         it('stops blinking on text marking', async () => {
-            const wrapper = createHomeTextWrapper();
+            const wrapper = createWrapper();
 
             const markedTextElement = getMarkedTextElement(wrapper);
 
@@ -224,7 +224,7 @@ describe('HomeText', () => {
         });
 
         it('starts blinking on written text idle', async () => {
-            const wrapper = createHomeTextWrapper();
+            const wrapper = createWrapper();
 
             const markedTextElement = getMarkedTextElement(wrapper);
             const nonMarkedTextElement = getNonMarkedTextElement(wrapper);

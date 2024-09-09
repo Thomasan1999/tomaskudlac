@@ -7,16 +7,16 @@ describe('Home', () => {
         await mockInitStore();
     });
 
-    const createHomeWrapper = buildCreateWrapper(Home, undefined, {
+    const createWrapper = buildCreateWrapper(Home, undefined, {
         global: {
             stubs: ['HomeText'],
         },
     });
 
     it('does not have heading', () => {
-        const homeWrapper = createHomeWrapper();
+        const wrapper = createWrapper();
 
-        const headingElement = homeWrapper.find('h1, h2, h3, h4, h5, h6');
+        const headingElement = wrapper.find('h1, h2, h3, h4, h5, h6');
 
         expect(headingElement.exists()).toBe(false);
     });

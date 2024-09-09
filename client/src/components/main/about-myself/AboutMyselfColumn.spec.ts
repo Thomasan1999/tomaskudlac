@@ -12,7 +12,7 @@ describe('AboutMyselfColumn', () => {
         await mockInitStore();
     });
 
-    const createAboutMyselfColumnWrapper = buildCreateWrapper(AboutMyselfColumn, {
+    const createWrapper = buildCreateWrapper(AboutMyselfColumn, {
         title: '',
         text: '',
     });
@@ -21,15 +21,15 @@ describe('AboutMyselfColumn', () => {
     it("renders 'text' property", async () => {
         let text = 'this is a random text';
 
-        const aboutMyselfColumnWrapper = createAboutMyselfColumnWrapper({ text });
+        const wrapper = createWrapper({ text });
 
-        const textElement = aboutMyselfColumnWrapper.get(TEXT_SELECTOR);
+        const textElement = wrapper.get(TEXT_SELECTOR);
 
         expect(textElement.text()).toBe(text);
 
         text = 'this is another text';
 
-        await setProps(aboutMyselfColumnWrapper, { text });
+        await setProps(wrapper, { text });
 
         expect(textElement.text()).toBe(text);
     });
@@ -43,9 +43,9 @@ describe('AboutMyselfColumn', () => {
 <strong>JS</strong> is ${store.age} years old. Other programming languages are ${store.programmingLanguagesString}
 `.trim();
 
-        const aboutMyselfColumnWrapper = createAboutMyselfColumnWrapper({ text: rawText });
+        const wrapper = createWrapper({ text: rawText });
 
-        const textElement = aboutMyselfColumnWrapper.get(TEXT_SELECTOR);
+        const textElement = wrapper.get(TEXT_SELECTOR);
 
         expect(textElement.html()).toContain(parsedText);
 
@@ -55,7 +55,7 @@ describe('AboutMyselfColumn', () => {
 <strong>I</strong>'m ${store.age} years old. These programming languages ${store.programmingLanguagesString} are older.
 `.trim();
 
-        await setProps(aboutMyselfColumnWrapper, { text: rawText });
+        await setProps(wrapper, { text: rawText });
 
         expect(textElement.html()).toContain(parsedText);
     });
@@ -63,15 +63,15 @@ describe('AboutMyselfColumn', () => {
     it("renders 'title' property", async () => {
         let title = 'Title';
 
-        const aboutMyselfColumnWrapper = createAboutMyselfColumnWrapper({ title });
+        const wrapper = createWrapper({ title });
 
-        const titleElement = aboutMyselfColumnWrapper.get(TITLE_SELECTOR);
+        const titleElement = wrapper.get(TITLE_SELECTOR);
 
         expect(titleElement.text()).toBe(title);
 
         title = 'New Title';
 
-        await setProps(aboutMyselfColumnWrapper, { title });
+        await setProps(wrapper, { title });
 
         expect(titleElement.text()).toBe(title);
     });

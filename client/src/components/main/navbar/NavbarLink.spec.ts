@@ -4,7 +4,7 @@ import { buildCreateWrapper, buildSetProps } from '@/utils/test';
 import { NavbarLinkProps } from '@/components/main/navbar/types';
 
 describe('NavbarLink', () => {
-    const createNavbarLink = buildCreateWrapper(
+    const createWrapper = buildCreateWrapper(
         NavbarLink,
         {
             title: 'Link',
@@ -21,71 +21,71 @@ describe('NavbarLink', () => {
     const setProps = buildSetProps<NavbarLinkProps>();
 
     it("has 'active' class based on 'active' property", async () => {
-        const navbarLinkWrapper = createNavbarLink({ active: false });
+        const wrapper = createWrapper({ active: false });
 
-        expect(navbarLinkWrapper.classes()).not.toContain('active');
+        expect(wrapper.classes()).not.toContain('active');
 
-        await setProps(navbarLinkWrapper, { active: true });
+        await setProps(wrapper, { active: true });
 
-        expect(navbarLinkWrapper.classes()).toContain('active');
+        expect(wrapper.classes()).toContain('active');
     });
 
     it("includes 'RouterLink' component if 'routerLink' property is set to true", async () => {
-        const navbarLinkWrapper = createNavbarLink({ routerLink: false });
+        const wrapper = createWrapper({ routerLink: false });
 
-        expect(navbarLinkWrapper.findComponent(RouterLink).exists()).toBe(false);
+        expect(wrapper.findComponent(RouterLink).exists()).toBe(false);
 
-        await setProps(navbarLinkWrapper, { routerLink: true });
+        await setProps(wrapper, { routerLink: true });
 
-        expect(navbarLinkWrapper.findComponent(RouterLink).exists()).toBe(true);
+        expect(wrapper.findComponent(RouterLink).exists()).toBe(true);
     });
 
     it("uses 'text' property as default slot if defined", async () => {
-        const navbarLinkWrapper = createNavbarLink({ text: 'Hello World' });
+        const wrapper = createWrapper({ text: 'Hello World' });
 
-        expect(navbarLinkWrapper.text()).toContain('Hello World');
+        expect(wrapper.text()).toContain('Hello World');
 
-        await setProps(navbarLinkWrapper, { text: 'Link Text' });
+        await setProps(wrapper, { text: 'Link Text' });
 
-        expect(navbarLinkWrapper.text()).toContain('Link Text');
+        expect(wrapper.text()).toContain('Link Text');
     });
 
     it("uses 'title' property as default slot if text is not defined", async () => {
-        const navbarLinkWrapper = createNavbarLink({ title: 'Random Title' });
+        const wrapper = createWrapper({ title: 'Random Title' });
 
-        expect(navbarLinkWrapper.text()).toContain('Random Title');
+        expect(wrapper.text()).toContain('Random Title');
 
-        await setProps(navbarLinkWrapper, { text: 'Another Name' });
+        await setProps(wrapper, { text: 'Another Name' });
 
-        expect(navbarLinkWrapper.text()).toContain('Another Name');
+        expect(wrapper.text()).toContain('Another Name');
     });
 
     it("uses 'to' property as href", async () => {
         function expectHrefToBe(value: string): void {
-            expect(navbarLinkWrapper.get('a').attributes().href).toBe(value);
+            expect(wrapper.get('a').attributes().href).toBe(value);
         }
 
-        const navbarLinkWrapper = createNavbarLink({ to: '/' });
+        const wrapper = createWrapper({ to: '/' });
 
         expectHrefToBe('/');
 
-        await setProps(navbarLinkWrapper, { to: '/route' });
+        await setProps(wrapper, { to: '/route' });
 
         expectHrefToBe('/route');
 
-        await setProps(navbarLinkWrapper, { routerLink: true });
+        await setProps(wrapper, { routerLink: true });
 
         expectHrefToBe('/route');
     });
 
     it('renders default slot if defined', () => {
         function expectSlotTextToBe(text: string): void {
-            const navbarLinkWrapper = createNavbarLink(
+            const wrapper = createWrapper(
                 { title: 'Title', text: 'Text' },
                 { slots: { default: `<p class="slot">${text}</p>` } },
             );
 
-            expect(navbarLinkWrapper.get('.slot').text()).toBe(text);
+            expect(wrapper.get('.slot').text()).toBe(text);
         }
 
         expectSlotTextToBe('First Text');

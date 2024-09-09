@@ -10,7 +10,7 @@ describe('CookiesModal', () => {
         await mockInitStore();
     });
 
-    const createCookiesModalWrapper = buildCreateWrapper(CookiesModal, undefined, {
+    const createWrapper = buildCreateWrapper(CookiesModal, undefined, {
         global: {
             renderStubDefaultSlot: true,
         },
@@ -18,22 +18,22 @@ describe('CookiesModal', () => {
     });
 
     it("emits 'close' event on close button click", async () => {
-        const cookiesModalWrapper = createCookiesModalWrapper();
+        const wrapper = createWrapper();
 
-        expect(cookiesModalWrapper.emitted().close).toBeUndefined();
+        expect(wrapper.emitted().close).toBeUndefined();
 
-        await cookiesModalWrapper.get(CLOSE_BUTTON_SELECTOR).trigger('click');
+        await wrapper.get(CLOSE_BUTTON_SELECTOR).trigger('click');
 
-        expect(cookiesModalWrapper.emitted().close).toHaveLength(1);
+        expect(wrapper.emitted().close).toHaveLength(1);
     });
 
     it("emits 'close' event on overlay click", async () => {
-        const cookiesModalWrapper = createCookiesModalWrapper();
+        const wrapper = createWrapper();
 
-        expect(cookiesModalWrapper.emitted().close).toBeUndefined();
+        expect(wrapper.emitted().close).toBeUndefined();
 
-        await cookiesModalWrapper.get(OVERLAY_SELECTOR).trigger('click');
+        await wrapper.get(OVERLAY_SELECTOR).trigger('click');
 
-        expect(cookiesModalWrapper.emitted().close).toHaveLength(1);
+        expect(wrapper.emitted().close).toHaveLength(1);
     });
 });

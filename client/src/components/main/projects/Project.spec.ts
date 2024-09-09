@@ -11,7 +11,7 @@ describe('Project', () => {
         await mockInitStore();
     });
 
-    const createProjectWrapper = buildCreateWrapper(Project, {
+    const createWrapper = buildCreateWrapper(Project, {
         name: 'fifaManiaci',
     });
 
@@ -20,16 +20,16 @@ describe('Project', () => {
 
         const projectName = 'fifaManiaci';
 
-        const projectWrapper = createProjectWrapper({ name: projectName });
+        const wrapper = createWrapper({ name: projectName });
 
         const locales = store.locales.sections.projects.projects[projectName];
 
-        const projectWrapperElement = projectWrapper.element as HTMLAnchorElement;
+        const wrapperElement = wrapper.element as HTMLAnchorElement;
 
         const localesUrl = new URL(locales.href);
-        const projectWrapperElementUrl = new URL(projectWrapperElement.href);
+        const wrapperElementUrl = new URL(wrapperElement.href);
 
-        expect(localesUrl.toString()).toBe(projectWrapperElementUrl.toString());
+        expect(localesUrl.toString()).toBe(wrapperElementUrl.toString());
     });
 
     it('renders project description', () => {
@@ -37,11 +37,11 @@ describe('Project', () => {
 
         const projectName = 'fifaManiaci';
 
-        const projectWrapper = createProjectWrapper({ name: projectName });
+        const wrapper = createWrapper({ name: projectName });
 
         const locales = store.locales.sections.projects.projects[projectName];
 
-        const textContentElement = projectWrapper.get(TEXT_CONTENT_SELECTOR);
+        const textContentElement = wrapper.get(TEXT_CONTENT_SELECTOR);
 
         expect(textContentElement.text()).not.toBeFalsy();
         expect(textContentElement.text()).toContain(locales.frontEndDesc);
@@ -54,11 +54,11 @@ describe('Project', () => {
 
         const projectName = 'fifaManiaci';
 
-        const projectWrapper = createProjectWrapper({ name: projectName });
+        const wrapper = createWrapper({ name: projectName });
 
         const locales = store.locales.sections.projects.projects[projectName];
 
-        const textContentElement = projectWrapper.get(TITLE_SELECTOR);
+        const textContentElement = wrapper.get(TITLE_SELECTOR);
 
         expect(textContentElement.text()).not.toBeFalsy();
         expect(textContentElement.text()).toContain(locales.title);

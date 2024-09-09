@@ -12,9 +12,7 @@ describe('MainSectionObject', () => {
         store.locales = sk;
     });
 
-    function createMainSectionObject(
-        args: Partial<ConstructorParameters<typeof MainSectionObject>[0]> = {},
-    ): MainSectionObject {
+    function createWrapper(args: Partial<ConstructorParameters<typeof MainSectionObject>[0]> = {}): MainSectionObject {
         const defaultArgs: ConstructorParameters<typeof MainSectionObject>[0] = {
             heading: false,
             name: 'home',
@@ -30,9 +28,9 @@ describe('MainSectionObject', () => {
         firstPropName: keyof MainSectionObject,
         secondPropName: keyof MainSectionObject,
     ): void {
-        const firstObject = createMainSectionObject(firstArgs);
+        const firstObject = createWrapper(firstArgs);
 
-        const secondObject = createMainSectionObject(secondArgs);
+        const secondObject = createWrapper(secondArgs);
 
         expect(firstObject[firstPropName]).not.toBe(secondObject[firstPropName]);
         expect(firstObject[secondPropName]).not.toBe(secondObject[secondPropName]);

@@ -48,7 +48,7 @@ describe('ContactForm', () => {
         vi.clearAllMocks();
     });
 
-    const createContactFormWrapper = buildCreateWrapper(ContactForm);
+    const createWrapper = buildCreateWrapper(ContactForm);
 
     function getFieldTestingSelector(name: string): string {
         return getTestingSelector(`field-${name}`);
@@ -59,7 +59,7 @@ describe('ContactForm', () => {
             fieldName: string,
             testCases: { value: string; validity: boolean }[],
         ): Promise<void> {
-            const wrapper = createContactFormWrapper();
+            const wrapper = createWrapper();
 
             const field = wrapper.getComponent<typeof ContactFormField>(getFieldTestingSelector(fieldName));
 
@@ -118,7 +118,7 @@ describe('ContactForm', () => {
 
     describe('submit', () => {
         it('touches fields on submit', async () => {
-            const wrapper = createContactFormWrapper();
+            const wrapper = createWrapper();
 
             const fields = wrapper.findAllComponents(ContactFormField);
 
@@ -134,13 +134,13 @@ describe('ContactForm', () => {
             expect(classNameBeforeSubmit).not.toBe(requiredField.element.className);
         });
 
-        async function makeFormSubmittable(formWrapper: Omit<DOMWrapper<HTMLFormElement>, 'exists'>): Promise<void> {
-            await formWrapper.get('input[type=email]').setValue('name.surname@email.com');
-            await formWrapper.get('textarea').setValue('Random message');
+        async function makeFormSubmittable(wrapper: Omit<DOMWrapper<HTMLFormElement>, 'exists'>): Promise<void> {
+            await wrapper.get('input[type=email]').setValue('name.surname@email.com');
+            await wrapper.get('textarea').setValue('Random message');
         }
 
         it('does not submit if fields are invalid', async () => {
-            const wrapper = createContactFormWrapper();
+            const wrapper = createWrapper();
 
             expect(fetchSpy).not.toHaveBeenCalled();
 
@@ -158,7 +158,7 @@ describe('ContactForm', () => {
         });
 
         it('submits site language', async () => {
-            const wrapper = createContactFormWrapper();
+            const wrapper = createWrapper();
 
             expect(fetchSpy).not.toHaveBeenCalled();
 
@@ -170,7 +170,7 @@ describe('ContactForm', () => {
         it('displays toast message on form submit', async () => {
             const addToastSpy = vi.spyOn(store, 'addToast');
 
-            const wrapper = createContactFormWrapper();
+            const wrapper = createWrapper();
 
             expect(addToastSpy).not.toHaveBeenCalled();
 
@@ -184,7 +184,7 @@ describe('ContactForm', () => {
         });
 
         it('resets form after successful submit', async () => {
-            const wrapper = createContactFormWrapper();
+            const wrapper = createWrapper();
 
             const formWrapper = wrapper.get('form');
 

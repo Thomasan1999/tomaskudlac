@@ -34,7 +34,7 @@ describe('Navbar', () => {
         ],
     ];
 
-    const createNavbarWrapper = buildCreateWrapper(
+    const createWrapper = buildCreateWrapper(
         Navbar,
         {
             activeSection: sections[0][0],
@@ -51,8 +51,8 @@ describe('Navbar', () => {
     );
     const setProps = buildSetProps<NavbarProps>();
 
-    function getSectionLinks(navbarWrapper: VueWrapper): ReturnType<typeof mount<typeof NavbarLink>>[] {
-        const navbarLinks = navbarWrapper.findAllComponents(NavbarLink);
+    function getSectionLinks(wrapper: VueWrapper): ReturnType<typeof mount<typeof NavbarLink>>[] {
+        const navbarLinks = wrapper.findAllComponents(NavbarLink);
 
         return navbarLinks.filter(
             (navbarLink) => (navbarLink.element as HTMLElement).dataset.testid === 'section-link',
@@ -64,17 +64,17 @@ describe('Navbar', () => {
     });
 
     it("assigns 'active' property to active section", async () => {
-        const navbarWrapper = createNavbarWrapper();
+        const wrapper = createWrapper();
 
-        const sectionLinks = getSectionLinks(navbarWrapper);
+        const sectionLinks = getSectionLinks(wrapper);
 
         expect(sectionLinks[0].props().active).toBeTruthy();
 
-        await setProps(navbarWrapper, { activeSection: sections[1][0] });
+        await setProps(wrapper, { activeSection: sections[1][0] });
 
         expect(sectionLinks[1].props().active).toBeTruthy();
 
-        await setProps(navbarWrapper, { activeSection: 'randomSection' });
+        await setProps(wrapper, { activeSection: 'randomSection' });
 
         const noLinkHasActiveClass = sectionLinks.every((sectionLink) => !sectionLink.props().active);
 
@@ -84,13 +84,13 @@ describe('Navbar', () => {
     it('changes navbar icon mode on navbar icon click', async () => {
         mockWindowResizeBy();
 
-        const navbarWrapper = createNavbarWrapper();
+        const wrapper = createWrapper();
 
         window.resizeBy(640, 360);
 
         await nextTick();
 
-        const navbarIcon = navbarWrapper.get('.navbar-icon');
+        const navbarIcon = wrapper.get('.navbar-icon');
 
         const oldClasses = navbarIcon.classes();
 
@@ -101,39 +101,39 @@ describe('Navbar', () => {
 
     it('renders all section links', async () => {
         for await (const length of [2, 1, 0]) {
-            // navbarWrapper has to be initialized every iteration because 'setProps' didn't change template
+            // wrapper has to be initialized every iteration because 'setProps' didn't change template
 
-            const navbarWrapper = createNavbarWrapper({
+            const wrapper = createWrapper({
                 sections: sections.slice(0, length),
             });
 
-            const sectionLinks = getSectionLinks(navbarWrapper);
+            const sectionLinks = getSectionLinks(wrapper);
 
             expect(sectionLinks).toHaveLength(length);
         }
     });
 
     it("emits 'linkClick' on a section link click", async () => {
-        const navbarWrapper = createNavbarWrapper();
+        const wrapper = createWrapper();
 
-        expect(navbarWrapper.emitted().linkClick).toBeUndefined();
+        expect(wrapper.emitted().linkClick).toBeUndefined();
 
-        await navbarWrapper.get(LOGO_SELECTOR).trigger('click');
+        await wrapper.get(LOGO_SELECTOR).trigger('click');
 
-        expect(navbarWrapper.emitted().linkClick).toHaveLength(1);
+        expect(wrapper.emitted().linkClick).toHaveLength(1);
 
-        await navbarWrapper.get(SECTION_LINK_SELECTOR).trigger('click');
+        await wrapper.get(SECTION_LINK_SELECTOR).trigger('click');
 
-        expect(navbarWrapper.emitted().linkClick).toHaveLength(2);
+        expect(wrapper.emitted().linkClick).toHaveLength(2);
     });
 
     it("emits 'languageToggle' on language button click", async () => {
-        const navbarWrapper = createNavbarWrapper();
+        const wrapper = createWrapper();
 
-        expect(navbarWrapper.emitted().languageToggle).toBeUndefined();
+        expect(wrapper.emitted().languageToggle).toBeUndefined();
 
-        await navbarWrapper.get(NAVBAR_OTHER_LANG_SELECTOR).trigger('click');
+        await wrapper.get(NAVBAR_OTHER_LANG_SELECTOR).trigger('click');
 
-        expect(navbarWrapper.emitted().languageToggle).toHaveLength(1);
+        expect(wrapper.emitted().languageToggle).toHaveLength(1);
     });
 });

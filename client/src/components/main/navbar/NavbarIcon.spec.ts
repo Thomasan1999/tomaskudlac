@@ -8,26 +8,26 @@ describe('NavbarIcon', () => {
         await mockInitStore();
     });
 
-    const createNavbarIconWrapper = buildCreateWrapper(NavbarIcon);
+    const createWrapper = buildCreateWrapper(NavbarIcon);
     const setProps = buildSetProps<NavbarIconProps>();
 
     it("emits 'click' event on click", async () => {
-        const navbarIconWrapper = createNavbarIconWrapper({ mode: 'bars' });
+        const wrapper = createWrapper({ mode: 'bars' });
 
-        expect(navbarIconWrapper.emitted().click).toBeUndefined();
+        expect(wrapper.emitted().click).toBeUndefined();
 
-        await navbarIconWrapper.trigger('click');
+        await wrapper.trigger('click');
 
-        expect(navbarIconWrapper.emitted().click).toHaveLength(1);
+        expect(wrapper.emitted().click).toHaveLength(1);
     });
 
     it("has a class based on 'mode' property", async () => {
-        const navbarIconWrapper = createNavbarIconWrapper({ mode: 'bars' });
+        const wrapper = createWrapper({ mode: 'bars' });
 
-        expect(navbarIconWrapper.classes()).toContain('bars');
+        expect(wrapper.classes()).toContain('bars');
 
-        await setProps(navbarIconWrapper, { mode: 'cross' });
+        await setProps(wrapper, { mode: 'cross' });
 
-        expect(navbarIconWrapper.classes()).toContain('cross');
+        expect(wrapper.classes()).toContain('cross');
     });
 });

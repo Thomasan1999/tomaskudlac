@@ -16,7 +16,7 @@ describe('FooterComponent', () => {
         });
     });
 
-    const createFooterComponentWrapper = buildCreateWrapper(FooterComponent, undefined, {
+    const createWrapper = buildCreateWrapper(FooterComponent, undefined, {
         global: {
             stubs: ['CookiesModal'],
         },
@@ -25,21 +25,21 @@ describe('FooterComponent', () => {
     it('opens cookies modal on copyright link click in the Slovak version', async () => {
         const store = useStore();
 
-        const footerComponentWrapper = createFooterComponentWrapper();
+        const wrapper = createWrapper();
 
         store.language = SiteLanguage.SK;
 
         await nextTick();
 
-        let cookiesModal = footerComponentWrapper.findComponent({ name: 'CookiesModal' });
+        let cookiesModal = wrapper.findComponent({ name: 'CookiesModal' });
 
         expect(cookiesModal.exists()).toBe(false);
 
-        const copyrightLink = footerComponentWrapper.get(COPYRIGHT_LINK_SELECTOR);
+        const copyrightLink = wrapper.get(COPYRIGHT_LINK_SELECTOR);
 
         await copyrightLink.trigger('click');
 
-        cookiesModal = footerComponentWrapper.findComponent({ name: 'CookiesModal' });
+        cookiesModal = wrapper.findComponent({ name: 'CookiesModal' });
 
         expect(cookiesModal.exists()).toBe(true);
     });
@@ -47,13 +47,13 @@ describe('FooterComponent', () => {
     it('uses external link for cookies in the English version', async () => {
         const store = useStore();
 
-        const footerComponentWrapper = createFooterComponentWrapper();
+        const wrapper = createWrapper();
 
         store.language = SiteLanguage.EN;
 
         await nextTick();
 
-        const copyrightLink = footerComponentWrapper.findComponent<typeof ExternalLink>(COPYRIGHT_LINK_SELECTOR);
+        const copyrightLink = wrapper.findComponent<typeof ExternalLink>(COPYRIGHT_LINK_SELECTOR);
 
         const copyrightLinkUrl = new URL((copyrightLink.element as HTMLAnchorElement).href);
 
