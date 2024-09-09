@@ -2,7 +2,8 @@
     "name": "tomaskudlac",
     "scripts": {
         "format": "prettier . -write",
-        "prepare": "husky"
+        "prepare": "husky",
+        "postinstall": "cd client && npm i"
     },
     "devDependencies": {
         "@commitlint/cli": "19.4.0",
