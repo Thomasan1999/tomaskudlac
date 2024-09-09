@@ -8,9 +8,10 @@ import { nextTick } from 'vue';
 
 const TOAST_SELECTOR = getTestingSelector('toast');
 
+const createWrapper = buildCreateWrapper(ToastContainer);
+
 describe('ToastContainer', () => {
     let store: ReturnType<typeof useStore>;
-    const createWrapper = buildCreateWrapper(ToastContainer);
 
     beforeAll(async () => {
         await mockInitStore();

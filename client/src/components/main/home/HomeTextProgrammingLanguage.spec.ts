@@ -1,9 +1,8 @@
 import HomeTextProgrammingLanguage from '@/components/main/home/HomeTextProgrammingLanguage.vue';
 import { buildCreateWrapper } from '@/utils/test';
 
+const createWrapper = buildCreateWrapper(HomeTextProgrammingLanguage);
 describe('HomeTextProgrammingLanguage', () => {
-    const createWrapper = buildCreateWrapper(HomeTextProgrammingLanguage);
-
     it('shows whole programming language', async () => {
         let programmingLanguage = 'n HTML';
 

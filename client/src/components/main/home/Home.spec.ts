@@ -2,15 +2,15 @@ import mockInitStore from '@/mocks/mockInitStore';
 import Home from '@/components/main/home/Home.vue';
 import { buildCreateWrapper } from '@/utils/test';
 
+const createWrapper = buildCreateWrapper(Home, undefined, {
+    global: {
+        stubs: ['HomeText'],
+    },
+});
+
 describe('Home', () => {
     beforeAll(async () => {
         await mockInitStore();
-    });
-
-    const createWrapper = buildCreateWrapper(Home, undefined, {
-        global: {
-            stubs: ['HomeText'],
-        },
     });
 
     it('does not have heading', () => {

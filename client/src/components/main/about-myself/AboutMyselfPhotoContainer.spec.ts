@@ -6,13 +6,13 @@ const JPG_SRC_SELECTOR = getTestingSelector('jpg-src');
 const PHOTO_SELECTOR = getTestingSelector('photo');
 const WEBP_SRC_SELECTOR = getTestingSelector('webp-src');
 
-describe('AboutMyselfPhotoContainer', () => {
-    const createWrapper = buildCreateWrapper(AboutMyselfPhotoContainer, {
-        alt: '',
-        jpgSrc: '',
-        webpSrc: '',
-    });
+const createWrapper = buildCreateWrapper(AboutMyselfPhotoContainer, {
+    alt: '',
+    jpgSrc: '',
+    webpSrc: '',
+});
 
+describe('AboutMyselfPhotoContainer', () => {
     beforeAll(async () => {
         await mockInitStore();
     });

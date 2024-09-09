@@ -2,15 +2,15 @@ import MainSection from '@/components/main/MainSection.vue';
 import mockInitStore from '@/mocks/mockInitStore';
 import { buildCreateWrapper } from '@/utils/test';
 
+const createWrapper = buildCreateWrapper(MainSection, {
+    name: 'home',
+});
+
 describe('MainSection', () => {
     const headingSelector = 'h1, h2, h3, h4, h5, h6';
 
     beforeAll(async () => {
         await mockInitStore();
-    });
-
-    const createWrapper = buildCreateWrapper(MainSection, {
-        name: 'home',
     });
 
     it("adds/removes heading element depending on the 'heading' property", async () => {

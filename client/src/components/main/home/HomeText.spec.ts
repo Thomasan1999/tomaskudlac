@@ -17,6 +17,8 @@ const PROGRAMMING_LANGUAGE_SELECTOR = getTestingSelector('programming-language')
 
 const shuffleSpy = (vi.spyOn(_, 'shuffle') as MockInstance).mockImplementation((value) => value);
 
+const createWrapper = buildCreateWrapper(HomeText);
+
 describe('HomeText', () => {
     const languageTitle = 'HTML';
     const languageTitleWithPrefix = 'n HTML';
@@ -68,8 +70,6 @@ describe('HomeText', () => {
     afterAll(() => {
         window.setTimeout = timeout;
     });
-
-    const createWrapper = buildCreateWrapper(HomeText);
 
     function getMarkedTextElement(wrapper: VueWrapper) {
         return wrapper.get<HTMLDivElement>(MARKED_TEXT_SELECTOR);

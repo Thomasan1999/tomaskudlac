@@ -7,6 +7,23 @@ import { ToastType } from '@/store/types';
 const CLOSE_BUTTON_SELECTOR = getTestingSelector('close-button');
 const TOAST_SELECTOR = getTestingSelector('toast');
 
+const createWrapper = buildCreateWrapper(
+    Toast,
+    {
+        message: '',
+        type: ToastType.FAIL,
+    },
+    {
+        global: {
+            renderStubDefaultSlot: true,
+            stubs: {
+                Teleport: true,
+                Transition: true,
+            },
+        },
+    },
+);
+
 describe('Toast', () => {
     beforeAll(async () => {
         await mockInitStore();
@@ -14,23 +31,6 @@ describe('Toast', () => {
         document.body.style.setProperty('--primary-green', 'green');
         vi.useFakeTimers();
     });
-
-    const createWrapper = buildCreateWrapper(
-        Toast,
-        {
-            message: '',
-            type: ToastType.FAIL,
-        },
-        {
-            global: {
-                renderStubDefaultSlot: true,
-                stubs: {
-                    Teleport: true,
-                    Transition: true,
-                },
-            },
-        },
-    );
 
     it('renders message', async () => {
         const wrapper = createWrapper({

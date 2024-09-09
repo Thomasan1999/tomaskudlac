@@ -11,44 +11,44 @@ const LOGO_SELECTOR = getTestingSelector('logo');
 const NAVBAR_OTHER_LANG_SELECTOR = getTestingSelector('navbar-other-lang');
 const SECTION_LINK_SELECTOR = getTestingSelector('section-link');
 
-describe('Navbar', () => {
-    const sections: [string, MainSectionObject][] = [
-        [
-            'home',
-            reactive(
-                new MainSectionObject({
-                    name: 'home',
-                    order: 0,
-                }),
-            ),
-        ],
-        [
-            'aboutMyself',
-            reactive(
-                new MainSectionObject({
-                    name: 'aboutMyself',
-                    order: 1,
-                }),
-            ),
-        ],
-    ];
+const sections: [string, MainSectionObject][] = [
+    [
+        'home',
+        reactive(
+            new MainSectionObject({
+                name: 'home',
+                order: 0,
+            }),
+        ),
+    ],
+    [
+        'aboutMyself',
+        reactive(
+            new MainSectionObject({
+                name: 'aboutMyself',
+                order: 1,
+            }),
+        ),
+    ],
+];
 
-    const createWrapper = buildCreateWrapper(
-        Navbar,
-        {
-            activeSection: sections[0][0],
-            sections,
-        },
-        {
-            global: {
-                stubs: {
-                    FontAwesomeIcon: true,
-                    RouterLink: { template: '<div></div>' },
-                },
+const createWrapper = buildCreateWrapper(
+    Navbar,
+    {
+        activeSection: sections[0][0],
+        sections,
+    },
+    {
+        global: {
+            stubs: {
+                FontAwesomeIcon: true,
+                RouterLink: { template: '<div></div>' },
             },
         },
-    );
+    },
+);
 
+describe('Navbar', () => {
     function getSectionLinks(wrapper: VueWrapper): ReturnType<typeof mount<typeof NavbarLink>>[] {
         const navbarLinks = wrapper.findAllComponents(NavbarLink);
 

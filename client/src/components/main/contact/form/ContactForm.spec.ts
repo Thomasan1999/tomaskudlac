@@ -30,6 +30,8 @@ const resetSpy = vi.spyOn(HTMLFormElement.prototype, 'reset');
 
 const defaultFormFields = cloneDeep(contactFormFields);
 
+const createWrapper = buildCreateWrapper(ContactForm);
+
 describe('ContactForm', () => {
     let store: ReturnType<typeof useStore>;
 
@@ -47,8 +49,6 @@ describe('ContactForm', () => {
     afterEach(() => {
         vi.clearAllMocks();
     });
-
-    const createWrapper = buildCreateWrapper(ContactForm);
 
     function getFieldTestingSelector(name: string): string {
         return getTestingSelector(`field-${name}`);

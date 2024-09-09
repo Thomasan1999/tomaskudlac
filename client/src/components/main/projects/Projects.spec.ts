@@ -2,15 +2,15 @@ import Projects from '@/components/main/projects/Projects.vue';
 import mockInitStore from '@/mocks/mockInitStore';
 import { buildCreateWrapper } from '@/utils/test';
 
+const createWrapper = buildCreateWrapper(Projects, undefined, {
+    global: {
+        stubs: ['Project'],
+    },
+});
+
 describe('Projects', () => {
     beforeAll(async () => {
         await mockInitStore();
-    });
-
-    const createWrapper = buildCreateWrapper(Projects, undefined, {
-        global: {
-            stubs: ['Project'],
-        },
     });
 
     it('has heading', () => {

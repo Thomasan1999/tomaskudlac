@@ -3,24 +3,24 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faEnvelope, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { buildCreateWrapper } from '@/utils/test';
 
+const createWrapper = buildCreateWrapper(
+    NavbarSocialNetwork,
+    {
+        icon: ['', ''],
+        title: 'Title',
+        to: '/',
+    },
+    {
+        global: {
+            stubs: ['FontAwesomeIcon'],
+        },
+    },
+);
+
 describe('NavbarSocialNetwork', () => {
     beforeAll(() => {
         library.add(faEnvelope, faTimes);
     });
-
-    const createWrapper = buildCreateWrapper(
-        NavbarSocialNetwork,
-        {
-            icon: ['', ''],
-            title: 'Title',
-            to: '/',
-        },
-        {
-            global: {
-                stubs: ['FontAwesomeIcon'],
-            },
-        },
-    );
 
     it("renders different icons for different 'icon' property value", async () => {
         const wrapper = createWrapper({ icon: ['fas', 'times'] });

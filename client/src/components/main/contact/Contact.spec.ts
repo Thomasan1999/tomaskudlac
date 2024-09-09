@@ -4,15 +4,15 @@ import { buildCreateWrapper, getTestingSelector } from '@/utils/test';
 
 const BRIEF_TEXT_SELECTOR = getTestingSelector('brief-text');
 
+const createWrapper = buildCreateWrapper(Contact, undefined, {
+    global: {
+        stubs: ['ContactForm'],
+    },
+});
+
 describe('Contact', () => {
     beforeAll(async () => {
         await mockInitStore();
-    });
-
-    const createWrapper = buildCreateWrapper(Contact, undefined, {
-        global: {
-            stubs: ['ContactForm'],
-        },
     });
 
     it('has heading', () => {

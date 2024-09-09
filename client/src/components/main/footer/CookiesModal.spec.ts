@@ -5,16 +5,16 @@ import { buildCreateWrapper, getTestingSelector } from '@/utils/test';
 const CLOSE_BUTTON_SELECTOR = getTestingSelector('close-button');
 const OVERLAY_SELECTOR = getTestingSelector('overlay');
 
+const createWrapper = buildCreateWrapper(CookiesModal, undefined, {
+    global: {
+        renderStubDefaultSlot: true,
+    },
+    shallow: true,
+});
+
 describe('CookiesModal', () => {
     beforeAll(async () => {
         await mockInitStore();
-    });
-
-    const createWrapper = buildCreateWrapper(CookiesModal, undefined, {
-        global: {
-            renderStubDefaultSlot: true,
-        },
-        shallow: true,
     });
 
     it("emits 'close' event on close button click", async () => {

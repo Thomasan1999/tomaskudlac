@@ -24,17 +24,17 @@ vi.mock('@/router', () => {
     };
 });
 
+const createWrapper = buildCreateWrapper(Main, undefined, {
+    global: {
+        stubs: ['font-awesome-icon', 'footer-component'],
+    },
+});
+
 describe('Main', () => {
     beforeAll(async () => {
         await mockInitStore();
 
         Element.prototype.scroll = function () {};
-    });
-
-    const createWrapper = buildCreateWrapper(Main, undefined, {
-        global: {
-            stubs: ['font-awesome-icon', 'footer-component'],
-        },
     });
 
     it('renders sections in the right order', () => {

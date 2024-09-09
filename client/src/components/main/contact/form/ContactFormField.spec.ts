@@ -5,26 +5,26 @@ import { ContactFormFieldElement } from '@/components/main/contact/form/types';
 import ContactFormLabelText from '@/components/main/contact/form/ContactFormLabelText.vue';
 import { buildCreateWrapper } from '@/utils/test';
 
+const createWrapper = buildCreateWrapper(
+    ContactFormField,
+    {
+        label: '',
+        modelValue: '',
+        name: '',
+        touched: false,
+        valid: true,
+    },
+    {
+        global: {
+            stubs: { ContactFormFieldError: true },
+        },
+    },
+);
+
 describe('ContactFormField', () => {
     beforeAll(async () => {
         await mockInitStore();
     });
-
-    const createWrapper = buildCreateWrapper(
-        ContactFormField,
-        {
-            label: '',
-            modelValue: '',
-            name: '',
-            touched: false,
-            valid: true,
-        },
-        {
-            global: {
-                stubs: { ContactFormFieldError: true },
-            },
-        },
-    );
 
     describe('HTML attributes', () => {
         it('renders label text', async () => {

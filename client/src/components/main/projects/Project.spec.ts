@@ -6,13 +6,13 @@ import { buildCreateWrapper, getTestingSelector } from '@/utils/test';
 const TEXT_CONTENT_SELECTOR = getTestingSelector('text-content');
 const TITLE_SELECTOR = getTestingSelector('title');
 
+const createWrapper = buildCreateWrapper(Project, {
+    name: 'fifaManiaci',
+});
+
 describe('Project', () => {
     beforeAll(async () => {
         await mockInitStore();
-    });
-
-    const createWrapper = buildCreateWrapper(Project, {
-        name: 'fifaManiaci',
     });
 
     it('is wrapped in project link', () => {

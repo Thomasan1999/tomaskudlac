@@ -4,13 +4,13 @@ import useStore from '@/store';
 import AboutMyselfColumn from '@/components/main/about-myself/AboutMyselfColumn.vue';
 import { buildCreateWrapper } from '@/utils/test';
 
+const createWrapper = buildCreateWrapper(AboutMyself, undefined, {
+    global: { stubs: ['AboutMyselfColumn'] },
+});
+
 describe('AboutMyself', () => {
     beforeAll(async () => {
         await mockInitStore();
-    });
-
-    const createWrapper = buildCreateWrapper(AboutMyself, undefined, {
-        global: { stubs: ['AboutMyselfColumn'] },
     });
 
     it('has heading', () => {

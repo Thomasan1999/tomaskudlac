@@ -2,12 +2,12 @@ import NavbarIcon from '@/components/main/navbar/NavbarIcon.vue';
 import mockInitStore from '@/mocks/mockInitStore';
 import { buildCreateWrapper } from '@/utils/test';
 
+const createWrapper = buildCreateWrapper(NavbarIcon);
+
 describe('NavbarIcon', () => {
     beforeAll(async () => {
         await mockInitStore();
     });
-
-    const createWrapper = buildCreateWrapper(NavbarIcon);
 
     it("emits 'click' event on click", async () => {
         const wrapper = createWrapper({ mode: 'bars' });

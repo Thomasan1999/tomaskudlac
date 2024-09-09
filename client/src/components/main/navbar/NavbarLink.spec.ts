@@ -2,22 +2,22 @@ import NavbarLink from '@/components/main/navbar/NavbarLink.vue';
 import { RouterLink } from 'vue-router';
 import { buildCreateWrapper } from '@/utils/test';
 
-describe('NavbarLink', () => {
-    const createWrapper = buildCreateWrapper(
-        NavbarLink,
-        {
-            title: 'Link',
-            to: '/',
-        },
-        {
-            global: {
-                stubs: {
-                    RouterLink: { name: 'RouterLink', props: ['to'], template: '<a :href="to"></a>' },
-                },
+const createWrapper = buildCreateWrapper(
+    NavbarLink,
+    {
+        title: 'Link',
+        to: '/',
+    },
+    {
+        global: {
+            stubs: {
+                RouterLink: { name: 'RouterLink', props: ['to'], template: '<a :href="to"></a>' },
             },
         },
-    );
+    },
+);
 
+describe('NavbarLink', () => {
     it("has 'active' class based on 'active' property", async () => {
         const wrapper = createWrapper({ active: false });
 

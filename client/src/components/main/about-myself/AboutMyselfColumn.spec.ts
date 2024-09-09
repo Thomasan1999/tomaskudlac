@@ -6,14 +6,14 @@ import { buildCreateWrapper, getTestingSelector } from '@/utils/test';
 const TEXT_SELECTOR = getTestingSelector('text');
 const TITLE_SELECTOR = getTestingSelector('title');
 
+const createWrapper = buildCreateWrapper(AboutMyselfColumn, {
+    title: '',
+    text: '',
+});
+
 describe('AboutMyselfColumn', () => {
     beforeAll(async () => {
         await mockInitStore();
-    });
-
-    const createWrapper = buildCreateWrapper(AboutMyselfColumn, {
-        title: '',
-        text: '',
     });
 
     it("renders 'text' property", async () => {

@@ -8,18 +8,18 @@ import { buildCreateWrapper, getTestingSelector } from '@/utils/test';
 
 const COPYRIGHT_LINK_SELECTOR = getTestingSelector('copyright-link');
 
+const createWrapper = buildCreateWrapper(FooterComponent, undefined, {
+    global: {
+        stubs: ['CookiesModal'],
+    },
+});
+
 describe('FooterComponent', () => {
     beforeAll(async () => {
         await mockInitStore();
         Object.defineProperty(window, 'location', {
             value: new URL('https://tomaskudlac.sk'),
         });
-    });
-
-    const createWrapper = buildCreateWrapper(FooterComponent, undefined, {
-        global: {
-            stubs: ['CookiesModal'],
-        },
     });
 
     it('opens cookies modal on copyright link click in the Slovak version', async () => {
