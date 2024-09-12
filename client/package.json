@@ -1,13 +1,17 @@
 {
     "version": "0.0.0",
     "scripts": {
-        "serve": "vite",
         "build": "vite build --emptyOutDir",
-        "test:run": "vitest --run",
-        "test:watch": "vitest -w",
+        "format:base": "prettier . -write",
+        "format": "npm run format:base -- -write",
+        "format:check": "npm runformat:base -- -check",
         "lint": "eslint",
         "lint:fix": "eslint --fix",
-        "format": "prettier . -write",
+        "serve": "vite",
+        "test:run:base": "vitest --run",
+        "test:run": "run-p serve test:run:base --race",
+        "test:watch:base": "vitest -w",
+        "test:watch": "run-p serve test:watch:base",
         "type-check": "vue-tsc --noEmit"
     },
     "dependencies": {

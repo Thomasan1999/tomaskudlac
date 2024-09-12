@@ -1,14 +1,22 @@
 {
     "name": "tomaskudlac",
     "scripts": {
-        "format": "prettier . -write",
+        "build": "cd client && npm run build",
+        "format:base": "prettier .",
+        "format": "npm run format:base -- -write",
+        "format:check": "npm run format -- -check",
+        "lint": "cd client && npm run lint",
         "prepare": "husky",
-        "postinstall": "cd client && npm i"
+        "postinstall": "cd client && npm i",
+        "test:run": "cd client && npm run test:run",
+        "test:watch": "cd client && npm run test:watch",
+        "type-check": "cd client && npm run type-check"
     },
     "devDependencies": {
         "@commitlint/cli": "19.4.0",
         "@commitlint/config-conventional": "19.2.2",
         "husky": "9.1.5",
+        "npm-run-all": "4.1.5",
         "prettier": "3.3.3"
     }
 }
