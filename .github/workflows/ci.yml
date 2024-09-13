@@ -1,12 +1,7 @@
 name: CI
 
 on:
-    push:
-        branches:
-            - 'master'
-    pull_request:
-        branches:
-            - 'master'
+    workflow_dispatch:
 
 jobs:
     prepare:
@@ -43,19 +38,7 @@ jobs:
         needs: prepare
 
         steps:
-            - name: Checkout code
-              uses: actions/checkout@v4
-
-            - name: Restore node modules cache
-              uses: actions/cache@v4
-              with:
-                  path: '**/node_modules'
-                  key: ${{ runner.os }}-node_modules-${{ hashFiles('package-lock.json') }}
-                  restore-keys: |
-                      ${{ runner.os }}-node_modules-
-
-            - name: Install dependencies
-              run: npm install
+            - uses: ./.github/prepare-npm-job
 
             - name: Build project
               run: npm run build
@@ -65,16 +48,7 @@ jobs:
         needs: prepare
 
         steps:
-            - name: Checkout code
-              uses: actions/checkout@v4
-
-            - name: Restore node modules cache
-              uses: actions/cache@v4
-              with:
-                  path: "**/node_modules"
-                  key: ${{ runner.os }}-node_modules-${{ hashFiles('package-lock.json') }}
-                  restore-keys: |
-                      ${{ runner.os }}-node_modules-
+            - uses: ./.github/prepare-npm-job
 
             - name: Check code format
               run: npm run format:check
@@ -84,16 +58,7 @@ jobs:
         needs: prepare
 
         steps:
-            - name: Checkout code
-              uses: actions/checkout@v4
-
-            - name: Restore node modules cache
-              uses: actions/cache@v4
-              with:
-                  path: "**/node_modules"
-                  key: ${{ runner.os }}-node_modules-${{ hashFiles('package-lock.json') }}
-                  restore-keys: |
-                      ${{ runner.os }}-node_modules-
+            - uses: ./.github/prepare-npm-job
 
             - name: Run linter
               run: npm run lint
@@ -103,16 +68,7 @@ jobs:
         needs: prepare
 
         steps:
-            - name: Checkout code
-              uses: actions/checkout@v4
-
-            - name: Restore node modules cache
-              uses: actions/cache@v4
-              with:
-                  path: "**/node_modules"
-                  key: ${{ runner.os }}-node_modules-${{ hashFiles('package-lock.json') }}
-                  restore-keys: |
-                      ${{ runner.os }}-node_modules-
+            - uses: ./.github/prepare-npm-job
 
             - name: Check types
               run: npm run type-check
@@ -122,16 +78,7 @@ jobs:
         needs: prepare
 
         steps:
-            - name: Checkout code
-              uses: actions/checkout@v4
-
-            - name: Restore node modules cache
-              uses: actions/cache@v4
-              with:
-                  path: "**/node_modules"
-                  key: ${{ runner.os }}-node_modules-${{ hashFiles('package-lock.json') }}
-                  restore-keys: |
-                      ${{ runner.os }}-node_modules-
+            - uses: ./.github/prepare-npm-job
 
             - name: Run tests
               run: npm run test:run
