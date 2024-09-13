@@ -1,53 +1,80 @@
-# Front-end of the Tomáš Kudláč's portfolio
+# Front-end of Tomáš Kudláč's Portfolio
 
-Front-end of the portfolio developed by Tomáš Kudláč available in English at: [https://tomaskudlac.sk/en](https://tomaskudlac.sk/en?ref=github) and in Slovak at: [https://tomaskudlac.sk](https://tomaskudlac.sk/?ref=github).
+Front-end of the portfolio developed by Tomáš Kudláč. You can view the portfolio in:
 
-## About project
+- [English version](https://tomaskudlac.sk/en?ref=github)
+- [Slovak version](https://tomaskudlac.sk/?ref=github)
 
-The project is built in Vue 3, is written in TypeScript and uses the new Composition API to structure the component logic. The project uses Vue Router, global store using the new reactive system, DayJS for date manipulation, fetch for HTTP requests. All images are formatted in both the modern WebP format and less optimized JPEG
-format for compatibility reasons. The project is modularized, which means the code is structured into semi-independent modules which handle different parts of the application.
+## Project Setup
 
-## Directory structure
 
-    .
-    ├── public                      # Files which are not modified by the building process.
-    |   ├── ie                          # Version shown to the IE users.
-    |   ├── images                      # Images.
-    |   ├── icons                       # All sizes of the fav icon required to run on various devices.
-    |   ├── manifest_en.webmanifest     # Web app manifest for the English version.
-    |   └── manifest_sk.webmanifest     # Web app manifest for the Slovak version.
-    ├── src                         # Part of the application which has to be built before using in the browser, it contains all of the application logic and most of the application code.
-    |   ├── components                  # Vue components.
-    |   ├── locales                     # Locales of each supported language in a JSON-like format.
-    |   ├── store                       # Data and logic related to the module and all children modules.
-    |   ├── utils                       # Helper functions.
-    |   ├── views                       # Route views.
-    |   ├── App.vue                     # Root file of the Virtual DOM.
-    |   ├── main.ts                     # Entry file of the application.
-    |   ├── register-service-worker.ts  # Registers a service worker.
-    |   ├── router.ts                   # Routes.
-    |   └── shims-vue.d.ts              # TS definition for .vue files.
-    |   └── vite-env.d.ts               # TS definition for custom env variables.
-    ├── .editorconfig               # Config of an IDE.
-    ├── .gitignore                  # List of files to be ignored by Git.
-    ├── index.html                  # The entry HTML file.
-    ├── package.json                # Project metadata.
-    ├── package-lock.json           # Project metadata.
-    ├── README.md                   # Project description.
-    ├── tsconfig.json               # Config of the TypeScript compiler.
-    └── vite.config.mts             # Config of Vite.
-    └── vitest.config.mts           # Config of Vitest.
+### Prerequisites
+1. Install [Node.js](https://nodejs.org/en/download/package-manager).
+2. Run `npm install`.
 
-## Project setup
+### Utility Scripts
+- `npm run build` - Builds the code for production.
+- `npm run format` - Formats the code using Prettier.
+- `npm run format:check` - Checks the code format using Prettier without modifying it.
+- `npm run lint` - Lints the code using ESLint.
+- `npm run serve` - Compiles and hot-reloads for development.
+- `npm run test:run` - Runs the tests once.
+- `npm run test:watch` - Runs the tests and re-runs them on any test file changes.
+- `npm run type-check` - Checks the code for type validity.
 
-The portfolio is built via Vite and uses ECMAScript modules.
+## Technologies Used
+
+- Vue 3 - SPA framework
+    - Composition API
+    - `<script setup>`
+- Vite - bundles files for development and production
+- Typescript - ensures more safe and readable code
+- Tailwind - scalable and more readable CSS
+- Vue Router - navigation
+- fetch - HTTP requests
+- DayJS - date manipulation
+- Vitest - unit/component tests
+- Puppeteer - E2E tests
+- ESLint - ensures code consistency and prevents bugs
+- Prettier - ensures consistent code formatting
+- vue-tsc - type checking
+
+## Directory Structure
 
 ```
-npm install                     # Project setup.
-npm run serve                   # Compiles and hot-reloads for development.
-npm run build                   # Compiles and minifies for production.
+.
+├── public                          # Files not modified by the build process
+│   ├── ie                          # Version for Internet Explorer users
+│   ├── images                      # Image assets
+│   ├── icons                       # Favicon in various sizes for different devices
+│   ├── manifest_en.webmanifest     # Web app manifest for English
+│   └── manifest_sk.webmanifest     # Web app manifest for Slovak
+├── src                             # Application logic (needs to be built for browser use)
+│   ├── components                  # Vue components
+│   ├── locales                     # JSON-like locales for each supported language
+│   ├── store                       # Global store and module-related logic
+│   ├── utils                       # Helper functions
+│   ├── views                       # Route views
+│   ├── App.vue                     # Root file for the Virtual DOM
+│   ├── main.ts                     # Application entry point
+│   ├── register-service-worker.ts  # Service worker registration
+│   ├── router.ts                   # Routes configuration
+│   ├── shims-vue.d.ts              # TypeScript definition for Vue files
+│   └── vite-env.d.ts               # TS definition for custom environment variables
+├── .editorconfig                   # IDE configuration
+├── .gitignore                      # Files ignored by Git
+├── eslint.config.mjs               # ESLint configuration file
+├── index.html                      # Entry HTML file
+├── package.json                    # Project metadata
+├── package-lock.json               # Project metadata
+├── README.md                       # Project description
+├── postcss.config.ts               # PostCSS configuration file
+├── tailwind.config.ts              # Tailwind configuration file
+├── tsconfig.json                   # TypeScript compiler configuration
+├── vite.config.mts                 # Vite configuration
+└── vitest.config.mts               # Vitest configuration
 ```
 
 ## License
 
-The Tomáš Kudláč's portfolio is licensed under the [MIT License](https://opensource.org/licenses/MIT).
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
