@@ -54,6 +54,9 @@ jobs:
                   restore-keys: |
                       ${{ runner.os }}-node_modules-
 
+            - name: Install dependencies
+              run: npm install
+
             - name: Build project
               run: npm run build
 
