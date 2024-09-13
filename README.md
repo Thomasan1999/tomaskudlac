@@ -1,21 +1,57 @@
-# Tomáš Kudláč's portfolio
+# Tomáš Kudláč's Portfolio
 
-Repository hosting the codebase of the portfolio developed by Tomáš Kudláč available in English at: https://tomaskudlac.sk/en?ref=github and in Slovak at: https://tomaskudlac.sk/?ref=github.
+Repository hosting the codebase of the portfolio developed by Tomáš Kudláč. You can view the portfolio in:
 
-## About project
+- [English version](https://tomaskudlac.sk/en?ref=github)
+- [Slovak version](https://tomaskudlac.sk/?ref=github)
 
-The portfolio is divided into 2 semi-independent projects contained in subdirectories client and server. The client subdirectory contains front-end of the application build via
-the Vue framework. The current version of the project is built in Vue 3, if you want to see the previous version built in Vue 2, check the [vue-2](https://github.com/Thomasan1999/tomaskudlac/tree/vue-2) branch. The server subdirectory contains server files, the contents of the directory are not published for security reasons. Some parts, which would not compromise the security of the website, might be available in the future.
+## About the Project
 
-## Directory structure
+This portfolio is structured into two semi-independent projects, located in the following subdirectories:
 
-    .
-    ├── client # Front-end (Vue application)
-    ├── server # Back-end, not published for security reasons.
-    └── README.md                   # Project description.
+- **client**: Contains the front-end code of the application, built using the Vue.js framework. The current version is
+  developed in Vue 3. To explore the previous version of the project built with Vue 2, visit
+  the [vue-2](https://github.com/Thomasan1999/tomaskudlac/tree/vue-2) branch.
 
-More detailed structure might be found in respective subdirectories.
+- **server**: Contains the back-end code, which is not published for security reasons. However, parts that do not
+  compromise security might be available in future updates.
+
+## Project Setup
+
+### Utility Scripts
+
+- `npm run format` - Formats the code using Prettier.
+- `npm run format:check` - Checks the code formatting with Prettier without modifying it.
+- `npm run lint` - Lints the code using ESLint.
+- `npm run test:run` - Runs the tests once.
+- `npm run test:watch` - Runs the tests and re-runs them when any test file changes.
+- `npm run type-check` - Checks the code for type validity.
+
+## Technologies Used
+
+- Husky - used for extending Git hooks
+- Prettier - ensures consistent code formatting
+
+## Directory Structure
+
+```
+.
+├── .github              # Contains code used by GitHub
+│   ├── actions          # GitHub actions
+│   └── workflows        # GitHub workflows
+├── .husky               # Contains Husky scripts
+│   ├── commit-msg       # Lints commit messages
+│   └── pre-commit       # Validates code to be committed
+├── client               # Front-end (Vue application)
+├── server               # Back-end, not published for security reasons
+├── .gitignore           # Files ignored by Git
+├── .prettierrc.json     # Prettier configuration file
+├── commitlint.config.ts # Commitlint configuration file
+└── README.md            # Project description
+```
+
+More detailed structures are available within their respective subdirectories.
 
 ## License
 
-The Tomáš Kudláč's portfolio is licensed under an [MIT License](https://opensource.org/licenses/MIT).
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
