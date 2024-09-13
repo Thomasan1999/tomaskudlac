@@ -38,7 +38,10 @@ jobs:
         needs: prepare
 
         steps:
-            - uses: ./.github/prepare-npm-job
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - uses: ./.github/actions/prepare-npm-job
 
             - name: Build project
               run: npm run build
@@ -48,7 +51,10 @@ jobs:
         needs: prepare
 
         steps:
-            - uses: ./.github/prepare-npm-job
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - uses: ./.github/actions/prepare-npm-job
 
             - name: Check code format
               run: npm run format:check
@@ -58,7 +64,10 @@ jobs:
         needs: prepare
 
         steps:
-            - uses: ./.github/prepare-npm-job
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - uses: ./.github/actions/prepare-npm-job
 
             - name: Run linter
               run: npm run lint
@@ -68,7 +77,10 @@ jobs:
         needs: prepare
 
         steps:
-            - uses: ./.github/prepare-npm-job
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - uses: ./.github/actions/prepare-npm-job
 
             - name: Check types
               run: npm run type-check
@@ -78,7 +90,10 @@ jobs:
         needs: prepare
 
         steps:
-            - uses: ./.github/prepare-npm-job
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - uses: ./.github/actions/prepare-npm-job
 
             - name: Run tests
               run: npm run test:run

@@ -2,9 +2,6 @@ name: 'Prepare NPM job'
 runs:
     using: 'composite'
     steps:
-        - name: Checkout code
-          uses: actions/checkout@v4
-
         - name: Restore node modules cache
           uses: actions/cache@v4
           with:
