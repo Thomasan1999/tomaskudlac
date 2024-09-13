@@ -9,9 +9,12 @@ on:
             - 'master'
 
 env:
+    CACHE_KEY: ${ runner.os }}-node_modules-${{ hashFiles('package-lock.json') }}
     CACHE_PATHS: |
         **/node_modules
         ~/.cache/puppeteer
+    CACHE_RESTORE_KEYS: |
+        ${{ runner.os }}-node_modules-
 
 jobs:
     prepare:
@@ -34,9 +37,8 @@ jobs:
               uses: actions/cache@v4
               with:
                   path: ${{ env.CACHE_PATHS }}
-                  key: ${{ runner.os }}-node_modules-${{ hashFiles('package-lock.json') }}
-                  restore-keys: |
-                      ${{ runner.os }}-node_modules-
+                  key: ${{ env.CACHE_KEY }}
+                  restore-keys: ${{ env.CACHE_RESTORE_KEYS }}
               if: steps.cache.outputs.cache-hit != 'true'
 
             - name: Store the cache status
