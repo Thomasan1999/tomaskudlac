@@ -20,17 +20,10 @@ jobs:
               uses: actions/setup-node@v4
               with:
                   node-version: 20.x
+                  cache: 'npm'
 
             - name: Install dependencies
               run: npm install
-
-            - name: Cache dependencies
-              uses: actions/cache@v4
-              with:
-                  path: node_modules
-                  key: ${{ runner.os }}-node_modules-${{ hashFiles('package-lock.json') }}
-                  restore-keys: |
-                      ${{ runner.os }}-node_modules-
 
     build:
         runs-on: ubuntu-latest
@@ -39,12 +32,6 @@ jobs:
         steps:
             - name: Checkout code
               uses: actions/checkout@v4
-
-            - name: Retrieve cache
-              uses: actions/cache@v4
-              with:
-                  path: node_modules
-                  key: ${{ runner.os }}-node_modules-${{ hashFiles('package-lock.json') }}
 
             - name: Build project
               run: npm run build
@@ -57,12 +44,6 @@ jobs:
             - name: Checkout code
               uses: actions/checkout@v4
 
-            - name: Retrieve cache
-              uses: actions/cache@v4
-              with:
-                  path: node_modules
-                  key: ${{ runner.os }}-node_modules-${{ hashFiles('package-lock.json') }}
-
             - name: Check code format
               run: npm run format:check
 
@@ -73,12 +54,6 @@ jobs:
         steps:
             - name: Checkout code
               uses: actions/checkout@v4
-
-            - name: Retrieve cache
-              uses: actions/cache@v4
-              with:
-                  path: node_modules
-                  key: ${{ runner.os }}-node_modules-${{ hashFiles('package-lock.json') }}
 
             - name: Run linter
               run: npm run lint
@@ -91,12 +66,6 @@ jobs:
             - name: Checkout code
               uses: actions/checkout@v4
 
-            - name: Retrieve cache
-              uses: actions/cache@v4
-              with:
-                  path: node_modules
-                  key: ${{ runner.os }}-node_modules-${{ hashFiles('package-lock.json') }}
-
             - name: Check types
               run: npm run type-check
 
@@ -107,12 +76,6 @@ jobs:
         steps:
             - name: Checkout code
               uses: actions/checkout@v4
-
-            - name: Retrieve cache
-              uses: actions/cache@v4
-              with:
-                  path: node_modules
-                  key: ${{ runner.os }}-node_modules-${{ hashFiles('package-lock.json') }}
 
             - name: Run tests
               run: npm run test:run
