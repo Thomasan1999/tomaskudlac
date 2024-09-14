@@ -1,3 +1,20 @@
+<script lang="ts" setup>
+    import { computed } from 'vue';
+    import useStore from '@/store';
+    import { NavbarIconProps } from '@/components/main/navbar/types';
+
+    defineProps<NavbarIconProps>();
+    const emit = defineEmits<{ (event: 'click'): void }>();
+
+    const store = useStore();
+
+    const onClick = () => {
+        emit('click');
+    };
+
+    const locales = computed(() => store.locales.navbar);
+</script>
+
 <template>
     <div
         class="navbar-icon"
@@ -22,23 +39,6 @@
         </div>
     </div>
 </template>
-
-<script lang="ts" setup>
-    import { computed } from 'vue';
-    import useStore from '@/store';
-    import { NavbarIconProps } from '@/components/main/navbar/types';
-
-    defineProps<NavbarIconProps>();
-    const emit = defineEmits<{ (event: 'click'): void }>();
-
-    const store = useStore();
-
-    const onClick = () => {
-        emit('click');
-    };
-
-    const locales = computed(() => store.locales.navbar);
-</script>
 
 <style lang="scss" scoped>
     .navbar-icon {

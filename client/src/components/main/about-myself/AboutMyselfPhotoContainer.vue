@@ -1,3 +1,9 @@
+<script setup lang="ts">
+    import { AboutMyselfPhotoContainerProps } from '@/components/main/about-myself/types';
+
+    defineProps<AboutMyselfPhotoContainerProps>();
+</script>
+
 <template>
     <picture
         data-testid="about-myself-photo-container"
@@ -21,9 +27,3 @@
         />
     </picture>
 </template>
-
-<script setup lang="ts">
-    import { AboutMyselfPhotoContainerProps } from '@/components/main/about-myself/types';
-
-    defineProps<AboutMyselfPhotoContainerProps>();
-</script>

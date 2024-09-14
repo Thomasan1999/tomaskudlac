@@ -1,3 +1,14 @@
+<script lang="ts" setup>
+    import MainSection from '@/components/main/MainSection.vue';
+    import HomeText from '@/components/main/home/HomeText.vue';
+    import { computed } from 'vue';
+    import useStore from '@/store';
+
+    const store = useStore();
+
+    const imageFormat = computed(() => store.imageFormat);
+</script>
+
 <template>
     <MainSection
         class="home has-curtain"
@@ -9,17 +20,6 @@
         </div>
     </MainSection>
 </template>
-
-<script lang="ts" setup>
-    import MainSection from '@/components/main/MainSection.vue';
-    import HomeText from '@/components/main/home/HomeText.vue';
-    import { computed } from 'vue';
-    import useStore from '@/store';
-
-    const store = useStore();
-
-    const imageFormat = computed(() => store.imageFormat);
-</script>
 
 <style lang="scss" scoped>
     .home {

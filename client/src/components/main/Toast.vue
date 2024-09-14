@@ -1,30 +1,3 @@
-<template>
-    <Teleport to="#modal-container">
-        <Transition
-            name="fade"
-            @after-leave="$emit('close')"
-        >
-            <div
-                v-if="opened"
-                class="toast"
-                :class="[`type-${type}`]"
-                data-testid="toast"
-                :style="`--relative-margin-top: ${relativeMarginTop}`"
-            >
-                <div class="toast-message">{{ message }}</div>
-                <button
-                    class="toast-close-button"
-                    data-testid="close-button"
-                    :title="locales.closeButtonTitle"
-                    @click="opened = false"
-                >
-                    <CloseIcon class="toast-close-button-icon" />
-                </button>
-            </div>
-        </Transition>
-    </Teleport>
-</template>
-
 <script lang="ts" setup>
     import useStore from '@/store';
     import { computed, onMounted, ref } from 'vue';
@@ -67,6 +40,33 @@
         }, lifetime.value);
     });
 </script>
+
+<template>
+    <Teleport to="#modal-container">
+        <Transition
+            name="fade"
+            @after-leave="$emit('close')"
+        >
+            <div
+                v-if="opened"
+                class="toast"
+                :class="[`type-${type}`]"
+                data-testid="toast"
+                :style="`--relative-margin-top: ${relativeMarginTop}`"
+            >
+                <div class="toast-message">{{ message }}</div>
+                <button
+                    class="toast-close-button"
+                    data-testid="close-button"
+                    :title="locales.closeButtonTitle"
+                    @click="opened = false"
+                >
+                    <CloseIcon class="toast-close-button-icon" />
+                </button>
+            </div>
+        </Transition>
+    </Teleport>
+</template>
 
 <style lang="scss" scoped>
     .toast {

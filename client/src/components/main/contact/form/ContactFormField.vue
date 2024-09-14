@@ -1,30 +1,3 @@
-<template>
-    <label
-        :data-testid="`field-${name}`"
-        class="contact-form-field"
-        :class="{ 'has-error': error }"
-    >
-        <ContactFormLabelText
-            :fieldRequired="required"
-            :text="label"
-        />
-        <Component
-            :is="element"
-            class="contact-form-data flex-grow"
-            :class="[`contact-form-${element}`]"
-            :minlength="minlength"
-            :maxlength="maxlength"
-            :name="name"
-            :required="required"
-            :value="model"
-            v-bind="dynamicProps"
-            @blur="onBlur"
-            @input="onInput"
-        />
-        <ContactFormFieldError :error="error" />
-    </label>
-</template>
-
 <script lang="ts" setup>
     import { computed, ref, watch } from 'vue';
     import { Merge } from 'ts-essentials';
@@ -108,6 +81,33 @@
         },
     );
 </script>
+
+<template>
+    <label
+        :data-testid="`field-${name}`"
+        class="contact-form-field"
+        :class="{ 'has-error': error }"
+    >
+        <ContactFormLabelText
+            :fieldRequired="required"
+            :text="label"
+        />
+        <Component
+            :is="element"
+            class="contact-form-data flex-grow"
+            :class="[`contact-form-${element}`]"
+            :minlength="minlength"
+            :maxlength="maxlength"
+            :name="name"
+            :required="required"
+            :value="model"
+            v-bind="dynamicProps"
+            @blur="onBlur"
+            @input="onInput"
+        />
+        <ContactFormFieldError :error="error" />
+    </label>
+</template>
 
 <style lang="scss" scoped>
     .contact-form-field {

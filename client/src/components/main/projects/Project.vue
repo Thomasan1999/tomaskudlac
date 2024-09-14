@@ -1,44 +1,3 @@
-<template>
-    <ExternalLink
-        class="project cover-background has-curtain"
-        :href="projectLocales.href"
-        :style="{ backgroundImage }"
-        :title="`${generalLocales.showProject} ${[projectLocales.title]}`"
-    >
-        <div class="text-content">
-            <div class="project-content">
-                <h3
-                    class="project-title"
-                    data-testid="title"
-                >
-                    {{ projectLocales.title }}
-                </h3>
-                <div
-                    class="project-text"
-                    :style="`--hover-height: ${textHoverHeight}px`"
-                >
-                    <div
-                        class="project-text-content"
-                        data-testid="text-content"
-                        ref="textContent"
-                    >
-                        <h4 class="project-what-ive-done">{{ generalLocales.whatIveDone }}:</h4>
-                        <p class="project-text-design">
-                            {{ generalLocales.designLabel }}: {{ projectLocales.designDesc }}
-                        </p>
-                        <p class="project-text-front-end">
-                            {{ generalLocales.frontEndLabel }}: {{ projectLocales.frontEndDesc }}
-                        </p>
-                        <p class="project-text-back-end">
-                            {{ generalLocales.backEndLabel }}: {{ projectLocales.backEndDesc }}
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </ExternalLink>
-</template>
-
 <script lang="ts" setup>
     import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
     import useStore from '@/store';
@@ -83,6 +42,47 @@
         window.removeEventListener('resize', setTextHoverHeight);
     });
 </script>
+
+<template>
+    <ExternalLink
+        class="project cover-background has-curtain"
+        :href="projectLocales.href"
+        :style="{ backgroundImage }"
+        :title="`${generalLocales.showProject} ${[projectLocales.title]}`"
+    >
+        <div class="text-content">
+            <div class="project-content">
+                <h3
+                    class="project-title"
+                    data-testid="title"
+                >
+                    {{ projectLocales.title }}
+                </h3>
+                <div
+                    class="project-text"
+                    :style="`--hover-height: ${textHoverHeight}px`"
+                >
+                    <div
+                        class="project-text-content"
+                        data-testid="text-content"
+                        ref="textContent"
+                    >
+                        <h4 class="project-what-ive-done">{{ generalLocales.whatIveDone }}:</h4>
+                        <p class="project-text-design">
+                            {{ generalLocales.designLabel }}: {{ projectLocales.designDesc }}
+                        </p>
+                        <p class="project-text-front-end">
+                            {{ generalLocales.frontEndLabel }}: {{ projectLocales.frontEndDesc }}
+                        </p>
+                        <p class="project-text-back-end">
+                            {{ generalLocales.backEndLabel }}: {{ projectLocales.backEndDesc }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ExternalLink>
+</template>
 
 <style lang="scss" scoped>
     .project {

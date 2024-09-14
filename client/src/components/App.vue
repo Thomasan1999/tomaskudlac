@@ -1,11 +1,3 @@
-<template>
-    <RouterView
-        v-if="initialized"
-        :style="`--scrollbar-width: ${scrollbarWidth}px; --vh: ${windowHeight / 100}px`"
-    />
-    <ToastContainer />
-</template>
-
 <script lang="ts" setup>
     import useStore from '@/store';
     import { computed, ref } from 'vue';
@@ -23,6 +15,14 @@
 
     const windowHeight = computed(() => store.windowHeight);
 </script>
+
+<template>
+    <RouterView
+        v-if="initialized"
+        :style="`--scrollbar-width: ${scrollbarWidth}px; --vh: ${windowHeight / 100}px`"
+    />
+    <ToastContainer />
+</template>
 
 <style lang="scss">
     @import url('https://fonts.googleapis.com/css?family=Raleway:300,400,500,700|Montserrat&display=swap');

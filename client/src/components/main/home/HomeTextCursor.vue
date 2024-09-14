@@ -1,3 +1,9 @@
+<script lang="ts" setup>
+    defineProps<{
+        blinking: boolean;
+    }>();
+</script>
+
 <template>
     <span
         data-testid="cursor"
@@ -5,9 +11,3 @@
         :class="{ 'animate-blinking': blinking }"
     />
 </template>
-
-<script lang="ts" setup>
-    defineProps<{
-        blinking: boolean;
-    }>();
-</script>

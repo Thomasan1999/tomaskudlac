@@ -1,3 +1,16 @@
+<script lang="ts" setup>
+    import { computed } from 'vue';
+    import useStore from '@/store';
+    import skLocales from '@/locales/sk';
+    import CloseIcon from '@/components/main/CloseIcon.vue';
+
+    defineEmits<{ (event: 'close'): void }>();
+
+    const store = useStore();
+
+    const locales = computed(() => (store.locales as typeof skLocales).cookies);
+</script>
+
 <template>
     <Teleport to="#modal-container">
         <div class="cookies-modal">
@@ -28,19 +41,6 @@
         </div>
     </Teleport>
 </template>
-
-<script lang="ts" setup>
-    import { computed } from 'vue';
-    import useStore from '@/store';
-    import skLocales from '@/locales/sk';
-    import CloseIcon from '@/components/main/CloseIcon.vue';
-
-    defineEmits<{ (event: 'close'): void }>();
-
-    const store = useStore();
-
-    const locales = computed(() => (store.locales as typeof skLocales).cookies);
-</script>
 
 <style lang="scss" scoped>
     .cookies-modal {

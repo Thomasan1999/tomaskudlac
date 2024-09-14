@@ -9,9 +9,9 @@ export default tsEslint.config(
             parserOptions: {
                 parser: tsEslint.parser,
                 ecmaVersion: 2020,
-                sourceType: 'module',
-            },
-        },
+                sourceType: 'module'
+            }
+        }
     },
     {
         rules: {
@@ -48,11 +48,12 @@ export default tsEslint.config(
                 {
                     anonymous: 'always',
                     asyncArrow: 'always',
-                    named: 'never',
-                },
+                    named: 'never'
+                }
             ],
             '@typescript-eslint/no-unused-vars': ['error'],
-        },
+            'vue/block-order': ['error', { order: ['script', 'template', 'style'] }]
+        }
     },
     {
         files: ['**/*.vue'],
@@ -60,7 +61,7 @@ export default tsEslint.config(
             'vue/attribute-hyphenation': ['error', 'never'],
             'vue/component-name-in-template-casing': ['error', 'PascalCase', { registeredComponentsOnly: false }],
             'vue/prefer-true-attribute-shorthand': ['error', 'always'],
-            'vue/experimental-script-setup-vars': 'off',
-        },
-    },
+            'vue/experimental-script-setup-vars': 'off'
+        }
+    }
 );

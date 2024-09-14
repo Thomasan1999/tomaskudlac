@@ -1,3 +1,10 @@
+<script lang="ts" setup>
+    import MainSection from '@/components/main/MainSection.vue';
+    import Project from '@/components/main/projects/Project.vue';
+
+    const projects = ['fifaManiaci', 'simonQ', 'villaRomaine', 'havranPub'];
+</script>
+
 <template>
     <MainSection
         class="projects"
@@ -12,13 +19,6 @@
         </div>
     </MainSection>
 </template>
-
-<script lang="ts" setup>
-    import MainSection from '@/components/main/MainSection.vue';
-    import Project from '@/components/main/projects/Project.vue';
-
-    const projects = ['fifaManiaci', 'simonQ', 'villaRomaine', 'havranPub'];
-</script>
 
 <style lang="scss" scoped>
     .projects {

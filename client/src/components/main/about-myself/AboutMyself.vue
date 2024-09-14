@@ -1,3 +1,15 @@
+<script lang="ts" setup>
+    import MainSection from '@/components/main/MainSection.vue';
+    import AboutMyselfColumn from '@/components/main/about-myself/AboutMyselfColumn.vue';
+    import { computed } from 'vue';
+    import useStore from '@/store';
+    import AboutMyselfPhotoContainer from '@/components/main/about-myself/AboutMyselfPhotoContainer.vue';
+
+    const store = useStore();
+
+    const locales = computed(() => store.locales.sections.aboutMyself);
+</script>
+
 <template>
     <MainSection
         class="about-myself"
@@ -19,18 +31,6 @@
         </div>
     </MainSection>
 </template>
-
-<script lang="ts" setup>
-    import MainSection from '@/components/main/MainSection.vue';
-    import AboutMyselfColumn from '@/components/main/about-myself/AboutMyselfColumn.vue';
-    import { computed } from 'vue';
-    import useStore from '@/store';
-    import AboutMyselfPhotoContainer from '@/components/main/about-myself/AboutMyselfPhotoContainer.vue';
-
-    const store = useStore();
-
-    const locales = computed(() => store.locales.sections.aboutMyself);
-</script>
 
 <style lang="scss" scoped>
     .about-myself {
