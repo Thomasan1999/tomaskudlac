@@ -72,9 +72,9 @@
 
 <template>
     <nav
+        ref="root"
         class="navbar"
         :class="{ opened }"
-        ref="root"
         :style="`--navbar-max-height: ${maxHeight}`"
     >
         <div class="navbar-part navbar-left-part navbar-outer-part">
@@ -90,9 +90,9 @@
         </div>
         <div class="navbar-part navbar-middle-part">
             <NavbarLink
-                class="navbar-middle-link"
                 v-for="[name, section] in sections"
                 :key="name"
+                class="navbar-middle-link"
                 :active="name === activeSection"
                 data-testid="section-link"
                 routerLink

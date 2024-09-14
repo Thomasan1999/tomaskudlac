@@ -99,8 +99,8 @@
 
 <template>
     <div
-        class="main"
         ref="root"
+        class="main"
         :style="`--navbar-height: ${navbarHeight}px`"
     >
         <Navbar
@@ -111,11 +111,11 @@
         />
         <div class="main-section-container">
             <Component
+                :is="components[sectionData.componentName]"
                 v-for="[sectionName, sectionData] in sections"
                 :key="sectionName"
-                :is="components[sectionData.componentName]"
-                :name="sectionName"
                 :ref="(component) => (sectionElements[sectionName] = component.$el)"
+                :name="sectionName"
             />
         </div>
         <FooterComponent />
