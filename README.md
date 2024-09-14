@@ -41,7 +41,7 @@ This portfolio is structured into two semi-independent projects, located in the 
 │   └── workflows        # GitHub workflows
 ├── .husky               # Contains Husky scripts
 │   ├── commit-msg       # Lints commit messages
-│   └── pre-commit       # Validates code to be committed
+│   └── pre-push         # Validates code to be pushed
 ├── client               # Front-end (Vue application)
 ├── server               # Back-end, not published for security reasons
 ├── .gitignore           # Files ignored by Git
