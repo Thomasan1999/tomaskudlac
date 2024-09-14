@@ -8,6 +8,7 @@
         "lint": "cd client && npm run lint",
         "prepare": "husky",
         "postinstall": "cd client && npm i",
+        "test:coverage": "cd client && npm run test:coverage",
         "test:run": "cd client && npm run test:run",
         "test:watch": "cd client && npm run test:watch",
         "type-check": "cd client && npm run type-check"
