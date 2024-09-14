@@ -1,5 +1,3 @@
-<script lang="ts" setup></script>
-
 <template>
     <a
         class="external-link"
