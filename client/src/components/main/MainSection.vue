@@ -1,11 +1,9 @@
 <script lang="ts" setup>
-    import { computed, ref } from 'vue';
+    import { computed } from 'vue';
     import mainSections from '@/components/main/mainSections';
     import { MainSectionProps } from '@/components/main/types';
 
     const props = withDefaults(defineProps<MainSectionProps>(), { heading: false });
-
-    const root = ref<HTMLDivElement | null>(null);
 
     const activeSection = computed(() => mainSections[props.name]);
 
@@ -18,7 +16,6 @@
     <section
         class="main-section"
         :id="id"
-        ref="root"
     >
         <div class="text-content">
             <h2

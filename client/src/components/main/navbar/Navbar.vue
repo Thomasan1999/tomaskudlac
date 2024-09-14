@@ -1,6 +1,6 @@
 <script lang="ts" setup>
     import NavbarLink from '@/components/main/navbar/NavbarLink.vue';
-    import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
+    import { computed, onBeforeUnmount, onMounted, ref, useTemplateRef } from 'vue';
     import useStore from '@/store';
     import NavbarSocialNetwork from '@/components/main/navbar/NavbarSocialNetwork.vue';
     import NavbarIcon from '@/components/main/navbar/NavbarIcon.vue';
@@ -31,7 +31,7 @@
 
     const opened = ref(false);
 
-    const root = ref<HTMLDivElement | null>(null);
+    const root = useTemplateRef('root');
 
     const socialNetworks: NavbarSocialNetworkProps[] = [
         {

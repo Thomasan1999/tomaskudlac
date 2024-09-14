@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
+    import { computed, onBeforeUnmount, onMounted, ref, useTemplateRef, watch } from 'vue';
     import useStore from '@/store';
     import { kebabCase } from 'lodash';
     import ExternalLink from '@/components/ExternalLink.vue';
@@ -19,7 +19,7 @@
 
     const textHoverHeight = ref(0);
 
-    const textContent = ref<HTMLDivElement | null>(null);
+    const textContent = useTemplateRef('textContent');
 
     const backgroundImage = computed(() => `url(/images/${kebabCase(props.name)}.${store.imageFormat})`);
 
