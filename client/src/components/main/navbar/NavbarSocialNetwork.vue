@@ -1,16 +1,3 @@
-<template>
-    <NavbarLink
-        position="right"
-        :title="title"
-        :to="to"
-    >
-        <FontAwesomeIcon
-            class="navbar-social-network"
-            :icon="icon"
-        />
-    </NavbarLink>
-</template>
-
 <script lang="ts" setup>
     import { library } from '@fortawesome/fontawesome-svg-core';
     import { faEnvelope, faTimes } from '@fortawesome/free-solid-svg-icons';
@@ -28,6 +15,19 @@
 
     defineProps<NavbarSocialNetworkProps>();
 </script>
+
+<template>
+    <NavbarLink
+        position="right"
+        :title="title"
+        :to="to"
+    >
+        <FontAwesomeIcon
+            class="navbar-social-network"
+            :icon="icon"
+        />
+    </NavbarLink>
+</template>
 
 <style lang="scss" scoped>
     .navbar-social-network {

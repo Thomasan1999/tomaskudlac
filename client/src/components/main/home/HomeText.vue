@@ -1,29 +1,3 @@
-<template>
-    <p class="home-text">
-        <span>{{ locales.welcome }}</span>
-        <span
-            class="home-programming-language"
-            data-testid="programming-language"
-        >
-            <span
-                class="home-programming-language-non-marked"
-                data-testid="non-marked-text"
-            >
-                <HomeTextProgrammingLanguage :programmingLanguage="nonMarkedText" />
-            </span>
-            <mark
-                class="home-programming-language-marked"
-                data-testid="marked-text"
-            >
-                <HomeTextProgrammingLanguage :programmingLanguage="markedText" />
-            </mark>
-        </span>
-        <HomeTextCursor :blinking="cursorIsBlinking" />
-        <span>{{ ' ' }}</span>
-        <span data-testid="locales">{{ locales.developer }}.</span>
-    </p>
-</template>
-
 <script lang="ts" setup>
     import { computed, ref, watch } from 'vue';
     import useStore from '@/store';
@@ -229,6 +203,32 @@
         },
     );
 </script>
+
+<template>
+    <p class="home-text">
+        <span>{{ locales.welcome }}</span>
+        <span
+            class="home-programming-language"
+            data-testid="programming-language"
+        >
+            <span
+                class="home-programming-language-non-marked"
+                data-testid="non-marked-text"
+            >
+                <HomeTextProgrammingLanguage :programmingLanguage="nonMarkedText" />
+            </span>
+            <mark
+                class="home-programming-language-marked"
+                data-testid="marked-text"
+            >
+                <HomeTextProgrammingLanguage :programmingLanguage="markedText" />
+            </mark>
+        </span>
+        <HomeTextCursor :blinking="cursorIsBlinking" />
+        <span>{{ ' ' }}</span>
+        <span data-testid="locales">{{ locales.developer }}.</span>
+    </p>
+</template>
 
 <style lang="scss" scoped>
     .home-text {

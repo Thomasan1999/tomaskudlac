@@ -1,12 +1,3 @@
-<template>
-    <div
-        class="contact-form-field-error"
-        v-if="error"
-    >
-        <div class="contact-form-field-error-message">{{ message }}</div>
-    </div>
-</template>
-
 <script lang="ts" setup>
     import { computed } from 'vue';
     import useStore from '@/store';
@@ -20,6 +11,15 @@
 
     const message = computed(() => locales.value[props.error!]);
 </script>
+
+<template>
+    <div
+        class="contact-form-field-error"
+        v-if="error"
+    >
+        <div class="contact-form-field-error-message">{{ message }}</div>
+    </div>
+</template>
 
 <style lang="scss" scoped>
     .contact-form-field-error {

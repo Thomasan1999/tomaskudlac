@@ -1,8 +1,3 @@
-<template>
-    <span class="home-programming-language-an-prefix">{{ anPrefix }}</span>
-    <span class="home-programming-language-base">{{ base }}</span>
-</template>
-
 <script lang="ts" setup>
     import { computed } from 'vue';
     import { HomeTextProgrammingLanguageProps } from '@/components/main/home/types';
@@ -21,6 +16,11 @@
         anPrefix.value.length ? props.programmingLanguage.slice(1) : props.programmingLanguage,
     );
 </script>
+
+<template>
+    <span class="home-programming-language-an-prefix">{{ anPrefix }}</span>
+    <span class="home-programming-language-base">{{ base }}</span>
+</template>
 
 <style lang="scss" scoped>
     .home-programming-language-base {

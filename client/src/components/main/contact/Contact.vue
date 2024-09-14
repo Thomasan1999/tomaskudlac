@@ -1,20 +1,3 @@
-<template>
-    <MainSection
-        class="contact"
-        heading
-        name="contact"
-    >
-        <div class="text-content">
-            <div
-                class="contact-brief-text"
-                data-testid="brief-text"
-                v-html="briefText"
-            />
-            <ContactForm />
-        </div>
-    </MainSection>
-</template>
-
 <script lang="ts" setup>
     import MainSection from '@/components/main/MainSection.vue';
     import useStore from '@/store';
@@ -34,6 +17,23 @@
         );
     });
 </script>
+
+<template>
+    <MainSection
+        class="contact"
+        heading
+        name="contact"
+    >
+        <div class="text-content">
+            <div
+                class="contact-brief-text"
+                data-testid="brief-text"
+                v-html="briefText"
+            />
+            <ContactForm />
+        </div>
+    </MainSection>
+</template>
 
 <style lang="scss" scoped>
     .contact {

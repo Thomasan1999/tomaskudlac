@@ -1,62 +1,3 @@
-<template>
-    <nav
-        class="navbar"
-        :class="{ opened }"
-        ref="root"
-        :style="`--navbar-max-height: ${maxHeight}`"
-    >
-        <div class="navbar-part navbar-left-part navbar-outer-part">
-            <NavbarLink
-                class="navbar-left-link navbar-logo"
-                data-testid="logo"
-                routerLink
-                replace
-                title="Tomáš Kudláč"
-                to="home"
-                @click="$emit('linkClick', 'home')"
-            />
-        </div>
-        <div class="navbar-part navbar-middle-part">
-            <NavbarLink
-                class="navbar-middle-link"
-                v-for="[name, section] in sections"
-                :key="name"
-                :active="name === activeSection"
-                data-testid="section-link"
-                routerLink
-                replace
-                :title="section.title"
-                :to="name"
-                @click="onLinkClick(name)"
-            />
-        </div>
-        <div class="navbar-part navbar-right-part navbar-outer-part">
-            <div class="navbar-other-lang-container">
-                <NavbarLink
-                    class="navbar-other-lang"
-                    data-testid="navbar-other-lang"
-                    routerLink
-                    :text="locales.otherLangCode"
-                    :title="locales.otherLangLinkTitle"
-                    :to="locales.otherLangHref"
-                    @click="$emit('languageToggle')"
-                />
-                <NavbarIcon
-                    v-if="touchscreen"
-                    :mode="opened ? 'cross' : 'bars'"
-                    @click="opened = !opened"
-                />
-            </div>
-            <div class="navbar-social-network-container">
-                <NavbarSocialNetwork
-                    v-for="socialNetwork in socialNetworks"
-                    v-bind="socialNetwork"
-                />
-            </div>
-        </div>
-    </nav>
-</template>
-
 <script lang="ts" setup>
     import NavbarLink from '@/components/main/navbar/NavbarLink.vue';
     import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
@@ -128,6 +69,65 @@
         window.removeEventListener('resize', onResize);
     });
 </script>
+
+<template>
+    <nav
+        class="navbar"
+        :class="{ opened }"
+        ref="root"
+        :style="`--navbar-max-height: ${maxHeight}`"
+    >
+        <div class="navbar-part navbar-left-part navbar-outer-part">
+            <NavbarLink
+                class="navbar-left-link navbar-logo"
+                data-testid="logo"
+                routerLink
+                replace
+                title="Tomáš Kudláč"
+                to="home"
+                @click="$emit('linkClick', 'home')"
+            />
+        </div>
+        <div class="navbar-part navbar-middle-part">
+            <NavbarLink
+                class="navbar-middle-link"
+                v-for="[name, section] in sections"
+                :key="name"
+                :active="name === activeSection"
+                data-testid="section-link"
+                routerLink
+                replace
+                :title="section.title"
+                :to="name"
+                @click="onLinkClick(name)"
+            />
+        </div>
+        <div class="navbar-part navbar-right-part navbar-outer-part">
+            <div class="navbar-other-lang-container">
+                <NavbarLink
+                    class="navbar-other-lang"
+                    data-testid="navbar-other-lang"
+                    routerLink
+                    :text="locales.otherLangCode"
+                    :title="locales.otherLangLinkTitle"
+                    :to="locales.otherLangHref"
+                    @click="$emit('languageToggle')"
+                />
+                <NavbarIcon
+                    v-if="touchscreen"
+                    :mode="opened ? 'cross' : 'bars'"
+                    @click="opened = !opened"
+                />
+            </div>
+            <div class="navbar-social-network-container">
+                <NavbarSocialNetwork
+                    v-for="socialNetwork in socialNetworks"
+                    v-bind="socialNetwork"
+                />
+            </div>
+        </div>
+    </nav>
+</template>
 
 <style lang="scss" scoped>
     .navbar {

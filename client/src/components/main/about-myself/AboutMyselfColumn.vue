@@ -1,19 +1,3 @@
-<template>
-    <div class="about-myself-column">
-        <h3
-            class="about-myself-column-title"
-            data-testid="title"
-        >
-            {{ title }}
-        </h3>
-        <p
-            class="about-myself-column-text"
-            data-testid="text"
-            v-html="text"
-        />
-    </div>
-</template>
-
 <script lang="ts" setup>
     import { computed } from 'vue';
     import useStore from '@/store';
@@ -30,6 +14,22 @@
             .replace(/{{programmingLanguages}}/, store.programmingLanguagesString),
     );
 </script>
+
+<template>
+    <div class="about-myself-column">
+        <h3
+            class="about-myself-column-title"
+            data-testid="title"
+        >
+            {{ title }}
+        </h3>
+        <p
+            class="about-myself-column-text"
+            data-testid="text"
+            v-html="text"
+        />
+    </div>
+</template>
 
 <style lang="scss" scoped>
     .about-myself-column {

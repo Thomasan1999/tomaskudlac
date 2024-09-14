@@ -1,29 +1,3 @@
-<template>
-    <div
-        class="main"
-        ref="root"
-        :style="`--navbar-height: ${navbarHeight}px`"
-    >
-        <Navbar
-            v-if="activeSection"
-            :activeSection="activeSection"
-            :sections="sections"
-            @linkClick="onLinkClick"
-        />
-        <div class="main-section-container">
-            <Component
-                v-for="[sectionName, sectionData] in sections"
-                :key="sectionName"
-                :is="components[sectionData.componentName]"
-                :name="sectionName"
-                :ref="(component) => (sectionElements[sectionName] = component.$el)"
-            />
-        </div>
-        <FooterComponent />
-        <div id="modal-container" />
-    </div>
-</template>
-
 <script lang="ts" setup>
     import Navbar from '@/components/main/navbar/Navbar.vue';
     import mainSections from '@/components/main/mainSections';
@@ -122,6 +96,32 @@
         root.value!.removeEventListener('scroll', onScroll);
     });
 </script>
+
+<template>
+    <div
+        class="main"
+        ref="root"
+        :style="`--navbar-height: ${navbarHeight}px`"
+    >
+        <Navbar
+            v-if="activeSection"
+            :activeSection="activeSection"
+            :sections="sections"
+            @linkClick="onLinkClick"
+        />
+        <div class="main-section-container">
+            <Component
+                v-for="[sectionName, sectionData] in sections"
+                :key="sectionName"
+                :is="components[sectionData.componentName]"
+                :name="sectionName"
+                :ref="(component) => (sectionElements[sectionName] = component.$el)"
+            />
+        </div>
+        <FooterComponent />
+        <div id="modal-container" />
+    </div>
+</template>
 
 <style lang="scss" scoped>
     .main {

@@ -1,16 +1,3 @@
-<template>
-    <Component
-        :is="routerLink ? 'router-link' : ExternalLink"
-        class="navbar-link"
-        :class="[$attrs.class, { active }]"
-        :title="title"
-        v-bind="dynamicProps"
-        @click="onClick"
-    >
-        <slot>{{ text ?? title }}</slot>
-    </Component>
-</template>
-
 <script lang="ts" setup>
     import mainSections from '@/components/main/mainSections';
     import { computed } from 'vue';
@@ -38,6 +25,19 @@
 
     const to = computed(() => mainSections[props.to]?.url ?? props.to);
 </script>
+
+<template>
+    <Component
+        :is="routerLink ? 'router-link' : ExternalLink"
+        class="navbar-link"
+        :class="[$attrs.class, { active }]"
+        :title="title"
+        v-bind="dynamicProps"
+        @click="onClick"
+    >
+        <slot>{{ text ?? title }}</slot>
+    </Component>
+</template>
 
 <style lang="scss" scoped>
     .navbar-link {

@@ -1,31 +1,3 @@
-<template>
-    <form
-        class="contact-form -ml-label"
-        action="/contact-form/send-mail"
-        method="post"
-        ref="root"
-        @submit.prevent="onSubmit"
-    >
-        <ContactFormField
-            v-for="field in fields"
-            :label="locales[field.name]"
-            v-bind="field"
-            v-model="field.value"
-            @blur="field.touched = true"
-            @validSet="(newValue) => onValidSet(field, newValue)"
-        />
-        <input
-            hidden
-            name="lang"
-            :value="language"
-        />
-        <ContactFormBottomPart
-            :formValid="valid"
-            :submitDisabled="submitDisabled"
-        />
-    </form>
-</template>
-
 <script lang="ts" setup>
     import { computed, ref } from 'vue';
     import useStore from '@/store';
@@ -93,6 +65,34 @@
 
     const valid = computed(() => fields.every((field) => field.valid));
 </script>
+
+<template>
+    <form
+        class="contact-form -ml-label"
+        action="/contact-form/send-mail"
+        method="post"
+        ref="root"
+        @submit.prevent="onSubmit"
+    >
+        <ContactFormField
+            v-for="field in fields"
+            :label="locales[field.name]"
+            v-bind="field"
+            v-model="field.value"
+            @blur="field.touched = true"
+            @validSet="(newValue) => onValidSet(field, newValue)"
+        />
+        <input
+            hidden
+            name="lang"
+            :value="language"
+        />
+        <ContactFormBottomPart
+            :formValid="valid"
+            :submitDisabled="submitDisabled"
+        />
+    </form>
+</template>
 
 <style lang="scss" scoped>
     .contact-form {

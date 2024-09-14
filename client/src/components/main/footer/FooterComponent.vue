@@ -1,3 +1,20 @@
+<script lang="ts" setup>
+    import { computed, defineAsyncComponent, ref } from 'vue';
+    import useStore from '@/store';
+    import ExternalLink from '@/components/ExternalLink.vue';
+    import { SiteLanguage } from '@/store/types';
+
+    const CookiesModal = defineAsyncComponent({ loader: () => import('./CookiesModal.vue') });
+
+    const store = useStore();
+
+    const showCookies = ref(false);
+
+    const language = computed(() => store.language);
+
+    const locales = computed(() => store.locales.footer);
+</script>
+
 <template>
     <section class="footer-component">
         <footer class="footer">
@@ -30,23 +47,6 @@
         />
     </section>
 </template>
-
-<script lang="ts" setup>
-    import { computed, defineAsyncComponent, ref } from 'vue';
-    import useStore from '@/store';
-    import ExternalLink from '@/components/ExternalLink.vue';
-    import { SiteLanguage } from '@/store/types';
-
-    const CookiesModal = defineAsyncComponent({ loader: () => import('./CookiesModal.vue') });
-
-    const store = useStore();
-
-    const showCookies = ref(false);
-
-    const language = computed(() => store.language);
-
-    const locales = computed(() => store.locales.footer);
-</script>
 
 <style lang="scss" scoped>
     .footer-component {

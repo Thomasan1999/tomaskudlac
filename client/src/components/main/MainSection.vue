@@ -1,3 +1,19 @@
+<script lang="ts" setup>
+    import { computed, ref } from 'vue';
+    import mainSections from '@/components/main/mainSections';
+    import { MainSectionProps } from '@/components/main/types';
+
+    const props = withDefaults(defineProps<MainSectionProps>(), { heading: false });
+
+    const root = ref<HTMLDivElement | null>(null);
+
+    const activeSection = computed(() => mainSections[props.name]);
+
+    const id = computed(() => activeSection.value.id);
+
+    const title = computed(() => activeSection.value.title);
+</script>
+
 <template>
     <section
         class="main-section"
@@ -15,22 +31,6 @@
         <slot />
     </section>
 </template>
-
-<script lang="ts" setup>
-    import { computed, ref } from 'vue';
-    import mainSections from '@/components/main/mainSections';
-    import { MainSectionProps } from '@/components/main/types';
-
-    const props = withDefaults(defineProps<MainSectionProps>(), { heading: false });
-
-    const root = ref<HTMLDivElement | null>(null);
-
-    const activeSection = computed(() => mainSections[props.name]);
-
-    const id = computed(() => activeSection.value.id);
-
-    const title = computed(() => activeSection.value.title);
-</script>
 
 <style lang="scss" scoped>
     .main-section {

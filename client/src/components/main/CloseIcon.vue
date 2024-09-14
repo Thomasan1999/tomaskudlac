@@ -1,3 +1,5 @@
+<script lang="ts" setup></script>
+
 <template>
     <svg
         class="close-icon"
@@ -14,8 +16,6 @@
         </g>
     </svg>
 </template>
-
-<script lang="ts" setup></script>
 
 <style lang="scss" scoped>
     .close-icon {

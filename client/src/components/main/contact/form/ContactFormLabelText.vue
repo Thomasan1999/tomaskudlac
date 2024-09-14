@@ -1,3 +1,15 @@
+<script lang="ts" setup>
+    import { computed } from 'vue';
+    import useStore from '@/store';
+    import { ContactFormLabelTextProps } from '@/components/main/contact/form/types';
+
+    const store = useStore();
+
+    defineProps<ContactFormLabelTextProps>();
+
+    const locales = computed(() => store.locales.sections.contact.form);
+</script>
+
 <template>
     <span
         data-testid="label-text"
@@ -13,15 +25,3 @@
         >
     </span>
 </template>
-
-<script lang="ts" setup>
-    import { computed } from 'vue';
-    import useStore from '@/store';
-    import { ContactFormLabelTextProps } from '@/components/main/contact/form/types';
-
-    const store = useStore();
-
-    defineProps<ContactFormLabelTextProps>();
-
-    const locales = computed(() => store.locales.sections.contact.form);
-</script>
