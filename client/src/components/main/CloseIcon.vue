@@ -1,5 +1,3 @@
-<script lang="ts" setup></script>
-
 <template>
     <svg
         class="close-icon"

@@ -52,7 +52,8 @@ export default tsEslint.config(
                 }
             ],
             '@typescript-eslint/no-unused-vars': ['error'],
-            'vue/block-order': ['error', { order: ['script', 'template', 'style'] }]
+            'vue/block-order': ['error', { order: ['script', 'template', 'style'] }],
+            'vue/no-empty-component-block': 'error'
         }
     },
     {
