@@ -18,13 +18,9 @@
                 <HomeTextProgrammingLanguage :programmingLanguage="markedText" />
             </mark>
         </span>
-        <span
-            class="home-text-cursor"
-            :class="{ blinking: cursorIsBlinking }"
-            data-testid="cursor"
-        />
+        <HomeTextCursor :blinking="cursorIsBlinking" />
         <span>{{ ' ' }}</span>
-        <span>{{ locales.developer }}.</span>
+        <span data-testid="locales">{{ locales.developer }}.</span>
     </p>
 </template>
 
@@ -37,6 +33,7 @@
     import HomeTextProgrammingLanguage from '@/components/main/home/HomeTextProgrammingLanguage.vue';
     import { ProgrammingLanguage } from '@/store/ProgrammingLanguage';
     import { SiteLanguage } from '@/store/types';
+    import HomeTextCursor from '@/components/main/home/HomeTextCursor.vue';
 
     const store = useStore();
 
@@ -250,27 +247,6 @@
 
         @media (max-width: 767px) {
             font-size: 9vw;
-        }
-    }
-
-    .home-text-cursor {
-        background-color: currentColor;
-        display: inline-flex;
-        height: var(--home-text-line-height);
-        width: 2px;
-
-        &.blinking {
-            animation: blinking 1.06s infinite step-end;
-        }
-
-        @keyframes blinking {
-            0% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0;
-            }
         }
     }
 </style>

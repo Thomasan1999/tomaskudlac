@@ -9,8 +9,9 @@ import _ from 'lodash';
 import { ExistingDomWrapper } from '@/types/tests';
 import { buildCreateWrapper, getTestingSelector } from '@/utils/test';
 import { MockInstance } from 'vitest';
+import HomeTextCursor from '@/components/main/home/HomeTextCursor.vue';
 
-const CURSOR_SELECTOR = getTestingSelector('cursor');
+const LOCALES_SELECTOR = getTestingSelector('locales');
 const MARKED_TEXT_SELECTOR = getTestingSelector('marked-text');
 const NON_MARKED_TEXT_SELECTOR = getTestingSelector('non-marked-text');
 const PROGRAMMING_LANGUAGE_SELECTOR = getTestingSelector('programming-language');
@@ -111,6 +112,17 @@ describe('HomeText', () => {
         }
     }
 
+    describe('structure', () => {
+        it('displays correct structure', () => {
+            const wrapper = createWrapper();
+
+            expect(wrapper.find(LOCALES_SELECTOR).exists()).toBe(true);
+            expect(wrapper.find(NON_MARKED_TEXT_SELECTOR).exists()).toBe(true);
+            expect(wrapper.find(MARKED_TEXT_SELECTOR).exists()).toBe(true);
+            expect(wrapper.findComponent(HomeTextCursor).exists()).toBe(true);
+        });
+    });
+
     describe('site language change', () => {
         it("instantly toggles 'an' prefix", async () => {
             function expectLanguageToBePrefixed(languageElement: ExistingDomWrapper<Element>, value: boolean): void {
@@ -180,21 +192,15 @@ describe('HomeText', () => {
     });
 
     describe('cursor', () => {
-        function getCursorElement(wrapper: VueWrapper) {
-            return wrapper.get<HTMLSpanElement>(CURSOR_SELECTOR);
-        }
-
         it('stops blinking on text removing', async () => {
             const wrapper = createWrapper();
 
             const markedTextElement = getMarkedTextElement(wrapper);
 
-            const cursorElement = getCursorElement(wrapper);
-
             await awaitLanguageMarkingStart(markedTextElement);
             await awaitTextRemovingStart(markedTextElement);
 
-            expect(cursorElement.classes()).not.toContain('blinking');
+            expect(wrapper.findComponent(HomeTextCursor).props('blinking')).toBe(false);
         });
 
         it('stops blinking on text writing', async () => {
@@ -202,13 +208,11 @@ describe('HomeText', () => {
 
             const markedTextElement = getMarkedTextElement(wrapper);
 
-            const cursorElement = getCursorElement(wrapper);
-
             await awaitLanguageMarkingStart(markedTextElement);
             await awaitTextRemovingStart(markedTextElement);
             await awaitNewLanguageWritingStart(markedTextElement);
 
-            expect(cursorElement.classes()).not.toContain('blinking');
+            expect(wrapper.findComponent(HomeTextCursor).props('blinking')).toBe(false);
         });
 
         it('stops blinking on text marking', async () => {
@@ -216,11 +220,9 @@ describe('HomeText', () => {
 
             const markedTextElement = getMarkedTextElement(wrapper);
 
-            const cursorElement = getCursorElement(wrapper);
-
             await awaitLanguageMarkingStart(markedTextElement);
 
-            expect(cursorElement.classes()).not.toContain('blinking');
+            expect(wrapper.findComponent(HomeTextCursor).props('blinking')).toBe(false);
         });
 
         it('starts blinking on written text idle', async () => {
@@ -229,15 +231,13 @@ describe('HomeText', () => {
             const markedTextElement = getMarkedTextElement(wrapper);
             const nonMarkedTextElement = getNonMarkedTextElement(wrapper);
 
-            const cursorElement = getCursorElement(wrapper);
-
-            expect(cursorElement.classes()).toContain('blinking');
+            expect(wrapper.findComponent(HomeTextCursor).props('blinking')).toBe(true);
 
             await awaitLanguageMarkingStart(markedTextElement);
             await awaitTextRemovingStart(markedTextElement);
             await awaitNewLanguageWritingEnd(nonMarkedTextElement);
 
-            expect(cursorElement.classes()).not.toContain('blinking');
+            expect(wrapper.findComponent(HomeTextCursor).props('blinking')).toBe(false);
         });
     });
 });
