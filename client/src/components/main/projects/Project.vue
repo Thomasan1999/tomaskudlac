@@ -63,9 +63,9 @@
                     :style="`--hover-height: ${textHoverHeight}px`"
                 >
                     <div
+                        ref="textContent"
                         class="project-text-content"
                         data-testid="text-content"
-                        ref="textContent"
                     >
                         <h4 class="project-what-ive-done">{{ generalLocales.whatIveDone }}:</h4>
                         <p class="project-text-design">

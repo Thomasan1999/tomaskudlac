@@ -68,17 +68,17 @@
 
 <template>
     <form
+        ref="root"
         class="contact-form -ml-label"
         action="/contact-form/send-mail"
         method="post"
-        ref="root"
         @submit.prevent="onSubmit"
     >
         <ContactFormField
             v-for="field in fields"
-            :label="locales[field.name]"
             v-bind="field"
             v-model="field.value"
+            :label="locales[field.name]"
             @blur="field.touched = true"
             @validSet="(newValue) => onValidSet(field, newValue)"
         />

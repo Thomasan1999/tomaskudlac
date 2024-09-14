@@ -14,13 +14,13 @@
 
 <template>
     <section
-        class="main-section"
         :id="id"
+        class="main-section"
     >
         <div class="text-content">
             <h2
-                class="main-section-name"
                 v-if="heading"
+                class="main-section-name"
             >
                 {{ title }}
             </h2>

@@ -14,8 +14,8 @@
 
 <template>
     <div
-        class="contact-form-field-error"
         v-if="error"
+        class="contact-form-field-error"
     >
         <div class="contact-form-field-error-message">{{ message }}</div>
     </div>

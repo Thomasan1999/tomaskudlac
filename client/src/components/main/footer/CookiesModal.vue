@@ -30,8 +30,8 @@
                 </button>
                 <div class="cookies-modal-paragraph-container">
                     <div
-                        class="cookies-modal-paragraph"
                         v-for="paragraph in locales.paragraphs"
+                        class="cookies-modal-paragraph"
                     >
                         <h3 class="cookies-modal-paragraph-heading">{{ paragraph.title }}</h3>
                         <p class="cookies-modal-paragraph-text">{{ paragraph.text }}</p>
