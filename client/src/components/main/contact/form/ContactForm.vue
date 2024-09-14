@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import { computed, ref } from 'vue';
+    import { computed, useTemplateRef } from 'vue';
     import useStore from '@/store';
     import ContactFormField from '@/components/main/contact/form/ContactFormField.vue';
     import contactFormFields from '@/components/main/contact/form/contactFormFields';
@@ -53,7 +53,7 @@
 
     const fields = contactFormFields;
 
-    const root = ref<HTMLFormElement>();
+    const root = useTemplateRef('root');
 
     const submitDisabled = computed(() => touched.value && !valid.value);
 

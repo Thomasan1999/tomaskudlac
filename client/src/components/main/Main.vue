@@ -1,7 +1,7 @@
 <script lang="ts" setup>
     import Navbar from '@/components/main/navbar/Navbar.vue';
     import mainSections from '@/components/main/mainSections';
-    import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
+    import { computed, onBeforeUnmount, onMounted, ref, useTemplateRef, watch } from 'vue';
     import router from '@/router';
     import AboutMyself from '@/components/main/about-myself/AboutMyself.vue';
     import Projects from '@/components/main/projects/Projects.vue';
@@ -49,7 +49,7 @@
 
     const navigatingTo = ref<string | undefined>();
 
-    const root = ref<HTMLDivElement | null>(null);
+    const root = useTemplateRef('root');
 
     const sectionElements = ref<Record<string, HTMLDivElement>>({});
 
