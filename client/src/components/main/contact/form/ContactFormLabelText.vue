@@ -1,7 +1,7 @@
 <template>
     <span
         data-testid="label-text"
-        class="leading-10 lg:text-right text-left lg:w-label w-full"
+        class="lg:w-label w-full text-left leading-10 lg:text-right"
     >
         {{ text }}:
         <span

@@ -1,5 +1,6 @@
 {
     "endOfLine": "lf",
+    "plugins": ["prettier-plugin-tailwindcss"],
     "printWidth": 120,
     "singleAttributePerLine": true,
     "singleQuote": true,

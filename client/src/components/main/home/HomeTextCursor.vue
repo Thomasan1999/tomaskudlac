@@ -1,7 +1,7 @@
 <template>
     <span
         data-testid="cursor"
-        class="animate-wiggle bg-current h-[1.2em] inline-flex w-0.5"
+        class="animate-wiggle inline-flex h-[1.2em] w-0.5 bg-current"
         :class="{ 'animate-blinking': blinking }"
     />
 </template>
