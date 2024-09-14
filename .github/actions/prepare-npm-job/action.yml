@@ -1,5 +1,4 @@
 name: 'Prepare NPM job'
-shell: 'bash'
 runs:
     using: 'composite'
     steps:
@@ -12,4 +11,5 @@ runs:
                   ${{ runner.os }}-node_modules-
 
         - name: Install dependencies
+          shell: 'bash'
           run: npm ci
