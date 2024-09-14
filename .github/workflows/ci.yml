@@ -108,4 +108,4 @@ jobs:
             - uses: ./.github/actions/prepare-npm-job
 
             - name: Run tests
-              run: npm run test:run
+              run: npm run test:coverage

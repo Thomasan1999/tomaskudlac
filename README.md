@@ -23,6 +23,7 @@ This portfolio is structured into two semi-independent projects, located in the 
 -   `npm run format` - Formats the code using Prettier.
 -   `npm run format:check` - Checks the code formatting with Prettier without modifying it.
 -   `npm run lint` - Lints the code using ESLint.
+-   `npm run test:coverage` - Runs the tests once and shows test code coverage.
 -   `npm run test:run` - Runs the tests once.
 -   `npm run test:watch` - Runs the tests and re-runs them when any test file changes.
 -   `npm run type-check` - Checks the code for type validity.

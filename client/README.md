@@ -19,6 +19,7 @@ Front-end of the portfolio developed by Tomáš Kudláč. You can view the portf
 -   `npm run format:check` - Checks the code format using Prettier without modifying it.
 -   `npm run lint` - Lints the code using ESLint.
 -   `npm run serve` - Compiles and hot-reloads for development.
+-   `npm run test:coverage` - Runs the tests once and shows test code coverage.
 -   `npm run test:run` - Runs the tests once.
 -   `npm run test:watch` - Runs the tests and re-runs them on any test file changes.
 -   `npm run type-check` - Checks the code for type validity.

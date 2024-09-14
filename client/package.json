@@ -8,6 +8,8 @@
         "lint": "eslint",
         "lint:fix": "eslint --fix",
         "serve": "vite",
+        "test:coverage:base": "npm run test:run:base -- --coverage",
+        "test:coverage": "run-p serve test:coverage:base --race",
         "test:run:base": "vitest --run",
         "test:run": "run-p serve test:run:base --race",
         "test:watch:base": "vitest -w",
@@ -34,6 +36,7 @@
         "@typescript-eslint/eslint-plugin": "8.1.0",
         "@typescript-eslint/parser": "8.1.0",
         "@vitejs/plugin-vue": "5.1.2",
+        "@vitest/coverage-v8": "2.1.1",
         "@vue/compiler-sfc": "3.4.38",
         "@vue/language-server": "2.1.6",
         "@vue/test-utils": "2.4.6",
@@ -51,7 +54,7 @@
         "vite-plugin-eslint": "1.8.1",
         "vite-plugin-html": "3.2.2",
         "vite-plugin-pwa": "0.20.1",
-        "vitest": "2.0.5",
+        "vitest": "2.1.1",
         "vue-tsc": "2.0.29"
     }
 }
