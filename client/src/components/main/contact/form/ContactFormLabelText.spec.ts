@@ -5,10 +5,16 @@ import mockInitStore from '@/mocks/mockInitStore';
 const LABEL_TEXT_SELECTOR = getTestingSelector('label-text');
 const REQUIRED_SELECTOR = getTestingSelector('required');
 
-const createWrapper = buildCreateWrapper(ContactFormLabelText, {
-    fieldRequired: false,
-    text: '',
-});
+const createWrapper = buildCreateWrapper(
+    ContactFormLabelText,
+    {
+        fieldRequired: false,
+        text: '',
+    },
+    {
+        attachTo: document.body,
+    },
+);
 
 describe('ContactFormLabelText', () => {
     beforeAll(async () => {
