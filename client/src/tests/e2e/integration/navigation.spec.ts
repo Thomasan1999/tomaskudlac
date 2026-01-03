@@ -7,7 +7,7 @@ const NAVBAR_OTHER_LANG_SELCTOR = getTestingSelector('navbar-other-lang');
 
 describe('navigation', async () => {
     const domChangeTimeout = 500;
-    const browser = await puppeteer.launch({ headless: true });
+    const browser = await puppeteer.launch({ headless: true, args: process.env.CI ? ['--no-sandbox'] : undefined });
     const page = await browser.newPage();
 
     beforeEach(async () => {
