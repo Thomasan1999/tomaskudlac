@@ -28,9 +28,9 @@
         "dayjs": "1.11.12",
         "lodash": "4.17.21",
         "pinia": "2.2.2",
-        "vue": "3.5.5",
-        "vue-gtag": "2.0.1",
-        "vue-router": "4.4.5"
+        "vue": "3.5.26",
+        "vue-gtag": "3.6.3",
+        "vue-router": "4.6.4"
     },
     "devDependencies": {
         "@pinia/testing": "0.1.5",
