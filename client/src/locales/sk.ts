@@ -27,7 +27,7 @@ export default {
     footer: {
         copyrightLinkTitle: 'Zobraziť informácie o tom, čo sú cookies',
         copyrightLinkText: 'cookies',
-        copyrightText: '© 2017 - 2024 Všetky práva vyhradené. Táto stránka používa',
+        copyrightText: '© 2017 - 2026 Všetky práva vyhradené. Táto stránka používa',
     },
     navbar: {
         hide: 'Skryť menu',
