@@ -2,9 +2,9 @@
     "version": "0.0.0",
     "scripts": {
         "build": "vite build --emptyOutDir",
-        "format:base": "prettier . -write",
-        "format": "npm run format:base -- -write",
-        "format:check": "npm runformat:base -- -check",
+        "format:base": "prettier .",
+        "format": "npm run format:base -- --write",
+        "format:check": "npm run format:base -- --check",
         "lint": "eslint",
         "lint:fix": "eslint --fix",
         "serve": "vite",
