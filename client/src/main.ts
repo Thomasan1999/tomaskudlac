@@ -1,12 +1,12 @@
-import VueGtag from 'vue-gtag';
+import { configure as configureVueGtag } from 'vue-gtag';
 import { createPinia } from 'pinia';
 
 import './register-service-worker';
 import router from '@/router';
 import app from '@/app';
 
-app.use(VueGtag, {
-    config: { id: 'UA-96781792-2' },
+configureVueGtag({
+    tagId: 'UA-96781792-2',
 });
 
 app.use(createPinia());
