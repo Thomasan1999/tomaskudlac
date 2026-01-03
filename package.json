@@ -4,7 +4,7 @@
         "build": "cd client && npm run build",
         "format:base": "prettier .",
         "format": "npm run format:base -- --write",
-        "format:check": "npm run format -- --check",
+        "format:check": "npm run format:base -- --check",
         "lint": "cd client && npm run lint",
         "prepare": "husky",
         "postinstall": "cd client && npm i",
