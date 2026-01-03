@@ -2,8 +2,8 @@
 
 Front-end of the portfolio developed by Tomáš Kudláč. You can view the portfolio in:
 
--   [English version](https://tomaskudlac.sk/en?ref=github)
--   [Slovak version](https://tomaskudlac.sk/?ref=github)
+- [English version](https://tomaskudlac.sk/en?ref=github)
+- [Slovak version](https://tomaskudlac.sk/?ref=github)
 
 ## Project Setup
 
@@ -14,32 +14,32 @@ Front-end of the portfolio developed by Tomáš Kudláč. You can view the portf
 
 ### Utility Scripts
 
--   `npm run build` - Builds the code for production.
--   `npm run format` - Formats the code using Prettier.
--   `npm run format:check` - Checks the code format using Prettier without modifying it.
--   `npm run lint` - Lints the code using ESLint.
--   `npm run serve` - Compiles and hot-reloads for development.
--   `npm run test:coverage` - Runs the tests once and shows test code coverage.
--   `npm run test:run` - Runs the tests once.
--   `npm run test:watch` - Runs the tests and re-runs them on any test file changes.
--   `npm run type-check` - Checks the code for type validity.
+- `npm run build` - Builds the code for production.
+- `npm run format` - Formats the code using Prettier.
+- `npm run format:check` - Checks the code format using Prettier without modifying it.
+- `npm run lint` - Lints the code using ESLint.
+- `npm run serve` - Compiles and hot-reloads for development.
+- `npm run test:coverage` - Runs the tests once and shows test code coverage.
+- `npm run test:run` - Runs the tests once.
+- `npm run test:watch` - Runs the tests and re-runs them on any test file changes.
+- `npm run type-check` - Checks the code for type validity.
 
 ## Technologies Used
 
--   Vue 3 - SPA framework
-    -   Composition API
-    -   `<script setup>`
--   Vite - bundles files for development and production
--   Typescript - ensures more safe and readable code
--   Tailwind - scalable and more readable CSS
--   Vue Router - navigation
--   fetch - HTTP requests
--   DayJS - date manipulation
--   Vitest - unit/component tests
--   Puppeteer - E2E tests
--   ESLint - ensures code consistency and prevents bugs
--   Prettier - ensures consistent code formatting
--   vue-tsc - type checking
+- Vue 3 - SPA framework
+    - Composition API
+    - `<script setup>`
+- Vite - bundles files for development and production
+- Typescript - ensures more safe and readable code
+- Tailwind - scalable and more readable CSS
+- Vue Router - navigation
+- fetch - HTTP requests
+- DayJS - date manipulation
+- Vitest - unit/component tests
+- Puppeteer - E2E tests
+- ESLint - ensures code consistency and prevents bugs
+- Prettier - ensures consistent code formatting
+- vue-tsc - type checking
 
 ## Directory Structure
 
