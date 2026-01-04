@@ -100,7 +100,8 @@
 <template>
     <div
         ref="root"
-        class="main"
+        data-testid="main"
+        class="relative box-border h-[calc(100*var(--vh))] overflow-auto"
         :style="`--navbar-height: ${navbarHeight}px`"
     >
         <Navbar
@@ -119,26 +120,9 @@
             />
         </div>
         <FooterComponent />
-        <div id="modal-container" />
+        <div
+            id="modal-container"
+            class="z-100 fixed left-0 top-0 h-0 w-0"
+        />
     </div>
 </template>
-
-<style lang="scss" scoped>
-    .main {
-        --main-row-gap: 50px;
-
-        box-sizing: border-box;
-        height: calc(100 * var(--vh));
-        overflow: auto;
-        position: relative;
-    }
-
-    #modal-container {
-        height: 0;
-        left: 0;
-        position: fixed;
-        top: 0;
-        width: 0;
-        z-index: 100;
-    }
-</style>

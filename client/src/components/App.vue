@@ -135,7 +135,7 @@
         flex-direction: column;
         padding-left: var(--content-padding-horizontal);
         padding-right: var(--content-padding-horizontal);
-        row-gap: var(--main-row-gap);
+        row-gap: theme('spacing.main-row-gap');
     }
 
     a {
