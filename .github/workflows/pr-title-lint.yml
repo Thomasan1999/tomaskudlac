@@ -1,11 +1,11 @@
-name: PR title commitlint
+name: PR title lint
 
 on:
     pull_request:
         types: [opened, edited, synchronize, reopened]
 
 jobs:
-    lint_pr_title:
+    lint-pr-title:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout code
@@ -13,6 +13,6 @@ jobs:
 
             - uses: ./.github/actions/prepare-npm-job
 
-            - name: Lint PR title
+            - name: Lint
               run: |
                   echo "${{ github.event.pull_request.title }}" | npx commitlint
