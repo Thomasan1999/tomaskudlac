@@ -7,7 +7,8 @@
 
 <template>
     <MainSection
-        class="projects"
+        data-testid="projects"
+        class="pt-main-row-gap"
         heading
         name="projects"
     >
@@ -21,10 +22,6 @@
 </template>
 
 <style lang="scss" scoped>
-    .projects {
-        padding-top: var(--main-row-gap);
-    }
-
     .project-container {
         display: grid;
         grid-template-columns: repeat(2, 1fr);

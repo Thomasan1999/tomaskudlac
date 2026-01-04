@@ -12,7 +12,8 @@
 
 <template>
     <MainSection
-        class="about-myself"
+        data-testid="about-myself"
+        class="py-main-row-gap"
         heading
         name="aboutMyself"
     >
@@ -22,7 +23,7 @@
                 jpgSrc="/images/myself.jpg"
                 :alt="locales.photoAlt"
             />
-            <div class="about-myself-column-container">
+            <div class="about-myself-column-container gap-y-main-row-gap">
                 <AboutMyselfColumn
                     v-for="column in locales.columns"
                     v-bind="column"
@@ -33,16 +34,10 @@
 </template>
 
 <style lang="scss" scoped>
-    .about-myself {
-        padding-bottom: var(--main-row-gap);
-        padding-top: var(--main-row-gap);
-    }
-
     .about-myself-column-container {
         column-gap: 80px;
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        row-gap: var(--main-row-gap);
     }
 </style>

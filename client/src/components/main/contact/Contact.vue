@@ -20,7 +20,8 @@
 
 <template>
     <MainSection
-        class="contact"
+        data-testid="contact"
+        class="py-main-row-gap"
         heading
         name="contact"
     >
@@ -36,11 +37,6 @@
 </template>
 
 <style lang="scss" scoped>
-    .contact {
-        padding-bottom: var(--main-row-gap);
-        padding-top: var(--main-row-gap);
-    }
-
     .contact-brief-text {
         max-width: 1100px;
 

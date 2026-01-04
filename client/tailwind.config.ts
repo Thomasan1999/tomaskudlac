@@ -28,6 +28,7 @@ const config: Config = {
             },
             spacing: {
                 label: '6rem',
+                'main-row-gap': '3.125rem',
             },
         },
     },

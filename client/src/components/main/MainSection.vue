@@ -15,7 +15,7 @@
 <template>
     <section
         :id="id"
-        class="main-section"
+        class="main-section gap-y-main-row-gap"
     >
         <div class="text-content">
             <h2
@@ -34,7 +34,6 @@
         align-items: center;
         display: flex;
         flex-direction: column;
-        row-gap: var(--main-row-gap);
         z-index: 1;
     }
 
