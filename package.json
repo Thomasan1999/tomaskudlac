@@ -6,7 +6,6 @@
         "format": "npm run format:base -- --write",
         "format:check": "npm run format:base -- --check",
         "lint": "cd client && npm run lint",
-        "prepare": "husky",
         "postinstall": "cd client && npm i",
         "test:coverage": "cd client && npm run test:coverage",
         "test:run": "cd client && npm run test:run",
@@ -16,7 +15,6 @@
     "devDependencies": {
         "@commitlint/cli": "20.3.0",
         "@commitlint/config-conventional": "20.3.0",
-        "husky": "9.1.7",
         "npm-run-all": "4.1.5",
         "prettier": "3.7.4",
         "prettier-plugin-tailwindcss": "0.7.2"
