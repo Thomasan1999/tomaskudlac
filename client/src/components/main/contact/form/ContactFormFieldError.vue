@@ -3,13 +3,13 @@
     import useStore from '@/store';
     import { ContactFormFieldErrorProps } from '@/components/main/contact/form/types';
 
-    const props = defineProps<ContactFormFieldErrorProps>();
+    const { error } = defineProps<ContactFormFieldErrorProps>();
 
     const store = useStore();
 
     const locales = computed(() => store.locales.sections.contact.form.errors);
 
-    const message = computed(() => locales.value[props.error!]);
+    const message = computed(() => locales.value[error!]);
 </script>
 
 <template>

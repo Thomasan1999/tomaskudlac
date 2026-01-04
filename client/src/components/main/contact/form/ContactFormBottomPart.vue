@@ -5,7 +5,7 @@
 
     const store = useStore();
 
-    const props = defineProps<ContactFormBottomPartProps>();
+    const { formValid } = defineProps<ContactFormBottomPartProps>();
 
     defineEmits<{
         (e: 'click'): void;
@@ -13,9 +13,7 @@
 
     const locales = computed(() => store.locales.sections.contact.form);
 
-    const submitTitle = computed(() =>
-        props.formValid ? locales.value.submitTitle : locales.value.submitTitleDisabled,
-    );
+    const submitTitle = computed(() => (formValid ? locales.value.submitTitle : locales.value.submitTitleDisabled));
 </script>
 
 <template>

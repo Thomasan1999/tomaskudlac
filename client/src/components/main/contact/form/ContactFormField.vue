@@ -9,12 +9,16 @@
     } from '@/components/main/contact/form/types';
     import ContactFormLabelText from '@/components/main/contact/form/ContactFormLabelText.vue';
 
-    const props = withDefaults(defineProps<ContactFormFieldProps>(), {
-        element: ContactFormFieldElement.INPUT,
-        minlength: 0,
-        required: false,
-        type: ContactFormFieldType.TEXT,
-    });
+    const {
+        element = ContactFormFieldElement.INPUT,
+        maxlength,
+        minlength = 0,
+        pattern,
+        required = false,
+        touched,
+        type = ContactFormFieldType.TEXT,
+        valid,
+    } = defineProps<ContactFormFieldProps>();
     const emit = defineEmits<{
         (event: 'blur'): void;
         (event: 'validSet', value: boolean): void;
@@ -35,12 +39,10 @@
 
     const inputting = ref(false);
 
-    const dynamicProps = computed(() =>
-        props.element === ContactFormFieldElement.INPUT ? { type: props.type } : undefined,
-    );
+    const dynamicProps = computed(() => (element === ContactFormFieldElement.INPUT ? { type } : undefined));
 
     const error = computed(() => {
-        if (props.valid || !props.touched || inputting.value) {
+        if (valid || !touched || inputting.value) {
             return;
         }
 
@@ -53,9 +55,9 @@
         }
     });
 
-    const missingValue = computed(() => props.required && !model.value);
+    const missingValue = computed(() => required && !model.value);
 
-    const validFormat = computed(() => !props.pattern || Boolean(model.value.match(props.pattern)));
+    const validFormat = computed(() => !pattern || Boolean(model.value.match(pattern)));
 
     watch(model, () => {
         const newValidValue = validFormat.value && !missingValue.value;
@@ -64,7 +66,7 @@
     });
 
     watch(
-        () => props.maxlength,
+        () => maxlength,
         (value) => {
             if (typeof value !== 'number' || value <= 0) {
                 throw new Error('Max length must be larger than 0');
@@ -73,7 +75,7 @@
     );
 
     watch(
-        () => props.minlength,
+        () => minlength,
         (value) => {
             if (value < 0) {
                 throw new Error('Min length must be larger or equal to 0');
