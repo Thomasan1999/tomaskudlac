@@ -16,32 +16,19 @@
 </script>
 
 <template>
-    <div class="about-myself-column">
+    <div
+        data-testid="about-myself-column"
+        class="box-border flex max-w-[26.25rem] flex-col gap-6"
+    >
         <h3
-            class="about-myself-column-title"
+            class="text-3xl font-bold"
             data-testid="title"
         >
             {{ title }}
         </h3>
         <p
-            class="about-myself-column-text"
             data-testid="text"
             v-html="parsedText"
         />
     </div>
 </template>
-
-<style lang="scss" scoped>
-    .about-myself-column {
-        box-sizing: border-box;
-        display: flex;
-        flex-direction: column;
-        gap: 25px;
-        max-width: 420px;
-    }
-
-    .about-myself-column-title {
-        font-size: 30px;
-        font-weight: 700;
-    }
-</style>
