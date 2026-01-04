@@ -1,0 +1,18 @@
+name: PR title lint
+
+on:
+    pull_request:
+        types: [opened, edited]
+
+jobs:
+    lint:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v6
+
+            - uses: ./.github/actions/prepare-npm-job
+
+            - name: Lint PR title
+              run: |
+                  echo "${{ github.event.pull_request.title }}" | npx commitlint
