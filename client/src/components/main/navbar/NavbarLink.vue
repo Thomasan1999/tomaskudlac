@@ -4,11 +4,11 @@
     import ExternalLink from '@/components/ExternalLink.vue';
     import { NavbarLinkProps } from '@/components/main/navbar/types';
 
-    const props = withDefaults(defineProps<NavbarLinkProps>(), { replace: false, routerLink: false });
+    const { replace = false, routerLink = false, to } = defineProps<NavbarLinkProps>();
     const emit = defineEmits<{ (event: 'click'): void }>();
 
     const onClick = ($event: MouseEvent) => {
-        if (!props.routerLink) {
+        if (!routerLink) {
             return;
         }
 
@@ -18,12 +18,12 @@
 
     const dynamicProps = computed(() => {
         return {
-            [props.routerLink ? 'to' : 'href']: to.value,
-            ...(props.replace && { replace: props.replace }),
+            [routerLink ? 'to' : 'href']: toUrl,
+            ...(replace && { replace }),
         };
     });
 
-    const to = computed(() => mainSections[props.to]?.url ?? props.to);
+    const toUrl = computed(() => mainSections[to]?.url ?? to);
 </script>
 
 <template>

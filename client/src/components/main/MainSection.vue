@@ -3,9 +3,9 @@
     import mainSections from '@/components/main/mainSections';
     import { MainSectionProps } from '@/components/main/types';
 
-    const props = withDefaults(defineProps<MainSectionProps>(), { heading: false });
+    const { heading = false, name } = defineProps<MainSectionProps>();
 
-    const activeSection = computed(() => mainSections[props.name]);
+    const activeSection = computed(() => mainSections[name]);
 
     const id = computed(() => activeSection.value.id);
 

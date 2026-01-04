@@ -3,13 +3,13 @@
     import useStore from '@/store';
     import { AboutMyselfColumnProps } from '@/components/main/about-myself/types';
 
-    const props = defineProps<AboutMyselfColumnProps>();
+    const { text } = defineProps<AboutMyselfColumnProps>();
 
     const store = useStore();
 
-    const text = computed(() =>
-        props.text
-            .replace(/\*[^*]+\*/g, (text) => `<strong>${text.slice(1, -1)}</strong>`)
+    const parsedText = computed(() =>
+        text
+            .replace(/\*[^*]+\*/g, (textPart) => `<strong>${textPart.slice(1, -1)}</strong>`)
             .replace(/{{age}}/, store.age.toString())
             .replace(/{{programmingLanguages}}/, store.programmingLanguagesString),
     );
@@ -26,7 +26,7 @@
         <p
             class="about-myself-column-text"
             data-testid="text"
-            v-html="text"
+            v-html="parsedText"
         />
     </div>
 </template>

@@ -2,19 +2,15 @@
     import { computed } from 'vue';
     import { HomeTextProgrammingLanguageProps } from '@/components/main/home/types';
 
-    const props = defineProps<HomeTextProgrammingLanguageProps>();
+    const { programmingLanguage } = defineProps<HomeTextProgrammingLanguageProps>();
 
     const anPrefix = computed(() => {
-        const programmingLanguage = props.programmingLanguage;
-
         const textHasAnPrefix = programmingLanguage.match(/^n$|^n /);
 
-        return textHasAnPrefix ? props.programmingLanguage[0] : '';
+        return textHasAnPrefix ? programmingLanguage[0] : '';
     });
 
-    const base = computed(() =>
-        anPrefix.value.length ? props.programmingLanguage.slice(1) : props.programmingLanguage,
-    );
+    const base = computed(() => (anPrefix.value.length ? programmingLanguage.slice(1) : programmingLanguage));
 </script>
 
 <template>

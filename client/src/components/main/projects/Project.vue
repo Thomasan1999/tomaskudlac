@@ -5,7 +5,7 @@
     import ExternalLink from '@/components/ExternalLink.vue';
     import { ProjectProps } from '@/components/main/projects/types';
 
-    const props = defineProps<ProjectProps>();
+    const { name } = defineProps<ProjectProps>();
 
     const store = useStore();
 
@@ -21,14 +21,14 @@
 
     const textContent = useTemplateRef('textContent');
 
-    const backgroundImage = computed(() => `url(/images/${kebabCase(props.name)}.${store.imageFormat})`);
+    const backgroundImage = computed(() => `url(/images/${kebabCase(name)}.${store.imageFormat})`);
 
     const generalLocales = computed(() => store.locales.sections.projects);
 
     const projectLocales = computed(() => {
         const root = store.locales.sections.projects.projects;
 
-        return root[props.name as keyof typeof root];
+        return root[name as keyof typeof root];
     });
 
     watch(() => store.language, setTextHoverHeight);
