@@ -18,7 +18,7 @@
 
     const dynamicProps = computed(() => {
         return {
-            [routerLink ? 'to' : 'href']: toUrl,
+            [routerLink ? 'to' : 'href']: toUrl.value,
             ...(replace && { replace }),
         };
     });
