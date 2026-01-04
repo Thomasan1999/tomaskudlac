@@ -23,7 +23,7 @@
                 jpgSrc="/images/myself.jpg"
                 :alt="locales.photoAlt"
             />
-            <div class="about-myself-column-container gap-y-main-row-gap">
+            <div class="flex flex-wrap justify-center gap-x-20 gap-y-main-row-gap">
                 <AboutMyselfColumn
                     v-for="column in locales.columns"
                     v-bind="column"
@@ -32,12 +32,3 @@
         </div>
     </MainSection>
 </template>
-
-<style lang="scss" scoped>
-    .about-myself-column-container {
-        column-gap: 80px;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-</style>
