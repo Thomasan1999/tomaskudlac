@@ -161,10 +161,10 @@
     }
 
     .contact-form-input {
-        height: var(--contact-form-input-height);
+        height: 2.5em;
     }
 
     .contact-form-textarea {
-        height: calc(var(--contact-form-line-height) * 8);
+        height: 8lh;
     }
 </style>
