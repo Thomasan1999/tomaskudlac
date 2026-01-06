@@ -12,6 +12,7 @@ const config: Config = {
                 'error-text': '#cc0000',
                 primary: '#191970',
                 'primary-light': '#2828b3',
+                'text-highlight': '#cc7832',
             },
             fontFamily: {
                 contact: 'Montserrat, sans-serif',
@@ -29,6 +30,9 @@ const config: Config = {
             spacing: {
                 label: '6rem',
                 'main-row-gap': '3.125rem',
+            },
+            transitionDuration: {
+                base: '0.25s',
             },
         },
     },

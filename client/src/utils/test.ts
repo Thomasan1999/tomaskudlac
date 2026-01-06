@@ -11,11 +11,8 @@ function getTestingSelector(id: string): string {
 
 function buildCreateWrapper<ComponentType>(
     component: ComponentType,
-): (options?: ComponentMountingOptions<ComponentType>) => CreateWrapperBuiltComponent<ComponentType>;
-function buildCreateWrapper<ComponentType>(
-    component: ComponentType,
 ): (
-    props: Parameters<ReturnType<typeof mount<ComponentType>>['setProps']>[0],
+    props?: Parameters<ReturnType<typeof mount<ComponentType>>['setProps']>[0],
     options?: ComponentMountingOptions<ComponentType>,
 ) => CreateWrapperBuiltComponent<ComponentType>;
 function buildCreateWrapper<
@@ -25,7 +22,10 @@ function buildCreateWrapper<
     component: ComponentType,
     defaultProps?: undefined,
     defaultOptions?: OptionsType,
-): (options?: ComponentMountingOptions<ComponentType>) => CreateWrapperBuiltComponent<ComponentType>;
+): (
+    props?: Parameters<ReturnType<typeof mount<ComponentType>>['setProps']>[0],
+    options?: ComponentMountingOptions<ComponentType>,
+) => CreateWrapperBuiltComponent<ComponentType>;
 function buildCreateWrapper<
     ComponentType,
     OptionsType extends ComponentMountingOptions<ComponentType> = ComponentMountingOptions<ComponentType>,
