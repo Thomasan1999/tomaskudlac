@@ -1,18 +1,11 @@
 <script lang="ts" setup>
-    import { computed } from 'vue';
     import useStore from '@/store';
     import { AboutMyselfColumnProps } from '@/components/main/about-myself/types';
+    import LocalesTextParser from '@/components/locales-text-parser/LocalesTextParser.vue';
 
     const { text } = defineProps<AboutMyselfColumnProps>();
 
     const store = useStore();
-
-    const parsedText = computed(() =>
-        text
-            .replace(/\*[^*]+\*/g, (textPart) => `<strong>${textPart.slice(1, -1)}</strong>`)
-            .replace(/{{age}}/, store.age.toString())
-            .replace(/{{programmingLanguages}}/, store.programmingLanguagesString),
-    );
 </script>
 
 <template>
@@ -26,9 +19,13 @@
         >
             {{ title }}
         </h3>
-        <p
+        <LocalesTextParser
             data-testid="text"
-            v-html="parsedText"
-        />
+            tag="p"
+            :text="text"
+        >
+            <template #age>{{ store.age }}</template>
+            <template #programmingLanguages>{{ store.programmingLanguagesString }}</template>
+        </LocalesTextParser>
     </div>
 </template>
