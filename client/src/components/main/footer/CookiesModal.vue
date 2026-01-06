@@ -23,7 +23,7 @@
                 @click="$emit('close')"
             />
             <div
-                class="px-screen-edge max-h-screen-without-edge max-w-screen-without-edge bg-overlay relative box-border w-[58rem] overflow-auto py-12 text-center lg:px-12"
+                class="relative box-border max-h-screen-without-edge w-[58rem] max-w-screen-without-edge overflow-auto bg-overlay px-screen-edge py-12 text-center lg:px-12"
             >
                 <button
                     class="absolute right-0 top-0 flex size-12 items-center justify-center font-thin hover:[&>.close-icon]:fill-text-highlight"
