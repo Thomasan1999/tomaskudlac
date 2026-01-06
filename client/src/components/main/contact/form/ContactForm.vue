@@ -69,7 +69,8 @@
 <template>
     <form
         ref="root"
-        class="contact-form -ml-label"
+        data-testid="contact-form"
+        class="-ml-label flex w-full max-w-none flex-col gap-5 font-contact lg:ml-0 lg:max-w-[43.75rem]"
         action="/contact-form/send-mail"
         method="post"
         @submit.prevent="onSubmit"
@@ -93,25 +94,3 @@
         />
     </form>
 </template>
-
-<style lang="scss" scoped>
-    .contact-form {
-        --contact-form-font-family: Montserrat, sans-serif;
-        --contact-form-input-height: 2.5em;
-        --contact-form-line-height: 1.5em;
-        --contact-form-label-width: 100px;
-        --contact-form-max-width: 700px;
-
-        display: flex;
-        font-family: var(--contact-form-font-family);
-        flex-direction: column;
-        gap: 20px;
-        max-width: var(--contact-form-max-width);
-        width: 100%;
-
-        @media (max-width: 1023px) {
-            margin-left: 0;
-            max-width: none;
-        }
-    }
-</style>
