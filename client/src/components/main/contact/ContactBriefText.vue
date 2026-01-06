@@ -21,7 +21,7 @@
         <template #phoneNumber>
             <a
                 data-testid="phone-number-link"
-                class="underline transition-colors duration-base hover:text-text-highlight"
+                class="underline transition-colors hover:text-text-highlight"
                 href="tel:+421949353783"
                 :title="phoneTitle"
                 >+421 949 353 783</a
