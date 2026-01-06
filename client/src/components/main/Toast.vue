@@ -61,7 +61,7 @@
                     :title="locales.closeButtonTitle"
                     @click="opened = false"
                 >
-                    <CloseIcon class="toast-close-button-icon" />
+                    <CloseIcon class="h-3" />
                 </button>
             </div>
         </Transition>
@@ -103,10 +103,6 @@
                 fill: #dda373;
             }
         }
-    }
-
-    .toast-close-button-icon {
-        height: 12px;
     }
 
     .fade-enter-active,

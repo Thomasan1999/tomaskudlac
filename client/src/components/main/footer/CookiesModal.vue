@@ -13,27 +13,33 @@
 
 <template>
     <Teleport to="#modal-container">
-        <div class="cookies-modal">
+        <div
+            data-testid="cookies-modal"
+            class="absolute left-0 top-0 z-[1] flex h-[calc(100*var(--vh))] w-screen items-center justify-center"
+        >
             <div
-                class="cookies-modal-overlay"
+                class="absolute left-0 top-0 z-0 size-full bg-black/[.55]"
                 data-testid="overlay"
                 @click="$emit('close')"
             />
-            <div class="cookies-modal-content">
+            <div
+                class="relative box-border max-h-screen-without-edge w-[58rem] max-w-screen-without-edge overflow-auto bg-overlay px-screen-edge py-12 text-center lg:px-12"
+            >
                 <button
-                    class="cookies-modal-close-button"
+                    class="absolute right-0 top-0 flex size-12 items-center justify-center font-thin hover:[&>.close-icon]:fill-text-highlight"
                     data-testid="close-button"
                     :title="locales.closeButtonTitle"
                     @click="$emit('close')"
                 >
-                    <CloseIcon class="cookies-modal-close-button-icon" />
+                    <CloseIcon class="h-4" />
                 </button>
-                <div class="cookies-modal-paragraph-container">
+
+                <div class="flex flex-col gap-6">
                     <div
                         v-for="paragraph in locales.paragraphs"
-                        class="cookies-modal-paragraph"
+                        class="flex flex-col gap-2.5"
                     >
-                        <h3 class="cookies-modal-paragraph-heading">{{ paragraph.title }}</h3>
+                        <h3 class="font-bold">{{ paragraph.title }}</h3>
                         <p class="cookies-modal-paragraph-text">{{ paragraph.text }}</p>
                     </div>
                 </div>
@@ -41,86 +47,3 @@
         </div>
     </Teleport>
 </template>
-
-<style lang="scss" scoped>
-    .cookies-modal {
-        align-items: center;
-        display: flex;
-        height: calc(100 * var(--vh));
-        justify-content: center;
-        left: 0;
-        position: absolute;
-        top: 0;
-        width: 100vw;
-        z-index: 1;
-    }
-
-    .cookies-modal-overlay {
-        background-color: rgba(0, 0, 0, 0.55);
-        height: 100%;
-        left: 0;
-        position: absolute;
-        top: 0;
-        width: 100%;
-        z-index: 0;
-    }
-
-    .cookies-modal-content {
-        background-color: #222222;
-        box-sizing: border-box;
-        max-height: calc(100% - var(--content-padding-horizontal) * 2);
-        max-width: calc(100% - var(--content-padding-horizontal) * 2);
-        overflow: auto;
-        padding: 50px;
-        position: relative;
-        text-align: center;
-        width: 1000px;
-
-        @media (max-width: 1029px) {
-            padding-left: var(--content-padding-horizontal);
-            padding-right: var(--content-padding-horizontal);
-        }
-    }
-
-    .cookies-modal-close-button {
-        align-items: center;
-        display: flex;
-        font-weight: 100;
-        height: 50px;
-        justify-content: center;
-        position: absolute;
-        right: 0;
-        top: 0;
-        width: 50px;
-
-        &:hover {
-            .cookies-modal-close-button-icon {
-                fill: var(--text-highlight-color);
-            }
-        }
-    }
-
-    .cookies-modal-close-button-icon {
-        height: 16px;
-    }
-
-    .cookies-modal-text {
-        position: relative;
-    }
-
-    .cookies-modal-paragraph-container {
-        display: flex;
-        flex-direction: column;
-        gap: 25px;
-    }
-
-    .cookies-modal-paragraph {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .cookies-modal-paragraph-heading {
-        font-weight: 700;
-    }
-</style>

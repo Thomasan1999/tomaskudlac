@@ -10,6 +10,7 @@ const config: Config = {
             colors: {
                 'error-bg': '#3e2d2d',
                 'error-text': '#cc0000',
+                overlay: '#222222',
                 primary: '#191970',
                 'primary-light': '#2828b3',
                 'text-highlight': '#cc7832',
@@ -27,12 +28,20 @@ const config: Config = {
                     },
                 },
             },
+            maxHeight: {
+                'screen-without-edge': 'calc(100vh - var(--content-padding-horizontal) * 2)',
+            },
+            maxWidth: {
+                'screen-without-edge': 'calc(100vw - var(--content-padding-horizontal) * 2)',
+            },
             spacing: {
                 label: '6rem',
                 'main-row-gap': '3.125rem',
+                // TODO: use normal CSS once Tailwind migrated to v4
+                'screen-edge': 'var(--content-padding-horizontal)',
             },
             transitionDuration: {
-                base: '0.25s',
+                DEFAULT: '0.25s',
             },
         },
     },

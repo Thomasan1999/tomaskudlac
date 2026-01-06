@@ -1,8 +1,7 @@
 <script lang="ts" setup>
     import { computed, defineAsyncComponent, ref } from 'vue';
     import useStore from '@/store';
-    import ExternalLink from '@/components/ExternalLink.vue';
-    import { SiteLanguage } from '@/store/types';
+    import FooterCopyrightLink from '@/components/main/footer/FooterCopyrightLink.vue';
 
     const CookiesModal = defineAsyncComponent({ loader: () => import('./CookiesModal.vue') });
 
@@ -10,34 +9,25 @@
 
     const showCookies = ref(false);
 
-    const language = computed(() => store.language);
-
     const locales = computed(() => store.locales.footer);
 </script>
 
 <template>
-    <section class="footer-component">
-        <footer class="footer">
+    <section
+        data-testid="footer-component"
+        class="bg-primary font-medium leading-10"
+    >
+        <footer>
             <div class="text-content">
-                <p class="footer-text">
+                <p>
                     {{ locales.copyrightText }}
                     {{ ' ' }}
-                    <ExternalLink
-                        v-if="language === SiteLanguage.EN"
-                        class="footer-copyright-link"
-                        data-testid="copyright-link"
-                        href="http://www.whatarecookies.com"
+                    <FooterCopyrightLink
+                        class="cursor-pointer underline transition-colors hover:text-text-highlight"
                         :title="locales.copyrightLinkTitle"
-                        >{{ locales.copyrightLinkText }}.
-                    </ExternalLink>
-                    <span
-                        v-else
-                        class="footer-copyright-link"
-                        data-testid="copyright-link"
-                        :title="locales.copyrightLinkTitle"
-                        @click="showCookies = true"
-                        >{{ locales.copyrightLinkText }}.</span
-                    >
+                        :text="`${locales.copyrightLinkText}.`"
+                        @showCookies="showCookies = true"
+                    />
                 </p>
             </div>
         </footer>
@@ -47,28 +37,3 @@
         />
     </section>
 </template>
-
-<style lang="scss" scoped>
-    .footer-component {
-        --footer-height: 40px;
-
-        background-color: var(--primary-color);
-        line-height: var(--footer-height);
-    }
-
-    .footer,
-    .footer-text {
-        font-weight: 500;
-        line-height: var(--footer-height);
-    }
-
-    .footer-copyright-link {
-        cursor: pointer;
-        text-decoration: underline;
-        transition: color var(--base-transition-duration);
-
-        &:hover {
-            color: var(--text-highlight-color);
-        }
-    }
-</style>
