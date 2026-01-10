@@ -15,6 +15,7 @@ const config: Config = {
                 overlay: '#222222',
                 primary: '#191970',
                 'primary-light': '#2828b3',
+                'primary-red': '#da0b24',
                 'text-highlight': '#cc7832',
             },
             fontFamily: {
@@ -38,6 +39,7 @@ const config: Config = {
                 'screen-without-edge': 'calc(100vw - var(--content-padding-horizontal) * 2)',
             },
             spacing: {
+                'contact-form-data-padding-vertical': '.5rem',
                 'hover-height': 'var(--hover-height)',
                 label: '6rem',
                 'main-row-gap': '3.125rem',

@@ -15,61 +15,9 @@
 <template>
     <div
         v-if="error"
-        class="contact-form-field-error"
+        data-testid="contact-form-field-error"
+        class="contact-form-field-error relative left-0 right-auto top-2.5 m-0 m-auto flex items-center justify-center whitespace-nowrap bg-primary-red px-4 py-contact-form-data-padding-vertical text-white after:absolute after:-top-5 after:bottom-auto after:left-0 after:right-auto after:top-0 after:m-auto after:block after:h-0 after:w-0 after:border-[.625rem] after:border-transparent after:border-b-primary-red after:content-[''] lg:absolute lg:left-[calc(100%+.625rem)] lg:left-auto lg:top-auto lg:m-auto lg:after:bottom-0 lg:after:left-auto lg:after:right-full lg:after:top-0 lg:after:border-b-transparent lg:after:border-r-primary-red"
     >
-        <div class="contact-form-field-error-message">{{ message }}</div>
+        <div>{{ message }}</div>
     </div>
 </template>
-
-<style lang="scss" scoped>
-    .contact-form-field-error {
-        --contact-form-field-error-arrow-width: 10px;
-
-        align-items: center;
-        background-color: var(--primary-red);
-        color: #ffffff;
-        display: flex;
-        justify-content: center;
-        left: calc(100% + var(--contact-form-field-error-arrow-width));
-        margin: auto;
-        padding-bottom: var(--contact-form-data-padding-vertical);
-        padding-left: 16px;
-        padding-right: 16px;
-        padding-top: var(--contact-form-data-padding-vertical);
-        position: absolute;
-        white-space: nowrap;
-
-        @media (max-width: 1023px) {
-            left: 0;
-            margin: 0;
-            position: relative;
-            right: auto;
-            top: var(--contact-form-field-error-arrow-width);
-        }
-
-        &:after {
-            border-color: transparent;
-            border-style: solid;
-            border-width: var(--contact-form-field-error-arrow-width);
-            border-right-color: var(--primary-red);
-            bottom: 0;
-            content: '';
-            display: block;
-            height: 0;
-            margin: auto;
-            position: absolute;
-            right: 100%;
-            top: 0;
-            width: 0;
-
-            @media (max-width: 1023px) {
-                border-bottom-color: var(--primary-red);
-                border-right-color: transparent;
-                bottom: auto;
-                left: 0;
-                right: auto;
-                top: calc(var(--contact-form-field-error-arrow-width) * -2);
-            }
-        }
-    }
-</style>
