@@ -3,6 +3,7 @@
     import { computed, onMounted, ref } from 'vue';
     import { ToastProps } from '@/components/main/types';
     import ToastCloseButton from '@/components/toast/ToastCloseButton.vue';
+    import { ToastType } from '@/store/types';
 
     defineProps<ToastProps>();
     defineEmits<{ (event: 'close'): void }>();
@@ -42,13 +43,16 @@
 <template>
     <Teleport to="#modal-container">
         <Transition
-            name="fade"
+            enterActiveClass="transition-opacity"
+            leaveActiveClass="transition-opacity"
+            enterFromClass="opacity-0"
+            leaveToClass="opacity-0"
             @after-leave="$emit('close')"
         >
             <div
                 v-if="opened"
-                class="toast"
-                :class="[`type-${type}`]"
+                class="w-screen-without-edge absolute right-toast-container-right top-toast-container-top z-[1] box-border max-w-[22.5rem] px-[1.875rem] py-2.5 text-left"
+                :class="type === ToastType.SUCCESS ? 'bg-primary-green' : 'bg-primary-red'"
                 data-testid="toast"
                 :style="`--relative-margin-top: ${relativeMarginTop}`"
             >
@@ -58,37 +62,3 @@
         </Transition>
     </Teleport>
 </template>
-
-<style lang="scss" scoped>
-    .toast {
-        --default-margin-top: calc(var(--content-padding-horizontal) + var(--navbar-height));
-
-        box-sizing: border-box;
-        max-width: 360px;
-        padding: 10px 30px;
-        position: absolute;
-        right: calc(-100vw + var(--content-padding-horizontal) + var(--scrollbar-width));
-        text-align: left;
-        top: var(--relative-margin-top, var(--default-margin-top));
-        width: calc(100vw - var(--content-padding-horizontal) * 2);
-        z-index: 1;
-
-        &.type-success {
-            background-color: var(--primary-green);
-        }
-
-        &.type-fail {
-            background-color: var(--primary-red);
-        }
-    }
-
-    .fade-enter-active,
-    .fade-leave-active {
-        transition: opacity var(--base-transition-duration) ease;
-    }
-
-    .fade-enter-from,
-    .fade-leave-to {
-        opacity: 0;
-    }
-</style>

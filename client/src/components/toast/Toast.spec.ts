@@ -27,8 +27,6 @@ const createWrapper = buildCreateWrapper(
 describe('Toast', () => {
     beforeAll(async () => {
         await mockInitStore();
-        document.body.style.setProperty('--primary-red', 'red');
-        document.body.style.setProperty('--primary-green', 'green');
         vi.useFakeTimers();
     });
 
