@@ -3,6 +3,7 @@
     import HomeText from '@/components/main/home/HomeText.vue';
     import { computed } from 'vue';
     import useStore from '@/store';
+    import { ImageFormat } from '@/store/types';
 
     const store = useStore();
 
@@ -11,8 +12,13 @@
 
 <template>
     <MainSection
-        class="home has-curtain"
-        :class="`image-format-${imageFormat}`"
+        data-testid="home"
+        class="has-curtain pt-navbar-height before:bg-home-curtain relative flex h-[calc(100*var(--vh)-var(--navbar-height))] items-center justify-center overflow-hidden before:z-0 after:absolute after:left-0 after:top-0 after:z-[-1] after:block after:size-full after:bg-cover after:bg-fixed after:bg-center after:bg-no-repeat after:blur-[3px] after:content-['']"
+        :class="
+            imageFormat === ImageFormat.WEBP
+                ? 'after:bg-[url(/images/background-home.webp)]'
+                : 'after:bg-[url(/images/background-home.jpg)]'
+        "
         name="home"
     >
         <div class="text-content">
@@ -20,50 +26,3 @@
         </div>
     </MainSection>
 </template>
-
-<style lang="scss" scoped>
-    .home {
-        --navbar-height: 60px;
-
-        align-items: center;
-        display: flex;
-        height: calc(100 * var(--vh) - var(--navbar-height));
-        justify-content: center;
-        overflow: hidden;
-        padding-top: var(--navbar-height);
-        position: relative;
-
-        &.image-format-webp {
-            &:after {
-                background-image: url('/images/background-home.webp');
-            }
-        }
-
-        &.image-format-jpg {
-            &:after {
-                background-image: url('/images/background-home.jpg');
-            }
-        }
-
-        &:before {
-            background-color: rgba(14, 33, 175, 0.55);
-            z-index: 0;
-        }
-
-        &:after {
-            background-attachment: fixed;
-            background-position: 50%;
-            background-size: cover;
-            background-repeat: no-repeat;
-            content: '';
-            display: block;
-            filter: blur(3px);
-            height: 100%;
-            left: 0;
-            position: absolute;
-            top: 0;
-            width: 100%;
-            z-index: -1;
-        }
-    }
-</style>

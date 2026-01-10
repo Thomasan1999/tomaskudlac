@@ -10,6 +10,7 @@ const config: Config = {
             colors: {
                 'error-bg': '#3e2d2d',
                 'error-text': '#cc0000',
+                'home-curtain': 'rgba(14, 33, 175, 0.55)',
                 overlay: '#222222',
                 primary: '#191970',
                 'primary-light': '#2828b3',
@@ -37,6 +38,7 @@ const config: Config = {
             spacing: {
                 label: '6rem',
                 'main-row-gap': '3.125rem',
+                'navbar-height': '3.75rem',
                 // TODO: use normal CSS once Tailwind migrated to v4
                 'screen-edge': 'var(--content-padding-horizontal)',
             },
