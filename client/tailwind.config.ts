@@ -14,6 +14,7 @@ const config: Config = {
                 'navbar-link-active': '#2c2c2c',
                 overlay: '#222222',
                 primary: '#191970',
+                'primary-green': '#1e9f31',
                 'primary-light': '#2828b3',
                 'primary-red': '#da0b24',
                 'text-highlight': '#cc7832',
@@ -47,6 +48,9 @@ const config: Config = {
                 'navbar-link-padding-horizontal': 'var(--navbar-link-padding-horizontal, 0)',
                 // TODO: use normal CSS once Tailwind migrated to v4
                 'screen-edge': 'var(--content-padding-horizontal)',
+                'toast-container-right': 'calc(-100vw + var(--content-padding-horizontal) + var(--scrollbar-width))',
+                'toast-container-top':
+                    'var(--relative-margin-top, calc(var(--content-padding-horizontal) + var(--navbar-height)))',
             },
             transitionDuration: {
                 DEFAULT: '0.25s',
