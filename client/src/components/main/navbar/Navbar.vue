@@ -132,7 +132,6 @@
 <style lang="scss" scoped>
     .navbar {
         --navbar-transition-duration: 0.8s;
-        --navbar-link-active-color: #2c2c2c;
         --navbar-outer-padding-horizontal: var(--content-padding-horizontal);
 
         background-color: var(--primary-color);
