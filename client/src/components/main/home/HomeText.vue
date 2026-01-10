@@ -205,7 +205,10 @@
 </script>
 
 <template>
-    <p class="home-text">
+    <p
+        data-testid="home-text"
+        class="home-text relative mb-navbar-height flex flex-wrap items-center whitespace-break-spaces text-[9vw] leading-[1.2] md:text-[4.375rem]"
+    >
         <span>{{ locales.welcome }}</span>
         <span
             class="home-programming-language"
@@ -229,24 +232,3 @@
         <span data-testid="locales">{{ locales.developer }}.</span>
     </p>
 </template>
-
-<style lang="scss" scoped>
-    .home-text {
-        --home-text-font-size: 70px;
-        --home-text-line-height: 1.2em;
-
-        align-items: center;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        font-size: var(--home-text-font-size);
-        line-height: var(--home-text-line-height);
-        margin-bottom: var(--navbar-height);
-        position: relative;
-        white-space: break-spaces;
-
-        @media (max-width: 767px) {
-            font-size: 9vw;
-        }
-    }
-</style>

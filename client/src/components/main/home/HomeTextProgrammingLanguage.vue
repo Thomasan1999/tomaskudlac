@@ -15,11 +15,5 @@
 
 <template>
     <span class="home-programming-language-an-prefix">{{ anPrefix }}</span>
-    <span class="home-programming-language-base">{{ base }}</span>
+    <span class="font-bold">{{ base }}</span>
 </template>
-
-<style lang="scss" scoped>
-    .home-programming-language-base {
-        font-weight: 700;
-    }
-</style>
