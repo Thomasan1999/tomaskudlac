@@ -2,8 +2,8 @@ import mockInitStore from '@/mocks/mockInitStore';
 import useStore from '@/store';
 import { ToastType } from '@/store/types';
 import { buildCreateWrapper, emitComponentEvent, getTestingSelector } from '@/utils/test';
-import ToastContainer from '@/components/main/ToastContainer.vue';
-import Toast from '@/components/main/Toast.vue';
+import ToastContainer from '@/components/toast/ToastContainer.vue';
+import Toast from '@/components/toast/Toast.vue';
 import { nextTick } from 'vue';
 
 const TOAST_SELECTOR = getTestingSelector('toast');

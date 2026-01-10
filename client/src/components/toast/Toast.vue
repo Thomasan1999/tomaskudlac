@@ -1,8 +1,8 @@
 <script lang="ts" setup>
     import useStore from '@/store';
     import { computed, onMounted, ref } from 'vue';
-    import CloseIcon from '@/components/main/CloseIcon.vue';
     import { ToastProps } from '@/components/main/types';
+    import ToastCloseButton from '@/components/toast/ToastCloseButton.vue';
 
     defineProps<ToastProps>();
     defineEmits<{ (event: 'close'): void }>();
@@ -29,8 +29,6 @@
 
     const lifetime = computed(() => (store.isTouchscreen ? baseLifetime.value / 2 : baseLifetime.value));
 
-    const locales = computed(() => store.locales.toasts);
-
     onMounted(() => {
         opened.value = true;
         relativeMarginTop.value = getRelativeMarginTop();
@@ -55,14 +53,7 @@
                 :style="`--relative-margin-top: ${relativeMarginTop}`"
             >
                 <div class="toast-message">{{ message }}</div>
-                <button
-                    class="toast-close-button"
-                    data-testid="close-button"
-                    :title="locales.closeButtonTitle"
-                    @click="opened = false"
-                >
-                    <CloseIcon class="h-3" />
-                </button>
+                <ToastCloseButton @click="opened = false" />
             </div>
         </Transition>
     </Teleport>
@@ -88,20 +79,6 @@
 
         &.type-fail {
             background-color: var(--primary-red);
-        }
-    }
-
-    .toast-close-button {
-        line-height: 0;
-        padding: 9px;
-        position: absolute;
-        right: 0;
-        top: 0;
-
-        &:hover {
-            .toast-close-button-icon {
-                fill: #dda373;
-            }
         }
     }
 
