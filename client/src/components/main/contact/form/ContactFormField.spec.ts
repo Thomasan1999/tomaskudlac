@@ -146,11 +146,11 @@ describe('ContactFormField', () => {
         it("emits 'blur' event on input blur", async () => {
             const wrapper = createWrapper({ element: ContactFormFieldElement.INPUT });
 
-            expect(wrapper.emitted().blur).toBeUndefined();
+            expect(wrapper.emitted('blur')).toBeUndefined();
 
             await wrapper.get('input').trigger('blur');
 
-            expect(wrapper.emitted().blur).toHaveLength(1);
+            expect(wrapper.emitted('blur')).toHaveLength(1);
         });
 
         it("emits 'update:modelValue' on input", async () => {
@@ -167,11 +167,11 @@ describe('ContactFormField', () => {
         it("emits 'validSet' on model value change", async () => {
             const wrapper = createWrapper({ element: ContactFormFieldElement.INPUT, modelValue: '' });
 
-            expect(wrapper.emitted().validSet).toBeUndefined();
+            expect(wrapper.emitted('validSet')).toBeUndefined();
 
             await wrapper.setProps({ modelValue: 'Input value' });
 
-            expect(wrapper.emitted().validSet).toHaveLength(1);
+            expect(wrapper.emitted('validSet')).toHaveLength(1);
         });
     });
 });
