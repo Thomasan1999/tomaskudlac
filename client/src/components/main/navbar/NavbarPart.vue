@@ -11,7 +11,7 @@
 
 <template>
     <div
-        class="flex items-center lg:h-navbar-height"
+        class="flex h-navbar-height items-center"
         :class="outer ? 'absolute top-0 max-lg:relative' : ''"
     >
         <slot />
