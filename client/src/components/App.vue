@@ -33,38 +33,18 @@
     @tailwind utilities;
 
     #app {
-        --base-line-height: 1.6;
-
-        --base-transition-duration: 0.25s;
-
         --content-padding-horizontal: 30px;
-
-        --primary-background-color: #1c1c1c;
-        --primary-color: #191970;
-        --primary-color-light: #2828b3;
-        --primary-text-color: #ffffff;
-        --selection-color: #0e6beb;
-        --text-highlight-color: #cc7832;
-
-        --section-name-font-family: var(--title-font-family);
-        --title-font-family: Raleway, sans-serif;
-
-        --mobile-max-width: 767px;
-        --touchscreen-max-width: 1023px;
 
         --scrollbar-thumb-color: #444444;
         --scrollbar-thumb-hover-color: #666666;
         --scrollbar-thumb-active-color: #959595;
         --scrollbar-color: #eeeeee;
 
-        --navbar-font-size: 20px;
-        --text-font-size: 16px;
-
-        background-color: var(--primary-background-color);
-        color: var(--primary-text-color);
-        font-family: 'Raleway', sans-serif;
-        font-size: var(--text-font-size);
-        line-height: var(--base-line-height);
+        background-color: #1c1c1c;
+        color: #ffffff;
+        font-family: theme('fontFamily.DEFAULT');
+        font-size: 16px;
+        line-height: 1.6;
         scrollbar-color: var(--scrollbar-thumb-color) var(--scrollbar-color);
         text-align: center;
 
@@ -73,7 +53,7 @@
         }
 
         @media (max-width: 549px) {
-            --text-font-size: 14px;
+            font-size: 14px;
         }
     }
 
@@ -95,7 +75,7 @@
 
     ::selection,
     mark {
-        background-color: var(--selection-color);
+        background-color: #0e6beb;
         color: currentColor;
     }
 
@@ -147,15 +127,8 @@
         }
     }
 
-    h1,
-    h2,
-    h3 {
-        font-family: var(--title-font-family);
-        font-weight: 400;
-    }
-
     strong {
-        color: var(--text-highlight-color);
+        color: #cc7832;
         font-weight: 600;
     }
 </style>
