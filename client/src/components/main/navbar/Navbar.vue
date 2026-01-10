@@ -5,6 +5,7 @@
     import NavbarSocialNetwork from '@/components/main/navbar/NavbarSocialNetwork.vue';
     import NavbarIcon from '@/components/main/navbar/NavbarIcon.vue';
     import { NavbarProps, NavbarSocialNetworkProps } from '@/components/main/navbar/types';
+    import NavbarPart from '@/components/main/navbar/NavbarPart.vue';
 
     defineProps<NavbarProps>();
     const emit = defineEmits<{
@@ -77,9 +78,12 @@
         :class="{ opened }"
         :style="`--navbar-max-height: ${maxHeight}`"
     >
-        <div class="navbar-part navbar-left-part navbar-outer-part">
+        <NavbarPart
+            class="left-0"
+            outer
+        >
             <NavbarLink
-                class="navbar-left-link navbar-logo"
+                class="navbar-left-link px-screen-edge"
                 data-testid="logo"
                 routerLink
                 replace
@@ -87,8 +91,8 @@
                 to="home"
                 @click="$emit('linkClick', 'home')"
             />
-        </div>
-        <div class="navbar-part navbar-middle-part">
+        </NavbarPart>
+        <NavbarPart class="self-center max-lg:order-1 max-lg:h-auto max-lg:w-full max-lg:flex-col">
             <NavbarLink
                 v-for="[name, section] in sections"
                 :key="name"
@@ -101,11 +105,14 @@
                 :to="name"
                 @click="onLinkClick(name)"
             />
-        </div>
-        <div class="navbar-part navbar-right-part navbar-outer-part">
-            <div class="navbar-other-lang-container">
+        </NavbarPart>
+        <NavbarPart
+            class="right-0 flex gap-5 max-lg:contents"
+            outer
+        >
+            <div class="flex items-center">
                 <NavbarLink
-                    class="navbar-other-lang"
+                    class="w-12 font-light"
                     data-testid="navbar-other-lang"
                     routerLink
                     :text="locales.otherLangCode"
@@ -119,20 +126,19 @@
                     @click="opened = !opened"
                 />
             </div>
-            <div class="navbar-social-network-container">
+            <div class="flex h-navbar-height max-lg:order-2 max-lg:w-full max-lg:items-center max-lg:justify-center">
                 <NavbarSocialNetwork
                     v-for="socialNetwork in socialNetworks"
                     v-bind="socialNetwork"
                 />
             </div>
-        </div>
+        </NavbarPart>
     </nav>
 </template>
 
 <style lang="scss" scoped>
     .navbar {
         --navbar-transition-duration: 0.8s;
-        --navbar-outer-padding-horizontal: var(--content-padding-horizontal);
 
         background-color: var(--primary-color);
         box-shadow: 0 5px 18px 0 rgb(0 0 0 / 33%);
@@ -161,43 +167,8 @@
         }
     }
 
-    .navbar-logo {
-        padding-left: var(--navbar-outer-padding-horizontal);
-        padding-right: var(--navbar-outer-padding-horizontal);
-    }
-
-    .navbar-part {
-        align-items: center;
-        display: flex;
-        height: var(--navbar-height);
-    }
-
-    .navbar-outer-part {
-        position: absolute;
-        top: 0;
-
-        @media (max-width: 1023px) {
-            position: relative;
-        }
-    }
-
-    .navbar-left-part {
-        left: 0;
-    }
-
     .navbar-left-link {
         --navbar-link-padding-horizontal: 30px;
-    }
-
-    .navbar-middle-part {
-        align-self: center;
-
-        @media (max-width: 1023px) {
-            flex-direction: column;
-            height: auto;
-            order: 1;
-            width: 100%;
-        }
     }
 
     .navbar-middle-link {
@@ -208,39 +179,6 @@
         }
 
         @media (max-width: 1023px) {
-            width: 100%;
-        }
-    }
-
-    .navbar-right-part {
-        display: flex;
-        gap: 20px;
-        right: 0;
-
-        @media (max-width: 1023px) {
-            display: contents;
-        }
-    }
-
-    .navbar-other-lang-container {
-        align-items: center;
-        display: flex;
-    }
-
-    .navbar-other-lang {
-        font-family: 'Raleway', sans-serif;
-        font-weight: 300;
-        width: 50px;
-    }
-
-    .navbar-social-network-container {
-        display: flex;
-        height: var(--navbar-height);
-
-        @media (max-width: 1023px) {
-            align-items: center;
-            justify-content: center;
-            order: 2;
             width: 100%;
         }
     }
