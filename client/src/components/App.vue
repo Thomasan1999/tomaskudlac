@@ -42,7 +42,6 @@
         --primary-background-color: #1c1c1c;
         --primary-color: #191970;
         --primary-color-light: #2828b3;
-        --primary-red: #da0b24;
         --primary-text-color: #ffffff;
         --selection-color: #0e6beb;
         --text-highlight-color: #cc7832;
