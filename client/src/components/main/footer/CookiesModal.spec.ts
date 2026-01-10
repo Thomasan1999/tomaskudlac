@@ -20,20 +20,20 @@ describe('CookiesModal', () => {
     it("emits 'close' event on close button click", async () => {
         const wrapper = createWrapper();
 
-        expect(wrapper.emitted().close).toBeUndefined();
+        expect(wrapper.emitted('close')).toBeUndefined();
 
         await wrapper.get(CLOSE_BUTTON_SELECTOR).trigger('click');
 
-        expect(wrapper.emitted().close).toHaveLength(1);
+        expect(wrapper.emitted('close')).toHaveLength(1);
     });
 
     it("emits 'close' event on overlay click", async () => {
         const wrapper = createWrapper();
 
-        expect(wrapper.emitted().close).toBeUndefined();
+        expect(wrapper.emitted('close')).toBeUndefined();
 
         await wrapper.get(OVERLAY_SELECTOR).trigger('click');
 
-        expect(wrapper.emitted().close).toHaveLength(1);
+        expect(wrapper.emitted('close')).toHaveLength(1);
     });
 });

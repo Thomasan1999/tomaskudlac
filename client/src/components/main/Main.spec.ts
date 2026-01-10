@@ -43,7 +43,7 @@ describe('Main', () => {
         const mainSectionComponents = wrapper.findAllComponents(MainSection);
 
         mainSectionComponents.forEach((mainSection, mainSectionIndex) => {
-            const name = mainSection.props().name;
+            const name = mainSection.props('name');
 
             const order = mainSections[name].order;
 

@@ -67,15 +67,15 @@ describe('Navbar', () => {
 
         const sectionLinks = getSectionLinks(wrapper);
 
-        expect(sectionLinks[0].props().active).toBeTruthy();
+        expect(sectionLinks[0].props('active')).toBeTruthy();
 
         await wrapper.setProps({ activeSection: sections[1][0] });
 
-        expect(sectionLinks[1].props().active).toBeTruthy();
+        expect(sectionLinks[1].props('active')).toBeTruthy();
 
         await wrapper.setProps({ activeSection: 'randomSection' });
 
-        const noLinkHasActiveClass = sectionLinks.every((sectionLink) => !sectionLink.props().active);
+        const noLinkHasActiveClass = sectionLinks.every((sectionLink) => !sectionLink.props('active'));
 
         expect(noLinkHasActiveClass).toBe(true);
     });
@@ -115,24 +115,24 @@ describe('Navbar', () => {
     it("emits 'linkClick' on a section link click", async () => {
         const wrapper = createWrapper();
 
-        expect(wrapper.emitted().linkClick).toBeUndefined();
+        expect(wrapper.emitted('linkClick')).toBeUndefined();
 
         await wrapper.get(LOGO_SELECTOR).trigger('click');
 
-        expect(wrapper.emitted().linkClick).toHaveLength(1);
+        expect(wrapper.emitted('linkClick')).toHaveLength(1);
 
         await wrapper.get(SECTION_LINK_SELECTOR).trigger('click');
 
-        expect(wrapper.emitted().linkClick).toHaveLength(2);
+        expect(wrapper.emitted('linkClick')).toHaveLength(2);
     });
 
     it("emits 'languageToggle' on language button click", async () => {
         const wrapper = createWrapper();
 
-        expect(wrapper.emitted().languageToggle).toBeUndefined();
+        expect(wrapper.emitted('languageToggle')).toBeUndefined();
 
         await wrapper.get(NAVBAR_OTHER_LANG_SELECTOR).trigger('click');
 
-        expect(wrapper.emitted().languageToggle).toHaveLength(1);
+        expect(wrapper.emitted('languageToggle')).toHaveLength(1);
     });
 });
