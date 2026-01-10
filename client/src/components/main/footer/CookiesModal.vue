@@ -26,12 +26,12 @@
                 class="relative box-border max-h-screen-without-edge w-[58rem] max-w-screen-without-edge overflow-auto bg-overlay px-screen-edge py-12 text-center lg:px-12"
             >
                 <button
-                    class="absolute right-0 top-0 flex size-12 items-center justify-center font-thin hover:[&>.close-icon]:fill-text-highlight"
+                    class="group absolute right-0 top-0 flex size-12 items-center justify-center font-thin"
                     data-testid="close-button"
                     :title="locales.closeButtonTitle"
                     @click="$emit('close')"
                 >
-                    <CloseIcon class="h-4" />
+                    <CloseIcon class="h-4 group-hover:fill-text-highlight" />
                 </button>
 
                 <div class="flex flex-col gap-6">
