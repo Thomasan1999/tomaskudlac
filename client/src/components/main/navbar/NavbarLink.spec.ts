@@ -18,14 +18,16 @@ const createWrapper = buildCreateWrapper(
 );
 
 describe('NavbarLink', () => {
-    it("has 'active' class based on 'active' property", async () => {
+    it("has different background color and default cursor when 'active' property is true", async () => {
         const wrapper = createWrapper({ active: false });
 
-        expect(wrapper.classes()).not.toContain('active');
+        expect(wrapper.classes('cursor-default')).toBe(false);
+        expect(wrapper.classes('bg-navbar-link-active')).toBe(false);
 
         await wrapper.setProps({ active: true });
 
-        expect(wrapper.classes()).toContain('active');
+        expect(wrapper.classes('cursor-default')).toBe(true);
+        expect(wrapper.classes('bg-navbar-link-active')).toBe(true);
     });
 
     it("includes 'RouterLink' component if 'routerLink' property is set to true", async () => {
