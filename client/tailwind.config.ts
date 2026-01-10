@@ -8,9 +8,9 @@ const config: Config = {
                 blinking: 'blinking 1.06s infinite step-end',
             },
             colors: {
+                'blue-curtain': 'rgba(14, 33, 175, 0.55)',
                 'error-bg': '#3e2d2d',
                 'error-text': '#cc0000',
-                'home-curtain': 'rgba(14, 33, 175, 0.55)',
                 'navbar-link-active': '#2c2c2c',
                 overlay: '#222222',
                 primary: '#191970',
@@ -38,6 +38,7 @@ const config: Config = {
                 'screen-without-edge': 'calc(100vw - var(--content-padding-horizontal) * 2)',
             },
             spacing: {
+                'hover-height': 'var(--hover-height)',
                 label: '6rem',
                 'main-row-gap': '3.125rem',
                 'navbar-height': '3.75rem',
