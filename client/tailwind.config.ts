@@ -7,6 +7,9 @@ const config: Config = {
             animation: {
                 blinking: 'blinking 1.06s infinite step-end',
             },
+            boxShadow: {
+                navbar: '0 5px 18px 0 rgb(0 0 0 / 33%)',
+            },
             colors: {
                 'blue-curtain': 'rgba(14, 33, 175, 0.55)',
                 'error-bg': '#3e2d2d',

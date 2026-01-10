@@ -1,6 +1,7 @@
 import NavbarLink from '@/components/main/navbar/NavbarLink.vue';
 import { RouterLink } from 'vue-router';
 import { buildCreateWrapper } from '@/utils/test';
+import { FontWeight } from '@/types/components';
 
 const createWrapper = buildCreateWrapper(
     NavbarLink,
@@ -90,5 +91,15 @@ describe('NavbarLink', () => {
 
         expectSlotTextToBe('First Text');
         expectSlotTextToBe('Another Text');
+    });
+
+    it("assigns a class based on 'fontWeight' property", async () => {
+        const wrapper = createWrapper({ fontWeight: FontWeight.NORMAL });
+
+        expect(wrapper.classes('font-normal')).toBe(true);
+
+        await wrapper.setProps({ fontWeight: FontWeight.LIGHT });
+
+        expect(wrapper.classes('font-light')).toBe(true);
     });
 });

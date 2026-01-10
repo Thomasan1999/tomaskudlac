@@ -49,7 +49,7 @@ describe('navigation', async () => {
     it('changes hash on nav item click', async () => {
         let previousHash: string = '';
 
-        const selector = '.navbar-middle-link';
+        const selector = getTestingSelector('section-link');
 
         await page.waitForSelector(selector, { timeout: 10000 });
 
