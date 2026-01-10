@@ -1,7 +1,7 @@
 <template>
     <svg
         data-testid="close-icon"
-        class="close-icon fill-current leading-[0] transition-colors"
+        class="fill-current leading-[0] transition-colors"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 121.31 122.876"
         xml:space="preserve"
