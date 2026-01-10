@@ -1,4 +1,5 @@
 import MainSectionObject from '@/components/main/MainSectionObject';
+import { FontWeight } from '@/types/components';
 
 export interface NavbarIconProps {
     mode: 'bars' | 'cross';
@@ -6,6 +7,7 @@ export interface NavbarIconProps {
 
 export interface NavbarLinkProps {
     active?: boolean;
+    fontWeight?: FontWeight;
     replace?: boolean;
     routerLink?: boolean;
     text?: string;

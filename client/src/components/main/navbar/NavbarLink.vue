@@ -3,8 +3,9 @@
     import { computed } from 'vue';
     import ExternalLink from '@/components/ExternalLink.vue';
     import { NavbarLinkProps } from '@/components/main/navbar/types';
+    import { FontWeight } from '@/types/components';
 
-    const { replace = false, routerLink = false, to } = defineProps<NavbarLinkProps>();
+    const { fontWeight = FontWeight.NORMAL, replace = false, routerLink = false, to } = defineProps<NavbarLinkProps>();
     const emit = defineEmits<{ (event: 'click'): void }>();
 
     const onClick = ($event: MouseEvent) => {
@@ -30,8 +31,11 @@
     <Component
         :is="routerLink ? 'router-link' : ExternalLink"
         data-testid="navbar-link"
-        class="flex h-navbar-height items-center justify-center px-navbar-link-padding-horizontal font-normal transition-colors"
-        :class="active ? 'cursor-default bg-navbar-link-active' : 'hover:bg-primary-light'"
+        class="flex h-navbar-height items-center justify-center px-navbar-link-padding-horizontal transition-colors"
+        :class="[
+            active ? 'cursor-default bg-navbar-link-active' : 'hover:bg-primary-light',
+            fontWeight === FontWeight.NORMAL ? 'font-normal' : 'font-light',
+        ]"
         :title="title"
         v-bind="dynamicProps"
         @click="onClick"
