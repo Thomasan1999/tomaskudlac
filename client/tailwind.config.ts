@@ -12,6 +12,7 @@ const config: Config = {
             },
             colors: {
                 'blue-curtain': 'rgba(14, 33, 175, 0.55)',
+                'contact-form-data-bg': '#2d2d2d',
                 'error-bg': '#3e2d2d',
                 'error-text': '#cc0000',
                 'navbar-link-active': '#2c2c2c',
@@ -48,7 +49,6 @@ const config: Config = {
                 label: '6rem',
                 'main-row-gap': '3.125rem',
                 'navbar-height': '3.75rem',
-                'navbar-link-padding-horizontal': 'var(--navbar-link-padding-horizontal, 0)',
                 // TODO: use normal CSS once Tailwind migrated to v4
                 'screen-edge': 'var(--content-padding-horizontal)',
                 'toast-container-right': 'calc(-100vw + var(--content-padding-horizontal) + var(--scrollbar-width))',
