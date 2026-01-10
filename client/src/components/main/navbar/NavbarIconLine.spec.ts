@@ -1,23 +1,13 @@
-import NavbarIcon from '@/components/main/navbar/NavbarIcon.vue';
+import NavbarIconLine from '@/components/main/navbar/NavbarIconLine.vue';
 import mockInitStore from '@/mocks/mockInitStore';
 import { buildCreateWrapper } from '@/utils/test';
 import { NavbarIconMode } from '@/components/main/navbar/types';
 
-const createWrapper = buildCreateWrapper(NavbarIcon, { mode: NavbarIconMode.BARS });
+const createWrapper = buildCreateWrapper(NavbarIconLine);
 
-describe('NavbarIcon', () => {
+describe('NavbarIconLine', () => {
     beforeAll(async () => {
         await mockInitStore();
-    });
-
-    it("emits 'click' event on click", async () => {
-        const wrapper = createWrapper();
-
-        expect(wrapper.emitted('click')).toBeUndefined();
-
-        await wrapper.trigger('click');
-
-        expect(wrapper.emitted('click')).toHaveLength(1);
     });
 
     it("has a class based on 'mode' property", async () => {

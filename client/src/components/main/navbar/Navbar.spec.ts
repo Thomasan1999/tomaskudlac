@@ -8,6 +8,7 @@ import mockInitStore from '@/mocks/mockInitStore';
 import { buildCreateWrapper, getTestingSelector } from '@/utils/test';
 
 const LOGO_SELECTOR = getTestingSelector('logo');
+const NAVBAR_ICON_SELECTOR = getTestingSelector('navbar-icon');
 const NAVBAR_OTHER_LANG_SELECTOR = getTestingSelector('navbar-other-lang');
 const SECTION_LINK_SELECTOR = getTestingSelector('section-link');
 
@@ -88,7 +89,7 @@ describe('Navbar', () => {
 
         await nextTick();
 
-        const navbarIcon = wrapper.get('.navbar-icon');
+        const navbarIcon = wrapper.get(NAVBAR_ICON_SELECTOR);
 
         const oldClasses = navbarIcon.classes();
 

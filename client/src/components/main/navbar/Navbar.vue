@@ -4,7 +4,7 @@
     import useStore from '@/store';
     import NavbarSocialNetwork from '@/components/main/navbar/NavbarSocialNetwork.vue';
     import NavbarIcon from '@/components/main/navbar/NavbarIcon.vue';
-    import { NavbarProps, NavbarSocialNetworkProps } from '@/components/main/navbar/types';
+    import { NavbarIconMode, NavbarProps, NavbarSocialNetworkProps } from '@/components/main/navbar/types';
     import NavbarPart from '@/components/main/navbar/NavbarPart.vue';
     import { FontWeight } from '@/types/components';
 
@@ -124,7 +124,7 @@
                 />
                 <NavbarIcon
                     v-if="touchscreen"
-                    :mode="opened ? 'cross' : 'bars'"
+                    :mode="opened ? NavbarIconMode.CROSS : NavbarIconMode.BARS"
                     @click="opened = !opened"
                 />
             </div>
