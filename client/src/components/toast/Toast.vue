@@ -51,7 +51,7 @@
         >
             <div
                 v-if="opened"
-                class="w-screen-without-edge absolute right-toast-container-right top-toast-container-top z-[1] box-border max-w-[22.5rem] px-[1.875rem] py-2.5 text-left"
+                class="toast w-screen-without-edge absolute right-toast-container-right top-toast-container-top z-[1] box-border max-w-[22.5rem] px-[1.875rem] py-2.5 text-left"
                 :class="type === ToastType.SUCCESS ? 'bg-primary-green' : 'bg-primary-red'"
                 data-testid="toast"
                 :style="`--relative-margin-top: ${relativeMarginTop}`"
