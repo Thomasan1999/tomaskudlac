@@ -11,6 +11,7 @@ const config: Config = {
                 'error-bg': '#3e2d2d',
                 'error-text': '#cc0000',
                 'home-curtain': 'rgba(14, 33, 175, 0.55)',
+                'navbar-link-active': '#2c2c2c',
                 overlay: '#222222',
                 primary: '#191970',
                 'primary-light': '#2828b3',
@@ -18,6 +19,7 @@ const config: Config = {
             },
             fontFamily: {
                 contact: 'Montserrat, sans-serif',
+                title: 'Raleway, sans-serif',
             },
             keyframes: {
                 blinking: {
@@ -39,6 +41,7 @@ const config: Config = {
                 label: '6rem',
                 'main-row-gap': '3.125rem',
                 'navbar-height': '3.75rem',
+                'navbar-link-padding-horizontal': 'var(--navbar-link-padding-horizontal, 0)',
                 // TODO: use normal CSS once Tailwind migrated to v4
                 'screen-edge': 'var(--content-padding-horizontal)',
             },

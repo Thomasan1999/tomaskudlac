@@ -18,20 +18,14 @@
 
 <template>
     <NavbarLink
+        data-testid="navbar-social-network"
         position="right"
         :title="title"
         :to="to"
     >
         <FontAwesomeIcon
-            class="navbar-social-network"
+            class="px-2.5"
             :icon="icon"
         />
     </NavbarLink>
 </template>
-
-<style lang="scss" scoped>
-    .navbar-social-network {
-        padding-left: 10px;
-        padding-right: 10px;
-    }
-</style>
