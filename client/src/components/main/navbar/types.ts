@@ -1,8 +1,17 @@
 import MainSectionObject from '@/components/main/MainSectionObject';
 import { FontWeight } from '@/types/components';
 
+export enum NavbarIconMode {
+    BARS = 'bars',
+    CROSS = 'cross',
+}
+
 export interface NavbarIconProps {
-    mode: 'bars' | 'cross';
+    mode: NavbarIconMode;
+}
+
+export interface NavbarIconLineProps {
+    mode: NavbarIconMode;
 }
 
 export interface NavbarLinkProps {

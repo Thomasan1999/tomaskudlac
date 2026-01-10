@@ -57,6 +57,7 @@ const config: Config = {
             },
             transitionDuration: {
                 DEFAULT: '0.25s',
+                navbar: '0.25s',
             },
         },
     },
