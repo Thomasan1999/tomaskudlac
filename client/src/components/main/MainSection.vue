@@ -15,12 +15,12 @@
 <template>
     <section
         :id="id"
-        class="main-section gap-y-main-row-gap"
+        class="z-[1] flex flex-col items-center gap-y-main-row-gap"
     >
         <div class="text-content">
             <h2
                 v-if="heading"
-                class="main-section-name"
+                class="text-[2.8125rem] lg:text-[3.125rem]"
             >
                 {{ title }}
             </h2>
@@ -28,16 +28,3 @@
         <slot />
     </section>
 </template>
-
-<style lang="scss" scoped>
-    .main-section {
-        align-items: center;
-        display: flex;
-        flex-direction: column;
-        z-index: 1;
-    }
-
-    .main-section-name {
-        font-size: var(--main-section-name-font-size);
-    }
-</style>

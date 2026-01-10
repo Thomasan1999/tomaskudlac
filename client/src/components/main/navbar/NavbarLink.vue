@@ -30,8 +30,8 @@
     <Component
         :is="routerLink ? 'router-link' : ExternalLink"
         data-testid="navbar-link"
-        class="flex h-navbar-height items-center justify-center px-navbar-link-padding-horizontal font-title font-normal transition-colors hover:bg-primary-light"
-        :class="active ? 'cursor-default bg-navbar-link-active' : ''"
+        class="flex h-navbar-height items-center justify-center px-navbar-link-padding-horizontal font-title font-normal transition-colors"
+        :class="active ? 'cursor-default bg-navbar-link-active' : 'hover:bg-primary-light'"
         :title="title"
         v-bind="dynamicProps"
         @click="onClick"
