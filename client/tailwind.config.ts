@@ -21,7 +21,7 @@ const config: Config = {
             },
             fontFamily: {
                 contact: 'Montserrat, sans-serif',
-                title: 'Raleway, sans-serif',
+                DEFAULT: 'Raleway, sans-serif',
             },
             keyframes: {
                 blinking: {
