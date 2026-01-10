@@ -12,7 +12,7 @@
         heading
         name="projects"
     >
-        <div class="project-container">
+        <div class="grid w-full grid-cols-1 lg:grid-cols-2">
             <Project
                 v-for="project in projects"
                 :name="project"
@@ -20,15 +20,3 @@
         </div>
     </MainSection>
 </template>
-
-<style lang="scss" scoped>
-    .project-container {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        width: 100%;
-
-        @media (max-width: 1023px) {
-            grid-template-columns: 1fr;
-        }
-    }
-</style>
