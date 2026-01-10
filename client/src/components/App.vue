@@ -60,10 +60,8 @@
         --scrollbar-color: #eeeeee;
 
         --about-myself-column-title-font-size: 30px;
-        --big-text-font-size: 20px;
         --main-section-name-font-size: 50px;
         --navbar-font-size: 20px;
-        --project-title-font-size: 45px;
         --text-font-size: 16px;
 
         background-color: var(--primary-background-color);
@@ -80,9 +78,7 @@
 
         @media (max-width: 549px) {
             --about-myself-column-title-font-size: 25px;
-            --big-text-font-size: 16px;
             --main-section-name-font-size: 45px;
-            --project-title-font-size: 35px;
             --text-font-size: 14px;
         }
     }

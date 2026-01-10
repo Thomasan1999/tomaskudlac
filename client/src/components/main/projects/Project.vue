@@ -45,107 +45,35 @@
 
 <template>
     <ExternalLink
-        class="project cover-background has-curtain"
+        data-testid="project"
+        class="cover-background has-curtain group relative flex items-center justify-center before:bg-black/[.75] before:transition-colors after:block after:pt-[56.25%] after:content-[''] hover:before:opacity-100 lg:before:bg-black/[.55] hover:before:lg:bg-blue-curtain"
         :href="projectLocales.href"
         :style="{ backgroundImage }"
         :title="`${generalLocales.showProject} ${[projectLocales.title]}`"
     >
         <div class="text-content">
-            <div class="project-content">
+            <div class="relative">
                 <h3
-                    class="project-title"
+                    class="text-[35px] sm:text-[45px]"
                     data-testid="title"
                 >
                     {{ projectLocales.title }}
                 </h3>
                 <div
-                    class="project-text"
+                    class="h-auto leading-[1.2] opacity-100 transition-none group-hover:h-hover-height group-hover:opacity-100 sm:text-xl lg:h-0 lg:opacity-0 lg:transition-[height,opacity]"
                     :style="`--hover-height: ${textHoverHeight}px`"
                 >
                     <div
                         ref="textContent"
-                        class="project-text-content"
                         data-testid="text-content"
                     >
-                        <h4 class="project-what-ive-done">{{ generalLocales.whatIveDone }}:</h4>
-                        <p class="project-text-design">
-                            {{ generalLocales.designLabel }}: {{ projectLocales.designDesc }}
-                        </p>
-                        <p class="project-text-front-end">
-                            {{ generalLocales.frontEndLabel }}: {{ projectLocales.frontEndDesc }}
-                        </p>
-                        <p class="project-text-back-end">
-                            {{ generalLocales.backEndLabel }}: {{ projectLocales.backEndDesc }}
-                        </p>
+                        <h4 class="font-bold">{{ generalLocales.whatIveDone }}:</h4>
+                        <p>{{ generalLocales.designLabel }}: {{ projectLocales.designDesc }}</p>
+                        <p>{{ generalLocales.frontEndLabel }}: {{ projectLocales.frontEndDesc }}</p>
+                        <p>{{ generalLocales.backEndLabel }}: {{ projectLocales.backEndDesc }}</p>
                     </div>
                 </div>
             </div>
         </div>
     </ExternalLink>
 </template>
-
-<style lang="scss" scoped>
-    .project {
-        align-items: center;
-        display: flex;
-        justify-content: center;
-        position: relative;
-
-        &:before {
-            background-color: rgba(0, 0, 0, 0.55);
-            transition: background-color var(--base-transition-duration);
-
-            @media (max-width: 1023px) {
-                background-color: rgba(0, 0, 0, 0.75);
-            }
-        }
-
-        &:after {
-            content: '';
-            display: block;
-            padding-top: 56.25%;
-        }
-
-        &:hover {
-            &:before {
-                @media (min-width: 1024px) {
-                    background-color: rgba(14, 33, 175, 0.55);
-                    opacity: 1;
-                }
-            }
-
-            .project-text {
-                height: var(--hover-height);
-                opacity: 1;
-            }
-        }
-    }
-
-    .project-content {
-        position: relative;
-    }
-
-    .project-what-ive-done {
-        font-weight: 700;
-    }
-
-    .project-title {
-        font-size: var(--project-title-font-size);
-    }
-
-    .project-text {
-        font-size: var(--big-text-font-size);
-        height: 0;
-        line-height: 1.2;
-        opacity: 0;
-        transition:
-            height var(--base-transition-duration),
-            opacity var(--base-transition-duration);
-
-        @media (max-width: 1023px) {
-            height: auto;
-            opacity: 1;
-            transition: none;
-        }
-    }
-</style>
