@@ -12,7 +12,7 @@
         heading
         name="projects"
     >
-        <div class="grid w-full grid-cols-1 lg:grid-cols-2">
+        <div class="grid w-full max-lg:grid-cols-1 lg:grid-cols-2">
             <Project
                 v-for="project in projects"
                 :name="project"

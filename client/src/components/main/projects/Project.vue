@@ -46,7 +46,7 @@
 <template>
     <ExternalLink
         data-testid="project"
-        class="cover-background has-curtain group relative flex items-center justify-center before:bg-black/[.75] before:transition-colors after:block after:pt-[56.25%] after:content-[''] hover:before:opacity-100 lg:before:bg-black/[.55] hover:before:lg:bg-blue-curtain"
+        class="cover-background has-curtain group relative flex items-center justify-center before:bg-black/[.75] before:transition-colors after:block after:pt-[56.25%] after:content-[''] lg:before:bg-black/[.55] hover:before:lg:bg-blue-curtain"
         :href="projectLocales.href"
         :style="{ backgroundImage }"
         :title="`${generalLocales.showProject} ${[projectLocales.title]}`"
@@ -54,13 +54,13 @@
         <div class="text-content">
             <div class="relative">
                 <h3
-                    class="text-[35px] sm:text-[45px]"
+                    class="max-sm:text-[35px] sm:text-[45px]"
                     data-testid="title"
                 >
                     {{ projectLocales.title }}
                 </h3>
                 <div
-                    class="h-auto leading-[1.2] opacity-100 transition-none group-hover:h-hover-height group-hover:opacity-100 sm:text-xl lg:h-0 lg:opacity-0 lg:transition-[height,opacity]"
+                    class="leading-[1.2] group-hover:h-hover-height group-hover:opacity-100 max-lg:opacity-100 max-lg:transition-none sm:text-xl lg:h-0 lg:opacity-0 lg:transition-[height,opacity]"
                     :style="`--hover-height: ${textHoverHeight}px`"
                 >
                     <div

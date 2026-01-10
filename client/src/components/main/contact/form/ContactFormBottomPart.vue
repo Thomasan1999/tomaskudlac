@@ -19,7 +19,7 @@
 <template>
     <div
         data-testid="contact-form-bottom-part"
-        class="ml-0 flex flex-col items-center justify-center gap-6 text-xl lg:ml-label"
+        class="flex flex-col items-center justify-center gap-6 text-xl lg:ml-label"
     >
         <p data-testid="required-legend">
             {{ locales.requiredLegend }}

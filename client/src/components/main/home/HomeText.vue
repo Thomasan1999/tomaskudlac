@@ -207,7 +207,7 @@
 <template>
     <p
         data-testid="home-text"
-        class="home-text relative mb-navbar-height flex flex-wrap items-center whitespace-break-spaces text-[9vw] leading-[1.2] md:text-[4.375rem]"
+        class="home-text relative mb-navbar-height flex flex-wrap items-center whitespace-break-spaces leading-[1.2] max-md:text-[9vw] md:text-[4.375rem]"
     >
         <span>{{ locales.welcome }}</span>
         <span
