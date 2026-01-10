@@ -1,7 +1,7 @@
 <script lang="ts" setup>
     import useStore from '@/store';
     import { computed, ref } from 'vue';
-    import ToastContainer from '@/components/main/ToastContainer.vue';
+    import ToastContainer from '@/components/toast/ToastContainer.vue';
 
     const store = useStore();
 

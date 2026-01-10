@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import Toast from '@/components/main/Toast.vue';
+    import Toast from '@/components/toast/Toast.vue';
     import useStore from '@/store';
 
     const store = useStore();
