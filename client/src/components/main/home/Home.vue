@@ -13,7 +13,7 @@
 <template>
     <MainSection
         data-testid="home"
-        class="has-curtain pt-navbar-height before:bg-home-curtain relative flex h-[calc(100*var(--vh)-var(--navbar-height))] items-center justify-center overflow-hidden before:z-0 after:absolute after:left-0 after:top-0 after:z-[-1] after:block after:size-full after:bg-cover after:bg-fixed after:bg-center after:bg-no-repeat after:blur-[3px] after:content-['']"
+        class="has-curtain relative flex h-[calc(100*var(--vh)-var(--navbar-height))] items-center justify-center overflow-hidden pt-navbar-height before:z-0 before:bg-home-curtain after:absolute after:left-0 after:top-0 after:z-[-1] after:block after:size-full after:bg-cover after:bg-fixed after:bg-center after:bg-no-repeat after:blur-[3px] after:content-['']"
         :class="
             imageFormat === ImageFormat.WEBP
                 ? 'after:bg-[url(/images/background-home.webp)]'
