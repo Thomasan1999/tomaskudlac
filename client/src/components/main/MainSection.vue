@@ -20,7 +20,7 @@
         <div class="text-content">
             <h2
                 v-if="heading"
-                class="text-[2.8125rem] lg:text-[3.125rem]"
+                class="max-lg:text-[2.8125rem] lg:text-[3.125rem]"
             >
                 {{ title }}
             </h2>
