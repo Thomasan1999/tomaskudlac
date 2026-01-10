@@ -57,8 +57,6 @@
         --scrollbar-thumb-active-color: #959595;
         --scrollbar-color: #eeeeee;
 
-        --about-myself-column-title-font-size: 30px;
-        --main-section-name-font-size: 50px;
         --navbar-font-size: 20px;
         --text-font-size: 16px;
 
@@ -75,8 +73,6 @@
         }
 
         @media (max-width: 549px) {
-            --about-myself-column-title-font-size: 25px;
-            --main-section-name-font-size: 45px;
             --text-font-size: 14px;
         }
     }
