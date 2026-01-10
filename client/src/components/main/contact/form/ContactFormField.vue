@@ -87,8 +87,8 @@
 <template>
     <label
         :data-testid="`field-${name}`"
-        class="contact-form-field"
-        :class="{ 'has-error': error }"
+        class="contact-form-field relative flex flex-wrap"
+        :class="error ? 'text-error-text' : ''"
     >
         <ContactFormLabelText
             :fieldRequired="required"
@@ -96,8 +96,8 @@
         />
         <Component
             :is="element"
-            class="contact-form-data flex-grow"
-            :class="[`contact-form-${element}`]"
+            class="font-inherit box-border flex flex-grow resize-none appearance-none overflow-auto border !border-solid border-[#cccccc] bg-contact-form-data-bg py-contact-form-data-padding-vertical pl-4 leading-[1.5] text-current outline-none max-lg:w-full"
+            :class="[element === 'input' ? 'h-[2.5em]' : 'h-[8lh]', error ? 'border-error-text bg-error-bg' : '']"
             :minlength="minlength"
             :maxlength="maxlength"
             :name="name"
@@ -111,60 +111,13 @@
     </label>
 </template>
 
-<style lang="scss" scoped>
-    .contact-form-field {
-        --contact-form-data-background-color: #2d2d2d;
-        --contact-form-data-padding-vertical: 8px;
-
-        display: flex;
-        flex-wrap: wrap;
-        position: relative;
-
-        &.has-error {
-            color: #cc0000;
-
-            .contact-form-data {
-                background-color: #3e2d2d;
-                border-color: #cc0000;
-            }
-        }
-    }
-
+<style scoped>
+    /* TODO: move to Tailwind once migrated to v4 */
     input:-webkit-autofill,
     input:-webkit-autofill:hover,
     input:-webkit-autofill:focus,
     input:-webkit-autofill:active {
-        -webkit-box-shadow: 0 0 0 30px var(--contact-form-data-background-color) inset !important;
+        -webkit-box-shadow: 0 0 0 30px #2d2d2d inset !important;
         -webkit-text-fill-color: #ffffff;
-    }
-
-    .contact-form-data {
-        appearance: none;
-        background-color: var(--contact-form-data-background-color);
-        border: 1px solid #cccccc;
-        box-sizing: border-box;
-        color: currentColor;
-        display: flex;
-        font: inherit;
-        line-height: var(--contact-form-line-height);
-        outline: none;
-        overflow: auto;
-        padding-bottom: var(--contact-form-data-padding-vertical);
-        padding-left: 15px;
-        padding-top: var(--contact-form-data-padding-vertical);
-        resize: none;
-
-        @media (max-width: 1023px) {
-            max-width: 100%;
-            width: 100%;
-        }
-    }
-
-    .contact-form-input {
-        height: 2.5em;
-    }
-
-    .contact-form-textarea {
-        height: 8lh;
     }
 </style>
