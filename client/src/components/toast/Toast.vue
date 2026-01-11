@@ -28,7 +28,7 @@
 
     const relativeMarginTop = ref('');
 
-    const lifetime = computed(() => (store.isTouchscreen ? baseLifetime.value / 2 : baseLifetime.value));
+    const lifetime = computed(() => (store.maxLg ? baseLifetime.value / 2 : baseLifetime.value));
 
     onMounted(() => {
         opened.value = true;
