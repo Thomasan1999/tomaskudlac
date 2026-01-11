@@ -1,3 +1,5 @@
+import { SiteLanguage } from '@/store/types';
+
 export default {
     cookies: {
         closeButtonTitle: 'Zavrieť',
@@ -31,9 +33,10 @@ export default {
     },
     navbar: {
         hide: 'Skryť menu',
-        otherLangCode: 'EN',
-        otherLangHref: '/en/',
-        otherLangLinkTitle: 'Prepnúť do angličtiny',
+        otherLangs: {
+            [SiteLanguage.CZ]: 'Prepnúť do češtiny',
+            [SiteLanguage.EN]: 'Prepnúť do angličtiny',
+        },
         show: 'Otvoriť menu',
     },
     sections: {

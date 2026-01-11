@@ -8,7 +8,9 @@
     import { ProgrammingLanguage } from '@/store/ProgrammingLanguage';
     import { SiteLanguage } from '@/store/types';
     import HomeTextCursor from '@/components/main/home/HomeTextCursor.vue';
+    import { useRoute } from 'vue-router';
 
+    const route = useRoute();
     const store = useStore();
 
     const baseInterval = 50;
@@ -68,7 +70,7 @@
     };
 
     const languageHasAnPrefix = (programmingLanguage: ProgrammingLanguage): boolean =>
-        programmingLanguage.an && store.language === SiteLanguage.EN;
+        Boolean(programmingLanguage.an && route.meta.languageHasAnPrefix);
 
     const markProgrammingLanguage = async (): Promise<void> => {
         const markCharTimeout = baseInterval;

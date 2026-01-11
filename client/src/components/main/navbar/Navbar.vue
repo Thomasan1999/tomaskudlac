@@ -6,11 +6,10 @@
     import NavbarIcon from '@/components/main/navbar/NavbarIcon.vue';
     import { NavbarIconMode, NavbarProps, NavbarSocialNetworkProps } from '@/components/main/navbar/types';
     import NavbarPart from '@/components/main/navbar/NavbarPart.vue';
-    import { FontWeight } from '@/types/components';
+    import NavbarLanguageSwitcher from '@/components/main/navbar/NavbarLanguageSwitcher.vue';
 
     defineProps<NavbarProps>();
     const emit = defineEmits<{
-        (event: 'languageToggle'): void;
         (event: 'linkClick', sectionName: string): void;
     }>();
 
@@ -58,8 +57,6 @@
         },
     ];
 
-    const locales = computed(() => store.locales.navbar);
-
     const isOpenable = computed(() => store.maxXl);
 
     onMounted(() => {
@@ -97,7 +94,7 @@
             <NavbarLink
                 v-for="[name, section] in sections"
                 :key="name"
-                class="max-xl:px-screen-edge px-16 max-xl:w-full"
+                class="max-xl:px-screen-edge px-16 max-2xl:px-8 max-xl:w-full"
                 :active="name === activeSection"
                 data-testid="section-link"
                 routerLink
@@ -112,16 +109,7 @@
             outer
         >
             <div class="flex items-center">
-                <NavbarLink
-                    class="w-12"
-                    data-testid="navbar-other-lang"
-                    :fontWeight="FontWeight.LIGHT"
-                    routerLink
-                    :text="locales.otherLangCode"
-                    :title="locales.otherLangLinkTitle"
-                    :to="locales.otherLangHref"
-                    @click="$emit('languageToggle')"
-                />
+                <NavbarLanguageSwitcher />
                 <NavbarIcon
                     v-if="isOpenable"
                     :mode="opened ? NavbarIconMode.CROSS : NavbarIconMode.BARS"

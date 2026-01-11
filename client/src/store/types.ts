@@ -10,6 +10,7 @@ export enum InitializingState {
 }
 
 export enum SiteLanguage {
+    CZ = 'cz',
     EN = 'en',
     SK = 'sk',
 }
