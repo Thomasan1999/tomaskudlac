@@ -26,7 +26,7 @@ const createWrapper = buildCreateWrapper(HomeText, undefined, {
 });
 
 beforeAll(() => {
-    document.head.innerHTML += '<link rel="manifest">';
+    document.head.innerHTML += '<link rel="manifest"><meta name="description">';
 });
 
 describe('HomeText', () => {
