@@ -10,6 +10,7 @@ import { ExistingDomWrapper } from '@/types/tests';
 import { buildCreateWrapper, getTestingSelector } from '@/utils/test';
 import { MockInstance } from 'vitest';
 import HomeTextCursor from '@/components/main/home/HomeTextCursor.vue';
+import router from '@/router';
 
 const LOCALES_SELECTOR = getTestingSelector('locales');
 const MARKED_TEXT_SELECTOR = getTestingSelector('marked-text');
@@ -18,7 +19,15 @@ const PROGRAMMING_LANGUAGE_SELECTOR = getTestingSelector('programming-language')
 
 const shuffleSpy = (vi.spyOn(_, 'shuffle') as MockInstance).mockImplementation((value) => value);
 
-const createWrapper = buildCreateWrapper(HomeText);
+const createWrapper = buildCreateWrapper(HomeText, undefined, {
+    global: {
+        plugins: [router],
+    },
+});
+
+beforeAll(() => {
+    document.head.innerHTML += '<link rel="manifest"><meta name="description">';
+});
 
 describe('HomeText', () => {
     const languageTitle = 'HTML';
@@ -27,6 +36,7 @@ describe('HomeText', () => {
     const timeout = window.setTimeout;
 
     async function changeStoreLanguage(store: ReturnType<typeof useStore>, value: SiteLanguage): Promise<void> {
+        await router.push({ name: value });
         store.language = value;
         store.locales = (await import(`@/locales/${store.language}.ts`)).default;
     }

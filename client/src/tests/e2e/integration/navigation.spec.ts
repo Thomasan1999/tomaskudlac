@@ -3,7 +3,8 @@ import { default as puppeteer, ElementHandle } from 'puppeteer';
 import sleep from '@/utils/sleep';
 import { getTestingSelector } from '@/utils/test';
 
-const NAVBAR_OTHER_LANG_SELCTOR = getTestingSelector('navbar-other-lang');
+const NAVBAR_LANG_CZ_SELECTOR = getTestingSelector('navbar-lang-cz');
+const NAVBAR_LANG_EN_SELECTOR = getTestingSelector('navbar-lang-en');
 
 describe('navigation', async () => {
     const domChangeTimeout = 500;
@@ -69,22 +70,27 @@ describe('navigation', async () => {
     });
 
     it('changes href on language change', async () => {
-        const initialHref = getUrlObject(page).href;
+        const skHref = getUrlObject(page).href;
 
-        const otherLangButton = (await page.$(NAVBAR_OTHER_LANG_SELCTOR))!;
+        const czLangButton = (await page.$(NAVBAR_LANG_CZ_SELECTOR))!;
 
-        await otherLangButton.click();
+        await czLangButton.click();
 
         await sleep(domChangeTimeout);
 
-        const otherLangButtonTextHandle = (await otherLangButton.getProperty('textContent'))!;
+        const czHref = getUrlObject(page).href;
 
-        const otherLangButtonText = (await otherLangButtonTextHandle.jsonValue())!;
+        expect(czHref).not.toBe(skHref);
 
-        expect(otherLangButtonText).toBe('SK');
+        const enLangButton = (await page.$(NAVBAR_LANG_EN_SELECTOR))!;
 
-        const newHref = getUrlObject(page).href;
+        await enLangButton.click();
 
-        expect(newHref).not.toBe(initialHref);
+        await sleep(domChangeTimeout);
+
+        const enHref = getUrlObject(page).href;
+
+        expect(enHref).not.toBe(czHref);
+        expect(enHref).not.toBe(skHref);
     });
 });

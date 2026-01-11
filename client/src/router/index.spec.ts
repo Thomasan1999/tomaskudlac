@@ -35,7 +35,7 @@ describe('router', () => {
     beforeAll(async () => {
         mockImageSrc();
 
-        document.head.innerHTML += '<link rel="manifest">';
+        document.head.innerHTML += '<link rel="manifest"><meta name="description">';
 
         setActivePinia(createPinia());
 

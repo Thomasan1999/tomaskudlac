@@ -9,7 +9,6 @@ import { buildCreateWrapper, getTestingSelector } from '@/utils/test';
 
 const LOGO_SELECTOR = getTestingSelector('logo');
 const NAVBAR_ICON_SELECTOR = getTestingSelector('navbar-icon');
-const NAVBAR_OTHER_LANG_SELECTOR = getTestingSelector('navbar-other-lang');
 const SECTION_LINK_SELECTOR = getTestingSelector('section-link');
 
 const sections: [string, MainSectionObject][] = [
@@ -43,6 +42,7 @@ const createWrapper = buildCreateWrapper(
         global: {
             stubs: {
                 FontAwesomeIcon: true,
+                NavbarLanguageSwitcher: true,
                 RouterLink: { template: '<div></div>' },
             },
         },
@@ -124,15 +124,5 @@ describe('Navbar', () => {
         await wrapper.get(SECTION_LINK_SELECTOR).trigger('click');
 
         expect(wrapper.emitted('linkClick')).toHaveLength(2);
-    });
-
-    it("emits 'languageToggle' on language button click", async () => {
-        const wrapper = createWrapper();
-
-        expect(wrapper.emitted('languageToggle')).toBeUndefined();
-
-        await wrapper.get(NAVBAR_OTHER_LANG_SELECTOR).trigger('click');
-
-        expect(wrapper.emitted('languageToggle')).toHaveLength(1);
     });
 });

@@ -26,7 +26,7 @@ vi.mock('@/router', () => {
 
 const createWrapper = buildCreateWrapper(Main, undefined, {
     global: {
-        stubs: ['font-awesome-icon', 'footer-component'],
+        stubs: ['font-awesome-icon', 'footer-component', 'HomeText', 'NavbarLanguageSwitcher'],
     },
 });
 

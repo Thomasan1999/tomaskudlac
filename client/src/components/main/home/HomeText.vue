@@ -6,9 +6,10 @@
     import sleep from '@/utils/sleep';
     import HomeTextProgrammingLanguage from '@/components/main/home/HomeTextProgrammingLanguage.vue';
     import { ProgrammingLanguage } from '@/store/ProgrammingLanguage';
-    import { SiteLanguage } from '@/store/types';
     import HomeTextCursor from '@/components/main/home/HomeTextCursor.vue';
+    import { useRoute } from 'vue-router';
 
+    const route = useRoute();
     const store = useStore();
 
     const baseInterval = 50;
@@ -68,7 +69,7 @@
     };
 
     const languageHasAnPrefix = (programmingLanguage: ProgrammingLanguage): boolean =>
-        programmingLanguage.an && store.language === SiteLanguage.EN;
+        Boolean(programmingLanguage.an && route.meta.languageHasAnPrefix);
 
     const markProgrammingLanguage = async (): Promise<void> => {
         const markCharTimeout = baseInterval;
@@ -184,9 +185,9 @@
     setTimeout(changeProgrammingLanguage, Rand.int({ min: 3000, max: 5000 }));
 
     watch(
-        () => store.language,
-        () => {
-            if (store.language === SiteLanguage.SK) {
+        () => route.meta.languageHasAnPrefix,
+        (newVal) => {
+            if (!newVal) {
                 nonMarkedText.value = removeAnPrefix(nonMarkedText.value);
                 markedText.value = removeAnPrefix(markedText.value);
             } else {

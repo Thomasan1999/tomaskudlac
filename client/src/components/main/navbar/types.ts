@@ -1,5 +1,6 @@
 import MainSectionObject from '@/components/main/MainSectionObject';
 import { FontWeight } from '@/types/components';
+import { RouteLocationRaw } from 'vue-router';
 
 export enum NavbarIconMode {
     BARS = 'bars',
@@ -20,8 +21,8 @@ export interface NavbarLinkProps {
     replace?: boolean;
     routerLink?: boolean;
     text?: string;
-    title: string;
-    to: string;
+    title?: string;
+    to: RouteLocationRaw;
 }
 
 export interface NavbarProps {

@@ -1,3 +1,5 @@
+import { SiteLanguage } from '@/store/types';
+
 export default {
     footer: {
         copyrightLinkTitle: 'Show explanation of what web cookies are',
@@ -6,9 +8,10 @@ export default {
     },
     navbar: {
         hide: 'Hide navigation bar',
-        otherLangCode: 'SK',
-        otherLangHref: '/',
-        otherLangLinkTitle: 'Switch to Slovak',
+        otherLangs: {
+            [SiteLanguage.CZ]: 'Switch to Czech',
+            [SiteLanguage.SK]: 'Switch to Slovak',
+        },
         show: 'Show navigation bar',
     },
     sections: {

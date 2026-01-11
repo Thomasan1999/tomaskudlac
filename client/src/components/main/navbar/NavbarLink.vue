@@ -24,7 +24,7 @@
         };
     });
 
-    const toUrl = computed(() => mainSections[to]?.url ?? to);
+    const toUrl = computed(() => (typeof to === 'string' ? (mainSections[to]?.url ?? to) : to));
 </script>
 
 <template>
@@ -33,7 +33,7 @@
         data-testid="navbar-link"
         class="h-navbar-height flex items-center justify-center transition-colors"
         :class="[
-            active ? 'bg-navbar-link-active cursor-default' : 'hover:bg-primary-light',
+            active ? 'bg-navbar-link-active pointer-events-none' : 'hover:bg-primary-light',
             fontWeight === FontWeight.NORMAL ? 'font-normal' : 'font-light',
         ]"
         :title="title"
