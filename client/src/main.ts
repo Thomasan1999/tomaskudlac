@@ -4,6 +4,7 @@ import { createPinia } from 'pinia';
 import './register-service-worker';
 import router from '@/router';
 import app from '@/app';
+import './app.css';
 
 configureVueGtag({
     tagId: 'UA-96781792-2',

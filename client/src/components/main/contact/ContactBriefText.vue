@@ -13,7 +13,7 @@
 
 <template>
     <LocalesTextParser
-        class="max-w-[68.75rem]"
+        class="max-w-275"
         data-testid="brief-text"
         tag="div"
         :text="briefText"
@@ -21,7 +21,7 @@
         <template #phoneNumber>
             <a
                 data-testid="phone-number-link"
-                class="underline transition-colors hover:text-text-highlight"
+                class="hover:text-text-highlight underline transition-colors"
                 href="tel:+421949353783"
                 :title="phoneTitle"
                 >+421 949 353 783</a

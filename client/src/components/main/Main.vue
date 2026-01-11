@@ -122,7 +122,7 @@
         <FooterComponent />
         <div
             id="modal-container"
-            class="fixed left-0 top-0 z-[100] h-0 w-0"
+            class="fixed top-0 left-0 z-100 h-0 w-0"
         />
     </div>
 </template>

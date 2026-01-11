@@ -11,7 +11,7 @@
 <template>
     <div
         data-testid="about-myself-column"
-        class="box-border flex max-w-[26.25rem] flex-col gap-6"
+        class="box-border flex max-w-105 flex-col gap-6"
     >
         <h3
             class="text-3xl font-bold"

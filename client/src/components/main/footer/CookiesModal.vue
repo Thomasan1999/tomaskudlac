@@ -15,23 +15,23 @@
     <Teleport to="#modal-container">
         <div
             data-testid="cookies-modal"
-            class="absolute left-0 top-0 z-[1] flex h-[calc(100*var(--vh))] w-screen items-center justify-center"
+            class="absolute top-0 left-0 z-1 flex h-[calc(100*var(--vh))] w-screen items-center justify-center"
         >
             <div
-                class="absolute left-0 top-0 z-0 size-full bg-black/[.55]"
+                class="absolute top-0 left-0 z-0 size-full bg-black/[.55]"
                 data-testid="overlay"
                 @click="$emit('close')"
             />
             <div
-                class="relative box-border max-h-screen-without-edge w-[58rem] max-w-screen-without-edge overflow-auto bg-overlay px-screen-edge py-12 text-center lg:px-12"
+                class="max-h-screen-without-edge max-w-screen-without-edge bg-overlay px-screen-edge relative box-border w-232 overflow-auto py-12 text-center lg:px-12"
             >
                 <button
-                    class="group absolute right-0 top-0 flex size-12 items-center justify-center font-thin"
+                    class="group absolute top-0 right-0 flex size-12 items-center justify-center font-thin"
                     data-testid="close-button"
                     :title="locales.closeButtonTitle"
                     @click="$emit('close')"
                 >
-                    <CloseIcon class="h-4 group-hover:fill-text-highlight" />
+                    <CloseIcon class="group-hover:fill-text-highlight h-4" />
                 </button>
 
                 <div class="flex flex-col gap-6">

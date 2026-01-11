@@ -76,7 +76,7 @@
     <nav
         ref="root"
         data-testid="navbar"
-        class="sticky left-0 top-0 z-[2] flex h-navbar-height w-full flex-wrap justify-center overflow-hidden bg-primary text-xl shadow-navbar max-lg:justify-between max-lg:transition-[height] max-lg:duration-[0.8s]"
+        class="h-navbar-height bg-primary shadow-navbar sticky top-0 left-0 z-2 flex w-full flex-wrap justify-center overflow-hidden text-xl max-lg:justify-between max-lg:transition-[height] max-lg:duration-[0.8s]"
         :style="opened && touchscreen ? { height: maxHeight } : ''"
     >
         <NavbarPart
@@ -97,7 +97,7 @@
             <NavbarLink
                 v-for="[name, section] in sections"
                 :key="name"
-                class="px-16 max-lg:w-full max-lg:px-screen-edge"
+                class="max-lg:px-screen-edge px-16 max-lg:w-full"
                 :active="name === activeSection"
                 data-testid="section-link"
                 routerLink
@@ -128,7 +128,7 @@
                     @click="opened = !opened"
                 />
             </div>
-            <div class="flex h-navbar-height max-lg:order-2 max-lg:w-full max-lg:items-center max-lg:justify-center">
+            <div class="h-navbar-height flex max-lg:order-2 max-lg:w-full max-lg:items-center max-lg:justify-center">
                 <NavbarSocialNetwork
                     v-for="socialNetwork in socialNetworks"
                     v-bind="socialNetwork"

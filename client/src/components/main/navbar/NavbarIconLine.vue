@@ -10,7 +10,7 @@
         :class="
             mode === NavbarIconMode.CROSS
                 ? 'top-[40%] transition-[top_0.4s_0s,transform_0.4s_0.4s]'
-                : 'rotate-0 transition-[top_0.4s_,transform_0.4s,0.4s_0s]'
+                : 'rotate-0 transition-[top_0.4s,transform_0.4s,0.4s_0s]'
         "
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 3"

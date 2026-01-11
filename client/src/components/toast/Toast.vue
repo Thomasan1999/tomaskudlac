@@ -51,7 +51,7 @@
         >
             <div
                 v-if="opened"
-                class="toast w-screen-without-edge absolute right-toast-container-right top-toast-container-top z-[1] box-border max-w-[22.5rem] px-[1.875rem] py-2.5 text-left"
+                class="toast w-screen-without-edge right-toast-container-right top-toast-container-top absolute z-1 box-border max-w-90 px-7.5 py-2.5 text-left"
                 :class="type === ToastType.SUCCESS ? 'bg-primary-green' : 'bg-primary-red'"
                 data-testid="toast"
                 :style="`--relative-margin-top: ${relativeMarginTop}`"
@@ -62,3 +62,15 @@
         </Transition>
     </Teleport>
 </template>
+
+<style>
+    @import '@/app.css';
+
+    @theme inline {
+        --spacing-toast-container-right: calc(-100vw + var(--content-padding-horizontal) + var(--scrollbar-width));
+        --spacing-toast-container-top: var(
+            --relative-margin-top,
+            calc(var(--content-padding-horizontal) + var(--spacing-navbar-height))
+        );
+    }
+</style>

@@ -19,7 +19,7 @@
 <template>
     <div
         data-testid="navbar-icon"
-        class="relative z-[3] flex h-full w-14 cursor-pointer items-center justify-center pl-4 pr-4"
+        class="relative z-3 flex h-full w-14 cursor-pointer items-center justify-center pr-4 pl-4"
         :title="mode === NavbarIconMode.BARS ? locales.show : locales.hide"
         @click="onClick"
     >

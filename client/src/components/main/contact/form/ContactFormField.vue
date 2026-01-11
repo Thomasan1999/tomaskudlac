@@ -96,7 +96,7 @@
         />
         <Component
             :is="element"
-            class="font-inherit box-border flex flex-grow resize-none appearance-none overflow-auto border !border-solid border-[#cccccc] bg-contact-form-data-bg py-contact-form-data-padding-vertical pl-4 leading-[1.5] text-current outline-none max-lg:w-full"
+            class="font-inherit bg-contact-form-data-bg py-contact-form-data-padding-vertical box-border flex grow resize-none appearance-none overflow-auto border border-solid! border-[#cccccc] pl-4 leading-normal text-current outline-none max-lg:w-full"
             :class="[element === 'input' ? 'h-[2.5em]' : 'h-[8lh]', error ? 'border-error-text bg-error-bg' : '']"
             :minlength="minlength"
             :maxlength="maxlength"
@@ -110,14 +110,3 @@
         <ContactFormFieldError :error="error" />
     </label>
 </template>
-
-<style scoped>
-    /* TODO: move to Tailwind once migrated to v4 */
-    input:-webkit-autofill,
-    input:-webkit-autofill:hover,
-    input:-webkit-autofill:focus,
-    input:-webkit-autofill:active {
-        -webkit-box-shadow: 0 0 0 30px #2d2d2d inset !important;
-        -webkit-text-fill-color: #ffffff;
-    }
-</style>

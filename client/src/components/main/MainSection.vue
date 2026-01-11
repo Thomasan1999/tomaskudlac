@@ -15,7 +15,7 @@
 <template>
     <section
         :id="id"
-        class="main-section z-[1] flex flex-col items-center gap-y-main-row-gap"
+        class="main-section gap-y-main-row-gap z-1 flex flex-col items-center"
     >
         <div class="text-content">
             <h2
