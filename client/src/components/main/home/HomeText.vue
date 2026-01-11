@@ -209,7 +209,7 @@
 <template>
     <p
         data-testid="home-text"
-        class="mb-navbar-height relative flex flex-wrap items-center leading-[1.2] whitespace-break-spaces max-md:text-[9vw] md:text-[4.375rem]"
+        class="mb-navbar-height relative flex flex-wrap items-center justify-center leading-[1.2] whitespace-break-spaces max-md:text-[9vw] md:text-[4.375rem]"
     >
         <span>{{ locales.welcome }}</span>
         <span data-testid="programming-language">
