@@ -1,5 +1,5 @@
 import mockInitStore from '@/mocks/mockInitStore';
-import { VueWrapper } from '@vue/test-utils';
+import { DOMWrapper, VueWrapper } from '@vue/test-utils';
 import { nextTick } from 'vue';
 import HomeText from '@/components/main/home/HomeText.vue';
 import useStore from '@/store';
@@ -72,11 +72,11 @@ describe('HomeText', () => {
         window.setTimeout = timeout;
     });
 
-    function getMarkedTextElement(wrapper: VueWrapper) {
+    function getMarkedTextElement(wrapper: VueWrapper): Omit<DOMWrapper<HTMLDivElement>, 'exists'> {
         return wrapper.get<HTMLDivElement>(MARKED_TEXT_SELECTOR);
     }
 
-    function getNonMarkedTextElement(wrapper: VueWrapper) {
+    function getNonMarkedTextElement(wrapper: VueWrapper): Omit<DOMWrapper<HTMLDivElement>, 'exists'> {
         return wrapper.get<HTMLDivElement>(NON_MARKED_TEXT_SELECTOR);
     }
 

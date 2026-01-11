@@ -1,4 +1,4 @@
-import { VueWrapper } from '@vue/test-utils';
+import { DOMWrapper, VueWrapper } from '@vue/test-utils';
 import { buildCreateWrapper, getTestingSelector } from '@/utils/test';
 import HomeTextCursor from '@/components/main/home/HomeTextCursor.vue';
 
@@ -7,7 +7,7 @@ const CURSOR_SELECTOR = getTestingSelector('cursor');
 const createWrapper = buildCreateWrapper(HomeTextCursor);
 
 describe('HomeTextCursor', () => {
-    function getCursorElement(wrapper: VueWrapper) {
+    function getCursorElement(wrapper: VueWrapper): Omit<DOMWrapper<HTMLSpanElement>, 'exists'> {
         return wrapper.get<HTMLSpanElement>(CURSOR_SELECTOR);
     }
 

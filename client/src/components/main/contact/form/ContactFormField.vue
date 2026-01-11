@@ -27,12 +27,12 @@
         required: true,
     });
 
-    const onBlur = () => {
+    const onBlur = (): void => {
         inputting.value = false;
         emit('blur');
     };
 
-    const onInput = ($event: Merge<KeyboardEvent, { target: HTMLInputElement | HTMLTextAreaElement }>) => {
+    const onInput = ($event: Merge<KeyboardEvent, { target: HTMLInputElement | HTMLTextAreaElement }>): void => {
         inputting.value = true;
         model.value = $event.target.value;
     };
