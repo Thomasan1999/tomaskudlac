@@ -19,7 +19,7 @@ const routes = [
         meta: {
             description: `Je mi {{age}} let a pracuji na živnost (freelance). Mou pracovní náplní je web development (vývoj webových stránek a aplikácí). Ovládám {{programmingLanguagesString}}. Rád se učím novým technologiím a zkoumám, jak se vyvíjejí. Pomáhá mi to být v obraze a využít každou novou příležitost k tomu být lepším vývojářem.`,
             language: SiteLanguage.CZ,
-            title: 'Tomáš Kudláč - Vývoj webových stránek a aplikácí',
+            title: 'Tomáš Kudláč - Vývoj webových stránek a aplikací',
         },
         name: SiteLanguage.CZ,
         path: '/cz/',
