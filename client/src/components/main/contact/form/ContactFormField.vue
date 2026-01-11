@@ -57,7 +57,7 @@
 
     const missingValue = computed(() => required && !model.value);
 
-    const validFormat = computed(() => !pattern || Boolean(model.value.match(pattern)));
+    const validFormat = computed(() => (!required && !model.value) || !pattern || Boolean(model.value.match(pattern)));
 
     watch(model, () => {
         const newValidValue = validFormat.value && !missingValue.value;
