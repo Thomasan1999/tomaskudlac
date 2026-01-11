@@ -24,7 +24,7 @@
         };
     });
 
-    const toUrl = computed(() => mainSections[to]?.url ?? to);
+    const toUrl = computed(() => (typeof to === 'string' ? (mainSections[to]?.url ?? to) : to));
 </script>
 
 <template>
