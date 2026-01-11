@@ -7,7 +7,7 @@ declare module 'vue-router' {
         /** The site language. */
         language: SiteLanguage;
         /** Whether the site language can have an 'an' prefix before a programming language. */
-        languageUsesAnPrefix: boolean;
+        languageHasAnPrefix: boolean;
         /** The document title. */
         title: string;
     }

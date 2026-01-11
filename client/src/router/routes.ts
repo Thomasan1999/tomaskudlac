@@ -35,7 +35,7 @@ const routes = [
         meta: {
             description: `I'm {{age}}} years old and I'm self-employed (freelancer). I work as a web developer. I know {{programmingLanguagesString}}. I like to learn new technologies and watch how do they turn out. It helps me to keep track with them and use every new opportunity to be a better developer.`,
             language: SiteLanguage.EN,
-            languageUsesAnPrefix: true,
+            languageHasAnPrefix: true,
             title: 'Tomáš Kudláč - Website and web application development',
         },
         name: SiteLanguage.EN,

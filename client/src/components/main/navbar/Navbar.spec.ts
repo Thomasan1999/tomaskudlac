@@ -42,6 +42,7 @@ const createWrapper = buildCreateWrapper(
         global: {
             stubs: {
                 FontAwesomeIcon: true,
+                NavbarLanguageSwitcher: true,
                 RouterLink: { template: '<div></div>' },
             },
         },

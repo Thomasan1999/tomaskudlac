@@ -19,15 +19,15 @@ const createWrapper = buildCreateWrapper(
 );
 
 describe('NavbarLink', () => {
-    it("has different background color and default cursor when 'active' property is true", async () => {
+    it("has different background color and is non-clickable when 'active' property is true", async () => {
         const wrapper = createWrapper({ active: false });
 
-        expect(wrapper.classes('cursor-default')).toBe(false);
+        expect(wrapper.classes('pointer-events-none')).toBe(false);
         expect(wrapper.classes('bg-navbar-link-active')).toBe(false);
 
         await wrapper.setProps({ active: true });
 
-        expect(wrapper.classes('cursor-default')).toBe(true);
+        expect(wrapper.classes('pointer-events-none')).toBe(true);
         expect(wrapper.classes('bg-navbar-link-active')).toBe(true);
     });
 
