@@ -16,16 +16,16 @@
 
     const store = useStore();
 
-    const onLinkClick = (sectionName: string) => {
+    const onLinkClick = (sectionName: string): void => {
         opened.value = false;
         emit('linkClick', sectionName);
     };
 
-    const onResize = () => {
+    const onResize = (): void => {
         setHeight();
     };
 
-    const setHeight = () => {
+    const setHeight = (): void => {
         maxHeight.value = `${root.value!.scrollHeight}px`;
     };
 

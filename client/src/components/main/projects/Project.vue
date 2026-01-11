@@ -9,7 +9,7 @@
 
     const store = useStore();
 
-    const setTextHoverHeight = async () => {
+    const setTextHoverHeight = async (): Promise<void> => {
         if (!textContent.value) {
             return;
         }

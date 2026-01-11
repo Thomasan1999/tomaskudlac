@@ -33,7 +33,8 @@ export default tsEslint.config(
             'object-shorthand': ['error', 'always'],
             'prefer-destructuring': 'off',
             'prefer-promise-reject-errors': 'off',
-            '@typescript-eslint/no-unused-vars': ['error'],
+            '@typescript-eslint/explicit-function-return-type': ['error', { allowExpressions: true }],
+            '@typescript-eslint/no-unused-vars': 'error',
         },
     },
     {

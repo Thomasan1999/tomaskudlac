@@ -9,7 +9,7 @@
 
     const store = useStore();
 
-    const onClick = () => {
+    const onClick = (): void => {
         emit('click');
     };
 

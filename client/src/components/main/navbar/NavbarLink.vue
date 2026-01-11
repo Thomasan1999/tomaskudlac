@@ -8,7 +8,7 @@
     const { fontWeight = FontWeight.NORMAL, replace = false, routerLink = false, to } = defineProps<NavbarLinkProps>();
     const emit = defineEmits<{ (event: 'click'): void }>();
 
-    const onClick = ($event: MouseEvent) => {
+    const onClick = ($event: MouseEvent): void => {
         if (!routerLink) {
             return;
         }

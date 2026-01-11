@@ -19,7 +19,7 @@
 
     const store = useStore();
 
-    const onLinkClick = (linkName: string) => {
+    const onLinkClick = (linkName: string): void => {
         if (!linkName) {
             return;
         }
@@ -28,7 +28,7 @@
         scrollToSection(linkName);
     };
 
-    const onScroll = () => {
+    const onScroll = (): void => {
         store.activeSection = [...sections.value].reverse().find(([sectionName]) => {
             const sectionElement = sectionElements.value[sectionName];
 
@@ -36,11 +36,11 @@
         })![0];
     };
 
-    const putSectionNameToUrl = (sectionName: string) => {
+    const putSectionNameToUrl = (sectionName: string): void => {
         router.replace({ hash: mainSections[sectionName].url });
     };
 
-    const scrollToSection = (sectionName: string, behavior: ScrollBehavior = 'smooth') => {
+    const scrollToSection = (sectionName: string, behavior: ScrollBehavior = 'smooth'): void => {
         const newTop = sectionElements.value[sectionName].offsetTop - navbarHeight.value;
 
         root.value!.scroll({ behavior, top: newTop });

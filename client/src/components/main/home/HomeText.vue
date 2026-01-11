@@ -13,7 +13,7 @@
 
     const baseInterval = 50;
 
-    const changeProgrammingLanguage = async () => {
+    const changeProgrammingLanguage = async (): Promise<void> => {
         setCursorBlinking(false);
 
         await markProgrammingLanguage();
@@ -29,7 +29,7 @@
         setTimeout(changeProgrammingLanguage, Rand.int({ min: 3000, max: 5000 }));
     };
 
-    const clearMarkedText = () => {
+    const clearMarkedText = (): void => {
         markedText.value = '';
     };
 
@@ -42,7 +42,9 @@
         }
     }
 
-    const flattenProgrammingLanguage = (programmingLanguage: ProgrammingLanguage) => {
+    const flattenProgrammingLanguage = (
+        programmingLanguage: ProgrammingLanguage,
+    ): ProgrammingLanguage | ProgrammingLanguage[] => {
         if (!programmingLanguage.children) {
             return programmingLanguage;
         }
@@ -53,26 +55,26 @@
         ].flat();
     };
 
-    const generateNextProgrammingLanguage = () => {
+    const generateNextProgrammingLanguage = (): void => {
         currentProgrammingLanguage.value = nextProgrammingLanguage.value;
 
         nextProgrammingLanguage.value = programmingLanguageGenerator.next().value!;
     };
 
-    const getNonMarkedText = (programmingLanguage: ProgrammingLanguage) => {
+    const getNonMarkedText = (programmingLanguage: ProgrammingLanguage): string => {
         const prefix = languageHasAnPrefix(programmingLanguage) ? 'n ' : ' ';
 
         return `${prefix}${programmingLanguage.title}`;
     };
 
-    const languageHasAnPrefix = (programmingLanguage: ProgrammingLanguage) =>
+    const languageHasAnPrefix = (programmingLanguage: ProgrammingLanguage): boolean =>
         programmingLanguage.an && store.language === SiteLanguage.EN;
 
-    const markProgrammingLanguage = async () => {
+    const markProgrammingLanguage = async (): Promise<void> => {
         const markCharTimeout = baseInterval;
 
         return new Promise<void>((resolve) => {
-            const markChar = () => {
+            const markChar = (): void => {
                 const timeout = markCharTimeout + Rand.int({ min: 0, max: markCharTimeout * 0.2 });
 
                 const languageIsMarked = nonMarkedText.value.length === nonMarkedTextNonRemovable.value.length;
@@ -98,15 +100,15 @@
         });
     };
 
-    const addAnPrefix = (text: string) => `n${text}`;
+    const addAnPrefix = (text: string): string => `n${text}`;
 
-    const removeAnPrefix = (text: string) => text.replace(/^n$|^n /, ' ');
+    const removeAnPrefix = (text: string): string => text.replace(/^n$|^n /, ' ');
 
-    const setCursorBlinking = (value: boolean) => {
+    const setCursorBlinking = (value: boolean): void => {
         cursorIsBlinking.value = value;
     };
 
-    const writeNextProgrammingLanguage = async () => {
+    const writeNextProgrammingLanguage = async (): Promise<void> => {
         const writeCharTimeout = baseInterval * 1.8;
 
         generateNextProgrammingLanguage();
@@ -114,7 +116,7 @@
         const currentLanguageTitle = computed(() => getNonMarkedText(currentProgrammingLanguage.value));
 
         return new Promise<void>((resolve) => {
-            const writeChar = () => {
+            const writeChar = (): void => {
                 const languageIsWritten = nonMarkedText.value.length === currentLanguageTitle.value.length;
 
                 if (languageIsWritten) {
