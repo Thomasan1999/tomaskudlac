@@ -110,7 +110,7 @@
             :sections="sections"
             @linkClick="onLinkClick"
         />
-        <div class="main-section-container">
+        <div>
             <Component
                 :is="components[sectionData.componentName]"
                 v-for="[sectionName, sectionData] in sections"

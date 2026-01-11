@@ -26,7 +26,7 @@
         </p>
         <button
             data-testid="submit-button"
-            class="contact-form-submit bg-primary hover:bg-primary-light h-12 w-full max-w-52 transition-colors duration-300 disabled:cursor-not-allowed disabled:bg-gray-500"
+            class="bg-primary hover:bg-primary-light h-12 w-full max-w-52 transition-colors duration-300 disabled:cursor-not-allowed disabled:bg-gray-500"
             :disabled="submitDisabled"
             :title="submitTitle"
             @click="$emit('click')"

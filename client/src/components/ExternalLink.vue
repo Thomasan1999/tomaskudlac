@@ -1,6 +1,6 @@
 <template>
     <a
-        class="external-link"
+        data-testid="external-link"
         rel="noopener noreferrer"
         target="_blank"
         v-bind="$attrs"

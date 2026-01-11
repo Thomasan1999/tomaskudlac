@@ -87,7 +87,7 @@
 <template>
     <label
         :data-testid="`field-${name}`"
-        class="contact-form-field relative flex flex-wrap"
+        class="relative flex flex-wrap"
         :class="error ? 'text-error-text' : ''"
     >
         <ContactFormLabelText
