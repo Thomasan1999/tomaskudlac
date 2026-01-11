@@ -3,7 +3,6 @@
 
 @theme {
     --animate-blinking: blinking 1.06s infinite step-end;
-    --content-padding-horizontal: --spacing(8);
     --color-blue-curtain: rgba(14, 33, 175, 0.55);
     --color-contact-form-data-bg: #2d2d2d;
     --color-error-bg: #3e2d2d;
@@ -24,24 +23,25 @@
     --color-text-highlight: #cc7832;
     --font-contact: Montserrat, sans-serif;
     --font-sans: Raleway, sans-serif;
-    --max-height-screen-without-edge: calc(100vh - var(--content-padding-horizontal) * 2);
+    --max-height-screen-without-edge: calc(100vh - var(--spacing-content-padding-horizontal) * 2);
     --max-width-screen-without-edge: var(--width-screen-without-edge);
     --shadow-navbar: 0 5px 18px 0 rgb(0 0 0 / 33%);
     --spacing-contact-form-data-padding-vertical: --spacing(2);
+    --spacing-content-padding-horizontal: --spacing(8);
     --spacing-hover-height: 0;
     --spacing-label: --spacing(24);
     --spacing-main-row-gap: --spacing(12.5);
     --spacing-navbar-height: --spacing(15);
-    --spacing-screen-edge: var(--content-padding-horizontal);
+    --spacing-screen-edge: var(--spacing-content-padding-horizontal);
     --transition-duration-default: 250ms;
-    --width-screen-without-edge: calc(100vw - var(--content-padding-horizontal) * 2);
+    --width-screen-without-edge: calc(100vw - var(--spacing-content-padding-horizontal) * 2);
 
     @keyframes blinking {
         0% {
-            @apply opacity-100;
+            opacity: 1;
         }
         50% {
-            @apply opacity-0;
+            opacity: 0;
         }
     }
 }
@@ -69,11 +69,11 @@
 
     ::selection,
     mark {
-        @apply bg-selection, color-current;
+        @apply bg-selection text-current;
     }
 
     strong {
-        @apply text-text-highlight, font-semibold;
+        @apply text-text-highlight font-semibold;
     }
 
     input:-webkit-autofill,
@@ -87,26 +87,26 @@
 
 @layer components {
     .text-content {
-        @apply items-center, flex, flex-col, px-content-padding-horizontal, gap-main-row-gap;
+        @apply px-content-padding-horizontal gap-main-row-gap flex flex-col items-center;
     }
 
     .has-curtain {
         @apply relative;
 
-        @apply before:content:[''], before:block, before:h-full, before:left-0, before:absolute, before:top-0, before:w-full, before:z-0;
+        @apply before:absolute before:top-0 before:left-0 before:z-0 before:block before:h-full before:w-full before:content-[''];
     }
 
     .cover-background {
-        @apply bg-cover, bg-no-repeat;
+        @apply bg-cover bg-no-repeat;
     }
 }
 
 :root {
-    @apply bg-primary-bg, text-primary-text, font-sans, text-base, leading-[1.6], text-center;
+    @apply bg-primary-bg text-primary-text text-center font-sans text-base leading-relaxed;
     scrollbar-color: var(--color-scrollbar-thumb) var(--color-scrollbar);
 
     @variant max-lg {
-        --content-padding-horizontal: --spacing(4);
+        --spacing-content-padding-horizontal: --spacing(4);
     }
 
     @apply max-sm:text-sm;

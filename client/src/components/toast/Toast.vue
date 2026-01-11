@@ -67,10 +67,12 @@
     @import '@/app.css';
 
     @theme inline {
-        --spacing-toast-container-right: calc(-100vw + var(--content-padding-horizontal) + var(--scrollbar-width));
+        --spacing-toast-container-right: calc(
+            -100vw + var(--spacing-content-padding-horizontal) + var(--scrollbar-width)
+        );
         --spacing-toast-container-top: var(
             --relative-margin-top,
-            calc(var(--content-padding-horizontal) + var(--spacing-navbar-height))
+            calc(var(--spacing-content-padding-horizontal) + var(--spacing-navbar-height))
         );
     }
 </style>
