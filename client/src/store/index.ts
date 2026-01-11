@@ -87,15 +87,6 @@ const useStore = defineStore('main', () => {
     const windowHeight = ref(window.innerHeight);
     const windowWidth = ref(window.innerWidth);
 
-    const isTouchscreen = computed<boolean>(() => {
-        return windowWidth.value < 1024;
-    });
-
-    /** List of programming languages joined by commas. */
-    const programmingLanguagesString = computed<string>(() => {
-        return programmingLanguages.value.map((language) => language.toString()).join(', ');
-    });
-
     /** Determines the preferred image format of all images. Checks if WebP is supported, if not, JPEG is used. */
     const getImageFormat = async (): Promise<ImageFormat> => {
         return new Promise((resolve) => {
@@ -110,11 +101,12 @@ const useStore = defineStore('main', () => {
 
     /** Initializes the function which checks for the preferred image format. */
     const initImageFormat = async (): Promise<void> => {
-        let format = localStorage.getItem('imageFormat') as ImageFormat | null;
+        const IMAGE_FORMAT_KEY = 'imageFormat';
+        let format = localStorage.getItem(IMAGE_FORMAT_KEY) as ImageFormat | null;
 
         if (!format) {
             format = await getImageFormat();
-            localStorage.setItem('imageFormat', format);
+            localStorage.setItem(IMAGE_FORMAT_KEY, format);
         }
 
         imageFormat.value = format;
@@ -176,6 +168,15 @@ const useStore = defineStore('main', () => {
     const removeToast = (toastIndex: number): void => {
         toasts.value.splice(toastIndex, 1);
     };
+
+    const isTouchscreen = computed<boolean>(() => {
+        return windowWidth.value < 1024;
+    });
+
+    /** List of programming languages joined by commas. */
+    const programmingLanguagesString = computed<string>(() => {
+        return programmingLanguages.value.map((language) => language.toString()).join(', ');
+    });
 
     return {
         activeSection,
