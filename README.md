@@ -47,7 +47,6 @@ This portfolio is structured into two semi-independent projects, located in the 
 ├── server               # Back-end, not published for security reasons
 ├── .gitignore           # Files ignored by Git
 ├── .prettierrc.json     # Prettier configuration file
-├── commitlint.config.ts # Commitlint configuration file
 └── README.md            # Project description
 ```
 
