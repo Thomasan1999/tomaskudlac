@@ -98,6 +98,12 @@ describe('ContactFormField', () => {
     });
 
     describe('error', () => {
+        function expectErrorToBeShown(wrapper: ReturnType<typeof createWrapper>, value: boolean): void {
+            const errorComponent = wrapper.findComponent(ContactFormFieldError);
+
+            expect(errorComponent.find('*').exists()).toBe(value);
+        }
+
         it('uses different styles for wrapper element when error is shown', async () => {
             const wrapper = createWrapper({
                 modelValue: '',
@@ -115,12 +121,6 @@ describe('ContactFormField', () => {
         });
 
         it('shows error only if input is touched and value is invalid', async () => {
-            function expectErrorToBeShown(value: boolean): void {
-                const errorComponent = wrapper.findComponent(ContactFormFieldError);
-
-                expect(errorComponent.find('*').exists()).toBe(value);
-            }
-
             const wrapper = createWrapper(
                 { required: true, touched: false, valid: true },
                 {
@@ -130,15 +130,36 @@ describe('ContactFormField', () => {
                 },
             );
 
-            expectErrorToBeShown(false);
+            expectErrorToBeShown(wrapper, false);
 
             await wrapper.setProps({ touched: true });
 
-            expectErrorToBeShown(false);
+            expectErrorToBeShown(wrapper, false);
 
             await wrapper.setProps({ valid: false });
 
-            expectErrorToBeShown(true);
+            expectErrorToBeShown(wrapper, true);
+        });
+
+        it('does not show error if input is empty and not required', async () => {
+            const wrapper = createWrapper(
+                { modelValue: '', pattern: /\d+/g, required: false, touched: true, valid: false },
+                {
+                    global: {
+                        stubs: { ContactFormFieldError: false },
+                    },
+                },
+            );
+
+            await wrapper.get('input').setValue('lorem ipsum');
+            await wrapper.get('input').trigger('blur');
+
+            expectErrorToBeShown(wrapper, true);
+
+            await wrapper.get('input').setValue('');
+            await wrapper.get('input').trigger('blur');
+
+            expectErrorToBeShown(wrapper, false);
         });
     });
 
