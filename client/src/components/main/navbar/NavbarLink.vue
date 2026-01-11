@@ -31,9 +31,9 @@
     <Component
         :is="routerLink ? 'router-link' : ExternalLink"
         data-testid="navbar-link"
-        class="flex h-navbar-height items-center justify-center transition-colors"
+        class="h-navbar-height flex items-center justify-center transition-colors"
         :class="[
-            active ? 'cursor-default bg-navbar-link-active' : 'hover:bg-primary-light',
+            active ? 'bg-navbar-link-active cursor-default' : 'hover:bg-primary-light',
             fontWeight === FontWeight.NORMAL ? 'font-normal' : 'font-light',
         ]"
         :title="title"
