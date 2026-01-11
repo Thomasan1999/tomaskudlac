@@ -8,7 +8,7 @@ const routes = [
         component: Main,
         meta: {
             description: `Mám {{age}} rokov a pracujem na živnosť (freelance). Mojou pracovnou náplňou je web development (vývoj webových stránok a aplikácií). Ovládam {{programmingLanguagesString}}. Rád sa učím novým technológiám a skúmám, ako sa vyvíjajú. Pomáha mi to byť v obraze a využiť každú novú príležitosť na to byť lepší vývojár.`,
-            language: 'sk',
+            language: SiteLanguage.SK,
             title: 'Tomáš Kudláč - Vývoj webových stránok a aplikácií',
         },
         path: '/',
