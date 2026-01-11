@@ -70,8 +70,6 @@ Front-end of the portfolio developed by Tomáš Kudláč. You can view the portf
 ├── package.json                    # Project metadata
 ├── package-lock.json               # Project metadata
 ├── README.md                       # Project description
-├── postcss.config.ts               # PostCSS configuration file
-├── tailwind.config.ts              # Tailwind configuration file
 ├── tsconfig.json                   # TypeScript compiler configuration
 ├── vite.config.mts                 # Vite configuration
 └── vitest.config.mts               # Vitest configuration

@@ -14,7 +14,7 @@
 
 <template>
     <button
-        class="leading-0 group absolute right-0 top-0 p-2"
+        class="group absolute top-0 right-0 p-2 leading-0"
         data-testid="close-button"
         :title="locales.closeButtonTitle"
         @click="$emit('click')"

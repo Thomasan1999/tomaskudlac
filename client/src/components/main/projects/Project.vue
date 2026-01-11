@@ -46,7 +46,7 @@
 <template>
     <ExternalLink
         data-testid="project"
-        class="cover-background has-curtain group relative flex items-center justify-center before:bg-black/[.75] before:transition-colors after:block after:pt-[56.25%] after:content-[''] lg:before:bg-black/[.55] hover:before:lg:bg-blue-curtain"
+        class="cover-background has-curtain group hover:before:lg:bg-blue-curtain relative flex items-center justify-center before:bg-black/75 before:transition-colors after:block after:pt-[56.25%] after:content-[''] lg:before:bg-black/[.55]"
         :href="projectLocales.href"
         :style="{ backgroundImage }"
         :title="`${generalLocales.showProject} ${[projectLocales.title]}`"
@@ -60,8 +60,8 @@
                     {{ projectLocales.title }}
                 </h3>
                 <div
-                    class="leading-[1.2] group-hover:h-hover-height group-hover:opacity-100 max-lg:opacity-100 max-lg:transition-none sm:text-xl lg:h-0 lg:opacity-0 lg:transition-[height,opacity]"
-                    :style="`--hover-height: ${textHoverHeight}px`"
+                    class="group-hover:h-hover-height leading-[1.2] group-hover:opacity-100 max-lg:opacity-100 max-lg:transition-none sm:text-xl lg:h-0 lg:opacity-0 lg:transition-[height,opacity]"
+                    :style="`--spacing-hover-height: ${textHoverHeight}px`"
                 >
                     <div
                         ref="textContent"

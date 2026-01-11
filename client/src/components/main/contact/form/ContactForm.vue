@@ -70,7 +70,7 @@
     <form
         ref="root"
         data-testid="contact-form"
-        class="flex w-full max-w-none flex-col gap-5 font-contact lg:-ml-label lg:max-w-[43.75rem]"
+        class="font-contact lg:-ml-label flex w-full max-w-none flex-col gap-5 lg:max-w-175"
         action="/contact-form/send-mail"
         method="post"
         @submit.prevent="onSubmit"

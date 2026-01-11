@@ -13,7 +13,7 @@
 <template>
     <span
         data-testid="label-text"
-        class="text-left leading-10 max-lg:w-full lg:w-label lg:text-right"
+        class="lg:w-label text-left leading-10 max-lg:w-full lg:text-right"
     >
         {{ text }}:
         <span

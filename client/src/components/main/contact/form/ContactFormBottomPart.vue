@@ -19,14 +19,14 @@
 <template>
     <div
         data-testid="contact-form-bottom-part"
-        class="flex flex-col items-center justify-center gap-6 text-xl lg:ml-label"
+        class="lg:ml-label flex flex-col items-center justify-center gap-6 text-xl"
     >
         <p data-testid="required-legend">
             {{ locales.requiredLegend }}
         </p>
         <button
             data-testid="submit-button"
-            class="contact-form-submit h-12 w-full max-w-52 bg-primary transition-colors duration-300 hover:bg-primary-light disabled:cursor-not-allowed disabled:bg-gray-500"
+            class="contact-form-submit bg-primary hover:bg-primary-light h-12 w-full max-w-52 transition-colors duration-300 disabled:cursor-not-allowed disabled:bg-gray-500"
             :disabled="submitDisabled"
             :title="submitTitle"
             @click="$emit('click')"

@@ -15,7 +15,7 @@
 <template>
     <section
         data-testid="footer-component"
-        class="bg-primary font-medium leading-10"
+        class="bg-primary leading-10 font-medium"
     >
         <footer>
             <div class="text-content">
@@ -23,7 +23,7 @@
                     {{ locales.copyrightText }}
                     {{ ' ' }}
                     <FooterCopyrightLink
-                        class="cursor-pointer underline transition-colors hover:text-text-highlight"
+                        class="hover:text-text-highlight cursor-pointer underline transition-colors"
                         :title="locales.copyrightLinkTitle"
                         :text="`${locales.copyrightLinkText}.`"
                         @showCookies="showCookies = true"

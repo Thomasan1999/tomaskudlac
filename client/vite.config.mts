@@ -4,6 +4,7 @@ import * as path from 'path';
 import { VitePWA } from 'vite-plugin-pwa';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import eslintPlugin from 'vite-plugin-eslint';
+import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
     build: {
@@ -16,6 +17,7 @@ export default defineConfig({
         VitePWA({
             manifest: false,
         }),
+        tailwindcss(),
     ],
     resolve: {
         alias: {

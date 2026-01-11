@@ -23,7 +23,7 @@
                 jpgSrc="/images/myself.jpg"
                 :alt="locales.photoAlt"
             />
-            <div class="flex flex-wrap justify-center gap-x-20 gap-y-main-row-gap">
+            <div class="gap-y-main-row-gap flex flex-wrap justify-center gap-x-20">
                 <AboutMyselfColumn
                     v-for="column in locales.columns"
                     v-bind="column"

@@ -16,7 +16,7 @@
     <div
         v-if="error"
         data-testid="contact-form-field-error"
-        class="flex items-center justify-center whitespace-nowrap bg-primary-red px-4 py-contact-form-data-padding-vertical text-white after:absolute after:m-auto after:block after:h-0 after:w-0 after:border-[.625rem] after:border-transparent after:content-[''] max-lg:relative max-lg:left-0 max-lg:top-2.5 max-lg:m-0 max-lg:after:-top-5 max-lg:after:bottom-auto max-lg:after:left-0 max-lg:after:border-b-primary-red lg:absolute lg:left-[calc(100%+.625rem)] lg:top-auto lg:m-auto lg:after:bottom-0 lg:after:left-auto lg:after:right-full lg:after:top-0 lg:after:border-b-transparent lg:after:border-r-primary-red"
+        class="bg-primary-red py-contact-form-data-padding-vertical max-lg:after:border-b-primary-red lg:after:border-r-primary-red flex items-center justify-center px-4 whitespace-nowrap text-white after:absolute after:m-auto after:block after:h-0 after:w-0 after:border-[.625rem] after:border-transparent after:content-[''] max-lg:relative max-lg:top-2.5 max-lg:left-0 max-lg:m-0 max-lg:after:-top-5 max-lg:after:bottom-auto max-lg:after:left-0 lg:absolute lg:top-auto lg:left-[calc(100%+.625rem)] lg:m-auto lg:after:top-0 lg:after:right-full lg:after:bottom-0 lg:after:left-auto lg:after:border-b-transparent"
     >
         <div>{{ message }}</div>
     </div>

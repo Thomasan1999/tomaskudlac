@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,400,500,700|Montserrat&display=swap');
+@import 'tailwindcss';
+
+@theme {
+    --animate-blinking: blinking 1.06s infinite step-end;
+    --color-blue-curtain: rgba(14, 33, 175, 0.55);
+    --color-contact-form-data-bg: #2d2d2d;
+    --color-error-bg: #3e2d2d;
+    --color-error-text: #cc0000;
+    --color-navbar-link-active: #2c2c2c;
+    --color-overlay: #222222;
+    --color-primary: #191970;
+    --color-primary-bg: #1c1c1c;
+    --color-primary-green: #1e9f31;
+    --color-primary-light: #2828b3;
+    --color-primary-red: #da0b24;
+    --color-primary-text: #ffffff;
+    --color-scrollbar: #eeeeee;
+    --color-scrollbar-thumb: #444444;
+    --color-scrollbar-thumb-active: #959595;
+    --color-scrollbar-thumb-hover: #666666;
+    --color-selection: #0e6beb;
+    --color-text-highlight: #cc7832;
+    --font-contact: Montserrat, sans-serif;
+    --font-sans: Raleway, sans-serif;
+    --max-height-screen-without-edge: calc(100vh - var(--spacing-content-padding-horizontal) * 2);
+    --max-width-screen-without-edge: var(--width-screen-without-edge);
+    --shadow-navbar: 0 5px 18px 0 rgb(0 0 0 / 33%);
+    --spacing-contact-form-data-padding-vertical: --spacing(2);
+    --spacing-content-padding-horizontal: --spacing(8);
+    --spacing-hover-height: 0;
+    --spacing-label: --spacing(24);
+    --spacing-main-row-gap: --spacing(12.5);
+    --spacing-navbar-height: --spacing(15);
+    --spacing-screen-edge: var(--spacing-content-padding-horizontal);
+    --transition-duration-default: 250ms;
+    --width-screen-without-edge: calc(100vw - var(--spacing-content-padding-horizontal) * 2);
+
+    @keyframes blinking {
+        0% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0;
+        }
+    }
+}
+
+@layer base {
+    ::-webkit-scrollbar {
+        @apply bg-scrollbar;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        @apply bg-scrollbar-thumb;
+
+        &:hover {
+            @apply bg-scrollbar-thumb-hover;
+        }
+
+        &:active {
+            @apply bg-scrollbar-thumb-active;
+        }
+    }
+
+    button {
+        @apply cursor-pointer;
+    }
+
+    ::selection,
+    mark {
+        @apply bg-selection text-current;
+    }
+
+    strong {
+        @apply text-text-highlight font-semibold;
+    }
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+        -webkit-box-shadow: 0 0 0 30px var(--color-contact-form-data-bg) inset !important;
+        -webkit-text-fill-color: var(--color-primary-text);
+    }
+}
+
+@layer components {
+    .text-content {
+        @apply px-content-padding-horizontal gap-main-row-gap flex flex-col items-center;
+    }
+
+    .has-curtain {
+        @apply relative;
+
+        @apply before:absolute before:top-0 before:left-0 before:z-0 before:block before:h-full before:w-full before:content-[''];
+    }
+
+    .cover-background {
+        @apply bg-cover bg-no-repeat;
+    }
+}
+
+:root {
+    @apply bg-primary-bg text-primary-text text-center font-sans text-base leading-relaxed;
+    scrollbar-color: var(--color-scrollbar-thumb) var(--color-scrollbar);
+
+    @variant max-lg {
+        --spacing-content-padding-horizontal: --spacing(4);
+    }
+
+    @apply max-sm:text-sm;
+}
