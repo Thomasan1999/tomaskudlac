@@ -49,6 +49,7 @@ Front-end of the portfolio developed by Tomáš Kudláč. You can view the portf
 │   ├── ie                          # Version for Internet Explorer users
 │   ├── images                      # Image assets
 │   ├── icons                       # Favicon in various sizes for different devices
+│   ├── manifest_cz.webmanifest     # Web app manifest for Czech
 │   ├── manifest_en.webmanifest     # Web app manifest for English
 │   └── manifest_sk.webmanifest     # Web app manifest for Slovak
 ├── src                             # Application logic (needs to be built for browser use)
