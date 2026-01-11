@@ -6,12 +6,15 @@ import mockImageSrc from '@/mocks/mockImageSrc';
 describe('store', () => {
     mockImageSrc();
 
-    setActivePinia(createPinia());
+    let store: ReturnType<typeof useStore>;
 
-    const store: ReturnType<typeof useStore> = useStore();
+    function initStore(): void {
+        setActivePinia(createPinia());
+        store = useStore();
+    }
 
-    afterEach(() => {
-        store.$reset();
+    beforeEach(() => {
+        initStore();
     });
 
     it('computes data on init', async () => {
@@ -34,6 +37,8 @@ describe('store', () => {
         ];
 
         for await (const [date, age] of dates) {
+            initStore();
+
             vi.setSystemTime(date);
 
             await store.init();
@@ -41,8 +46,6 @@ describe('store', () => {
             await vi.runOnlyPendingTimersAsync();
 
             expect(store.age).toBe(age);
-
-            store.$reset();
         }
 
         vi.useRealTimers();
