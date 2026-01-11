@@ -60,7 +60,7 @@
 
     const locales = computed(() => store.locales.navbar);
 
-    const touchscreen = computed(() => store.isTouchscreen);
+    const isOpenable = computed(() => store.maxXl);
 
     onMounted(() => {
         setHeight();
@@ -76,8 +76,8 @@
     <nav
         ref="root"
         data-testid="navbar"
-        class="h-navbar-height bg-primary shadow-navbar sticky top-0 left-0 z-2 flex w-full flex-wrap justify-center overflow-hidden text-xl max-lg:justify-between max-lg:transition-[height] max-lg:duration-[0.8s]"
-        :style="opened && touchscreen ? { height: maxHeight } : ''"
+        class="h-navbar-height bg-primary shadow-navbar sticky top-0 left-0 z-2 flex w-full flex-wrap justify-center overflow-hidden text-xl max-xl:justify-between max-xl:transition-[height] max-xl:duration-[0.8s]"
+        :style="opened && isOpenable ? { height: maxHeight } : ''"
     >
         <NavbarPart
             class="left-0"
@@ -93,11 +93,11 @@
                 @click="$emit('linkClick', 'home')"
             />
         </NavbarPart>
-        <NavbarPart class="self-center max-lg:order-1 max-lg:h-auto max-lg:w-full max-lg:flex-col">
+        <NavbarPart class="self-center max-xl:order-1 max-xl:h-auto max-xl:w-full max-xl:flex-col">
             <NavbarLink
                 v-for="[name, section] in sections"
                 :key="name"
-                class="max-lg:px-screen-edge px-16 max-lg:w-full"
+                class="max-xl:px-screen-edge px-16 max-xl:w-full"
                 :active="name === activeSection"
                 data-testid="section-link"
                 routerLink
@@ -108,7 +108,7 @@
             />
         </NavbarPart>
         <NavbarPart
-            class="right-0 flex gap-5 max-lg:contents"
+            class="right-0 flex gap-5 max-xl:contents"
             outer
         >
             <div class="flex items-center">
@@ -123,12 +123,12 @@
                     @click="$emit('languageToggle')"
                 />
                 <NavbarIcon
-                    v-if="touchscreen"
+                    v-if="isOpenable"
                     :mode="opened ? NavbarIconMode.CROSS : NavbarIconMode.BARS"
                     @click="opened = !opened"
                 />
             </div>
-            <div class="h-navbar-height flex max-lg:order-2 max-lg:w-full max-lg:items-center max-lg:justify-center">
+            <div class="h-navbar-height flex max-xl:order-2 max-xl:w-full max-xl:items-center max-xl:justify-center">
                 <NavbarSocialNetwork
                     v-for="socialNetwork in socialNetworks"
                     v-bind="socialNetwork"

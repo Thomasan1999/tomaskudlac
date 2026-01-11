@@ -169,8 +169,12 @@ const useStore = defineStore('main', () => {
         toasts.value.splice(toastIndex, 1);
     };
 
-    const isTouchscreen = computed<boolean>(() => {
+    const maxLg = computed<boolean>(() => {
         return windowWidth.value < 1024;
+    });
+
+    const maxXl = computed<boolean>(() => {
+        return windowWidth.value < 1280;
     });
 
     /** List of programming languages joined by commas. */
@@ -183,10 +187,11 @@ const useStore = defineStore('main', () => {
         addToast,
         age,
         imageFormat,
-        init,
-        isTouchscreen,
         language,
         locales,
+        init,
+        maxLg,
+        maxXl,
         navbarHeight,
         programmingLanguages,
         programmingLanguagesString,
