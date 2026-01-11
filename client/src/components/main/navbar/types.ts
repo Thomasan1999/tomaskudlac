@@ -21,7 +21,7 @@ export interface NavbarLinkProps {
     replace?: boolean;
     routerLink?: boolean;
     text?: string;
-    title: string;
+    title?: string;
     to: RouteLocationRaw;
 }
 

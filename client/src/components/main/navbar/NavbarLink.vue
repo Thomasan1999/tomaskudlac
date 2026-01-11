@@ -33,7 +33,7 @@
         data-testid="navbar-link"
         class="h-navbar-height flex items-center justify-center transition-colors"
         :class="[
-            active ? 'bg-navbar-link-active cursor-default' : 'hover:bg-primary-light',
+            active ? 'bg-navbar-link-active pointer-events-none' : 'hover:bg-primary-light',
             fontWeight === FontWeight.NORMAL ? 'font-normal' : 'font-light',
         ]"
         :title="title"
