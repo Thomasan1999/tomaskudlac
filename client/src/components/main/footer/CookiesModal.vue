@@ -40,7 +40,7 @@
                         class="flex flex-col gap-2.5"
                     >
                         <h3 class="font-bold">{{ paragraph.title }}</h3>
-                        <p class="cookies-modal-paragraph-text">{{ paragraph.text }}</p>
+                        <p>{{ paragraph.text }}</p>
                     </div>
                 </div>
             </div>

@@ -207,23 +207,14 @@
 <template>
     <p
         data-testid="home-text"
-        class="home-text mb-navbar-height relative flex flex-wrap items-center leading-[1.2] whitespace-break-spaces max-md:text-[9vw] md:text-[4.375rem]"
+        class="mb-navbar-height relative flex flex-wrap items-center leading-[1.2] whitespace-break-spaces max-md:text-[9vw] md:text-[4.375rem]"
     >
         <span>{{ locales.welcome }}</span>
-        <span
-            class="home-programming-language"
-            data-testid="programming-language"
-        >
-            <span
-                class="home-programming-language-non-marked"
-                data-testid="non-marked-text"
-            >
+        <span data-testid="programming-language">
+            <span data-testid="non-marked-text">
                 <HomeTextProgrammingLanguage :programmingLanguage="nonMarkedText" />
             </span>
-            <mark
-                class="home-programming-language-marked"
-                data-testid="marked-text"
-            >
+            <mark data-testid="marked-text">
                 <HomeTextProgrammingLanguage :programmingLanguage="markedText" />
             </mark>
         </span>

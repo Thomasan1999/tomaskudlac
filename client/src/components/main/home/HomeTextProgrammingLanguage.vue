@@ -14,6 +14,6 @@
 </script>
 
 <template>
-    <span class="home-programming-language-an-prefix">{{ anPrefix }}</span>
+    <span>{{ anPrefix }}</span>
     <span class="font-bold">{{ base }}</span>
 </template>
