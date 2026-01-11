@@ -5,6 +5,7 @@ import useStore from '@/store';
 import mockImageSrc from '@/mocks/mockImageSrc';
 import routes from '@/router/routes';
 import getManifestElement from '@/utils/getManifestElement';
+import { SiteLanguage } from '@/store/types';
 
 vi.mock('@/router/routes', () => {
     return {
@@ -14,7 +15,7 @@ vi.mock('@/router/routes', () => {
                 component: {},
                 meta: {
                     description: 'The description of the site.',
-                    language: 'en',
+                    language: SiteLanguage.EN,
                     title: 'The site',
                 },
             },
@@ -23,7 +24,7 @@ vi.mock('@/router/routes', () => {
                 component: {},
                 meta: {
                     description: 'Popis stránky.',
-                    language: 'sk',
+                    language: SiteLanguage.SK,
                     title: 'Stránka',
                 },
             },

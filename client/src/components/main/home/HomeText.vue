@@ -186,7 +186,7 @@
     watch(
         () => store.language,
         () => {
-            if (store.language === 'sk') {
+            if (store.language === SiteLanguage.SK) {
                 nonMarkedText.value = removeAnPrefix(nonMarkedText.value);
                 markedText.value = removeAnPrefix(markedText.value);
             } else {
