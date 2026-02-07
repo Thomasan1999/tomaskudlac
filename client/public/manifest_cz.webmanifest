@@ -3,7 +3,7 @@
     "short_name": "Tomáš Kudláč",
     "background_color": "#ffffff",
     "theme_color": "#191970",
-    "description": "Je mi 26 let a pracuji na živnost (freelance). Mou pracovní náplní je web development (vývoj webových stránek a aplikací). Ovládám JS (Vue.js, TypeScript, Node.js), HTML, CSS (Stylus, SCSS, Less), SQL (PostgreSQL), NoSQL (MongoDB), PHP.",
+    "description": "Mou pracovní náplní je web development (vývoj webových stránek a aplikací). Ovládám JS (Vue.js, TypeScript, Node.js), HTML, CSS (Stylus, SCSS, Less), SQL (PostgreSQL), NoSQL (MongoDB), PHP. Rád se učím novým technologiím a zkoumám, jak se vyvíjejí. Pomáhá mi to být v obraze a využít každou novou příležitost k tomu být lepším vývojářem.",
     "display": "fullscreen",
     "icons": [
         {

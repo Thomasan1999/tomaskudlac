@@ -5,6 +5,7 @@ import mainSections from '@/components/main/mainSections';
 import routes from '@/router/routes';
 import getManifestElement from '@/utils/getManifestElement';
 import getMetaElement from '@/utils/getMetaElement';
+import { parseTemplateVariables } from '@/utils/parseTemplateVariables';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -34,9 +35,9 @@ router.beforeEach(async (to, from, next) => {
     document.documentElement.lang = language;
 
     const metaDescription = getMetaElement('description');
-    metaDescription.content = to.meta.description
-        .replace('{{age}}', store.age.toString())
-        .replace('{{programmingLanguagesString}}', store.programmingLanguagesString);
+    metaDescription.content = parseTemplateVariables(to.meta.description, {
+        programmingLanguagesString: store.programmingLanguagesString,
+    });
 
     const manifestElement = getManifestElement();
     manifestElement.href = `/manifest_${language}.webmanifest`;
