@@ -15,7 +15,7 @@ const router = createRouter({
 /** The language of the previous route. */
 let lastLanguage: SiteLanguage | undefined;
 
-router.beforeEach(async (to, from, next) => {
+router.beforeEach(async (to) => {
     const store = useStore();
 
     const language = to.meta.language;
@@ -23,8 +23,7 @@ router.beforeEach(async (to, from, next) => {
     const languageUnchanged = lastLanguage === language;
 
     if (languageUnchanged) {
-        next();
-        return;
+        return true;
     }
 
     lastLanguage = language;
@@ -48,11 +47,9 @@ router.beforeEach(async (to, from, next) => {
 
     const hashChanged = newRouteHash && newRouteHash !== to.hash;
 
-    const newRoute = hashChanged
+    return hashChanged
         ? ({ hash: newRouteHash, path: to.path, replace: true } as RouteLocationRaw)
         : (undefined as never);
-
-    next(newRoute);
 });
 
 export default router;
