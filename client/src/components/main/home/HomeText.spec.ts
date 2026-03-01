@@ -7,7 +7,7 @@ import { ProgrammingLanguage } from '@/store/ProgrammingLanguage';
 import { SiteLanguage } from '@/store/types';
 import _ from 'lodash';
 import { ExistingDomWrapper } from '@/types/tests';
-import { buildCreateWrapper, getTestingSelector } from '@/utils/test';
+import { addManifestAndDescriptionToDocumentHead, buildCreateWrapper, getTestingSelector } from '@/utils/test';
 import { MockInstance } from 'vitest';
 import HomeTextCursor from '@/components/main/home/HomeTextCursor.vue';
 import router from '@/router';
@@ -26,7 +26,7 @@ const createWrapper = buildCreateWrapper(HomeText, undefined, {
 });
 
 beforeAll(() => {
-    document.head.innerHTML += '<link rel="manifest"><meta name="description">';
+    addManifestAndDescriptionToDocumentHead();
 });
 
 describe('HomeText', () => {
