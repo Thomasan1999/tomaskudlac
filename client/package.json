@@ -41,7 +41,7 @@
         "@typescript-eslint/parser": "8.51.0",
         "@vitejs/plugin-vue": "6.0.3",
         "@vitest/coverage-v8": "4.0.16",
-        "@vitest/ui": "4.0.16",
+        "@vitest/ui": "4.0.18",
         "@vue/compiler-sfc": "3.5.29",
         "@vue/language-server": "3.2.2",
         "@vue/test-utils": "2.4.6",
