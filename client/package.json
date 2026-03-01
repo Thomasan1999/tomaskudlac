@@ -45,7 +45,7 @@
         "@vue/compiler-sfc": "3.5.29",
         "@vue/language-server": "3.2.5",
         "@vue/test-utils": "2.4.6",
-        "eslint": "9.39.2",
+        "eslint": "10.0.2",
         "eslint-plugin-vue": "10.6.2",
         "jsdom": "28.1.0",
         "puppeteer": "24.37.5",
