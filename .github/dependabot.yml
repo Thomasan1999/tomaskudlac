@@ -34,7 +34,6 @@ updates:
       directory: '/'
       schedule:
           interval: 'weekly'
-      versioning-strategy: 'increase-if-necessary'
       commit-message:
           prefix: 'chore(ci)'
       open-pull-requests-limit: 3
