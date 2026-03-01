@@ -5,6 +5,14 @@ updates:
       schedule:
           interval: 'weekly'
       versioning-strategy: 'increase-if-necessary'
+      groups:
+          eslint:
+              patterns:
+                  - 'eslint'
+                  - '@eslint/*'
+                  - 'eslint-*'
+                  - '@typescript-eslint/*'
+                  - 'typescript-eslint'
       commit-message:
           prefix: 'chore(deps)'
       open-pull-requests-limit: 5
@@ -15,6 +23,13 @@ updates:
           interval: 'weekly'
       versioning-strategy: 'increase-if-necessary'
       groups:
+          eslint:
+              patterns:
+                  - 'eslint'
+                  - '@eslint/*'
+                  - 'eslint-*'
+                  - '@typescript-eslint/*'
+                  - 'typescript-eslint'
           fontawesome:
               patterns:
                   - '@fortawesome/*'
