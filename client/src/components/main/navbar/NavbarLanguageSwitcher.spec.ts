@@ -1,5 +1,5 @@
 import mockInitStore from '@/mocks/mockInitStore';
-import { buildCreateWrapper, getTestingSelector } from '@/utils/test';
+import { addManifestAndDescriptionToDocumentHead, buildCreateWrapper, getTestingSelector } from '@/utils/test';
 import NavbarLanguageSwitcher from '@/components/main/navbar/NavbarLanguageSwitcher.vue';
 import { SiteLanguage } from '@/store/types';
 import router from '@/router';
@@ -12,6 +12,7 @@ const createWrapper = buildCreateWrapper(NavbarLanguageSwitcher, undefined, {
 
 describe('NavbarLanguageSwitcher', () => {
     beforeAll(async () => {
+        addManifestAndDescriptionToDocumentHead();
         await mockInitStore();
     });
 

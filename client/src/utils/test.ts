@@ -74,4 +74,20 @@ function initPinia(): void {
     setActivePinia(createPinia());
 }
 
-export { getTestingSelector, buildCreateWrapper, emitComponentEvent, initPinia };
+function addManifestAndDescriptionToDocumentHead(): void {
+    const manifestLink = document.createElement('link');
+    manifestLink.rel = 'manifest';
+    document.head.appendChild(manifestLink);
+
+    const descriptionMeta = document.createElement('meta');
+    descriptionMeta.name = 'description';
+    document.head.appendChild(descriptionMeta);
+}
+
+export {
+    getTestingSelector,
+    buildCreateWrapper,
+    emitComponentEvent,
+    initPinia,
+    addManifestAndDescriptionToDocumentHead,
+};

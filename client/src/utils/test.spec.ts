@@ -1,4 +1,4 @@
-import { buildCreateWrapper, emitComponentEvent } from '@/utils/test';
+import { addManifestAndDescriptionToDocumentHead, buildCreateWrapper, emitComponentEvent } from '@/utils/test';
 import * as vueUtils from 'vue';
 
 vi.mock('vue', async (importOriginal) => ({
@@ -9,6 +9,22 @@ const createWrapper = buildCreateWrapper({ template: '<div/>' });
 const wrapper = createWrapper();
 
 describe('test', () => {
+    describe('addManifestAndDescriptionToDocumentHead()', () => {
+        beforeEach(() => {
+            document.head.innerHTML = '';
+        });
+
+        it('adds manifest link and description meta when missing', () => {
+            expect(document.head.querySelector('link[rel="manifest"]')).toBeFalsy();
+            expect(document.head.querySelector('meta[name="description"]')).toBeFalsy();
+
+            addManifestAndDescriptionToDocumentHead();
+
+            expect(document.head.querySelector('link[rel="manifest"]')).toBeTruthy();
+            expect(document.head.querySelector('meta[name="description"]')).toBeTruthy();
+        });
+    });
+
     describe('emitComponentEvent()', () => {
         it('emits event', () => {
             expect(wrapper.emitted('lorem')).toBe(undefined);
