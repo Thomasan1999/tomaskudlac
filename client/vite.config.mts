@@ -3,7 +3,6 @@ import { defineConfig } from 'vite';
 import * as path from 'path';
 import { VitePWA } from 'vite-plugin-pwa';
 import { createHtmlPlugin } from 'vite-plugin-html';
-import eslintPlugin from 'vite-plugin-eslint';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
@@ -11,7 +10,6 @@ export default defineConfig({
         outDir: path.resolve(__dirname, '../server/public'),
     },
     plugins: [
-        eslintPlugin(),
         vue(),
         createHtmlPlugin(),
         VitePWA({
