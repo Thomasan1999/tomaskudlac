@@ -1,56 +1,66 @@
 # Tomáš Kudláč's Portfolio
 
-Repository hosting the codebase of the portfolio developed by Tomáš Kudláč. You can view the portfolio in:
+Repository for Tomáš Kudláč's personal portfolio site.
 
-- [English version](https://tomaskudlac.sk/en?ref=github)
-- [Slovak version](https://tomaskudlac.sk/?ref=github)
+Live site:
 
-## About the Project
+- [Slovak](https://tomaskudlac.sk/?ref=github)
+- [English](https://tomaskudlac.sk/en?ref=github)
+- [Czech](https://tomaskudlac.sk/cz?ref=github)
 
-This portfolio is structured into two semi-independent projects, located in the following subdirectories:
+## Project Structure
 
-- **client**: Contains the front-end code of the application, built using the Vue.js framework. The current version is
-  developed in Vue 3. To explore the previous version of the project built with Vue 2, visit
-  the [vue-2](https://github.com/Thomasan1999/tomaskudlac/tree/vue-2) branch.
+This repository contains two parts:
 
-- **server**: Contains the back-end code, which is not published for security reasons. However, parts that do not
-  compromise security might be available in future updates.
+- `client/` - the public frontend application built with Vue 3, Vite, TypeScript, Pinia, Vue Router, Tailwind CSS, and Vitest
+- `server/` - backend-related code; the full implementation is intentionally not published
 
-## Project Setup
+The main active codebase in this repository is `client/`.
 
-### Utility Scripts
+## Getting Started
 
-- `npm run format` - Formats the code using Prettier.
-- `npm run format:check` - Checks the code formatting with Prettier without modifying it.
-- `npm run lint` - Lints the code using ESLint.
-- `npm run test:coverage` - Runs the tests once and shows test code coverage.
-- `npm run test:run` - Runs the tests once.
-- `npm run test:watch` - Runs the tests and re-runs them when any test file changes.
-- `npm run type-check` - Checks the code for type validity.
+### Prerequisites
 
-## Technologies Used
+- [Node.js](https://nodejs.org/)
+- npm
 
-- Husky - used for extending Git hooks
-- Prettier - ensures consistent code formatting
+### Install Dependencies
 
-## Directory Structure
+From the repository root:
 
+```bash
+npm install
 ```
+
+The root `postinstall` script also installs frontend dependencies in `client/`.
+
+## Available Scripts
+
+Run these commands from the repository root:
+
+- `npm run build` - builds the frontend for production into `server/public`
+- `npm run format` - formats repository files with Prettier
+- `npm run format:check` - checks formatting without writing changes
+- `npm run lint` - runs frontend ESLint checks
+- `npm run test:coverage` - runs frontend tests with coverage
+- `npm run test:run` - runs frontend tests once
+- `npm run test:watch` - runs frontend tests in watch mode
+- `npm run type-check` - checks types
+
+For frontend-only details, see [client/README.md](https://github.com/Thomasan1999/tomaskudlac/blob/master/client/README.md).
+
+## Repository Layout
+
+```text
 .
-├── .github              # Contains code used by GitHub
-│   ├── actions          # GitHub actions
-│   └── workflows        # GitHub workflows
-├── .husky               # Contains Husky scripts
-│   ├── commit-msg       # Lints commit messages
-│   └── pre-push         # Validates code to be pushed
-├── client               # Front-end (Vue application)
-├── server               # Back-end, not published for security reasons
-├── .gitignore           # Files ignored by Git
-├── .prettierrc.json     # Prettier configuration file
-└── README.md            # Project description
+|-- .github/            # GitHub workflows and related automation
+|-- .husky/             # Git hooks
+|-- client/             # Public frontend application
+|-- server/             # Backend-related code (not fully published)
+|-- commitlint.config.ts
+|-- package.json        # Root workspace scripts and shared tooling
+`-- README.md
 ```
-
-More detailed structures are available within their respective subdirectories.
 
 ## License
 
