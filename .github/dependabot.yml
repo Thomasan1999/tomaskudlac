@@ -6,6 +6,9 @@ updates:
           interval: 'weekly'
       versioning-strategy: 'increase-if-necessary'
       groups:
+          commitlint:
+              patterns:
+                  - '@commitlint/*'
           eslint:
               patterns:
                   - 'eslint'
