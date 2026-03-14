@@ -63,6 +63,7 @@
         "vue-tsc": "3.2.5"
     },
     "overrides": {
+        "immutable": "5.1.5",
         "serialize-javascript": "7.0.3"
     }
 }
