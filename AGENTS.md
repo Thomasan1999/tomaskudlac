@@ -53,3 +53,5 @@ For documentation-only or workflow-only changes, run only the relevant checks.
 
 - The default branch in this repository is `master`.
 - Commit messages are validated with Commitlint via Husky.
+- When updating dependencies, use `deps` as the commit scope.
+- When a change is AI-related, use `ai` as the commit scope.
