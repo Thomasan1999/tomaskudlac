@@ -59,7 +59,7 @@
         "vite-plugin-pwa": "1.2.0",
         "vitest": "4.1.0",
         "vue-eslint-parser": "10.4.0",
-        "vue-tsc": "3.2.5"
+        "vue-tsc": "3.2.6"
     },
     "overrides": {
         "immutable": "5.1.5",
