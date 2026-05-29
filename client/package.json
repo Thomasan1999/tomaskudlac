@@ -63,6 +63,6 @@
     },
     "overrides": {
         "immutable": "5.1.5",
-        "serialize-javascript": "7.0.3"
+        "serialize-javascript": "7.0.5"
     }
 }
