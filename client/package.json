@@ -48,7 +48,7 @@
         "eslint": "10.8.0",
         "eslint-plugin-vue": "10.10.0",
         "jsdom": "30.0.0",
-        "puppeteer": "25.3.0",
+        "puppeteer": "25.4.0",
         "tailwindcss": "4.3.0",
         "ts-essentials": "10.2.1",
         "ts-node": "10.9.2",
