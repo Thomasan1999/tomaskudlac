@@ -47,7 +47,7 @@
         "@vue/test-utils": "2.4.11",
         "eslint": "10.8.0",
         "eslint-plugin-vue": "10.10.0",
-        "jsdom": "30.0.0",
+        "jsdom": "30.0.1",
         "puppeteer": "25.4.0",
         "tailwindcss": "4.3.0",
         "ts-essentials": "10.2.1",
