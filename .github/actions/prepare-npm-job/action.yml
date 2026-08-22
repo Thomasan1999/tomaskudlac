@@ -1,7 +1,0 @@
-name: 'Prepare NPM job'
-runs:
-    using: 'composite'
-    steps:
-        - name: Install dependencies
-          shell: 'bash'
-          run: npm ci

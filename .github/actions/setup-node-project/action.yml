@@ -1,0 +1,30 @@
+name: 'Set up Node project'
+description: 'Installs the Node version pinned in .nvmrc, with npm and Puppeteer caching, then installs dependencies.'
+
+inputs:
+    root-only:
+        description: 'Install only the root dev dependencies, skipping the client workspace.'
+        default: 'false'
+
+runs:
+    using: 'composite'
+    steps:
+        - name: Set up Node.js
+          uses: actions/setup-node@v7
+          with:
+              node-version-file: '.nvmrc'
+              cache: 'npm'
+
+        # npm's own cache does not cover the browser Puppeteer downloads in its postinstall, which is the slowest
+        # part of a cold install.
+        - name: Restore Puppeteer browsers
+          if: inputs.root-only != 'true'
+          uses: actions/cache@v4
+          with:
+              path: '~/.cache/puppeteer'
+              key: "puppeteer-${{ runner.os }}-${{ hashFiles('package-lock.json') }}"
+              restore-keys: 'puppeteer-${{ runner.os }}-'
+
+        - name: Install dependencies
+          shell: 'bash'
+          run: npm ci ${{ inputs.root-only == 'true' && '--workspaces=false --include-workspace-root' || '' }}
