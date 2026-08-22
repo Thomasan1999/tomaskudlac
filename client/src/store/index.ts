@@ -1,5 +1,4 @@
-import skLocales from '@/locales/sk';
-import enLocales from '@/locales/en';
+import { Locales } from '@/locales/types';
 import { ImageFormat, InitializingState, SiteLanguage, ToastData } from '@/store/types';
 import { ProgrammingLanguage } from '@/store/ProgrammingLanguage';
 import dayjs from 'dayjs';
@@ -16,7 +15,7 @@ const useStore = defineStore('main', () => {
     const imageFormat = ref(ImageFormat.WEBP);
     const initState = ref(InitializingState.NOT_INITIALIZED);
     const language = ref(SiteLanguage.SK);
-    const locales = ref(null as unknown as typeof skLocales | typeof enLocales);
+    const locales = ref<Locales>(null as unknown as Locales);
     const navbarHeight = ref(60);
     const programmingLanguages = ref<ProgrammingLanguage[]>(
         [

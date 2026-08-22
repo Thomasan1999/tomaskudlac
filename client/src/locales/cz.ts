@@ -1,4 +1,5 @@
 import { SiteLanguage } from '@/store/types';
+import { Locales } from '@/locales/types';
 
 export default {
     cookies: {
@@ -59,7 +60,7 @@ export default {
                     text: `Ovládám *{{programmingLanguages}}*. Rád se učím novým technologiím a zkoumám, jak se vyvíjejí.
                     Pomáhá mi to být v obraze a využít každou novou příležitost k tomu být lepším vývojářem.`,
                 },
-            ] as { title: string; text: string }[],
+            ],
             photoAlt: 'Tomáš Kudláč - Fotografie',
             title: 'O mně',
         },
@@ -137,4 +138,4 @@ export default {
     toasts: {
         closeButtonTitle: 'Zavřít',
     },
-};
+} satisfies Locales;

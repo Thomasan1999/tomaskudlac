@@ -1,14 +1,14 @@
 <script lang="ts" setup>
     import { computed } from 'vue';
     import useStore from '@/store';
-    import skLocales from '@/locales/sk';
     import CloseIcon from '@/components/main/CloseIcon.vue';
 
     defineEmits<{ (event: 'close'): void }>();
 
     const store = useStore();
 
-    const locales = computed(() => (store.locales as typeof skLocales).cookies);
+    // FooterComponent only renders this modal for the languages that have the texts.
+    const locales = computed(() => store.locales.cookies!);
 </script>
 
 <template>
