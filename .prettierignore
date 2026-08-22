@@ -1,0 +1,4 @@
+package-lock.json
+
+# Build output. server/.gitignore hides it from git, but Prettier does not read nested gitignore files.
+server/public

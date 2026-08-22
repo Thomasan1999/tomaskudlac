@@ -2,17 +2,31 @@ name: PR title lint
 
 on:
     pull_request:
-        types: [opened, edited]
+        types: [opened, edited, reopened]
+
+permissions:
+    contents: read
+
+concurrency:
+    group: '${{ github.workflow }}-${{ github.event.pull_request.number }}'
+    cancel-in-progress: true
 
 jobs:
     lint:
         runs-on: ubuntu-latest
+        timeout-minutes: 5
+
         steps:
             - name: Checkout code
               uses: actions/checkout@v7
 
-            - uses: ./.github/actions/prepare-npm-job
+            - uses: ./.github/actions/setup-node-project
+              with:
+                  root-only: 'true'
 
+            # The title is untrusted input, so it is passed through the environment rather than interpolated into
+            # the script, where a backtick or $(...) would be executed by the shell.
             - name: Lint PR title
-              run: |
-                  echo "${{ github.event.pull_request.title }}" | npx commitlint
+              env:
+                  PR_TITLE: '${{ github.event.pull_request.title }}'
+              run: printf '%s' "$PR_TITLE" | npx --no commitlint
