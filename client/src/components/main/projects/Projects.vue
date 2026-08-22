@@ -15,6 +15,7 @@
         <div class="grid w-full max-lg:grid-cols-1 lg:grid-cols-2">
             <Project
                 v-for="project in projects"
+                :key="project"
                 :name="project"
             />
         </div>

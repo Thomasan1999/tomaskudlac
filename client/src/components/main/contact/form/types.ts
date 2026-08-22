@@ -13,7 +13,7 @@ export type ContactFormFieldData = {
     element?: ContactFormFieldElement;
     maxlength?: number;
     minlength?: number;
-    name: string;
+    name: ContactFormFieldName;
     pattern?: RegExp;
     required?: boolean;
     touched: boolean;
@@ -32,7 +32,7 @@ export interface ContactFormFieldProps {
     label: string;
     maxlength?: number;
     minlength?: number;
-    name: string;
+    name: ContactFormFieldName;
     pattern?: RegExp;
     required?: boolean;
     touched: boolean;
@@ -40,8 +40,14 @@ export interface ContactFormFieldProps {
     valid: boolean;
 }
 
+/** Names of the contact form fields. They double as keys into the form locales. */
+export type ContactFormFieldName = 'email' | 'message' | 'name' | 'phone';
+
+/** Keys of the field error messages in the locales. */
+export type ContactFormFieldErrorKey = 'empty' | 'invalidFormat';
+
 export interface ContactFormFieldErrorProps {
-    error?: string;
+    error?: ContactFormFieldErrorKey;
     /** Id the input points at through aria-describedby. */
     id: string;
 }

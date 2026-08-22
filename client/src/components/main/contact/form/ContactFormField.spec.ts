@@ -11,7 +11,7 @@ const createWrapper = buildCreateWrapper(
     {
         label: '',
         modelValue: '',
-        name: '',
+        name: 'name',
         touched: false,
         valid: true,
     },
@@ -73,7 +73,7 @@ describe('ContactFormField', () => {
             for await (const attributeValue of htmlAttributeValues) {
                 await wrapper.setProps({ [attributeName]: attributeValue });
 
-                expect(inputElement.element[htmlAttributeName]).toBe(attributeValue);
+                expect(inputElement.element[htmlAttributeName as keyof HTMLInputElement]).toBe(attributeValue);
             }
         }
 

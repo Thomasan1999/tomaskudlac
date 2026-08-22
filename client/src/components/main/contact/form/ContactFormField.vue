@@ -4,6 +4,7 @@
     import ContactFormFieldError from '@/components/main/contact/form/ContactFormFieldError.vue';
     import {
         ContactFormFieldElement,
+        ContactFormFieldErrorKey,
         ContactFormFieldProps,
         ContactFormFieldType,
     } from '@/components/main/contact/form/types';
@@ -47,18 +48,17 @@
 
     const errorId = computed(() => `${fieldId.value}-error`);
 
-    const error = computed(() => {
+    /** Key into the error locales, or undefined while there is nothing to report. */
+    const error = computed<ContactFormFieldErrorKey | undefined>(() => {
         if (valid || !touched || inputting.value) {
-            return;
+            return undefined;
         }
 
         if (missingValue.value) {
             return 'empty';
         }
 
-        if (!validFormat.value) {
-            return 'invalidFormat';
-        }
+        return validFormat.value ? undefined : 'invalidFormat';
     });
 
     const missingValue = computed(() => required && !model.value);

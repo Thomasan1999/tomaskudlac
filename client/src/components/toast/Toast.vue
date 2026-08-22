@@ -49,7 +49,7 @@
         leaveActiveClass="transition-opacity"
         enterFromClass="opacity-0"
         leaveToClass="opacity-0"
-        @after-leave="$emit('close')"
+        @afterLeave="$emit('close')"
     >
         <div
             v-if="opened"

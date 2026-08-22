@@ -2,6 +2,8 @@
     import Navbar from '@/components/main/navbar/Navbar.vue';
     import mainSections from '@/components/main/mainSections';
     import { computed, onBeforeUnmount, onMounted, ref, useTemplateRef, watch } from 'vue';
+    import type { ComponentPublicInstance } from 'vue';
+    import { MainSectionName } from '@/locales/types';
     import router from '@/router';
     import AboutMyself from '@/components/main/about-myself/AboutMyself.vue';
     import Projects from '@/components/main/projects/Projects.vue';
@@ -19,7 +21,7 @@
 
     const store = useStore();
 
-    const onLinkClick = (linkName: string): void => {
+    const onLinkClick = (linkName: MainSectionName): void => {
         if (!linkName) {
             return;
         }
@@ -29,18 +31,19 @@
     };
 
     const onScroll = (): void => {
-        store.activeSection = [...sections.value].reverse().find(([sectionName]) => {
+        // The first section's threshold is always met at any scroll position, so findLast always matches.
+        store.activeSection = sections.value.findLast(([sectionName]) => {
             const sectionElement = sectionElements.value[sectionName];
 
             return root.value!.scrollTop >= sectionElement.offsetTop - window.innerHeight / 2;
         })![0];
     };
 
-    const putSectionNameToUrl = (sectionName: string): void => {
+    const putSectionNameToUrl = (sectionName: MainSectionName): void => {
         router.replace({ hash: mainSections[sectionName].url });
     };
 
-    const scrollToSection = (sectionName: string, behavior: ScrollBehavior = 'smooth'): void => {
+    const scrollToSection = (sectionName: MainSectionName, behavior: ScrollBehavior = 'smooth'): void => {
         const newTop = sectionElements.value[sectionName].offsetTop - navbarHeight.value;
 
         root.value!.scroll({ behavior, top: newTop });
@@ -51,16 +54,17 @@
 
     const root = useTemplateRef('root');
 
-    const sectionElements = ref<Record<string, HTMLDivElement>>({});
+    const sectionElements = ref<Record<MainSectionName, HTMLDivElement>>({} as Record<MainSectionName, HTMLDivElement>);
 
     const activeSection = computed(() => store.activeSection);
 
     const navbarHeight = computed(() => store.navbarHeight);
 
-    const sections = computed(() =>
-        Object.entries(mainSections).sort(
-            ([, sectionDataA], [, sectionDataB]) => sectionDataA.order - sectionDataB.order,
-        ),
+    const sections = computed(
+        () =>
+            Object.entries(mainSections).toSorted(
+                ([, sectionDataA], [, sectionDataB]) => sectionDataA.order - sectionDataB.order,
+            ) as [MainSectionName, (typeof mainSections)[MainSectionName]][],
     );
 
     watch(
@@ -82,7 +86,7 @@
 
         const newActiveSection = Object.entries(mainSections).find(
             ([, sectionData]) => sectionData.url === currentHash,
-        )?.[0];
+        )?.[0] as MainSectionName | undefined;
 
         store.activeSection = newActiveSection ?? 'home';
 
@@ -115,7 +119,7 @@
                 :is="components[sectionData.componentName]"
                 v-for="[sectionName, sectionData] in sections"
                 :key="sectionName"
-                :ref="(component) => (sectionElements[sectionName] = component.$el)"
+                :ref="(component: ComponentPublicInstance) => (sectionElements[sectionName] = component.$el)"
                 :name="sectionName"
             />
         </div>

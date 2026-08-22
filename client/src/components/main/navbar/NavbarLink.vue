@@ -1,5 +1,6 @@
 <script lang="ts" setup>
     import mainSections from '@/components/main/mainSections';
+    import { MainSectionName } from '@/locales/types';
     import { computed } from 'vue';
     import ExternalLink from '@/components/ExternalLink.vue';
     import { NavbarLinkProps } from '@/components/main/navbar/types';
@@ -24,7 +25,7 @@
         };
     });
 
-    const toUrl = computed(() => (typeof to === 'string' ? (mainSections[to]?.url ?? to) : to));
+    const toUrl = computed(() => (typeof to === 'string' ? (mainSections[to as MainSectionName]?.url ?? to) : to));
 </script>
 
 <template>

@@ -3,7 +3,8 @@ import ContactFormFieldError from '@/components/main/contact/form/ContactFormFie
 import { buildCreateWrapper } from '@/utils/test';
 
 const createWrapper = buildCreateWrapper(ContactFormFieldError, {
-    error: '',
+    error: undefined,
+    id: 'contact-form-email-error',
 });
 
 describe('ContactFormFieldError', () => {
@@ -12,7 +13,7 @@ describe('ContactFormFieldError', () => {
     });
 
     it("does display message only if 'error' property is not empty", async () => {
-        const wrapper = createWrapper({ error: '' });
+        const wrapper = createWrapper({ error: undefined });
 
         expect(wrapper.find('div').exists()).toBe(false);
 
