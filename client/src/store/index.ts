@@ -193,6 +193,7 @@ const useStore = defineStore('main', () => {
         language,
         locales,
         init,
+        initState,
         maxLg,
         maxXl,
         navbarHeight,
