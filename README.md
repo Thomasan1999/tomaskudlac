@@ -76,4 +76,8 @@ For frontend-only details, see [client/README.md](https://github.com/Thomasan199
 
 ## License
 
-This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
+The source code is licensed under the [MIT License](LICENSE).
+
+The site content - the biographical texts in `client/src/locales/`, the photographs in `client/public/images/` and
+the name - is not covered by it and remains All Rights Reserved. Fork the code freely; please put your own content
+in it.
