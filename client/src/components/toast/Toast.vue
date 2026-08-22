@@ -4,6 +4,7 @@
     import { ToastProps } from '@/components/main/types';
     import ToastCloseButton from '@/components/toast/ToastCloseButton.vue';
     import { ToastType } from '@/store/types';
+    import useTimeouts from '@/composables/useTimeouts';
 
     defineProps<ToastProps>();
     defineEmits<{ (event: 'close'): void }>();
@@ -22,6 +23,8 @@
 
     const store = useStore();
 
+    const { setSafeTimeout } = useTimeouts();
+
     const baseLifetime = ref(10000);
 
     const opened = ref(false);
@@ -34,7 +37,7 @@
         opened.value = true;
         relativeMarginTop.value = getRelativeMarginTop();
 
-        setTimeout(() => {
+        setSafeTimeout(() => {
             opened.value = false;
         }, lifetime.value);
     });
