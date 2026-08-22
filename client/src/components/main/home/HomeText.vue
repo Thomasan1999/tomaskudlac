@@ -1,7 +1,7 @@
 <script lang="ts" setup>
     import { computed, ref, watch } from 'vue';
     import useStore from '@/store';
-    import { shuffle } from 'lodash';
+    import { shuffle } from 'lodash-es';
     import Rand from '@/utils/Rand';
     import sleep from '@/utils/sleep';
     import HomeTextProgrammingLanguage from '@/components/main/home/HomeTextProgrammingLanguage.vue';

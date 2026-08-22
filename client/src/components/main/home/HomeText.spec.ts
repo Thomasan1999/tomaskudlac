@@ -1,3 +1,11 @@
+// lodash-es exports are live ESM bindings, so shuffle has to be replaced at module level rather than spied on.
+const { shuffleSpy } = vi.hoisted(() => ({ shuffleSpy: vi.fn((value: unknown[]) => value) }));
+
+vi.mock('lodash-es', async (importOriginal) => ({
+    ...(await importOriginal<typeof import('lodash-es')>()),
+    shuffle: shuffleSpy,
+}));
+
 import mockInitStore from '@/mocks/mockInitStore';
 import { DOMWrapper, VueWrapper } from '@vue/test-utils';
 import { nextTick } from 'vue';
@@ -5,10 +13,8 @@ import HomeText from '@/components/main/home/HomeText.vue';
 import useStore from '@/store';
 import { ProgrammingLanguage } from '@/store/ProgrammingLanguage';
 import { SiteLanguage } from '@/store/types';
-import _ from 'lodash';
 import { ExistingDomWrapper } from '@/types/tests';
 import { addManifestAndDescriptionToDocumentHead, buildCreateWrapper, getTestingSelector } from '@/utils/test';
-import { MockInstance } from 'vitest';
 import HomeTextCursor from '@/components/main/home/HomeTextCursor.vue';
 import router from '@/router';
 
@@ -16,8 +22,6 @@ const LOCALES_SELECTOR = getTestingSelector('locales');
 const MARKED_TEXT_SELECTOR = getTestingSelector('marked-text');
 const NON_MARKED_TEXT_SELECTOR = getTestingSelector('non-marked-text');
 const PROGRAMMING_LANGUAGE_SELECTOR = getTestingSelector('programming-language');
-
-const shuffleSpy = (vi.spyOn(_, 'shuffle') as MockInstance).mockImplementation((value) => value);
 
 const createWrapper = buildCreateWrapper(HomeText, undefined, {
     global: {

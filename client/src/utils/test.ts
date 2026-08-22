@@ -1,6 +1,6 @@
 import { ComponentMountingOptions, mount, VueWrapper } from '@vue/test-utils';
 import { DeepPartial } from 'ts-essentials';
-import { merge } from 'lodash';
+import { merge } from 'lodash-es';
 import { nextTick } from 'vue';
 import { createPinia, setActivePinia } from 'pinia';
 import { CreateWrapperBuiltComponent } from '@/utils/types';
