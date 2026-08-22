@@ -67,6 +67,19 @@ jobs:
 
     test:
         runs-on: ubuntu-latest
+        timeout-minutes: 10
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v7
+
+            - uses: ./.github/actions/setup-node-project
+
+            - name: Run unit tests
+              run: npm run test:coverage
+
+    e2e:
+        runs-on: ubuntu-latest
         timeout-minutes: 15
 
         steps:
@@ -75,5 +88,5 @@ jobs:
 
             - uses: ./.github/actions/setup-node-project
 
-            - name: Run tests
-              run: npm run test:coverage
+            - name: Run end-to-end tests
+              run: npm run test:e2e

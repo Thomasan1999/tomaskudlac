@@ -9,13 +9,15 @@
     },
     "scripts": {
         "build": "npm run build -w client",
-        "format:base": "prettier .",
         "format": "npm run format:base -- --write",
+        "format:base": "prettier .",
         "format:check": "npm run format:base -- --check",
         "lint": "npm run lint -w client",
         "lint:fix": "npm run lint:fix -w client",
         "serve": "npm run serve -w client",
+        "test:all": "npm run test:all -w client",
         "test:coverage": "npm run test:coverage -w client",
+        "test:e2e": "npm run test:e2e -w client",
         "test:run": "npm run test:run -w client",
         "test:watch": "npm run test:watch -w client",
         "type-check": "npm run type-check -w client"
