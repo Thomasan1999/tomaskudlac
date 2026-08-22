@@ -20,6 +20,15 @@ describe('getMetaElement', () => {
         expect(metaTag.name).toBe('description');
     });
 
+    // An unquoted attribute selector cannot hold a colon, so `meta[name=og:title]` threw a SyntaxError.
+    it('handles names that are not valid unquoted attribute values', () => {
+        const metaTag = getMetaElement('og:title');
+
+        expect(metaTag.tagName).toBe('META');
+        expect(metaTag.name).toBe('og:title');
+        expect(getMetaElement('og:title')).toBe(metaTag);
+    });
+
     it('returns the right HTML element', () => {
         document.head.innerHTML = `${document.head.innerHTML}<meta name="robots" content="noindex">`;
 

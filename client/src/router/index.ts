@@ -1,11 +1,24 @@
 import { createRouter, createWebHistory, RouteLocationRaw } from 'vue-router';
 import useStore from '@/store';
 import { SiteLanguage } from '@/store/types';
+import { Locales } from '@/locales/types';
 import mainSections from '@/components/main/mainSections';
 import routes from '@/router/routes';
 import getManifestElement from '@/utils/getManifestElement';
 import getMetaElement from '@/utils/getMetaElement';
 import { parseTemplateVariables } from '@/utils/parseTemplateVariables';
+
+/**
+ * Loaders for the locale chunks.
+ *
+ * Listed explicitly rather than built from a template literal, because Vite resolves an interpolated import by
+ * globbing the whole directory - which would bundle every file that lands in `locales/`, spec files included.
+ */
+const localeLoaders: Record<SiteLanguage, () => Promise<{ default: Locales }>> = {
+    [SiteLanguage.CZ]: () => import('@/locales/cz'),
+    [SiteLanguage.EN]: () => import('@/locales/en'),
+    [SiteLanguage.SK]: () => import('@/locales/sk'),
+};
 
 const router = createRouter({
     history: createWebHistory(),
@@ -30,7 +43,7 @@ router.beforeEach(async (to) => {
 
     store.language = language;
 
-    store.locales = (await import(`../locales/${store.language}.ts`)).default;
+    store.locales = (await localeLoaders[language]()).default;
     document.documentElement.lang = language;
 
     const metaDescription = getMetaElement('description');

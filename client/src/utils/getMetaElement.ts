@@ -4,7 +4,7 @@
  * @returns The HTML meta element.
  * */
 export default function getMetaElement(name: string): HTMLMetaElement {
-    const existingTag = document.head.querySelector<HTMLMetaElement>(`meta[name=${name}]`);
+    const existingTag = document.head.querySelector<HTMLMetaElement>(`meta[name="${name}"]`);
 
     if (existingTag) {
         return existingTag;

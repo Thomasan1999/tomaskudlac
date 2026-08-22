@@ -2,8 +2,6 @@ import mockInitStore from '@/mocks/mockInitStore';
 import { DOMWrapper, flushPromises } from '@vue/test-utils';
 import ContactForm from '@/components/main/contact/form/ContactForm.vue';
 import ContactFormField from '@/components/main/contact/form/ContactFormField.vue';
-import contactFormFields from '@/components/main/contact/form/contactFormFields';
-import { cloneDeep, merge } from 'lodash';
 import { buildCreateWrapper, getTestingSelector } from '@/utils/test';
 import { nextTick } from 'vue';
 import { afterEach } from 'vitest';
@@ -26,9 +24,6 @@ window.fetch = () =>
     );
 
 const fetchSpy = vi.spyOn(window, 'fetch');
-const resetSpy = vi.spyOn(HTMLFormElement.prototype, 'reset');
-
-const defaultFormFields = cloneDeep(contactFormFields);
 
 const createWrapper = buildCreateWrapper(ContactForm);
 
@@ -40,10 +35,9 @@ describe('ContactForm', () => {
         store = useStore();
     });
 
+    // Each form builds its own fields, so no shared state needs restoring between tests.
     beforeEach(() => {
         fetchSpy.mockClear();
-
-        merge(contactFormFields, defaultFormFields);
     });
 
     afterEach(() => {
@@ -67,7 +61,7 @@ describe('ContactForm', () => {
                 await field.find(`[name=${fieldName}]`).setValue(value);
                 await nextTick();
 
-                expect(contactFormFields.find((field) => field.name === fieldName)!.valid).toBe(validity);
+                expect(field.props('valid'), `"${value}" should be ${validity ? 'valid' : 'invalid'}`).toBe(validity);
             }
         }
 
@@ -183,38 +177,41 @@ describe('ContactForm', () => {
             expect(addToastSpy).toHaveBeenCalledTimes(1);
         });
 
+        /**
+         * The form used to call `form.reset()`, which clears the DOM inputs but not the reactive fields the template
+         * is bound to. `touched` and `valid` stayed set and the values came straight back on the next render, so this
+         * asserts on the fields themselves rather than on the call.
+         */
         it('resets form after successful submit', async () => {
             const wrapper = createWrapper();
 
             const formWrapper = wrapper.get('form');
 
-            const nameFieldWrapper = formWrapper.get<HTMLInputElement>('input[name=name]');
+            function getFieldValues(): string[] {
+                return formWrapper
+                    .findAll<HTMLInputElement | HTMLTextAreaElement>('input:not([name=lang]), textarea')
+                    .map((field) => field.element.value);
+            }
 
-            await nameFieldWrapper.setValue('Aaa');
-
+            await formWrapper.get<HTMLInputElement>('input[name=name]').setValue('Aaa');
             await makeFormSubmittable(formWrapper);
+
+            expect(getFieldValues().filter(Boolean)).not.toHaveLength(0);
 
             fetchSpy.mockRejectedValueOnce(new Error());
 
             await awaitSubmit(formWrapper);
 
-            expect(resetSpy).not.toHaveBeenCalled();
-
-            fetchSpy.mockResolvedValueOnce(
-                new Promise((resolve) =>
-                    resolve({
-                        json: async () => {
-                            return {};
-                        },
-                        ok: true,
-                        status: 200,
-                    } as never),
-                ) as never,
-            );
+            expect(getFieldValues().filter(Boolean), 'a failed submit must keep what was typed').not.toHaveLength(0);
 
             await awaitSubmit(formWrapper);
+            await nextTick();
 
-            expect(resetSpy).toHaveBeenCalledTimes(1);
+            expect(getFieldValues()).toEqual(['', '', '', '']);
+
+            wrapper.findAllComponents(ContactFormField).forEach((field) => {
+                expect(field.props('touched'), `${field.props('name')} should not be touched`).toBe(false);
+            });
         });
     });
 });

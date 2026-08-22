@@ -8,9 +8,12 @@
     import { ProgrammingLanguage } from '@/store/ProgrammingLanguage';
     import HomeTextCursor from '@/components/main/home/HomeTextCursor.vue';
     import { useRoute } from 'vue-router';
+    import useTimeouts from '@/composables/useTimeouts';
 
     const route = useRoute();
     const store = useStore();
+
+    const { isActive, setSafeTimeout } = useTimeouts();
 
     const baseInterval = 50;
 
@@ -21,13 +24,18 @@
 
         clearMarkedText();
 
+        // `sleep` cannot be cancelled, so the chain has to check for itself that it is still wanted.
         await sleep(800);
+
+        if (!isActive.value) {
+            return;
+        }
 
         await writeNextProgrammingLanguage();
 
         setCursorBlinking(true);
 
-        setTimeout(changeProgrammingLanguage, Rand.int({ min: 3000, max: 5000 }));
+        setSafeTimeout(changeProgrammingLanguage, Rand.int({ min: 3000, max: 5000 }));
     };
 
     const clearMarkedText = (): void => {
@@ -81,18 +89,18 @@
                 const languageIsMarked = nonMarkedText.value.length === nonMarkedTextNonRemovable.value.length;
 
                 if (languageIsMarked) {
-                    window.setTimeout(() => {
+                    setSafeTimeout(() => {
                         resolve();
                     }, timeout);
                     return;
                 }
 
-                const nextMarkedChar = nonMarkedText.value[nonMarkedText.value.length - 1];
+                const nextMarkedChar = nonMarkedText.value.at(-1);
 
                 nonMarkedText.value = nonMarkedText.value.slice(0, -1);
                 markedText.value = `${nextMarkedChar}${markedText.value}`;
 
-                window.setTimeout(() => {
+                setSafeTimeout(() => {
                     markChar();
                 }, timeout);
             };
@@ -128,7 +136,7 @@
 
                 nonMarkedText.value = currentLanguageTitle.value.slice(0, nonMarkedText.value.length + 1);
 
-                setTimeout(() => {
+                setSafeTimeout(() => {
                     writeChar();
                 }, timeout);
             };
@@ -182,7 +190,7 @@
         return ' ';
     });
 
-    setTimeout(changeProgrammingLanguage, Rand.int({ min: 3000, max: 5000 }));
+    setSafeTimeout(changeProgrammingLanguage, Rand.int({ min: 3000, max: 5000 }));
 
     watch(
         () => route.meta.languageHasAnPrefix,

@@ -1,4 +1,5 @@
 import { SiteLanguage } from '@/store/types';
+import { Locales } from '@/locales/types';
 
 export default {
     footer: {
@@ -34,7 +35,7 @@ export default {
                     text: `I know *{{programmingLanguages}}*. I like to learn new technologies and watch how do they 
                     turn out. It helps me to keep track with them and use every new opportunity to be a better developer.`,
                 },
-            ] as { title: string; text: string }[],
+            ],
             photoAlt: 'Tomáš Kudláč - Photo',
             title: 'About myself',
         },
@@ -112,4 +113,4 @@ export default {
     toasts: {
         closeButtonTitle: 'Close',
     },
-};
+} satisfies Locales;

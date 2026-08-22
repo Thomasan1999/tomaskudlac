@@ -1,6 +1,5 @@
-import skLocales from '@/locales/sk';
-import enLocales from '@/locales/en';
-import { ImageFormat, InitializingState, SiteLanguage, ToastData } from '@/store/types';
+import { Locales } from '@/locales/types';
+import { ImageFormat, InitializingState, SiteLanguage, Toast, ToastData } from '@/store/types';
 import { ProgrammingLanguage } from '@/store/ProgrammingLanguage';
 import dayjs from 'dayjs';
 import { defineStore } from 'pinia';
@@ -16,7 +15,7 @@ const useStore = defineStore('main', () => {
     const imageFormat = ref(ImageFormat.WEBP);
     const initState = ref(InitializingState.NOT_INITIALIZED);
     const language = ref(SiteLanguage.SK);
-    const locales = ref(null as unknown as typeof skLocales | typeof enLocales);
+    const locales = ref<Locales>(null as unknown as Locales);
     const navbarHeight = ref(60);
     const programmingLanguages = ref<ProgrammingLanguage[]>(
         [
@@ -83,7 +82,9 @@ const useStore = defineStore('main', () => {
         ].map((language) => new ProgrammingLanguage(language)),
     );
     const scrollbarWidth = ref(window.innerWidth > 1023 ? 17 : 0);
-    const toasts = ref<ToastData[]>([]);
+    /** Source of toast ids. Only ever incremented, so an id is never reused within a session. */
+    const lastToastId = ref(0);
+    const toasts = ref<Toast[]>([]);
     const windowHeight = ref(window.innerHeight);
     const windowWidth = ref(window.innerWidth);
 
@@ -136,14 +137,14 @@ const useStore = defineStore('main', () => {
 
         const timeUntilNextBirthday = nextBirthday.diff(now);
 
-        // prevent using higher value than allowed by Node.js
-        if (timeUntilNextBirthday > 2 ** 32) {
-            return;
-        }
+        /**
+         * Delays above this overflow the 32-bit signed integer `setTimeout` stores them in, which makes the timer
+         * fire immediately. Clamping instead of skipping keeps the age updating: every wake-up recomputes the
+         * remaining time, so the timer re-arms until it finally lands on the birthday.
+         */
+        const MAX_TIMEOUT_DELAY = 2 ** 31 - 1;
 
-        setTimeout(() => {
-            updateAge();
-        }, timeUntilNextBirthday);
+        setTimeout(updateAge, Math.min(Math.max(timeUntilNextBirthday, 0), MAX_TIMEOUT_DELAY));
     };
 
     /** Initializes the store. Must be run before the app is mounted. Must be run only once. */
@@ -162,11 +163,13 @@ const useStore = defineStore('main', () => {
     };
 
     const addToast = (toast: ToastData): void => {
-        toasts.value.push(toast);
+        lastToastId.value += 1;
+
+        toasts.value.push({ ...toast, id: lastToastId.value });
     };
 
-    const removeToast = (toastIndex: number): void => {
-        toasts.value.splice(toastIndex, 1);
+    const removeToast = (toastId: number): void => {
+        toasts.value = toasts.value.filter((toast) => toast.id !== toastId);
     };
 
     const maxLg = computed<boolean>(() => {
@@ -190,6 +193,7 @@ const useStore = defineStore('main', () => {
         language,
         locales,
         init,
+        initState,
         maxLg,
         maxXl,
         navbarHeight,

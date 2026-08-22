@@ -1,14 +1,16 @@
 <script lang="ts" setup>
     import useStore from '@/store';
-    import { computed, ref } from 'vue';
+    import { computed } from 'vue';
     import ToastContainer from '@/components/toast/ToastContainer.vue';
+    import { InitializingState } from '@/store/types';
 
     const store = useStore();
 
-    const initialized = ref(false);
+    const initialized = computed(() => store.initState === InitializingState.INITIALIZED);
 
-    store.init().then(() => {
-        initialized.value = true;
+    // Nothing renders until the store is ready, so a rejected init would otherwise leave a blank page and no trace.
+    store.init().catch((error: unknown) => {
+        console.error('Failed to initialize the application.', error);
     });
 
     const scrollbarWidth = computed(() => store.scrollbarWidth);

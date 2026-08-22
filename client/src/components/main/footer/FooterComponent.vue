@@ -10,6 +10,12 @@
     const showCookies = ref(false);
 
     const locales = computed(() => store.locales.footer);
+
+    /**
+     * Absent in English, where the footer links out to an external explanation instead. Gating the modal on it also
+     * closes it if the language is switched while it is open.
+     */
+    const cookiesLocales = computed(() => store.locales.cookies);
 </script>
 
 <template>
@@ -32,7 +38,7 @@
             </div>
         </footer>
         <CookiesModal
-            v-if="showCookies"
+            v-if="showCookies && cookiesLocales"
             @close="showCookies = false"
         />
     </section>
