@@ -42,6 +42,8 @@ export interface ContactFormFieldProps {
 
 export interface ContactFormFieldErrorProps {
     error?: string;
+    /** Id the input points at through aria-describedby. */
+    id: string;
 }
 
 export interface ContactFormLabelTextProps {

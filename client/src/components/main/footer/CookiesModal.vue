@@ -1,11 +1,16 @@
 <script lang="ts" setup>
-    import { computed } from 'vue';
+    import { computed, useTemplateRef } from 'vue';
     import useStore from '@/store';
     import CloseIcon from '@/components/main/CloseIcon.vue';
+    import useModalDialog from '@/composables/useModalDialog';
 
-    defineEmits<{ (event: 'close'): void }>();
+    const emit = defineEmits<{ (event: 'close'): void }>();
 
     const store = useStore();
+
+    const dialog = useTemplateRef<HTMLElement>('dialog');
+
+    useModalDialog(dialog, { onClose: () => emit('close') });
 
     // FooterComponent only renders this modal for the languages that have the texts.
     const locales = computed(() => store.locales.cookies!);
@@ -17,18 +22,32 @@
             data-testid="cookies-modal"
             class="absolute top-0 left-0 z-1 flex h-[calc(100*var(--vh))] w-screen items-center justify-center"
         >
-            <div
+            <!--
+                Closing by clicking the backdrop is a pointer convenience; Escape and the close button are the
+                keyboard paths. It is a button so the handler sits on something interactive, and is hidden from
+                assistive technology and taken out of the tab order so it does not duplicate the close button.
+            -->
+            <button
+                aria-hidden="true"
                 class="absolute top-0 left-0 z-0 size-full bg-black/[.55]"
                 data-testid="overlay"
+                tabindex="-1"
+                type="button"
                 @click="$emit('close')"
             />
             <div
+                ref="dialog"
+                aria-modal="true"
+                :aria-label="locales.paragraphs[0]?.title"
                 class="max-h-screen-without-edge max-w-screen-without-edge bg-overlay px-screen-edge relative box-border w-232 overflow-auto py-12 text-center lg:px-12"
+                role="dialog"
+                tabindex="-1"
             >
                 <button
                     class="group absolute top-0 right-0 flex size-12 items-center justify-center font-thin"
                     data-testid="close-button"
                     :title="locales.closeButtonTitle"
+                    type="button"
                     @click="$emit('close')"
                 >
                     <CloseIcon class="group-hover:fill-text-highlight h-4" />
@@ -37,6 +56,7 @@
                 <div class="flex flex-col gap-6">
                     <div
                         v-for="paragraph in locales.paragraphs"
+                        :key="paragraph.title"
                         class="flex flex-col gap-2.5"
                     >
                         <h3 class="font-bold">{{ paragraph.title }}</h3>

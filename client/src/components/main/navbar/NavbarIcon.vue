@@ -4,7 +4,7 @@
     import { NavbarIconMode, NavbarIconProps } from '@/components/main/navbar/types';
     import NavbarIconLine from '@/components/main/navbar/NavbarIconLine.vue';
 
-    defineProps<NavbarIconProps>();
+    const { mode } = defineProps<NavbarIconProps>();
     const emit = defineEmits<{ (event: 'click'): void }>();
 
     const store = useStore();
@@ -13,14 +13,21 @@
         emit('click');
     };
 
+    const opened = computed(() => mode === NavbarIconMode.CROSS);
+
+    const label = computed(() => (opened.value ? locales.value.hide : locales.value.show));
+
     const locales = computed(() => store.locales.navbar);
 </script>
 
 <template>
-    <div
+    <button
         data-testid="navbar-icon"
         class="relative z-3 flex h-full w-14 cursor-pointer items-center justify-center pr-4 pl-4"
-        :title="mode === NavbarIconMode.BARS ? locales.show : locales.hide"
+        :aria-expanded="opened"
+        :aria-label="label"
+        :title="label"
+        type="button"
         @click="onClick"
     >
         <div class="relative h-6 w-full">
@@ -37,5 +44,5 @@
                 :mode="mode"
             />
         </div>
-    </div>
+    </button>
 </template>

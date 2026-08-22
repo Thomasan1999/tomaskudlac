@@ -1,9 +1,11 @@
 import tsEslint from 'typescript-eslint';
 import pluginVue from 'eslint-plugin-vue';
+import pluginVueA11y from 'eslint-plugin-vuejs-accessibility';
 
 export default tsEslint.config(
     ...tsEslint.configs.recommended,
     ...pluginVue.configs['flat/base'],
+    ...pluginVueA11y.configs['flat/recommended'],
     {
         languageOptions: {
             parserOptions: {
@@ -41,6 +43,9 @@ export default tsEslint.config(
         files: ['**/*.vue'],
         rules: {
             'vue/attribute-hyphenation': ['error', 'never'],
+            // The control is rendered through `<Component :is>`, which the rule cannot resolve, so accept either
+            // the wrapping label or an explicit `for`. Both are in place.
+            'vuejs-accessibility/label-has-for': ['error', { required: { some: ['nesting', 'id'] } }],
             'vue/attributes-order': 'error',
             'vue/block-order': ['error', { order: ['script', 'template', 'style'] }],
             'vue/no-empty-component-block': 'error',

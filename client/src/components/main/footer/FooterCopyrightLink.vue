@@ -26,12 +26,13 @@
     >
         {{ text }}
     </ExternalLink>
-    <span
+    <button
         v-else
         data-testid="copyright-link"
+        type="button"
         v-bind="$attrs"
         @click="$emit('showCookies')"
     >
         {{ text }}
-    </span>
+    </button>
 </template>

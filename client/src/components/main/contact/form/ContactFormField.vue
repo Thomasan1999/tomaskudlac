@@ -13,6 +13,7 @@
         element = ContactFormFieldElement.INPUT,
         maxlength,
         minlength = 0,
+        name,
         pattern,
         required = false,
         touched,
@@ -40,6 +41,11 @@
     const inputting = ref(false);
 
     const dynamicProps = computed(() => (element === ContactFormFieldElement.INPUT ? { type } : undefined));
+
+    /** Ties the label and the error message to the control, which a wrapping label alone does not do. */
+    const fieldId = computed(() => `contact-form-${name}`);
+
+    const errorId = computed(() => `${fieldId.value}-error`);
 
     const error = computed(() => {
         if (valid || !touched || inputting.value) {
@@ -89,6 +95,7 @@
         :data-testid="`field-${name}`"
         class="relative flex flex-wrap"
         :class="error ? 'text-error-text' : ''"
+        :for="fieldId"
     >
         <ContactFormLabelText
             :fieldRequired="required"
@@ -96,6 +103,9 @@
         />
         <Component
             :is="element"
+            :id="fieldId"
+            :aria-describedby="error ? errorId : undefined"
+            :aria-invalid="Boolean(error)"
             class="font-inherit bg-contact-form-data-bg py-contact-form-data-padding-vertical box-border flex grow resize-none appearance-none overflow-auto border border-solid! border-[#cccccc] pl-4 leading-normal text-current outline-none max-lg:w-full"
             :class="[element === 'input' ? 'h-[2.5em]' : 'h-[8lh]', error ? 'border-error-text bg-error-bg' : '']"
             :minlength="minlength"
@@ -107,6 +117,9 @@
             @blur="onBlur"
             @input="onInput"
         />
-        <ContactFormFieldError :error="error" />
+        <ContactFormFieldError
+            :id="errorId"
+            :error="error"
+        />
     </label>
 </template>

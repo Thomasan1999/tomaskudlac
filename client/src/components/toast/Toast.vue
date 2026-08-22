@@ -44,26 +44,24 @@
 </script>
 
 <template>
-    <Teleport to="#modal-container">
-        <Transition
-            enterActiveClass="transition-opacity"
-            leaveActiveClass="transition-opacity"
-            enterFromClass="opacity-0"
-            leaveToClass="opacity-0"
-            @after-leave="$emit('close')"
+    <Transition
+        enterActiveClass="transition-opacity"
+        leaveActiveClass="transition-opacity"
+        enterFromClass="opacity-0"
+        leaveToClass="opacity-0"
+        @after-leave="$emit('close')"
+    >
+        <div
+            v-if="opened"
+            class="toast w-screen-without-edge right-toast-container-right top-toast-container-top absolute z-1 box-border max-w-90 px-7.5 py-2.5 text-left"
+            :class="type === ToastType.SUCCESS ? 'bg-primary-green' : 'bg-primary-red'"
+            data-testid="toast"
+            :style="`--relative-margin-top: ${relativeMarginTop}`"
         >
-            <div
-                v-if="opened"
-                class="toast w-screen-without-edge right-toast-container-right top-toast-container-top absolute z-1 box-border max-w-90 px-7.5 py-2.5 text-left"
-                :class="type === ToastType.SUCCESS ? 'bg-primary-green' : 'bg-primary-red'"
-                data-testid="toast"
-                :style="`--relative-margin-top: ${relativeMarginTop}`"
-            >
-                <div class="toast-message">{{ message }}</div>
-                <ToastCloseButton @click="opened = false" />
-            </div>
-        </Transition>
-    </Teleport>
+            <div class="toast-message">{{ message }}</div>
+            <ToastCloseButton @click="opened = false" />
+        </div>
+    </Transition>
 </template>
 
 <style>
