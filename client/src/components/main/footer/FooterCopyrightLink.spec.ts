@@ -32,7 +32,7 @@ describe('FooterCopyrightLink', () => {
         expect(wrapper.findComponent(ExternalLink).exists()).toBe(true);
     });
 
-    it('uses just span for Slovak', async () => {
+    it('uses a button for Slovak, since it opens the cookies modal rather than navigating', async () => {
         const store = useStore();
 
         store.language = SiteLanguage.SK;
@@ -40,6 +40,6 @@ describe('FooterCopyrightLink', () => {
         const wrapper = createWrapper();
 
         expect(wrapper.findComponent(ExternalLink).exists()).toBe(false);
-        expect(wrapper.find('span').exists()).toBe(true);
+        expect(wrapper.find('button').attributes('type')).toBe('button');
     });
 });

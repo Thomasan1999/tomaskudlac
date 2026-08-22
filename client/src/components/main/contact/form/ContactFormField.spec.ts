@@ -3,7 +3,8 @@ import ContactFormField from '@/components/main/contact/form/ContactFormField.vu
 import ContactFormFieldError from '@/components/main/contact/form/ContactFormFieldError.vue';
 import { ContactFormFieldElement } from '@/components/main/contact/form/types';
 import ContactFormLabelText from '@/components/main/contact/form/ContactFormLabelText.vue';
-import { buildCreateWrapper } from '@/utils/test';
+import { buildCreateWrapper, getTestingSelector } from '@/utils/test';
+import { nextTick } from 'vue';
 
 const createWrapper = buildCreateWrapper(
     ContactFormField,
@@ -94,6 +95,35 @@ describe('ContactFormField', () => {
 
         it("uses 'type' property", async () => {
             await checkInputAttribute<string>('type', ['color', 'tel']);
+        });
+    });
+
+    /**
+     * A wrapping label does not associate anything on its own, and `aria-describedby` has no reflected DOM property,
+     * so writing it in camelCase silently produced an `ariadescribedby` attribute that nothing reads. The ids also
+     * have to carry the field name - taken from the prop, not from the global `name` that shadows it.
+     */
+    describe('accessible wiring', () => {
+        it('gives the control an id derived from the field name', () => {
+            const wrapper = createWrapper({ name: 'email' });
+
+            expect(wrapper.get('input').attributes('id')).toBe('contact-form-email');
+            expect(wrapper.get('label').attributes('for')).toBe('contact-form-email');
+        });
+
+        it('points the control at its error message once one is shown', async () => {
+            const wrapper = createWrapper(
+                { name: 'email', required: true, touched: true, valid: false },
+                { global: { stubs: { ContactFormFieldError: false } } },
+            );
+
+            await nextTick();
+
+            const errorId = wrapper.get(getTestingSelector('contact-form-field-error')).attributes('id');
+
+            expect(errorId).toBe('contact-form-email-error');
+            expect(wrapper.get('input').attributes('aria-describedby')).toBe(errorId);
+            expect(wrapper.get('input').attributes('aria-invalid')).toBe('true');
         });
     });
 

@@ -24,6 +24,20 @@ describe('ToastContainer', () => {
         document.body.innerHTML = '<div id="modal-container"></div>';
     });
 
+    /**
+     * A live region only announces content that lands in it while it is already on the page, so the region has to be
+     * the container rather than the individual toasts.
+     */
+    it('announces toasts through a non-atomic live region', () => {
+        createWrapper();
+
+        const region = document.body.querySelector(getTestingSelector('toast-container'))!;
+
+        expect(region.getAttribute('aria-live')).toBe('polite');
+        expect(region.getAttribute('aria-atomic')).toBe('false');
+        expect(region.getAttribute('role')).toBe('status');
+    });
+
     it('displays all toasts', async () => {
         createWrapper();
 
