@@ -2,3 +2,6 @@ package-lock.json
 
 # Build output. server/.gitignore hides it from git, but Prettier does not read nested gitignore files.
 server/public
+
+# Coverage reports. client/.gitignore hides them from git, but Prettier does not read nested gitignore files.
+client/coverage

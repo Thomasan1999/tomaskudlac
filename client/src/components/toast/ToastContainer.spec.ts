@@ -12,11 +12,11 @@ const TOAST_SELECTOR = getTestingSelector('toast');
 const createWrapper = buildCreateWrapper(ToastContainer);
 
 describe('ToastContainer', () => {
-    let store: ReturnType<typeof useStore>;
-
     // Every container teleports into the same #modal-container, so a wrapper left mounted would render the store's
     // toasts a second time in the next test.
     enableAutoUnmount(afterEach);
+
+    let store: ReturnType<typeof useStore>;
 
     beforeAll(async () => {
         await mockInitStore();

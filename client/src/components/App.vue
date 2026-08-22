@@ -23,5 +23,14 @@
         v-if="initialized"
         :style="`--scrollbar-width: ${scrollbarWidth}px; --vh: ${windowHeight / 100}px`"
     />
+    <!--
+        Teleport target for toasts and modals. It lives here rather than inside Main because ToastContainer mounts
+        immediately while Main only renders once the store is ready - a target that appears later is never picked up,
+        since Teleport resolves it on mount and does not retry.
+    -->
+    <div
+        id="modal-container"
+        class="fixed top-0 left-0 z-100 h-0 w-0"
+    />
     <ToastContainer />
 </template>
