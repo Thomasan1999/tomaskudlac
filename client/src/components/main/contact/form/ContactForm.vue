@@ -2,7 +2,7 @@
     import { computed, useTemplateRef } from 'vue';
     import useStore from '@/store';
     import ContactFormField from '@/components/main/contact/form/ContactFormField.vue';
-    import contactFormFields from '@/components/main/contact/form/contactFormFields';
+    import { createContactFormFields, resetContactFormFields } from '@/components/main/contact/form/contactFormFields';
     import type { ContactFormFieldData } from '@/components/main/contact/form/types';
     import { ToastType } from '@/store/types';
     import ContactFormBottomPart from '@/components/main/contact/form/ContactFormBottomPart.vue';
@@ -30,7 +30,9 @@
                     message: apiMessages.success,
                     type: ToastType.SUCCESS,
                 });
-                form.reset();
+
+                // `form.reset()` only clears the DOM inputs; the values the template is bound to live in `fields`.
+                resetContactFormFields(fields);
             })
             .catch((err: Error) => {
                 store.addToast({
@@ -40,8 +42,13 @@
             });
     };
 
-    const onValidSet = (field: ContactFormFieldData, newValue): void => {
-        field.touched = true;
+    /**
+     * Marking the field touched here as well used to be harmless but redundant - an error only renders once the
+     * field is no longer being typed into, which is `blur`, and `blur` sets `touched` itself. It also meant clearing
+     * the fields after a submit immediately marked them all touched again, so the emptied required fields came back
+     * showing errors.
+     */
+    const onValidSet = (field: ContactFormFieldData, newValue: boolean): void => {
         field.valid = newValue;
     };
 
@@ -51,7 +58,7 @@
         });
     };
 
-    const fields = contactFormFields;
+    const fields = createContactFormFields();
 
     const root = useTemplateRef('root');
 
