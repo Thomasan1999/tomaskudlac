@@ -75,6 +75,13 @@
             rel="manifest"
             href="/manifest_<?= $lang ?>.webmanifest"
         />
+        <link
+            rel="preload"
+            as="image"
+            href="/images/background-home.webp"
+            type="image/webp"
+            fetchpriority="high"
+        />
         <meta
             name="description"
             content="<?= $locales['description'] ?>"
@@ -88,28 +95,68 @@
             content="width=device-width, initial-scale=1.0"
         />
         <meta
-            name="og:description"
+            property="og:description"
             content="<?= $locales['description'] ?>"
         />
         <meta
-            name="og:image"
+            property="og:image"
             content="https://tomaskudlac.sk/images/og-image.jpg"
         />
         <meta
-            name="og:locale"
-            content="<?= $locales['locale'] ?>"
-        />
-        <meta
-            name="og:title"
+            property="og:image:alt"
             content="<?= $locales['title'] ?>"
         />
         <meta
-            name="og:type"
+            property="og:image:height"
+            content="630"
+        />
+        <meta
+            property="og:image:width"
+            content="1200"
+        />
+        <meta
+            property="og:locale"
+            content="<?= $locales['locale'] ?>"
+        />
+        <meta
+            property="og:title"
+            content="<?= $locales['title'] ?>"
+        />
+        <meta
+            property="og:type"
             content="website"
         />
         <meta
-            name="og:url"
-            content="https://tomaskudlac.sk"
+            property="og:url"
+            content="https://tomaskudlac.sk<?= $lang === 'sk' ? '/' : '/' . $lang . '/' ?>"
+        />
+        <meta
+            name="twitter:card"
+            content="summary_large_image"
+        />
+        <link
+            rel="canonical"
+            href="https://tomaskudlac.sk<?= $lang === 'sk' ? '/' : '/' . $lang . '/' ?>"
+        />
+        <link
+            rel="alternate"
+            hreflang="sk"
+            href="https://tomaskudlac.sk/"
+        />
+        <link
+            rel="alternate"
+            hreflang="cs"
+            href="https://tomaskudlac.sk/cz/"
+        />
+        <link
+            rel="alternate"
+            hreflang="en"
+            href="https://tomaskudlac.sk/en/"
+        />
+        <link
+            rel="alternate"
+            hreflang="x-default"
+            href="https://tomaskudlac.sk/"
         />
         <title><?= $locales['title'] ?></title>
     </head>

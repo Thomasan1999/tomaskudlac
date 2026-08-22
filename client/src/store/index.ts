@@ -1,5 +1,5 @@
 import { Locales } from '@/locales/types';
-import { ImageFormat, InitializingState, SiteLanguage, Toast, ToastData } from '@/store/types';
+import { InitializingState, SiteLanguage, Toast, ToastData } from '@/store/types';
 import { ProgrammingLanguage } from '@/store/ProgrammingLanguage';
 import dayjs from 'dayjs';
 import { defineStore } from 'pinia';
@@ -11,8 +11,6 @@ const useStore = defineStore('main', () => {
     const activeSection = ref<string | undefined>(undefined);
     /** The current age of Tomáš Kudláč. */
     const age = ref<number>(null as unknown as number);
-    /** The preferred image format of images. */
-    const imageFormat = ref(ImageFormat.WEBP);
     const initState = ref(InitializingState.NOT_INITIALIZED);
     const language = ref(SiteLanguage.SK);
     const locales = ref<Locales>(null as unknown as Locales);
@@ -88,31 +86,6 @@ const useStore = defineStore('main', () => {
     const windowHeight = ref(window.innerHeight);
     const windowWidth = ref(window.innerWidth);
 
-    /** Determines the preferred image format of all images. Checks if WebP is supported, if not, JPEG is used. */
-    const getImageFormat = async (): Promise<ImageFormat> => {
-        return new Promise((resolve) => {
-            const webP = new Image();
-            webP.onload = webP.onerror = function () {
-                resolve(webP.height === 2 ? ImageFormat.WEBP : ImageFormat.JPG);
-            };
-            webP.src =
-                'data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA';
-        });
-    };
-
-    /** Initializes the function which checks for the preferred image format. */
-    const initImageFormat = async (): Promise<void> => {
-        const IMAGE_FORMAT_KEY = 'imageFormat';
-        let format = localStorage.getItem(IMAGE_FORMAT_KEY) as ImageFormat | null;
-
-        if (!format) {
-            format = await getImageFormat();
-            localStorage.setItem(IMAGE_FORMAT_KEY, format);
-        }
-
-        imageFormat.value = format;
-    };
-
     const onWindowResize = async (): Promise<void> => {
         windowHeight.value = window.innerHeight;
         windowWidth.value = window.innerWidth;
@@ -157,7 +130,6 @@ const useStore = defineStore('main', () => {
 
         await initListeners();
         await updateAge();
-        await initImageFormat();
 
         initState.value = InitializingState.INITIALIZED;
     };
@@ -189,7 +161,6 @@ const useStore = defineStore('main', () => {
         activeSection,
         addToast,
         age,
-        imageFormat,
         language,
         locales,
         init,

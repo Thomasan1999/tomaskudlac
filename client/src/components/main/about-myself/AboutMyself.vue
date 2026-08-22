@@ -19,8 +19,7 @@
     >
         <div class="text-content">
             <AboutMyselfPhotoContainer
-                webpSrc="/images/myself.webp"
-                jpgSrc="/images/myself.jpg"
+                src="/images/myself.webp"
                 :alt="locales.photoAlt"
             />
             <div class="gap-y-main-row-gap flex flex-wrap justify-center gap-x-20">

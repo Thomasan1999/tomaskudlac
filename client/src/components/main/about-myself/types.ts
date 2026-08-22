@@ -5,6 +5,5 @@ export interface AboutMyselfColumnProps {
 
 export interface AboutMyselfPhotoContainerProps {
     alt: string;
-    jpgSrc: string;
-    webpSrc: string;
+    src: string;
 }

@@ -1,11 +1,8 @@
 import useStore from '@/store/index';
 import { createPinia, setActivePinia } from 'pinia';
 import mockWindowResizeBy from '@/mocks/mockWindowResizeBy';
-import mockImageSrc from '@/mocks/mockImageSrc';
 
 describe('store', () => {
-    mockImageSrc();
-
     let store: ReturnType<typeof useStore>;
 
     function initStore(): void {
@@ -18,7 +15,7 @@ describe('store', () => {
     });
 
     it('computes data on init', async () => {
-        const propertiesToInit: (keyof typeof store)[] = ['age', 'imageFormat'];
+        const propertiesToInit: (keyof typeof store)[] = ['age'];
 
         await store.init();
 

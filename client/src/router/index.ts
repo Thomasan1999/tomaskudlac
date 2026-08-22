@@ -4,9 +4,7 @@ import { SiteLanguage } from '@/store/types';
 import { Locales } from '@/locales/types';
 import mainSections from '@/components/main/mainSections';
 import routes from '@/router/routes';
-import getManifestElement from '@/utils/getManifestElement';
-import getMetaElement from '@/utils/getMetaElement';
-import { parseTemplateVariables } from '@/utils/parseTemplateVariables';
+import syncDocumentHead from '@/router/syncDocumentHead';
 
 /**
  * Loaders for the locale chunks.
@@ -44,17 +42,8 @@ router.beforeEach(async (to) => {
     store.language = language;
 
     store.locales = (await localeLoaders[language]()).default;
-    document.documentElement.lang = language;
 
-    const metaDescription = getMetaElement('description');
-    metaDescription.content = parseTemplateVariables(to.meta.description, {
-        programmingLanguagesString: store.programmingLanguagesString,
-    });
-
-    const manifestElement = getManifestElement();
-    manifestElement.href = `/manifest_${language}.webmanifest`;
-
-    document.title = to.meta.title;
+    syncDocumentHead(to, { programmingLanguagesString: store.programmingLanguagesString });
 
     const newRouteHash = store.activeSection && mainSections[store.activeSection].url;
 

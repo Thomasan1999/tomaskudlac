@@ -1,4 +1,4 @@
-import { kebabCase, upperFirst } from 'lodash';
+import { kebabCase, upperFirst } from 'lodash-es';
 import { Merge } from 'ts-essentials';
 import useStore from '@/store';
 

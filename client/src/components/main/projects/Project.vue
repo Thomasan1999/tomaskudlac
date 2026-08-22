@@ -1,7 +1,7 @@
 <script lang="ts" setup>
     import { computed, onBeforeUnmount, onMounted, ref, useTemplateRef, watch } from 'vue';
     import useStore from '@/store';
-    import { kebabCase } from 'lodash';
+    import { kebabCase } from 'lodash-es';
     import ExternalLink from '@/components/ExternalLink.vue';
     import { ProjectProps } from '@/components/main/projects/types';
 
@@ -21,7 +21,7 @@
 
     const textContent = useTemplateRef('textContent');
 
-    const backgroundImage = computed(() => `url(/images/${kebabCase(name)}.${store.imageFormat})`);
+    const backgroundImage = computed(() => `url(/images/${kebabCase(name)}.webp)`);
 
     const generalLocales = computed(() => store.locales.sections.projects);
 
