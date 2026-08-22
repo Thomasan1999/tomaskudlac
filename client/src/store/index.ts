@@ -135,14 +135,14 @@ const useStore = defineStore('main', () => {
 
         const timeUntilNextBirthday = nextBirthday.diff(now);
 
-        // prevent using higher value than allowed by Node.js
-        if (timeUntilNextBirthday > 2 ** 32) {
-            return;
-        }
+        /**
+         * Delays above this overflow the 32-bit signed integer `setTimeout` stores them in, which makes the timer
+         * fire immediately. Clamping instead of skipping keeps the age updating: every wake-up recomputes the
+         * remaining time, so the timer re-arms until it finally lands on the birthday.
+         */
+        const MAX_TIMEOUT_DELAY = 2 ** 31 - 1;
 
-        setTimeout(() => {
-            updateAge();
-        }, timeUntilNextBirthday);
+        setTimeout(updateAge, Math.min(Math.max(timeUntilNextBirthday, 0), MAX_TIMEOUT_DELAY));
     };
 
     /** Initializes the store. Must be run before the app is mounted. Must be run only once. */
