@@ -3,6 +3,8 @@ import { nextTick } from 'vue';
 import FooterComponent from '@/components/main/footer/FooterComponent.vue';
 import useStore from '@/store';
 import ExternalLink from '@/components/ExternalLink.vue';
+import enLocales from '@/locales/en';
+import skLocales from '@/locales/sk';
 import { SiteLanguage } from '@/store/types';
 import { buildCreateWrapper, getTestingSelector } from '@/utils/test';
 
@@ -42,6 +44,30 @@ describe('FooterComponent', () => {
         cookiesModal = wrapper.findComponent({ name: 'CookiesModal' });
 
         expect(cookiesModal.exists()).toBe(true);
+    });
+
+    /**
+     * The modal stays mounted across a client-side language switch, and English carries no cookies texts, so
+     * without this it would be left rendering against nothing.
+     */
+    it('closes the cookies modal when switching to a language without cookies texts', async () => {
+        const store = useStore();
+
+        const wrapper = createWrapper();
+
+        store.language = SiteLanguage.SK;
+        store.locales = skLocales;
+        await nextTick();
+
+        await wrapper.get(COPYRIGHT_LINK_SELECTOR).trigger('click');
+
+        expect(wrapper.findComponent({ name: 'CookiesModal' }).exists()).toBe(true);
+
+        store.language = SiteLanguage.EN;
+        store.locales = enLocales;
+        await nextTick();
+
+        expect(wrapper.findComponent({ name: 'CookiesModal' }).exists()).toBe(false);
     });
 
     it('uses external link for cookies in the English version', async () => {
