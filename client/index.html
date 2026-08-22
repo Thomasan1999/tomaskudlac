@@ -75,6 +75,13 @@
             rel="manifest"
             href="/manifest_<?= $lang ?>.webmanifest"
         />
+        <link
+            rel="preload"
+            as="image"
+            href="/images/background-home.webp"
+            type="image/webp"
+            fetchpriority="high"
+        />
         <meta
             name="description"
             content="<?= $locales['description'] ?>"

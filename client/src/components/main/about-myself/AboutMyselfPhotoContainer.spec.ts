@@ -2,14 +2,11 @@ import mockInitStore from '@/mocks/mockInitStore';
 import { getTestingSelector, buildCreateWrapper } from '@/utils/test';
 import AboutMyselfPhotoContainer from '@/components/main/about-myself/AboutMyselfPhotoContainer.vue';
 
-const JPG_SRC_SELECTOR = getTestingSelector('jpg-src');
 const PHOTO_SELECTOR = getTestingSelector('photo');
-const WEBP_SRC_SELECTOR = getTestingSelector('webp-src');
 
 const createWrapper = buildCreateWrapper(AboutMyselfPhotoContainer, {
     alt: '',
-    jpgSrc: '',
-    webpSrc: '',
+    src: '',
 });
 
 describe('AboutMyselfPhotoContainer', () => {
@@ -17,30 +14,16 @@ describe('AboutMyselfPhotoContainer', () => {
         await mockInitStore();
     });
 
-    it('uses JPG source', async () => {
-        const wrapper = createWrapper({ jpgSrc: 'lorem.jpg' });
+    it('uses the given source', async () => {
+        const wrapper = createWrapper({ src: 'lorem.webp' });
 
-        const jpgSrcElement = wrapper.find<HTMLSourceElement>(JPG_SRC_SELECTOR);
+        const photoElement = wrapper.find(PHOTO_SELECTOR);
 
-        expect(jpgSrcElement.exists()).toBe(true);
-        expect(jpgSrcElement.attributes('srcset')).toBe('lorem.jpg');
+        expect(photoElement.attributes('src')).toBe('lorem.webp');
 
-        await wrapper.setProps({ jpgSrc: 'ipsum.jpg' });
+        await wrapper.setProps({ src: 'ipsum.webp' });
 
-        expect(jpgSrcElement.attributes('srcset')).toBe('ipsum.jpg');
-    });
-
-    it('uses WebP source', async () => {
-        const wrapper = createWrapper({ webpSrc: 'dolor.webp' });
-
-        const webpSrcElement = wrapper.find<HTMLSourceElement>(WEBP_SRC_SELECTOR);
-
-        expect(webpSrcElement.exists()).toBe(true);
-        expect(webpSrcElement.attributes('srcset')).toBe('dolor.webp');
-
-        await wrapper.setProps({ webpSrc: 'sit.webp' });
-
-        expect(webpSrcElement.attributes('srcset')).toBe('sit.webp');
+        expect(photoElement.attributes('src')).toBe('ipsum.webp');
     });
 
     it('renders photo of Tomáš Kudláč', () => {
@@ -61,5 +44,10 @@ describe('AboutMyselfPhotoContainer', () => {
         await wrapper.setProps({ alt: 'Anything else' });
 
         expect(photoElement.attributes('alt')).toBe('Anything else');
+    });
+
+    // The photo sits well below the fold, so it must not compete with the hero for bandwidth.
+    it('loads lazily', () => {
+        expect(createWrapper().find(PHOTO_SELECTOR).attributes('loading')).toBe('lazy');
     });
 });

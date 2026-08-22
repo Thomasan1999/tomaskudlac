@@ -3,7 +3,6 @@ import getLinkElement from '@/utils/getLinkElement';
 import getMetaElement from '@/utils/getMetaElement';
 import { createPinia, setActivePinia } from 'pinia';
 import useStore from '@/store';
-import mockImageSrc from '@/mocks/mockImageSrc';
 import routes from '@/router/routes';
 import { SITE_ORIGIN } from '@/router/syncDocumentHead';
 
@@ -38,8 +37,6 @@ vi.mock('@/router/routes', () => {
 
 describe('router', () => {
     beforeAll(async () => {
-        mockImageSrc();
-
         document.head.innerHTML += '<link rel="manifest"><meta name="description">';
 
         setActivePinia(createPinia());

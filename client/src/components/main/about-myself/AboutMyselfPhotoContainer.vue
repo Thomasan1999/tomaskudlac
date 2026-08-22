@@ -5,25 +5,16 @@
 </script>
 
 <template>
-    <picture
+    <div
         data-testid="about-myself-photo-container"
         class="flex justify-center"
     >
-        <source
-            data-testid="webp-src"
-            type="image/webp"
-            :srcset="webpSrc"
-        />
-        <source
-            data-testid="jpg-src"
-            type="image/jpeg"
-            :srcset="jpgSrc"
-        />
         <img
             class="max-w-full rounded-full"
             :alt="alt"
             data-testid="photo"
-            :src="jpgSrc"
+            loading="lazy"
+            :src="src"
         />
-    </picture>
+    </div>
 </template>

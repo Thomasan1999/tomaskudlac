@@ -21,7 +21,7 @@
 
     const textContent = useTemplateRef('textContent');
 
-    const backgroundImage = computed(() => `url(/images/${kebabCase(name)}.${store.imageFormat})`);
+    const backgroundImage = computed(() => `url(/images/${kebabCase(name)}.webp)`);
 
     const generalLocales = computed(() => store.locales.sections.projects);
 
