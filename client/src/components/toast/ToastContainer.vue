@@ -7,8 +7,10 @@
 
 <template>
     <Toast
-        v-for="(toast, toastIndex) in store.toasts"
-        v-bind="toast"
-        @close="store.removeToast(toastIndex)"
+        v-for="toast in store.toasts"
+        :key="toast.id"
+        :message="toast.message"
+        :type="toast.type"
+        @close="store.removeToast(toast.id)"
     />
 </template>

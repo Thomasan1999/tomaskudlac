@@ -1,5 +1,5 @@
 import { Locales } from '@/locales/types';
-import { ImageFormat, InitializingState, SiteLanguage, ToastData } from '@/store/types';
+import { ImageFormat, InitializingState, SiteLanguage, Toast, ToastData } from '@/store/types';
 import { ProgrammingLanguage } from '@/store/ProgrammingLanguage';
 import dayjs from 'dayjs';
 import { defineStore } from 'pinia';
@@ -82,7 +82,9 @@ const useStore = defineStore('main', () => {
         ].map((language) => new ProgrammingLanguage(language)),
     );
     const scrollbarWidth = ref(window.innerWidth > 1023 ? 17 : 0);
-    const toasts = ref<ToastData[]>([]);
+    /** Source of toast ids. Only ever incremented, so an id is never reused within a session. */
+    const lastToastId = ref(0);
+    const toasts = ref<Toast[]>([]);
     const windowHeight = ref(window.innerHeight);
     const windowWidth = ref(window.innerWidth);
 
@@ -161,11 +163,13 @@ const useStore = defineStore('main', () => {
     };
 
     const addToast = (toast: ToastData): void => {
-        toasts.value.push(toast);
+        lastToastId.value += 1;
+
+        toasts.value.push({ ...toast, id: lastToastId.value });
     };
 
-    const removeToast = (toastIndex: number): void => {
-        toasts.value.splice(toastIndex, 1);
+    const removeToast = (toastId: number): void => {
+        toasts.value = toasts.value.filter((toast) => toast.id !== toastId);
     };
 
     const maxLg = computed<boolean>(() => {
