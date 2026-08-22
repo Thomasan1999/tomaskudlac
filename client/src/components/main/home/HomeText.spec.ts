@@ -50,7 +50,7 @@ describe('HomeText', () => {
 
         const setTimeout = window.setTimeout;
 
-        window.setTimeout = function (callback, timeout) {
+        window.setTimeout = function (callback: TimerHandler, timeout?: number) {
             return setTimeout(callback, timeout);
         } as never;
 

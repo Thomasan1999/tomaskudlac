@@ -21,6 +21,7 @@
 <template>
     <NavbarLink
         v-for="language in SiteLanguage"
+        :key="language"
         class="w-12"
         :active="route.name === language"
         :data-testid="`navbar-lang-${language}`"

@@ -1,7 +1,11 @@
 import MainSectionObject from '@/components/main/MainSectionObject';
-import { reactive } from 'vue';
+import { MainSectionName } from '@/locales/types';
 
-const mainSections: Record<string, MainSectionObject> = reactive({
+/**
+ * Immutable section configuration. Not `reactive` - the only dynamic member is `title`, which reads the store and so
+ * is already reactive through it.
+ */
+const mainSections: Record<MainSectionName, MainSectionObject> = {
     aboutMyself: new MainSectionObject({
         heading: true,
         name: 'aboutMyself',
@@ -21,6 +25,6 @@ const mainSections: Record<string, MainSectionObject> = reactive({
         name: 'projects',
         order: 1,
     }),
-});
+};
 
 export default mainSections;

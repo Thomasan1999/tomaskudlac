@@ -2,6 +2,7 @@
     import NavbarLink from '@/components/main/navbar/NavbarLink.vue';
     import { computed, onBeforeUnmount, onMounted, ref, useTemplateRef } from 'vue';
     import useStore from '@/store';
+    import { MainSectionName } from '@/locales/types';
     import NavbarSocialNetwork from '@/components/main/navbar/NavbarSocialNetwork.vue';
     import NavbarIcon from '@/components/main/navbar/NavbarIcon.vue';
     import { NavbarIconMode, NavbarProps, NavbarSocialNetworkProps } from '@/components/main/navbar/types';
@@ -10,12 +11,12 @@
 
     defineProps<NavbarProps>();
     const emit = defineEmits<{
-        (event: 'linkClick', sectionName: string): void;
+        (event: 'linkClick', sectionName: MainSectionName): void;
     }>();
 
     const store = useStore();
 
-    const onLinkClick = (sectionName: string): void => {
+    const onLinkClick = (sectionName: MainSectionName): void => {
         opened.value = false;
         emit('linkClick', sectionName);
     };
@@ -101,7 +102,7 @@
                 replace
                 :title="section.title"
                 :to="name"
-                @click="onLinkClick(name)"
+                @click="onLinkClick(name as MainSectionName)"
             />
         </NavbarPart>
         <NavbarPart
@@ -119,6 +120,7 @@
             <div class="h-navbar-height flex max-xl:order-2 max-xl:w-full max-xl:items-center max-xl:justify-center">
                 <NavbarSocialNetwork
                     v-for="socialNetwork in socialNetworks"
+                    :key="socialNetwork.title"
                     v-bind="socialNetwork"
                 />
             </div>

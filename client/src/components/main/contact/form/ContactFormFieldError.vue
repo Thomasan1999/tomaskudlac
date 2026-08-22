@@ -9,7 +9,7 @@
 
     const locales = computed(() => store.locales.sections.contact.form.errors);
 
-    const message = computed(() => locales.value[error!]);
+    const message = computed(() => (error ? locales.value[error] : undefined));
 </script>
 
 <template>

@@ -84,6 +84,7 @@
     >
         <ContactFormField
             v-for="field in fields"
+            :key="field.name"
             v-bind="field"
             v-model="field.value"
             :label="locales[field.name]"

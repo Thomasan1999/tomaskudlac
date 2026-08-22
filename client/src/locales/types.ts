@@ -90,3 +90,6 @@ export interface Locales {
         closeButtonTitle: string;
     };
 }
+
+/** Names of the page sections. Derived from the locales so the two cannot drift apart. */
+export type MainSectionName = keyof Locales['sections'];

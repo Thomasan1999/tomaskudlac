@@ -1,4 +1,4 @@
-import { Locales } from '@/locales/types';
+import { Locales, MainSectionName } from '@/locales/types';
 import { InitializingState, SiteLanguage, Toast, ToastData } from '@/store/types';
 import { ProgrammingLanguage } from '@/store/ProgrammingLanguage';
 import dayjs from 'dayjs';
@@ -8,7 +8,7 @@ import { ref, computed } from 'vue';
 /** Global store of the application. */
 const useStore = defineStore('main', () => {
     /** The scrolled page section. */
-    const activeSection = ref<string | undefined>(undefined);
+    const activeSection = ref<MainSectionName | undefined>(undefined);
     /** The current age of Tomáš Kudláč. */
     const age = ref<number>(null as unknown as number);
     const initState = ref(InitializingState.NOT_INITIALIZED);

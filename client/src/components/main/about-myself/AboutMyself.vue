@@ -25,6 +25,7 @@
             <div class="gap-y-main-row-gap flex flex-wrap justify-center gap-x-20">
                 <AboutMyselfColumn
                     v-for="column in locales.columns"
+                    :key="column.title"
                     v-bind="column"
                 />
             </div>

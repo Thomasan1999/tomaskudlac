@@ -1,6 +1,7 @@
 import { kebabCase, upperFirst } from 'lodash-es';
 import { Merge } from 'ts-essentials';
 import useStore from '@/store';
+import { MainSectionName } from '@/locales/types';
 
 type ConstructorOptionalParams = Partial<Pick<MainSectionObject, 'heading'>>;
 
@@ -10,7 +11,7 @@ type ConstructorType = Merge<ConstructorOptionalParams, ConstructorRequiredParam
 
 export default class MainSectionObject {
     readonly heading: boolean;
-    readonly name: string;
+    readonly name: MainSectionName;
     readonly order: number;
 
     constructor({ heading = false, name, order }: ConstructorType) {
@@ -19,8 +20,8 @@ export default class MainSectionObject {
         this.order = order;
     }
 
-    get componentName(): string {
-        return upperFirst(this.name);
+    get componentName(): Capitalize<MainSectionName> {
+        return upperFirst(this.name) as Capitalize<MainSectionName>;
     }
 
     get id(): string {
