@@ -17,8 +17,6 @@ export default defineConfig({
          */
         projects: [
             {
-                plugins: [vue()],
-                resolve: { alias },
                 test: {
                     environment: 'jsdom',
                     exclude: ['src/tests/e2e/**'],
@@ -28,7 +26,6 @@ export default defineConfig({
                 },
             },
             {
-                resolve: { alias },
                 test: {
                     // Puppeteer drives a real browser, so jsdom would only be overhead here.
                     environment: 'node',

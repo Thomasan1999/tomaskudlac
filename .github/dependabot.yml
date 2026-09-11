@@ -7,7 +7,39 @@ updates:
           interval: 'weekly'
       versioning-strategy: 'increase-if-necessary'
       groups:
-          # Majors stay ungrouped so they still get looked at one at a time.
+          # Families that share a release line come first, and deliberately set no update-types, so a
+          # major moves every package in the family in one pull request. Splitting one out breaks the
+          # build: a 4.x @vitest/coverage-v8 under vitest 5 failed all 49 spec files. Dependabot puts a
+          # dependency in the first group it matches, so these win over the two catch-alls below.
+          commitlint:
+              patterns:
+                  - '@commitlint/*'
+          eslint:
+              patterns:
+                  - 'eslint'
+                  - '@eslint/*'
+                  - 'eslint-*'
+                  - '@typescript-eslint/*'
+                  - 'typescript-eslint'
+                  - 'vue-eslint-parser'
+          fontawesome:
+              patterns:
+                  - '@fortawesome/*'
+          tailwind:
+              patterns:
+                  - 'tailwindcss'
+                  - '@tailwindcss/*'
+          vitest:
+              patterns:
+                  - 'vitest'
+                  - '@vitest/*'
+          vue:
+              patterns:
+                  - 'vue'
+                  - '@vue/*'
+                  - 'vue-tsc'
+          # Everything left over: minor and patch collapse into one pull request per dependency type,
+          # keeping the long tail of bumps down. Majors here stay ungrouped, one at a time.
           development:
               dependency-type: 'development'
               update-types:
