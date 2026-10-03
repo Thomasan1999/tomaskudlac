@@ -48,7 +48,7 @@ available there.
 - `npm run test:watch` - runs the unit tests in watch mode
 - `npm run test:e2e` - runs the Puppeteer end-to-end tests
 - `npm run test:all` - runs both test projects
-- `npm run type-check` - checks types
+- `npm run type-check` - checks the full project using TypeScript's incremental cache
 
 For repository-level scripts and setup, see [README.md](https://github.com/Thomasan1999/tomaskudlac/blob/master/README.md).
 

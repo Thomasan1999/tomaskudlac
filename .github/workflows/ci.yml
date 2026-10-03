@@ -74,6 +74,14 @@ jobs:
 
             - uses: ./.github/actions/setup-node-project
 
+            - name: Restore type-check cache
+              uses: actions/cache@v4
+              with:
+                  path: node_modules/.cache/type-check.tsbuildinfo
+                  key: type-check-${{ runner.os }}-${{ hashFiles('package-lock.json', 'tsconfig.json', '.nvmrc') }}-${{ github.sha }}
+                  restore-keys: |
+                      type-check-${{ runner.os }}-${{ hashFiles('package-lock.json', 'tsconfig.json', '.nvmrc') }}-
+
             - name: Check types
               run: npm run type-check
 
