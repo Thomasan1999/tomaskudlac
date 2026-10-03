@@ -1,23 +1,14 @@
-import { execFileSync, spawnSync } from 'node:child_process';
+import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { getChangedFiles } from './changed-files.ts';
 
 const check = process.argv.includes('--check');
-const base = process.env.FORMAT_BASE;
-const head = process.env.FORMAT_HEAD;
-const gitFiles = (args: string[]): string[] =>
-    execFileSync('git', args, { encoding: 'utf8' }).split('\0').filter(Boolean);
-const comparison = base
-    ? `${base}...${head || 'HEAD'}`
-    : execFileSync('git', ['merge-base', 'origin/master', 'HEAD'], { encoding: 'utf8' }).trim();
-const files = new Set([
-    ...gitFiles(['diff', '--name-only', '--diff-filter=ACMR', '-z', comparison]),
-    ...(base ? [] : gitFiles(['ls-files', '--others', '--exclude-standard', '-z'])),
-]);
+const files = getChangedFiles(process.env.FORMAT_BASE, process.env.FORMAT_HEAD);
 
-if (files.size === 0) {
+if (files.length === 0) {
     console.log('No changed files to format.');
 } else {
-    if (check) console.log([...files].join('\n'));
+    if (check) console.log(files.join('\n'));
 
     const result = spawnSync(
         process.execPath,

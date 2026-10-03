@@ -36,8 +36,10 @@ Run these commands from `client/`. Formatting is repository-wide and lives at th
 available there.
 
 - `npm run build` - builds the frontend for production
-- `npm run lint` - runs ESLint checks
-- `npm run lint:fix` - runs ESLint checks and applies safe fixes
+- `npm run lint` - checks frontend files changed on the branch relative to `origin/master`, including local changes and untracked files
+- `npm run lint:all` - checks the full frontend
+- `npm run lint:fix` - checks the same branch changes and applies safe fixes
+- `npm run lint:fix:all` - checks the full frontend and applies safe fixes
 - `npm run serve` - starts the Vite development server
 - `npm run test:coverage` - runs the unit tests with coverage
 - `npm run test:run` - runs unit tests affected by branch changes relative to `origin/master`, including transitive imports and local changes

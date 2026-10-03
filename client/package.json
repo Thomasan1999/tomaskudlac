@@ -3,8 +3,10 @@
     "version": "0.0.0",
     "scripts": {
         "build": "vite build --emptyOutDir",
-        "lint": "eslint",
-        "lint:fix": "eslint --fix",
+        "lint": "node ../scripts/lint-changed.ts",
+        "lint:all": "eslint",
+        "lint:fix": "node ../scripts/lint-changed.ts --fix",
+        "lint:fix:all": "eslint --fix",
         "serve": "vite",
         "test:all": "vitest --run",
         "test:coverage": "vitest --run --project=unit --coverage",
