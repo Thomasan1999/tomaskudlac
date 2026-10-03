@@ -18,6 +18,8 @@ const files = new Set(
 if (files.size === 0) {
     console.log('No changed files to format.');
 } else {
+    if (check) console.log([...files].join('\n'));
+
     const result = spawnSync(
         process.execPath,
         [
