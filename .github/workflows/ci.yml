@@ -91,8 +91,14 @@ jobs:
         steps:
             - name: Checkout code
               uses: actions/checkout@v7
+              with:
+                  fetch-depth: 0
+                  ref: ${{ github.event.pull_request.head.sha }}
 
             - uses: ./.github/actions/setup-node-project
 
             - name: Run end-to-end tests
-              run: npm run test:e2e
+              env:
+                  TEST_E2E_CHANGED: 'true'
+                  TEST_BASE: ${{ github.event.pull_request.base.sha }}
+              run: npm run test:e2e -- --changed "$TEST_BASE" --passWithNoTests

@@ -28,7 +28,8 @@ Run from the repository root:
 - `npm run lint` - runs frontend ESLint checks from `client/`
 - `npm run lint:fix` - runs frontend ESLint checks with automatic fixes from `client/`
 - `npm run serve` - starts the Vite dev server on port 8082
-- `npm run test:run` - runs the unit tests once
+- `npm run test:run` - runs unit tests affected by branch changes relative to `origin/master`
+- `npm run test:run:all` - runs all unit tests once
 - `npm run test:watch` - runs the unit tests in watch mode
 - `npm run test:e2e` - runs the Puppeteer end-to-end tests, starting the dev server itself
 - `npm run test:all` - runs both test projects

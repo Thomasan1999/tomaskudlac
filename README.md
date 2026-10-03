@@ -55,13 +55,22 @@ Run these commands from the repository root:
 - `npm run lint:fix` - runs frontend ESLint checks and applies safe fixes
 - `npm run serve` - starts the Vite dev server on http://localhost:8082
 - `npm run test:coverage` - runs the unit tests with coverage
-- `npm run test:run` - runs the unit tests once
+- `npm run test:run` - runs unit tests affected by branch changes relative to `origin/master`, including transitive imports and local changes
+- `npm run test:run:all` - runs all unit tests once
 - `npm run test:watch` - runs the unit tests in watch mode
 - `npm run test:e2e` - runs the Puppeteer end-to-end tests, which start the dev server themselves
 - `npm run test:all` - runs both test projects
 - `npm run type-check` - checks types
 
 For frontend-only details, see [client/README.md](https://github.com/Thomasan1999/tomaskudlac/blob/master/client/README.md).
+
+Unit test selection follows Vitest's import graph, including indirect dependencies. Changes to dependencies,
+TypeScript/Vite/Vitest configuration, declarations, shared tooling, or dynamically loaded locales run all unit tests. `test:run` exits successfully
+when no tests are affected; `test:run:all`, `test:coverage`, and `test:all` always run their full suites.
+
+CI keeps the full unit coverage run and its repository-wide thresholds. The e2e job selects tests from PR changes;
+any application source, HTML, or public asset change runs all browser tests because their dependencies are loaded
+through the dev server rather than imported into the test modules.
 
 ## Repository Layout
 
