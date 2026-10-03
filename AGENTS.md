@@ -22,7 +22,9 @@ The primary active codebase is the frontend in `client/`.
 
 Run from the repository root:
 
-- `npm run format` - formats repository files with Prettier
+- `npm run format` - formats changed and untracked files with Prettier
+- `npm run format:all` - formats all repository files with Prettier
+- `npm run format:check:all` - checks all repository files without writing changes
 - `npm run lint` - runs frontend ESLint checks from `client/`
 - `npm run lint:fix` - runs frontend ESLint checks with automatic fixes from `client/`
 - `npm run serve` - starts the Vite dev server on port 8082

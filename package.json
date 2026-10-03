@@ -1,6 +1,7 @@
 {
     "name": "tomaskudlac",
     "private": true,
+    "type": "module",
     "workspaces": [
         "client"
     ],
@@ -10,8 +11,10 @@
     "scripts": {
         "build": "npm run build -w client",
         "format": "npm run format:base -- --write",
-        "format:base": "prettier .",
+        "format:all": "prettier . --write",
+        "format:base": "node scripts/format-changed.ts",
         "format:check": "npm run format:base -- --check",
+        "format:check:all": "prettier . --check",
         "lint": "npm run lint -w client",
         "lint:fix": "npm run lint:fix -w client",
         "serve": "npm run serve -w client",
