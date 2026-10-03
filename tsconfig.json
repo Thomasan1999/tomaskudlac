@@ -1,11 +1,28 @@
 {
     "compilerOptions": {
-        "target": "es2024",
-        "module": "nodenext",
+        "target": "esnext",
+        "module": "esnext",
+        "moduleResolution": "bundler",
         "strict": true,
+        "jsx": "preserve",
+        "sourceMap": true,
+        "noImplicitAny": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
         "noEmit": true,
         "skipLibCheck": true,
-        "types": ["node"]
+        "strictNullChecks": true,
+        "lib": ["esnext", "dom"],
+        "paths": {
+            "@/*": ["./client/src/*"]
+        },
+        "types": ["node", "vitest/globals", "vite-plugin-pwa/client"],
+        "typeRoots": [
+            "./node_modules/@types",
+            "./client/node_modules/@types",
+            "./client/node_modules",
+            "./node_modules"
+        ]
     },
-    "include": ["scripts/**/*.ts"]
+    "include": ["client/src", "client/vite.config.mts", "client/vitest.config.mts", "scripts/**/*.ts"]
 }

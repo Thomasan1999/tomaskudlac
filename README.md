@@ -73,6 +73,7 @@ For frontend-only details, see [client/README.md](https://github.com/Thomasan199
 |-- server/             # Backend-related code (not fully published)
 |-- commitlint.config.ts
 |-- package.json        # Workspace definition, shared tooling and proxy scripts
+|-- tsconfig.json       # TypeScript configuration for the frontend and repository scripts
 `-- README.md
 ```
 

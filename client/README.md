@@ -62,6 +62,8 @@ For repository-level scripts and setup, see [README.md](https://github.com/Thoma
 
 ## Directory Layout
 
+TypeScript configuration lives in the repository root at `../tsconfig.json` and also covers repository scripts.
+
 ```text
 .
 |-- public/            # Static assets copied as-is
@@ -82,7 +84,6 @@ For repository-level scripts and setup, see [README.md](https://github.com/Thoma
 |-- eslint.config.mjs  # ESLint configuration
 |-- index.html         # HTML entry file
 |-- package.json       # Frontend scripts and dependencies
-|-- tsconfig.json      # TypeScript configuration
 |-- vite.config.mts    # Vite configuration
 `-- vitest.config.mts  # Vitest configuration
 ```
