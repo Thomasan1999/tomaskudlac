@@ -47,8 +47,10 @@ This installs the `client/` workspace as well.
 Run these commands from the repository root:
 
 - `npm run build` - builds the frontend for production into `server/public`
-- `npm run format` - formats repository files with Prettier
-- `npm run format:check` - checks formatting without writing changes
+- `npm run format` - formats files changed on the branch relative to `origin/master`, including local changes and untracked files
+- `npm run format:all` - formats all repository files with Prettier
+- `npm run format:check` - checks the same branch changes without writing changes; CI checks files changed in the pull request
+- `npm run format:check:all` - checks all repository files without writing changes
 - `npm run lint` - runs frontend ESLint checks
 - `npm run lint:fix` - runs frontend ESLint checks and applies safe fixes
 - `npm run serve` - starts the Vite dev server on http://localhost:8082
@@ -71,6 +73,7 @@ For frontend-only details, see [client/README.md](https://github.com/Thomasan199
 |-- server/             # Backend-related code (not fully published)
 |-- commitlint.config.ts
 |-- package.json        # Workspace definition, shared tooling and proxy scripts
+|-- tsconfig.json       # TypeScript configuration for the frontend and repository scripts
 `-- README.md
 ```
 

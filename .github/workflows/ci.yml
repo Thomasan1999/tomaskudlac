@@ -33,10 +33,16 @@ jobs:
         steps:
             - name: Checkout code
               uses: actions/checkout@v7
+              with:
+                  fetch-depth: 0
+                  ref: ${{ github.event.pull_request.head.sha }}
 
             - uses: ./.github/actions/setup-node-project
 
             - name: Check code format
+              env:
+                  FORMAT_BASE: ${{ github.event.pull_request.base.sha }}
+                  FORMAT_HEAD: ${{ github.event.pull_request.head.sha }}
               run: npm run format:check
 
     lint:

@@ -9,13 +9,20 @@
         "noImplicitAny": true,
         "resolveJsonModule": true,
         "esModuleInterop": true,
+        "noEmit": true,
         "skipLibCheck": true,
         "strictNullChecks": true,
         "lib": ["esnext", "dom"],
         "paths": {
-            "@/*": ["./src/*"]
+            "@/*": ["./client/src/*"]
         },
-        "types": ["vitest/globals", "vite-plugin-pwa/client"]
+        "types": ["node", "vitest/globals", "vite-plugin-pwa/client"],
+        "typeRoots": [
+            "./node_modules/@types",
+            "./client/node_modules/@types",
+            "./client/node_modules",
+            "./node_modules"
+        ]
     },
-    "include": ["src", "vite.config.mts", "vitest.config.mts"]
+    "include": ["client/src", "client/vite.config.mts", "client/vitest.config.mts", "scripts/**/*.ts"]
 }
