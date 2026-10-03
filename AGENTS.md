@@ -25,8 +25,10 @@ Run from the repository root:
 - `npm run format` - formats branch changes relative to `origin/master`, including local changes and untracked files
 - `npm run format:all` - formats all repository files with Prettier
 - `npm run format:check:all` - checks all repository files without writing changes
-- `npm run lint` - runs frontend ESLint checks from `client/`
-- `npm run lint:fix` - runs frontend ESLint checks with automatic fixes from `client/`
+- `npm run lint` - checks frontend branch changes, with a full run when lint configuration or dependencies change
+- `npm run lint:all` - checks the full frontend
+- `npm run lint:fix` - checks frontend branch changes with automatic fixes
+- `npm run lint:fix:all` - checks the full frontend with automatic fixes
 - `npm run serve` - starts the Vite dev server on port 8082
 - `npm run test:run` - runs unit tests affected by branch changes relative to `origin/master`
 - `npm run test:run:all` - runs all unit tests once
