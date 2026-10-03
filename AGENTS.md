@@ -22,7 +22,7 @@ The primary active codebase is the frontend in `client/`.
 
 Run from the repository root:
 
-- `npm run format` - formats changed and untracked files with Prettier
+- `npm run format` - formats branch changes relative to `origin/master`, including local changes and untracked files
 - `npm run format:all` - formats all repository files with Prettier
 - `npm run format:check:all` - checks all repository files without writing changes
 - `npm run lint` - runs frontend ESLint checks from `client/`
