@@ -20,8 +20,9 @@
         "serve": "npm run serve -w client",
         "test:all": "npm run test:all -w client",
         "test:coverage": "npm run test:coverage -w client",
-        "test:e2e": "npm run test:e2e -w client",
-        "test:run": "npm run test:run -w client",
+        "test:e2e": "npm run test:e2e -w client --",
+        "test:run": "npm run test:run -w client --",
+        "test:run:all": "npm run test:run:all -w client",
         "test:watch": "npm run test:watch -w client",
         "type-check": "npm run type-check -w client"
     },

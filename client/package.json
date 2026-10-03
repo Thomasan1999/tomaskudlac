@@ -9,7 +9,8 @@
         "test:all": "vitest --run",
         "test:coverage": "vitest --run --project=unit --coverage",
         "test:e2e": "vitest --run --project=e2e",
-        "test:run": "vitest --run --project=unit",
+        "test:run": "vitest --run --project=unit --changed origin/master --passWithNoTests",
+        "test:run:all": "vitest --run --project=unit",
         "test:ui": "vitest --project=unit --ui",
         "test:watch": "vitest --project=unit",
         "type-check": "vue-tsc --noEmit"
