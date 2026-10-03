@@ -1,4 +1,4 @@
-import { coverageConfigDefaults, defineConfig } from 'vitest/config';
+import { configDefaults, coverageConfigDefaults, defineConfig } from 'vitest/config';
 import vue from '@vitejs/plugin-vue';
 import * as path from 'path';
 
@@ -10,6 +10,21 @@ export default defineConfig({
     plugins: [vue()],
     resolve: { alias },
     test: {
+        forceRerunTriggers: [
+            ...configDefaults.forceRerunTriggers,
+            '**/package-lock.json',
+            '**/tsconfig*.json',
+            '**/*.d.ts',
+            '**/.nvmrc',
+            '**/scripts/**',
+            '**/.github/**',
+            // HomeText.spec.ts chooses a locale through a computed dynamic import.
+            '**/client/src/locales/**',
+            // Browser tests exercise the app through HTTP, so its imports are absent from their module graph.
+            ...(process.env.TEST_E2E_CHANGED
+                ? ['**/client/src/**', '**/client/public/**', '**/client/index.html']
+                : []),
+        ],
         /**
          * The end-to-end spec used to run in the same jsdom project as the unit specs, which is why running the unit
          * tests at all meant booting a dev server and launching Chromium. Split apart, the unit project needs

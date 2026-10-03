@@ -40,7 +40,8 @@ available there.
 - `npm run lint:fix` - runs ESLint checks and applies safe fixes
 - `npm run serve` - starts the Vite development server
 - `npm run test:coverage` - runs the unit tests with coverage
-- `npm run test:run` - runs the unit tests once
+- `npm run test:run` - runs unit tests affected by branch changes relative to `origin/master`, including transitive imports and local changes
+- `npm run test:run:all` - runs all unit tests once
 - `npm run test:ui` - opens the Vitest UI for the unit tests
 - `npm run test:watch` - runs the unit tests in watch mode
 - `npm run test:e2e` - runs the Puppeteer end-to-end tests
