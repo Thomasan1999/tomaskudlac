@@ -1,6 +1,5 @@
-import { execFileSync } from 'node:child_process';
-import { readFile, writeFile } from 'node:fs/promises';
-import * as prettier from 'prettier';
+import { execFileSync, spawnSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 
 const check = process.argv.includes('--check');
 const base = process.env.FORMAT_BASE;
@@ -16,24 +15,20 @@ const files = new Set(
           ],
 );
 
-let count = 0;
-for (const file of files) {
-    const info = await prettier.getFileInfo(file, { ignorePath: '.prettierignore' });
-    if (info.ignored || !info.inferredParser) continue;
-
-    const options = { ...(await prettier.resolveConfig(file)), filepath: file };
-    const source = await readFile(file, 'utf8');
-    count++;
-    if (check) {
-        if (!(await prettier.check(source, options))) {
-            console.error(`Formatting required: ${file}`);
-            process.exitCode = 1;
-        }
-    } else {
-        const formatted = await prettier.format(source, options);
-        if (formatted !== source) await writeFile(file, formatted);
-        console.log(file);
-    }
+if (files.size === 0) {
+    console.log('No changed files to format.');
+} else {
+    const result = spawnSync(
+        process.execPath,
+        [
+            fileURLToPath(import.meta.resolve('prettier/bin/prettier.cjs')),
+            check ? '--check' : '--write',
+            '--ignore-unknown',
+            '--',
+            ...files,
+        ],
+        { stdio: 'inherit' },
+    );
+    if (result.error) throw result.error;
+    process.exitCode = result.status ?? 1;
 }
-
-console.log(`${check ? 'Checked' : 'Formatted'} ${count} changed files.`);
