@@ -62,13 +62,17 @@ Run these commands from the repository root:
 - `npm run test:watch` - runs the unit tests in watch mode
 - `npm run test:e2e` - runs the Puppeteer end-to-end tests, which start the dev server themselves
 - `npm run test:all` - runs both test projects
-- `npm run type-check` - checks types
+- `npm run type-check` - checks the full project using TypeScript's incremental cache
 
 For frontend-only details, see [client/README.md](https://github.com/Thomasan1999/tomaskudlac/blob/master/client/README.md).
 
 Lint checks individual files with the current ESLint rules; source imports do not require rerunning lint on their
 dependents. Changes to lint configuration, dependencies, TypeScript configuration, or the shared selection scripts
 run lint over the full frontend. Deleted files and non-code files are skipped.
+
+Type checking always covers the full project, including source dependencies and global declarations. TypeScript
+stores incremental information in `node_modules/.cache/type-check.tsbuildinfo`; CI restores this cache when the
+dependency lockfile, TypeScript configuration, and Node version match. A missing cache triggers a fresh check.
 
 Unit test selection follows Vitest's import graph, including indirect dependencies. Changes to dependencies,
 TypeScript/Vite/Vitest configuration, declarations, shared tooling, or dynamically loaded locales run all unit tests. `test:run` exits successfully

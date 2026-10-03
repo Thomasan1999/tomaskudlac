@@ -10,6 +10,8 @@
         "resolveJsonModule": true,
         "esModuleInterop": true,
         "noEmit": true,
+        "incremental": true,
+        "tsBuildInfoFile": "./node_modules/.cache/type-check.tsbuildinfo",
         "allowImportingTsExtensions": true,
         "skipLibCheck": true,
         "strictNullChecks": true,

@@ -35,7 +35,7 @@ Run from the repository root:
 - `npm run test:watch` - runs the unit tests in watch mode
 - `npm run test:e2e` - runs the Puppeteer end-to-end tests, starting the dev server itself
 - `npm run test:all` - runs both test projects
-- `npm run type-check` - runs Vue TypeScript checks without emitting output
+- `npm run type-check` - runs full-project Vue TypeScript checks without emitting output, using an incremental cache
 - `npm run build` - builds the production frontend bundle from `client/`
 
 ## Frontend Notes
