@@ -13,6 +13,22 @@ concurrency:
     cancel-in-progress: true
 
 jobs:
+    node-types-version:
+        runs-on: ubuntu-latest
+        timeout-minutes: 5
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v7
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v7
+              with:
+                  node-version-file: '.nvmrc'
+
+            - name: Check Node.js types compatibility
+              run: node scripts/check-node-types.mjs
+
     build:
         runs-on: ubuntu-latest
         timeout-minutes: 10
