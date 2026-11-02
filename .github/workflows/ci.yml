@@ -27,7 +27,7 @@ jobs:
                   node-version-file: '.nvmrc'
 
             - name: Check Node.js types compatibility
-              run: node scripts/check-node-types.mjs
+              run: node scripts/check-node-types.ts
 
     build:
         runs-on: ubuntu-latest

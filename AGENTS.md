@@ -17,6 +17,7 @@ The primary active codebase is the frontend in `client/`.
 - Keep edits small and aligned with the existing structure and naming.
 - Do not expose or recreate hidden backend implementation details.
 - Preserve existing formatting and linting conventions.
+- Write repository scripts in TypeScript (`.ts`), not JavaScript (`.js` or `.mjs`).
 
 ## Common Commands
 
