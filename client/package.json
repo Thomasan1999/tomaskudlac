@@ -58,9 +58,5 @@
         "vitest": "5.1.0",
         "vue-eslint-parser": "10.4.2",
         "vue-tsc": "3.3.14"
-    },
-    "overrides": {
-        "@babel/core": "7.29.6",
-        "serialize-javascript": "7.0.5"
     }
 }
