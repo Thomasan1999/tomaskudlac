@@ -6,7 +6,7 @@
         "client"
     ],
     "engines": {
-        "node": ">=24"
+        "node": ">=26"
     },
     "scripts": {
         "build": "npm run build -w client",
