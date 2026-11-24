@@ -60,6 +60,9 @@ After code changes in `client/`, prefer this order:
 
 For documentation-only or workflow-only changes, run only the relevant checks.
 
+After Vitest dependency updates, run `npm run test:coverage` after `npm ci`:
+unit tests alone do not verify that the hoisted Vitest can resolve its coverage plugin.
+
 ## Git Notes
 
 - The default branch in this repository is `master`.
